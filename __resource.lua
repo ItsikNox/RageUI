@@ -23,5 +23,5 @@ client_scripts {
 
     "RageUI/windows/UIHeritage.lua",
 
-    "WorkspaceRageUI.lua",
+    ---"example/default.lua",
 }
