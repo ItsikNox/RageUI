@@ -1,4 +1,4 @@
-NativeUI.HaircutColorsPanel = {
+RageUI.HaircutColorsPanel = {
     { 22, 19, 19 }, -- 0
     { 30, 28, 25 }, -- 1
     { 76, 56, 45 }, -- 2

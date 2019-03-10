@@ -4,7 +4,7 @@
 ---@param scale number
 ---@return _G
 ---@public
-function NativeUI.MeasureStringWidth(str, font, scale)
+function RageUI.MeasureStringWidth(str, font, scale)
     BeginTextCommandWidth("CELL_EMAIL_BCON")
     AddTextComponentSubstringPlayerName(str)
     SetTextFont(font or 0)
@@ -16,7 +16,7 @@ end
 ---@param Str string
 ---@return number
 ---@public
-function NativeUI.GetCharacterCount(Str)
+function RageUI.GetCharacterCount(Str)
     ---@type number
     local Chars = 0
 
@@ -31,10 +31,10 @@ end
 ---@param Text string
 ---@return nil
 ---@public
-function NativeUI.AddText(Text)
+function RageUI.AddText(Text)
 
     ---@type number
-    local Characters = NativeUI.GetCharacterCount(Text)
+    local Characters = RageUI.GetCharacterCount(Text)
 
     if Characters < 100 then
         AddTextComponentSubstringPlayerName(Text)
@@ -64,7 +64,7 @@ end
 ---@param WordWrap number
 ---@return function
 ---@public
-function NativeUI.GetLineCount(Text, X, Y, Font, Scale, R, G, B, A, Alignment, DropShadow, Outline, WordWrap)
+function RageUI.GetLineCount(Text, X, Y, Font, Scale, R, G, B, A, Alignment, DropShadow, Outline, WordWrap)
 
     ---@type table
     local Text, X, Y = tostring(Text), (tonumber(X) or 0) / 1920, (tonumber(Y) or 0) / 1080
@@ -104,7 +104,7 @@ function NativeUI.GetLineCount(Text, X, Y, Font, Scale, R, G, B, A, Alignment, D
     end
 
     BeginTextCommandLineCount("CELL_EMAIL_BCON")
-    NativeUI.AddText(Text)
+    RageUI.AddText(Text)
     return GetTextScreenLineCount(X, Y)
 end
 
@@ -125,7 +125,7 @@ end
 ---@param WordWrap number
 ---@return nil
 ---@public
-function NativeUI.RenderText(Text, X, Y, Font, Scale, R, G, B, A, Alignment, DropShadow, Outline, WordWrap)
+function RageUI.RenderText(Text, X, Y, Font, Scale, R, G, B, A, Alignment, DropShadow, Outline, WordWrap)
 
     ---@type table
     local Text, X, Y = tostring(Text), (tonumber(X) or 0) / 1920, (tonumber(Y) or 0) / 1080
@@ -165,6 +165,6 @@ function NativeUI.RenderText(Text, X, Y, Font, Scale, R, G, B, A, Alignment, Dro
     end
 
     BeginTextCommandDisplayText("CELL_EMAIL_BCON")
-    NativeUI.AddText(Text)
+    RageUI.AddText(Text)
     EndTextCommandDisplayText(X, Y)
 end

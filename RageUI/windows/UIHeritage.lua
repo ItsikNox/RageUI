@@ -3,9 +3,9 @@
 ---@param Dad number
 ---@return nil
 ---@public
-function NativeUI.HeritageWindow(Mum, Dad)
-    if NativeUI.CurrentMenu ~= nil then
-        if NativeUI.CurrentMenu() then
+function RageUI.HeritageWindow(Mum, Dad)
+    if RageUI.CurrentMenu ~= nil then
+        if RageUI.CurrentMenu() then
             if Mum < 0 or Mum > 21 then
                 Mum = 0
             end
@@ -22,10 +22,10 @@ function NativeUI.HeritageWindow(Mum, Dad)
             else
                 Dad = "male_" .. Dad
             end
-            NativeUI.RenderSprite(NativeUI.Settings.Windows.Heritage.Background.Dictionary, NativeUI.Settings.Windows.Heritage.Background.Texture, NativeUI.CurrentMenu.X + (NativeUI.CurrentMenu.WidthOffset / 2), NativeUI.CurrentMenu.Y + NativeUI.CurrentMenu.SubtitleHeight + NativeUI.ItemOffset, NativeUI.Settings.Windows.Heritage.Background.Width, NativeUI.Settings.Windows.Heritage.Background.Height)
-            NativeUI.RenderSprite(NativeUI.Settings.Windows.Heritage.Dad.Dictionary, Dad, NativeUI.CurrentMenu.X + NativeUI.Settings.Windows.Heritage.Dad.X + (NativeUI.CurrentMenu.WidthOffset / 2), NativeUI.CurrentMenu.Y + NativeUI.CurrentMenu.SubtitleHeight + NativeUI.ItemOffset, NativeUI.Settings.Windows.Heritage.Dad.Width, NativeUI.Settings.Windows.Heritage.Dad.Height)
-            NativeUI.RenderSprite(NativeUI.Settings.Windows.Heritage.Mum.Dictionary, Mum, NativeUI.CurrentMenu.X + NativeUI.Settings.Windows.Heritage.Mum.X + (NativeUI.CurrentMenu.WidthOffset / 2), NativeUI.CurrentMenu.Y + NativeUI.CurrentMenu.SubtitleHeight + NativeUI.ItemOffset, NativeUI.Settings.Windows.Heritage.Mum.Width, NativeUI.Settings.Windows.Heritage.Mum.Height)
-            NativeUI.ItemOffset = NativeUI.ItemOffset + NativeUI.Settings.Windows.Heritage.Background.Height
+            RageUI.RenderSprite(RageUI.Settings.Windows.Heritage.Background.Dictionary, RageUI.Settings.Windows.Heritage.Background.Texture, RageUI.CurrentMenu.X + (RageUI.CurrentMenu.WidthOffset / 2), RageUI.CurrentMenu.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Windows.Heritage.Background.Width, RageUI.Settings.Windows.Heritage.Background.Height)
+            RageUI.RenderSprite(RageUI.Settings.Windows.Heritage.Dad.Dictionary, Dad, RageUI.CurrentMenu.X + RageUI.Settings.Windows.Heritage.Dad.X + (RageUI.CurrentMenu.WidthOffset / 2), RageUI.CurrentMenu.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Windows.Heritage.Dad.Width, RageUI.Settings.Windows.Heritage.Dad.Height)
+            RageUI.RenderSprite(RageUI.Settings.Windows.Heritage.Mum.Dictionary, Mum, RageUI.CurrentMenu.X + RageUI.Settings.Windows.Heritage.Mum.X + (RageUI.CurrentMenu.WidthOffset / 2), RageUI.CurrentMenu.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Windows.Heritage.Mum.Width, RageUI.Settings.Windows.Heritage.Mum.Height)
+            RageUI.ItemOffset = RageUI.ItemOffset + RageUI.Settings.Windows.Heritage.Background.Height
         end
     end
 end

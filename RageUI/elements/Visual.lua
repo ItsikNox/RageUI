@@ -1,7 +1,7 @@
 ---Popup
 ---@param array table
 ---@public
-function NativeUI.Popup(array)
+function RageUI.Popup(array)
     ClearPrints()
     if (array.colors == nil) then
         SetNotificationBackgroundColor(140)
@@ -31,7 +31,7 @@ end
 ---PopupChar
 ---@param array table
 ---@public
-function NativeUI.PopupChar(array)
+function RageUI.PopupChar(array)
     if (array.colors == nil) then
         SetNotificationBackgroundColor(140)
     else
@@ -76,7 +76,7 @@ end
 ---Text
 ---@param array table
 ---@public
-function NativeUI.Text(array)
+function RageUI.Text(array)
     ClearPrints()
     SetTextEntry_2("STRING")
     if (array.message ~= nil) then

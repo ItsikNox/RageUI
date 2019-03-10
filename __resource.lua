@@ -1,27 +1,27 @@
 resource_manifest_version '05cfa83c-a124-4cfa-a768-c24a5811d8f9'
 
 client_scripts {
-    "NativeUI/NativeUI.lua",
-    "NativeUI/UIMenuProcess.lua",
+    "RageUI/RageUI.lua",
+    "RageUI/UIMenuProcess.lua",
 
-    "NativeUI/elements/Badge.lua",
-    "NativeUI/elements/Rectangle.lua",
-    "NativeUI/elements/Sprite.lua",
-    "NativeUI/elements/Text.lua",
-    "NativeUI/elements/ColourPanel.lua",
-    "NativeUI/elements/Visual.lua",
+    "RageUI/elements/Badge.lua",
+    "RageUI/elements/Rectangle.lua",
+    "RageUI/elements/Sprite.lua",
+    "RageUI/elements/Text.lua",
+    "RageUI/elements/ColourPanel.lua",
+    "RageUI/elements/Visual.lua",
 
-    "NativeUI/items/UIButton.lua",
-    "NativeUI/items/UICheckBox.lua",
-    "NativeUI/items/UIList.lua",
-    "NativeUI/items/UIProgress.lua",
-    "NativeUI/items/UISlider.lua",
+    "RageUI/items/UIButton.lua",
+    "RageUI/items/UICheckBox.lua",
+    "RageUI/items/UIList.lua",
+    "RageUI/items/UIProgress.lua",
+    "RageUI/items/UISlider.lua",
 
-    "NativeUI/panels/UIColourPanel.lua",
-    "NativeUI/panels/UIGridPanel.lua",
-    "NativeUI/panels/UIPercentagePanel.lua",
+    "RageUI/panels/UIColourPanel.lua",
+    "RageUI/panels/UIGridPanel.lua",
+    "RageUI/panels/UIPercentagePanel.lua",
 
-    "NativeUI/windows/UIHeritage.lua",
+    "RageUI/windows/UIHeritage.lua",
 
-    "WorkspaceNativeUI.lua",
+    "WorkspaceRageUI.lua",
 }

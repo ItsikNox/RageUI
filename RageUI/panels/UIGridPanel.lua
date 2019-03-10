@@ -8,21 +8,21 @@
 ---@param Callback table
 ---@return table
 ---@public
-function NativeUI.GridPanel(X, Y, TopText, BottomText, LeftText, RightText, Callback)
-    if NativeUI.CurrentMenu ~= nil then
-        if NativeUI.CurrentMenu() then
+function RageUI.GridPanel(X, Y, TopText, BottomText, LeftText, RightText, Callback)
+    if RageUI.CurrentMenu ~= nil then
+        if RageUI.CurrentMenu() then
 
             ---@type boolean
-            local Hovered = NativeUI.IsMouseInBounds(NativeUI.CurrentMenu.X + NativeUI.Settings.Panels.Grid.Grid.X + NativeUI.CurrentMenu.SafeZoneSize.X + 20, NativeUI.CurrentMenu.Y + NativeUI.Settings.Panels.Grid.Grid.Y + NativeUI.CurrentMenu.SafeZoneSize.Y + NativeUI.CurrentMenu.SubtitleHeight + NativeUI.ItemOffset + 20, NativeUI.Settings.Panels.Grid.Grid.Width + NativeUI.CurrentMenu.WidthOffset - 40, NativeUI.Settings.Panels.Grid.Grid.Height - 40)
+            local Hovered = RageUI.IsMouseInBounds(RageUI.CurrentMenu.X + RageUI.Settings.Panels.Grid.Grid.X + RageUI.CurrentMenu.SafeZoneSize.X + 20, RageUI.CurrentMenu.Y + RageUI.Settings.Panels.Grid.Grid.Y + RageUI.CurrentMenu.SafeZoneSize.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset + 20, RageUI.Settings.Panels.Grid.Grid.Width + RageUI.CurrentMenu.WidthOffset - 40, RageUI.Settings.Panels.Grid.Grid.Height - 40)
 
             ---@type boolean
             local Selected = false
 
             ---@type number
-            local CircleX = NativeUI.CurrentMenu.X + NativeUI.Settings.Panels.Grid.Grid.X + (NativeUI.CurrentMenu.WidthOffset / 2) + 20
+            local CircleX = RageUI.CurrentMenu.X + RageUI.Settings.Panels.Grid.Grid.X + (RageUI.CurrentMenu.WidthOffset / 2) + 20
 
             ---@type number
-            local CircleY = NativeUI.CurrentMenu.Y + NativeUI.Settings.Panels.Grid.Grid.Y + NativeUI.CurrentMenu.SubtitleHeight + NativeUI.ItemOffset + 20
+            local CircleY = RageUI.CurrentMenu.Y + RageUI.Settings.Panels.Grid.Grid.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset + 20
 
             if X < 0.0 or X > 1.0 then
                 X = 0.0
@@ -32,39 +32,39 @@ function NativeUI.GridPanel(X, Y, TopText, BottomText, LeftText, RightText, Call
                 Y = 0.0
             end
 
-            CircleX = CircleX + ((NativeUI.Settings.Panels.Grid.Grid.Width - 40) * X) - (NativeUI.Settings.Panels.Grid.Circle.Width / 2)
-            CircleY = CircleY + ((NativeUI.Settings.Panels.Grid.Grid.Height - 40) * Y) - (NativeUI.Settings.Panels.Grid.Circle.Height / 2)
+            CircleX = CircleX + ((RageUI.Settings.Panels.Grid.Grid.Width - 40) * X) - (RageUI.Settings.Panels.Grid.Circle.Width / 2)
+            CircleY = CircleY + ((RageUI.Settings.Panels.Grid.Grid.Height - 40) * Y) - (RageUI.Settings.Panels.Grid.Circle.Height / 2)
 
-            NativeUI.RenderSprite(NativeUI.Settings.Panels.Grid.Background.Dictionary, NativeUI.Settings.Panels.Grid.Background.Texture, NativeUI.CurrentMenu.X, NativeUI.CurrentMenu.Y + NativeUI.Settings.Panels.Grid.Background.Y + NativeUI.CurrentMenu.SubtitleHeight + NativeUI.ItemOffset, NativeUI.Settings.Panels.Grid.Background.Width + NativeUI.CurrentMenu.WidthOffset, NativeUI.Settings.Panels.Grid.Background.Height)
-            NativeUI.RenderSprite(NativeUI.Settings.Panels.Grid.Grid.Dictionary, NativeUI.Settings.Panels.Grid.Grid.Texture, NativeUI.CurrentMenu.X + NativeUI.Settings.Panels.Grid.Grid.X + (NativeUI.CurrentMenu.WidthOffset / 2), NativeUI.CurrentMenu.Y + NativeUI.Settings.Panels.Grid.Grid.Y + NativeUI.CurrentMenu.SubtitleHeight + NativeUI.ItemOffset, NativeUI.Settings.Panels.Grid.Grid.Width, NativeUI.Settings.Panels.Grid.Grid.Height)
-            NativeUI.RenderSprite(NativeUI.Settings.Panels.Grid.Circle.Dictionary, NativeUI.Settings.Panels.Grid.Circle.Texture, CircleX, CircleY, NativeUI.Settings.Panels.Grid.Circle.Width, NativeUI.Settings.Panels.Grid.Circle.Height)
+            RageUI.RenderSprite(RageUI.Settings.Panels.Grid.Background.Dictionary, RageUI.Settings.Panels.Grid.Background.Texture, RageUI.CurrentMenu.X, RageUI.CurrentMenu.Y + RageUI.Settings.Panels.Grid.Background.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Panels.Grid.Background.Width + RageUI.CurrentMenu.WidthOffset, RageUI.Settings.Panels.Grid.Background.Height)
+            RageUI.RenderSprite(RageUI.Settings.Panels.Grid.Grid.Dictionary, RageUI.Settings.Panels.Grid.Grid.Texture, RageUI.CurrentMenu.X + RageUI.Settings.Panels.Grid.Grid.X + (RageUI.CurrentMenu.WidthOffset / 2), RageUI.CurrentMenu.Y + RageUI.Settings.Panels.Grid.Grid.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Panels.Grid.Grid.Width, RageUI.Settings.Panels.Grid.Grid.Height)
+            RageUI.RenderSprite(RageUI.Settings.Panels.Grid.Circle.Dictionary, RageUI.Settings.Panels.Grid.Circle.Texture, CircleX, CircleY, RageUI.Settings.Panels.Grid.Circle.Width, RageUI.Settings.Panels.Grid.Circle.Height)
 
-            NativeUI.RenderText(TopText or "", NativeUI.CurrentMenu.X + NativeUI.Settings.Panels.Grid.Text.Top.X + (NativeUI.CurrentMenu.WidthOffset / 2), NativeUI.CurrentMenu.Y + NativeUI.Settings.Panels.Grid.Text.Top.Y + NativeUI.CurrentMenu.SubtitleHeight + NativeUI.ItemOffset, 0, NativeUI.Settings.Panels.Grid.Text.Top.Scale, 245, 245, 245, 255, 1)
-            NativeUI.RenderText(BottomText or "", NativeUI.CurrentMenu.X + NativeUI.Settings.Panels.Grid.Text.Bottom.X + (NativeUI.CurrentMenu.WidthOffset / 2), NativeUI.CurrentMenu.Y + NativeUI.Settings.Panels.Grid.Text.Bottom.Y + NativeUI.CurrentMenu.SubtitleHeight + NativeUI.ItemOffset, 0, NativeUI.Settings.Panels.Grid.Text.Bottom.Scale, 245, 245, 245, 255, 1)
-            NativeUI.RenderText(LeftText or "", NativeUI.CurrentMenu.X + NativeUI.Settings.Panels.Grid.Text.Left.X + (NativeUI.CurrentMenu.WidthOffset / 2), NativeUI.CurrentMenu.Y + NativeUI.Settings.Panels.Grid.Text.Left.Y + NativeUI.CurrentMenu.SubtitleHeight + NativeUI.ItemOffset, 0, NativeUI.Settings.Panels.Grid.Text.Left.Scale, 245, 245, 245, 255, 1)
-            NativeUI.RenderText(RightText or "", NativeUI.CurrentMenu.X + NativeUI.Settings.Panels.Grid.Text.Right.X + (NativeUI.CurrentMenu.WidthOffset / 2), NativeUI.CurrentMenu.Y + NativeUI.Settings.Panels.Grid.Text.Right.Y + NativeUI.CurrentMenu.SubtitleHeight + NativeUI.ItemOffset, 0, NativeUI.Settings.Panels.Grid.Text.Right.Scale, 245, 245, 245, 255, 1)
+            RageUI.RenderText(TopText or "", RageUI.CurrentMenu.X + RageUI.Settings.Panels.Grid.Text.Top.X + (RageUI.CurrentMenu.WidthOffset / 2), RageUI.CurrentMenu.Y + RageUI.Settings.Panels.Grid.Text.Top.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, 0, RageUI.Settings.Panels.Grid.Text.Top.Scale, 245, 245, 245, 255, 1)
+            RageUI.RenderText(BottomText or "", RageUI.CurrentMenu.X + RageUI.Settings.Panels.Grid.Text.Bottom.X + (RageUI.CurrentMenu.WidthOffset / 2), RageUI.CurrentMenu.Y + RageUI.Settings.Panels.Grid.Text.Bottom.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, 0, RageUI.Settings.Panels.Grid.Text.Bottom.Scale, 245, 245, 245, 255, 1)
+            RageUI.RenderText(LeftText or "", RageUI.CurrentMenu.X + RageUI.Settings.Panels.Grid.Text.Left.X + (RageUI.CurrentMenu.WidthOffset / 2), RageUI.CurrentMenu.Y + RageUI.Settings.Panels.Grid.Text.Left.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, 0, RageUI.Settings.Panels.Grid.Text.Left.Scale, 245, 245, 245, 255, 1)
+            RageUI.RenderText(RightText or "", RageUI.CurrentMenu.X + RageUI.Settings.Panels.Grid.Text.Right.X + (RageUI.CurrentMenu.WidthOffset / 2), RageUI.CurrentMenu.Y + RageUI.Settings.Panels.Grid.Text.Right.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, 0, RageUI.Settings.Panels.Grid.Text.Right.Scale, 245, 245, 245, 255, 1)
 
             if Hovered then
                 if IsDisabledControlPressed(0, 24) then
                     Selected = true
 
-                    CircleX = math.round(GetControlNormal(0, 239) * 1920) - NativeUI.CurrentMenu.SafeZoneSize.X - (NativeUI.Settings.Panels.Grid.Circle.Width / 2)
-                    CircleY = math.round(GetControlNormal(0, 240) * 1080) - NativeUI.CurrentMenu.SafeZoneSize.Y - (NativeUI.Settings.Panels.Grid.Circle.Height / 2)
+                    CircleX = math.round(GetControlNormal(0, 239) * 1920) - RageUI.CurrentMenu.SafeZoneSize.X - (RageUI.Settings.Panels.Grid.Circle.Width / 2)
+                    CircleY = math.round(GetControlNormal(0, 240) * 1080) - RageUI.CurrentMenu.SafeZoneSize.Y - (RageUI.Settings.Panels.Grid.Circle.Height / 2)
 
-                    if CircleX > (NativeUI.CurrentMenu.X + NativeUI.Settings.Panels.Grid.Grid.X + (NativeUI.CurrentMenu.WidthOffset / 2) + 20 + NativeUI.Settings.Panels.Grid.Grid.Width - 40) then
-                        CircleX = NativeUI.CurrentMenu.X + NativeUI.Settings.Panels.Grid.Grid.X + (NativeUI.CurrentMenu.WidthOffset / 2) + 20 + NativeUI.Settings.Panels.Grid.Grid.Width - 40
-                    elseif CircleX < (NativeUI.CurrentMenu.X + NativeUI.Settings.Panels.Grid.Grid.X + 20 - (NativeUI.Settings.Panels.Grid.Circle.Width / 2)) then
-                        CircleX = NativeUI.CurrentMenu.X + NativeUI.Settings.Panels.Grid.Grid.X + 20 - (NativeUI.Settings.Panels.Grid.Circle.Width / 2)
+                    if CircleX > (RageUI.CurrentMenu.X + RageUI.Settings.Panels.Grid.Grid.X + (RageUI.CurrentMenu.WidthOffset / 2) + 20 + RageUI.Settings.Panels.Grid.Grid.Width - 40) then
+                        CircleX = RageUI.CurrentMenu.X + RageUI.Settings.Panels.Grid.Grid.X + (RageUI.CurrentMenu.WidthOffset / 2) + 20 + RageUI.Settings.Panels.Grid.Grid.Width - 40
+                    elseif CircleX < (RageUI.CurrentMenu.X + RageUI.Settings.Panels.Grid.Grid.X + 20 - (RageUI.Settings.Panels.Grid.Circle.Width / 2)) then
+                        CircleX = RageUI.CurrentMenu.X + RageUI.Settings.Panels.Grid.Grid.X + 20 - (RageUI.Settings.Panels.Grid.Circle.Width / 2)
                     end
 
-                    if CircleY > (NativeUI.CurrentMenu.Y + NativeUI.Settings.Panels.Grid.Grid.Y + NativeUI.CurrentMenu.SubtitleHeight + NativeUI.ItemOffset + 20 + NativeUI.Settings.Panels.Grid.Grid.Height - 40) then
-                        CircleY = NativeUI.CurrentMenu.Y + NativeUI.Settings.Panels.Grid.Grid.Y + NativeUI.CurrentMenu.SubtitleHeight + NativeUI.ItemOffset + 20 + NativeUI.Settings.Panels.Grid.Grid.Height - 40
-                    elseif CircleY < (NativeUI.CurrentMenu.Y + NativeUI.Settings.Panels.Grid.Grid.Y + NativeUI.CurrentMenu.SubtitleHeight + NativeUI.ItemOffset + 20 - (NativeUI.Settings.Panels.Grid.Circle.Height / 2)) then
-                        CircleY = NativeUI.CurrentMenu.Y + NativeUI.Settings.Panels.Grid.Grid.Y + NativeUI.CurrentMenu.SubtitleHeight + NativeUI.ItemOffset + 20 - (NativeUI.Settings.Panels.Grid.Circle.Height / 2)
+                    if CircleY > (RageUI.CurrentMenu.Y + RageUI.Settings.Panels.Grid.Grid.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset + 20 + RageUI.Settings.Panels.Grid.Grid.Height - 40) then
+                        CircleY = RageUI.CurrentMenu.Y + RageUI.Settings.Panels.Grid.Grid.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset + 20 + RageUI.Settings.Panels.Grid.Grid.Height - 40
+                    elseif CircleY < (RageUI.CurrentMenu.Y + RageUI.Settings.Panels.Grid.Grid.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset + 20 - (RageUI.Settings.Panels.Grid.Circle.Height / 2)) then
+                        CircleY = RageUI.CurrentMenu.Y + RageUI.Settings.Panels.Grid.Grid.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset + 20 - (RageUI.Settings.Panels.Grid.Circle.Height / 2)
                     end
 
-                    X = math.round((CircleX - (NativeUI.CurrentMenu.X + NativeUI.Settings.Panels.Grid.Grid.X + (NativeUI.CurrentMenu.WidthOffset / 2) + 20) + (NativeUI.Settings.Panels.Grid.Circle.Width / 2)) / (NativeUI.Settings.Panels.Grid.Grid.Width - 40), 2)
-                    Y = math.round((CircleY - (NativeUI.CurrentMenu.Y + NativeUI.Settings.Panels.Grid.Grid.Y + NativeUI.CurrentMenu.SubtitleHeight + NativeUI.ItemOffset + 20) + (NativeUI.Settings.Panels.Grid.Circle.Height / 2)) / (NativeUI.Settings.Panels.Grid.Grid.Height - 40), 2)
+                    X = math.round((CircleX - (RageUI.CurrentMenu.X + RageUI.Settings.Panels.Grid.Grid.X + (RageUI.CurrentMenu.WidthOffset / 2) + 20) + (RageUI.Settings.Panels.Grid.Circle.Width / 2)) / (RageUI.Settings.Panels.Grid.Grid.Width - 40), 2)
+                    Y = math.round((CircleY - (RageUI.CurrentMenu.Y + RageUI.Settings.Panels.Grid.Grid.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset + 20) + (RageUI.Settings.Panels.Grid.Circle.Height / 2)) / (RageUI.Settings.Panels.Grid.Grid.Height - 40), 2)
 
                     if X > 1.0 then
                         X = 1.0
@@ -74,9 +74,9 @@ function NativeUI.GridPanel(X, Y, TopText, BottomText, LeftText, RightText, Call
                     end
                 end
             end
-            NativeUI.ItemOffset = NativeUI.ItemOffset + NativeUI.Settings.Panels.Grid.Background.Height + NativeUI.Settings.Panels.Grid.Background.Y
+            RageUI.ItemOffset = RageUI.ItemOffset + RageUI.Settings.Panels.Grid.Background.Height + RageUI.Settings.Panels.Grid.Background.Y
             if Hovered and Selected then
-                NativeUI.PlaySound(NativeUI.Settings.Audio.Library, NativeUI.Settings.Audio.Slider, true)
+                RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.Slider, true)
             end
             Callback(Hovered, Selected, X, Y)
         end

@@ -1,4 +1,4 @@
-NativeUI.CheckboxStyle = {
+RageUI.CheckboxStyle = {
     Tick = 1,
     Cross = 2
 }
@@ -6,15 +6,15 @@ NativeUI.CheckboxStyle = {
 local function StyleCheckBox(Selected, Checked, Box, BoxSelect)
     if Selected then
         if Checked then
-            NativeUI.RenderSprite(NativeUI.Settings.Items.Checkbox.Dictionary, NativeUI.Settings.Items.Checkbox.Textures[Box], NativeUI.CurrentMenu.X + NativeUI.Settings.Items.Checkbox.X + NativeUI.CurrentMenu.WidthOffset, NativeUI.CurrentMenu.Y + NativeUI.Settings.Items.Checkbox.Y + NativeUI.CurrentMenu.SubtitleHeight + NativeUI.ItemOffset, NativeUI.Settings.Items.Checkbox.Width, NativeUI.Settings.Items.Checkbox.Height)
+            RageUI.RenderSprite(RageUI.Settings.Items.Checkbox.Dictionary, RageUI.Settings.Items.Checkbox.Textures[Box], RageUI.CurrentMenu.X + RageUI.Settings.Items.Checkbox.X + RageUI.CurrentMenu.WidthOffset, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Checkbox.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Items.Checkbox.Width, RageUI.Settings.Items.Checkbox.Height)
         else
-            NativeUI.RenderSprite(NativeUI.Settings.Items.Checkbox.Dictionary, NativeUI.Settings.Items.Checkbox.Textures[1], NativeUI.CurrentMenu.X + NativeUI.Settings.Items.Checkbox.X + NativeUI.CurrentMenu.WidthOffset, NativeUI.CurrentMenu.Y + NativeUI.Settings.Items.Checkbox.Y + NativeUI.CurrentMenu.SubtitleHeight + NativeUI.ItemOffset, NativeUI.Settings.Items.Checkbox.Width, NativeUI.Settings.Items.Checkbox.Height)
+            RageUI.RenderSprite(RageUI.Settings.Items.Checkbox.Dictionary, RageUI.Settings.Items.Checkbox.Textures[1], RageUI.CurrentMenu.X + RageUI.Settings.Items.Checkbox.X + RageUI.CurrentMenu.WidthOffset, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Checkbox.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Items.Checkbox.Width, RageUI.Settings.Items.Checkbox.Height)
         end
     else
         if Checked then
-            NativeUI.RenderSprite(NativeUI.Settings.Items.Checkbox.Dictionary, NativeUI.Settings.Items.Checkbox.Textures[BoxSelect], NativeUI.CurrentMenu.X + NativeUI.Settings.Items.Checkbox.X + NativeUI.CurrentMenu.WidthOffset, NativeUI.CurrentMenu.Y + NativeUI.Settings.Items.Checkbox.Y + NativeUI.CurrentMenu.SubtitleHeight + NativeUI.ItemOffset, NativeUI.Settings.Items.Checkbox.Width, NativeUI.Settings.Items.Checkbox.Height)
+            RageUI.RenderSprite(RageUI.Settings.Items.Checkbox.Dictionary, RageUI.Settings.Items.Checkbox.Textures[BoxSelect], RageUI.CurrentMenu.X + RageUI.Settings.Items.Checkbox.X + RageUI.CurrentMenu.WidthOffset, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Checkbox.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Items.Checkbox.Width, RageUI.Settings.Items.Checkbox.Height)
         else
-            NativeUI.RenderSprite(NativeUI.Settings.Items.Checkbox.Dictionary, NativeUI.Settings.Items.Checkbox.Textures[3], NativeUI.CurrentMenu.X + NativeUI.Settings.Items.Checkbox.X + NativeUI.CurrentMenu.WidthOffset, NativeUI.CurrentMenu.Y + NativeUI.Settings.Items.Checkbox.Y + NativeUI.CurrentMenu.SubtitleHeight + NativeUI.ItemOffset, NativeUI.Settings.Items.Checkbox.Width, NativeUI.Settings.Items.Checkbox.Height)
+            RageUI.RenderSprite(RageUI.Settings.Items.Checkbox.Dictionary, RageUI.Settings.Items.Checkbox.Textures[3], RageUI.CurrentMenu.X + RageUI.Settings.Items.Checkbox.X + RageUI.CurrentMenu.WidthOffset, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Checkbox.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Items.Checkbox.Width, RageUI.Settings.Items.Checkbox.Height)
         end
     end
 end
@@ -35,46 +35,46 @@ end
 ---@param Callback function
 ---@return nil
 ---@public
-function NativeUI.Checkbox(Label, Description, Checked, Style, Callback)
-    if NativeUI.CurrentMenu ~= nil then
-        if NativeUI.CurrentMenu() then
+function RageUI.Checkbox(Label, Description, Checked, Style, Callback)
+    if RageUI.CurrentMenu ~= nil then
+        if RageUI.CurrentMenu() then
 
             ---@type number
-            local Option = NativeUI.Options + 1
+            local Option = RageUI.Options + 1
 
-            if NativeUI.CurrentMenu.Pagination.Minimum <= Option and NativeUI.CurrentMenu.Pagination.Maximum >= Option then
+            if RageUI.CurrentMenu.Pagination.Minimum <= Option and RageUI.CurrentMenu.Pagination.Maximum >= Option then
 
                 ---@type number
-                local Selected = NativeUI.CurrentMenu.Index == Option
+                local Selected = RageUI.CurrentMenu.Index == Option
 
                 ---@type number
                 local Hovered = false
 
-                if not NativeUI.CurrentMenu.SafeZoneSize then
-                    NativeUI.CurrentMenu.SafeZoneSize = { X = 0, Y = 0 }
+                if not RageUI.CurrentMenu.SafeZoneSize then
+                    RageUI.CurrentMenu.SafeZoneSize = { X = 0, Y = 0 }
 
-                    if NativeUI.CurrentMenu.Safezone then
-                        NativeUI.CurrentMenu.SafeZoneSize = NativeUI.GetSafeZoneBounds()
+                    if RageUI.CurrentMenu.Safezone then
+                        RageUI.CurrentMenu.SafeZoneSize = RageUI.GetSafeZoneBounds()
 
                         ScreenDrawPositionBegin(76, 84)
                         ScreenDrawPositionRatio(0, 0, 0, 0)
                     end
                 end
 
-                Hovered = NativeUI.IsMouseInBounds(NativeUI.CurrentMenu.X + NativeUI.CurrentMenu.SafeZoneSize.X, NativeUI.CurrentMenu.Y + NativeUI.Settings.Items.Button.Rectangle.Y + NativeUI.CurrentMenu.SafeZoneSize.Y + NativeUI.CurrentMenu.SubtitleHeight + NativeUI.ItemOffset, NativeUI.Settings.Items.Button.Rectangle.Width + NativeUI.CurrentMenu.WidthOffset, NativeUI.Settings.Items.Button.Rectangle.Height)
+                Hovered = RageUI.IsMouseInBounds(RageUI.CurrentMenu.X + RageUI.CurrentMenu.SafeZoneSize.X, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Button.Rectangle.Y + RageUI.CurrentMenu.SafeZoneSize.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Items.Button.Rectangle.Width + RageUI.CurrentMenu.WidthOffset, RageUI.Settings.Items.Button.Rectangle.Height)
 
                 if Hovered and not Selected then
-                    NativeUI.RenderRectangle(NativeUI.CurrentMenu.X, NativeUI.CurrentMenu.Y + NativeUI.Settings.Items.Button.Rectangle.Y + NativeUI.CurrentMenu.SubtitleHeight + NativeUI.ItemOffset, NativeUI.Settings.Items.Button.Rectangle.Width + NativeUI.CurrentMenu.WidthOffset, NativeUI.Settings.Items.Button.Rectangle.Height, 255, 255, 255, 20)
+                    RageUI.RenderRectangle(RageUI.CurrentMenu.X, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Button.Rectangle.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Items.Button.Rectangle.Width + RageUI.CurrentMenu.WidthOffset, RageUI.Settings.Items.Button.Rectangle.Height, 255, 255, 255, 20)
 
-                    if NativeUI.CurrentMenu.Controls.Click.Active then
-                        NativeUI.CurrentMenu.Index = Option
-                        NativeUI.PlaySound(NativeUI.Settings.Audio.Library, NativeUI.Settings.Audio.Error)
-                        NativeUI.CurrentMenu.Controls.Click.Active = false
+                    if RageUI.CurrentMenu.Controls.Click.Active then
+                        RageUI.CurrentMenu.Index = Option
+                        RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.Error)
+                        RageUI.CurrentMenu.Controls.Click.Active = false
                     end
                 end
 
                 if Selected then
-                    NativeUI.RenderSprite(NativeUI.Settings.Items.Button.SelectedSprite.Dictionary, NativeUI.Settings.Items.Button.SelectedSprite.Texture, NativeUI.CurrentMenu.X, NativeUI.CurrentMenu.Y + NativeUI.Settings.Items.Button.SelectedSprite.Y + NativeUI.CurrentMenu.SubtitleHeight + NativeUI.ItemOffset, NativeUI.Settings.Items.Button.SelectedSprite.Width + NativeUI.CurrentMenu.WidthOffset, NativeUI.Settings.Items.Button.SelectedSprite.Height)
+                    RageUI.RenderSprite(RageUI.Settings.Items.Button.SelectedSprite.Dictionary, RageUI.Settings.Items.Button.SelectedSprite.Texture, RageUI.CurrentMenu.X, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Button.SelectedSprite.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Items.Button.SelectedSprite.Width + RageUI.CurrentMenu.WidthOffset, RageUI.Settings.Items.Button.SelectedSprite.Height)
                 end
 
                 if type(Style) == "table" then
@@ -82,31 +82,31 @@ function NativeUI.Checkbox(Label, Description, Checked, Style, Callback)
                     if Style.Enabled == true or Style.Enabled == nil then
 
                         if Selected then
-                            NativeUI.RenderText(Label, NativeUI.CurrentMenu.X + NativeUI.Settings.Items.Button.Text.X, NativeUI.CurrentMenu.Y + NativeUI.Settings.Items.Button.Text.Y + NativeUI.CurrentMenu.SubtitleHeight + NativeUI.ItemOffset, 0, NativeUI.Settings.Items.Button.Text.Scale, 0, 0, 0, 255)
+                            RageUI.RenderText(Label, RageUI.CurrentMenu.X + RageUI.Settings.Items.Button.Text.X, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Button.Text.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, 0, RageUI.Settings.Items.Button.Text.Scale, 0, 0, 0, 255)
                         else
-                            NativeUI.RenderText(Label, NativeUI.CurrentMenu.X + NativeUI.Settings.Items.Button.Text.X, NativeUI.CurrentMenu.Y + NativeUI.Settings.Items.Button.Text.Y + NativeUI.CurrentMenu.SubtitleHeight + NativeUI.ItemOffset, 0, NativeUI.Settings.Items.Button.Text.Scale, 245, 245, 245, 255)
+                            RageUI.RenderText(Label, RageUI.CurrentMenu.X + RageUI.Settings.Items.Button.Text.X, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Button.Text.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, 0, RageUI.Settings.Items.Button.Text.Scale, 245, 245, 245, 255)
                         end
                     else
                         ---@type table
-                        local LeftBadge = NativeUI.BadgeStyle.Lock
+                        local LeftBadge = RageUI.BadgeStyle.Lock
 
                         ---@type number
-                        local LeftBadgeOffset = ((LeftBadge == NativeUI.BadgeStyle.None or tonumber(LeftBadge) == nil) and 0 or 27)
+                        local LeftBadgeOffset = ((LeftBadge == RageUI.BadgeStyle.None or tonumber(LeftBadge) == nil) and 0 or 27)
 
                         if Selected then
-                            NativeUI.RenderText(Label, NativeUI.CurrentMenu.X + NativeUI.Settings.Items.Button.Text.X + LeftBadgeOffset, NativeUI.CurrentMenu.Y + NativeUI.Settings.Items.Button.Text.Y + NativeUI.CurrentMenu.SubtitleHeight + NativeUI.ItemOffset, 0, NativeUI.Settings.Items.Button.Text.Scale, 0, 0, 0, 255)
+                            RageUI.RenderText(Label, RageUI.CurrentMenu.X + RageUI.Settings.Items.Button.Text.X + LeftBadgeOffset, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Button.Text.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, 0, RageUI.Settings.Items.Button.Text.Scale, 0, 0, 0, 255)
                         else
-                            NativeUI.RenderText(Label, NativeUI.CurrentMenu.X + NativeUI.Settings.Items.Button.Text.X + LeftBadgeOffset, NativeUI.CurrentMenu.Y + NativeUI.Settings.Items.Button.Text.Y + NativeUI.CurrentMenu.SubtitleHeight + NativeUI.ItemOffset, 0, NativeUI.Settings.Items.Button.Text.Scale, 163, 159, 148, 255)
+                            RageUI.RenderText(Label, RageUI.CurrentMenu.X + RageUI.Settings.Items.Button.Text.X + LeftBadgeOffset, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Button.Text.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, 0, RageUI.Settings.Items.Button.Text.Scale, 163, 159, 148, 255)
                         end
-                        if LeftBadge ~= NativeUI.BadgeStyle.None and tonumber(LeftBadge) ~= nil then
-                            NativeUI.RenderSprite(NativeUI.GetBadgeDictionary(LeftBadge, Selected), NativeUI.GetBadgeTexture(LeftBadge, Selected), NativeUI.CurrentMenu.X, NativeUI.CurrentMenu.Y + NativeUI.Settings.Items.Button.LeftBadge.Y + NativeUI.CurrentMenu.SubtitleHeight + NativeUI.ItemOffset, NativeUI.Settings.Items.Button.LeftBadge.Width, NativeUI.Settings.Items.Button.LeftBadge.Height, nil, CheckBoxLockBadgeColor(Selected))
+                        if LeftBadge ~= RageUI.BadgeStyle.None and tonumber(LeftBadge) ~= nil then
+                            RageUI.RenderSprite(RageUI.GetBadgeDictionary(LeftBadge, Selected), RageUI.GetBadgeTexture(LeftBadge, Selected), RageUI.CurrentMenu.X, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Button.LeftBadge.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Items.Button.LeftBadge.Width, RageUI.Settings.Items.Button.LeftBadge.Height, nil, CheckBoxLockBadgeColor(Selected))
                         end
                     end
 
                     if Style.Style ~= nil then
-                        if Style.Style == NativeUI.CheckboxStyle.Tick then
+                        if Style.Style == RageUI.CheckboxStyle.Tick then
                             StyleCheckBox(Selected, Checked, 2, 4)
-                        elseif Style.Style == NativeUI.CheckboxStyle.Cross then
+                        elseif Style.Style == RageUI.CheckboxStyle.Cross then
                             StyleCheckBox(Selected, Checked, 5, 6)
                         else
                             StyleCheckBox(Selected, Checked, 2, 4)
@@ -115,13 +115,13 @@ function NativeUI.Checkbox(Label, Description, Checked, Style, Callback)
                         StyleCheckBox(Selected, Checked, 2, 4)
                     end
 
-                    if Selected and (NativeUI.CurrentMenu.Controls.Select.Active or (Hovered and NativeUI.CurrentMenu.Controls.Click.Active)) and (Style.Enabled == true or Style.Enabled == nil) then
-                        NativeUI.PlaySound(NativeUI.Settings.Audio.Library, NativeUI.Settings.Audio.Select)
+                    if Selected and (RageUI.CurrentMenu.Controls.Select.Active or (Hovered and RageUI.CurrentMenu.Controls.Click.Active)) and (Style.Enabled == true or Style.Enabled == nil) then
+                        RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.Select)
                         Checked = not Checked
                     end
 
-                    if Selected and (NativeUI.CurrentMenu.Controls.Select.Active or (Hovered and NativeUI.CurrentMenu.Controls.Click.Active)) and (Style.Enabled == false) then
-                        NativeUI.PlaySound(NativeUI.Settings.Audio.Library, NativeUI.Settings.Audio.Error)
+                    if Selected and (RageUI.CurrentMenu.Controls.Select.Active or (Hovered and RageUI.CurrentMenu.Controls.Click.Active)) and (Style.Enabled == false) then
+                        RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.Error)
                         Checked = false
                     end
 
@@ -132,33 +132,33 @@ function NativeUI.Checkbox(Label, Description, Checked, Style, Callback)
                 --[[
                 if Enabled == true or Enabled == nil then
                     if Selected then
-                        NativeUI.RenderText(Label, NativeUI.CurrentMenu.X + NativeUI.Settings.Items.Button.Text.X, NativeUI.CurrentMenu.Y + NativeUI.Settings.Items.Button.Text.Y + NativeUI.CurrentMenu.SubtitleHeight + NativeUI.ItemOffset, 0, NativeUI.Settings.Items.Button.Text.Scale, 0, 0, 0, 255)
+                        RageUI.RenderText(Label, RageUI.CurrentMenu.X + RageUI.Settings.Items.Button.Text.X, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Button.Text.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, 0, RageUI.Settings.Items.Button.Text.Scale, 0, 0, 0, 255)
                     else
-                        NativeUI.RenderText(Label, NativeUI.CurrentMenu.X + NativeUI.Settings.Items.Button.Text.X, NativeUI.CurrentMenu.Y + NativeUI.Settings.Items.Button.Text.Y + NativeUI.CurrentMenu.SubtitleHeight + NativeUI.ItemOffset, 0, NativeUI.Settings.Items.Button.Text.Scale, 245, 245, 245, 255)
+                        RageUI.RenderText(Label, RageUI.CurrentMenu.X + RageUI.Settings.Items.Button.Text.X, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Button.Text.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, 0, RageUI.Settings.Items.Button.Text.Scale, 245, 245, 245, 255)
                     end
                 else
-                    NativeUI.RenderText(Label, NativeUI.CurrentMenu.X + NativeUI.Settings.Items.Button.Text.X, NativeUI.CurrentMenu.Y + NativeUI.Settings.Items.Button.Text.Y + NativeUI.CurrentMenu.SubtitleHeight + NativeUI.ItemOffset, 0, NativeUI.Settings.Items.Button.Text.Scale, 163, 159, 148, 255)
+                    RageUI.RenderText(Label, RageUI.CurrentMenu.X + RageUI.Settings.Items.Button.Text.X, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Button.Text.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, 0, RageUI.Settings.Items.Button.Text.Scale, 163, 159, 148, 255)
                 end
                 ]]--
 
-                NativeUI.ItemOffset = NativeUI.ItemOffset + NativeUI.Settings.Items.Button.Rectangle.Height
+                RageUI.ItemOffset = RageUI.ItemOffset + RageUI.Settings.Items.Button.Rectangle.Height
 
-                if Selected and NativeUI.CurrentMenu.Description ~= Description then
-                    NativeUI.CurrentMenu.Description = Description or ""
+                if Selected and RageUI.CurrentMenu.Description ~= Description then
+                    RageUI.CurrentMenu.Description = Description or ""
 
-                    local DescriptionLineCount = NativeUI.GetLineCount(NativeUI.CurrentMenu.Description, NativeUI.CurrentMenu.X + NativeUI.Settings.Items.Description.Text.X, NativeUI.CurrentMenu.Y + NativeUI.Settings.Items.Description.Text.Y + NativeUI.CurrentMenu.SubtitleHeight + NativeUI.ItemOffset, 0, NativeUI.Settings.Items.Description.Text.Scale, 255, 255, 255, 255, nil, false, false, NativeUI.Settings.Items.Description.Background.Width + NativeUI.CurrentMenu.WidthOffset)
+                    local DescriptionLineCount = RageUI.GetLineCount(RageUI.CurrentMenu.Description, RageUI.CurrentMenu.X + RageUI.Settings.Items.Description.Text.X, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Description.Text.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, 0, RageUI.Settings.Items.Description.Text.Scale, 255, 255, 255, 255, nil, false, false, RageUI.Settings.Items.Description.Background.Width + RageUI.CurrentMenu.WidthOffset)
 
                     if DescriptionLineCount > 1 then
-                        NativeUI.CurrentMenu.DescriptionHeight = NativeUI.Settings.Items.Description.Background.Height * DescriptionLineCount
+                        RageUI.CurrentMenu.DescriptionHeight = RageUI.Settings.Items.Description.Background.Height * DescriptionLineCount
                     else
-                        NativeUI.CurrentMenu.DescriptionHeight = NativeUI.Settings.Items.Description.Background.Height + 7
+                        RageUI.CurrentMenu.DescriptionHeight = RageUI.Settings.Items.Description.Background.Height + 7
                     end
                 end
 
-                Callback(Hovered, Selected, ((NativeUI.CurrentMenu.Controls.Select.Active or (Hovered and NativeUI.CurrentMenu.Controls.Click.Active)) and Selected), Checked)
+                Callback(Hovered, Selected, ((RageUI.CurrentMenu.Controls.Select.Active or (Hovered and RageUI.CurrentMenu.Controls.Click.Active)) and Selected), Checked)
             end
 
-            NativeUI.Options = NativeUI.Options + 1
+            RageUI.Options = RageUI.Options + 1
         end
     end
 end

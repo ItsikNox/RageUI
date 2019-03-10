@@ -1,4 +1,4 @@
-NativeUI.BadgeStyle = {
+RageUI.BadgeStyle = {
     None = 1,
     BronzeMedal = 2,
     GoldMedal = 3,
@@ -24,7 +24,7 @@ NativeUI.BadgeStyle = {
     Tick = 23
 }
 
-NativeUI.BadgeTexture = {
+RageUI.BadgeTexture = {
     [1] = function()
         return ""
     end,
@@ -152,7 +152,7 @@ NativeUI.BadgeTexture = {
     end,
 }
 
-NativeUI.BadgeDictionary = {
+RageUI.BadgeDictionary = {
     [1] = function(Selected)
         if Selected then
             return "commonmenu"
@@ -162,7 +162,7 @@ NativeUI.BadgeDictionary = {
     end,
 }
 
-NativeUI.BadgeColour = {
+RageUI.BadgeColour = {
     [6] = function(Selected)
         if Selected then
             return 0, 0, 0, 255
@@ -191,9 +191,9 @@ NativeUI.BadgeColour = {
 ---@param Selected boolean
 ---@return table
 ---@public
-function NativeUI.GetBadgeTexture(Badge, Selected)
-    if NativeUI.BadgeTexture[Badge] then
-        return NativeUI.BadgeTexture[Badge](Selected)
+function RageUI.GetBadgeTexture(Badge, Selected)
+    if RageUI.BadgeTexture[Badge] then
+        return RageUI.BadgeTexture[Badge](Selected)
     else
         return ""
     end
@@ -204,9 +204,9 @@ end
 ---@param Selected boolean
 ---@return table
 ---@public
-function NativeUI.GetBadgeDictionary(Badge, Selected)
-    if NativeUI.BadgeDictionary[Badge] then
-        return NativeUI.BadgeDictionary[Badge](Selected)
+function RageUI.GetBadgeDictionary(Badge, Selected)
+    if RageUI.BadgeDictionary[Badge] then
+        return RageUI.BadgeDictionary[Badge](Selected)
     else
         return "commonmenu"
     end
@@ -217,9 +217,9 @@ end
 ---@param Selected boolean
 ---@return table
 ---@public
-function NativeUI.GetBadgeColour(Badge, Selected)
-    if NativeUI.BadgeColour[Badge] then
-        return NativeUI.BadgeColour[Badge](Selected)
+function RageUI.GetBadgeColour(Badge, Selected)
+    if RageUI.BadgeColour[Badge] then
+        return RageUI.BadgeColour[Badge](Selected)
     else
         return 255, 255, 255, 255
     end

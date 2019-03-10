@@ -2,34 +2,34 @@
 ---@param Options number
 ---@return nil
 ---@public
-function NativeUI.GoUp(Options)
-    if NativeUI.CurrentMenu ~= nil then
-        if NativeUI.CurrentMenu() then
-            if Options > NativeUI.CurrentMenu.Pagination.Total then
-                if NativeUI.CurrentMenu.Index <= NativeUI.CurrentMenu.Pagination.Minimum then
-                    if NativeUI.CurrentMenu.Index == 1 then
-                        NativeUI.CurrentMenu.Pagination.Minimum = Options - (NativeUI.CurrentMenu.Pagination.Total - 1)
-                        NativeUI.CurrentMenu.Pagination.Maximum = Options
-                        NativeUI.CurrentMenu.Index = Options
+function RageUI.GoUp(Options)
+    if RageUI.CurrentMenu ~= nil then
+        if RageUI.CurrentMenu() then
+            if Options > RageUI.CurrentMenu.Pagination.Total then
+                if RageUI.CurrentMenu.Index <= RageUI.CurrentMenu.Pagination.Minimum then
+                    if RageUI.CurrentMenu.Index == 1 then
+                        RageUI.CurrentMenu.Pagination.Minimum = Options - (RageUI.CurrentMenu.Pagination.Total - 1)
+                        RageUI.CurrentMenu.Pagination.Maximum = Options
+                        RageUI.CurrentMenu.Index = Options
                     else
-                        NativeUI.CurrentMenu.Pagination.Minimum = NativeUI.CurrentMenu.Pagination.Minimum - 1
-                        NativeUI.CurrentMenu.Pagination.Maximum = NativeUI.CurrentMenu.Pagination.Maximum - 1
-                        NativeUI.CurrentMenu.Index = NativeUI.CurrentMenu.Index - 1
+                        RageUI.CurrentMenu.Pagination.Minimum = RageUI.CurrentMenu.Pagination.Minimum - 1
+                        RageUI.CurrentMenu.Pagination.Maximum = RageUI.CurrentMenu.Pagination.Maximum - 1
+                        RageUI.CurrentMenu.Index = RageUI.CurrentMenu.Index - 1
                     end
                 else
-                    NativeUI.CurrentMenu.Index = NativeUI.CurrentMenu.Index - 1
+                    RageUI.CurrentMenu.Index = RageUI.CurrentMenu.Index - 1
                 end
             else
-                if NativeUI.CurrentMenu.Index == 1 then
-                    NativeUI.CurrentMenu.Pagination.Minimum = Options - (NativeUI.CurrentMenu.Pagination.Total - 1)
-                    NativeUI.CurrentMenu.Pagination.Maximum = Options
-                    NativeUI.CurrentMenu.Index = Options
+                if RageUI.CurrentMenu.Index == 1 then
+                    RageUI.CurrentMenu.Pagination.Minimum = Options - (RageUI.CurrentMenu.Pagination.Total - 1)
+                    RageUI.CurrentMenu.Pagination.Maximum = Options
+                    RageUI.CurrentMenu.Index = Options
                 else
-                    NativeUI.CurrentMenu.Index = NativeUI.CurrentMenu.Index - 1
+                    RageUI.CurrentMenu.Index = RageUI.CurrentMenu.Index - 1
                 end
             end
 
-            NativeUI.PlaySound(NativeUI.Settings.Audio.Library, NativeUI.Settings.Audio.UpDown)
+            RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.UpDown)
         end
     end
 end
@@ -38,34 +38,34 @@ end
 ---@param Options number
 ---@return nil
 ---@public
-function NativeUI.GoDown(Options)
-    if NativeUI.CurrentMenu ~= nil then
-        if NativeUI.CurrentMenu() then
-            if Options > NativeUI.CurrentMenu.Pagination.Total then
-                if NativeUI.CurrentMenu.Index >= NativeUI.CurrentMenu.Pagination.Maximum then
-                    if NativeUI.CurrentMenu.Index == Options then
-                        NativeUI.CurrentMenu.Pagination.Minimum = 1
-                        NativeUI.CurrentMenu.Pagination.Maximum = NativeUI.CurrentMenu.Pagination.Total
-                        NativeUI.CurrentMenu.Index = 1
+function RageUI.GoDown(Options)
+    if RageUI.CurrentMenu ~= nil then
+        if RageUI.CurrentMenu() then
+            if Options > RageUI.CurrentMenu.Pagination.Total then
+                if RageUI.CurrentMenu.Index >= RageUI.CurrentMenu.Pagination.Maximum then
+                    if RageUI.CurrentMenu.Index == Options then
+                        RageUI.CurrentMenu.Pagination.Minimum = 1
+                        RageUI.CurrentMenu.Pagination.Maximum = RageUI.CurrentMenu.Pagination.Total
+                        RageUI.CurrentMenu.Index = 1
                     else
-                        NativeUI.CurrentMenu.Pagination.Maximum = NativeUI.CurrentMenu.Pagination.Maximum + 1
-                        NativeUI.CurrentMenu.Pagination.Minimum = NativeUI.CurrentMenu.Pagination.Maximum - (NativeUI.CurrentMenu.Pagination.Total - 1)
-                        NativeUI.CurrentMenu.Index = NativeUI.CurrentMenu.Index + 1
+                        RageUI.CurrentMenu.Pagination.Maximum = RageUI.CurrentMenu.Pagination.Maximum + 1
+                        RageUI.CurrentMenu.Pagination.Minimum = RageUI.CurrentMenu.Pagination.Maximum - (RageUI.CurrentMenu.Pagination.Total - 1)
+                        RageUI.CurrentMenu.Index = RageUI.CurrentMenu.Index + 1
                     end
                 else
-                    NativeUI.CurrentMenu.Index = NativeUI.CurrentMenu.Index + 1
+                    RageUI.CurrentMenu.Index = RageUI.CurrentMenu.Index + 1
                 end
             else
-                if NativeUI.CurrentMenu.Index == Options then
-                    NativeUI.CurrentMenu.Pagination.Minimum = 1
-                    NativeUI.CurrentMenu.Pagination.Maximum = NativeUI.CurrentMenu.Pagination.Total
-                    NativeUI.CurrentMenu.Index = 1
+                if RageUI.CurrentMenu.Index == Options then
+                    RageUI.CurrentMenu.Pagination.Minimum = 1
+                    RageUI.CurrentMenu.Pagination.Maximum = RageUI.CurrentMenu.Pagination.Total
+                    RageUI.CurrentMenu.Index = 1
                 else
-                    NativeUI.CurrentMenu.Index = NativeUI.CurrentMenu.Index + 1
+                    RageUI.CurrentMenu.Index = RageUI.CurrentMenu.Index + 1
                 end
             end
 
-            NativeUI.PlaySound(NativeUI.Settings.Audio.Library, NativeUI.Settings.Audio.UpDown)
+            RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.UpDown)
         end
     end
 end
@@ -73,44 +73,44 @@ end
 ---Controls
 ---@return nil
 ---@public
-function NativeUI.Controls()
-    if NativeUI.CurrentMenu ~= nil then
-        if NativeUI.CurrentMenu() then
-            if NativeUI.CurrentMenu.Open then
+function RageUI.Controls()
+    if RageUI.CurrentMenu ~= nil then
+        if RageUI.CurrentMenu() then
+            if RageUI.CurrentMenu.Open then
 
                 ---@type number
-                local Options = NativeUI.Options
+                local Options = RageUI.Options
 
                 DisableAllControlActions(2)
 
                 if not IsInputDisabled(2) then
-                    for Index = 1, #NativeUI.CurrentMenu.Controls.Enabled.Controller do
-                        EnableControlAction(NativeUI.CurrentMenu.Controls.Enabled.Controller[Index][1], NativeUI.CurrentMenu.Controls.Enabled.Controller[Index][2], true)
+                    for Index = 1, #RageUI.CurrentMenu.Controls.Enabled.Controller do
+                        EnableControlAction(RageUI.CurrentMenu.Controls.Enabled.Controller[Index][1], RageUI.CurrentMenu.Controls.Enabled.Controller[Index][2], true)
                     end
                 else
-                    for Index = 1, #NativeUI.CurrentMenu.Controls.Enabled.Keyboard do
-                        EnableControlAction(NativeUI.CurrentMenu.Controls.Enabled.Keyboard[Index][1], NativeUI.CurrentMenu.Controls.Enabled.Keyboard[Index][2], true)
+                    for Index = 1, #RageUI.CurrentMenu.Controls.Enabled.Keyboard do
+                        EnableControlAction(RageUI.CurrentMenu.Controls.Enabled.Keyboard[Index][1], RageUI.CurrentMenu.Controls.Enabled.Keyboard[Index][2], true)
                     end
                 end
 
-                if NativeUI.CurrentMenu.Controls.Up.Enabled then
-                    for Index = 1, #NativeUI.CurrentMenu.Controls.Up.Keys do
-                        if not NativeUI.CurrentMenu.Controls.Up.Pressed then
-                            if IsDisabledControlJustPressed(NativeUI.CurrentMenu.Controls.Up.Keys[Index][1], NativeUI.CurrentMenu.Controls.Up.Keys[Index][2]) then
-                                NativeUI.CurrentMenu.Controls.Up.Pressed = true
+                if RageUI.CurrentMenu.Controls.Up.Enabled then
+                    for Index = 1, #RageUI.CurrentMenu.Controls.Up.Keys do
+                        if not RageUI.CurrentMenu.Controls.Up.Pressed then
+                            if IsDisabledControlJustPressed(RageUI.CurrentMenu.Controls.Up.Keys[Index][1], RageUI.CurrentMenu.Controls.Up.Keys[Index][2]) then
+                                RageUI.CurrentMenu.Controls.Up.Pressed = true
 
                                 Citizen.CreateThread(function()
-                                    NativeUI.GoUp(Options)
+                                    RageUI.GoUp(Options)
 
                                     Citizen.Wait(175)
 
-                                    while NativeUI.CurrentMenu.Controls.Up.Enabled and IsDisabledControlPressed(NativeUI.CurrentMenu.Controls.Up.Keys[Index][1], NativeUI.CurrentMenu.Controls.Up.Keys[Index][2]) do
-                                        NativeUI.GoUp(Options)
+                                    while RageUI.CurrentMenu.Controls.Up.Enabled and IsDisabledControlPressed(RageUI.CurrentMenu.Controls.Up.Keys[Index][1], RageUI.CurrentMenu.Controls.Up.Keys[Index][2]) do
+                                        RageUI.GoUp(Options)
 
                                         Citizen.Wait(125)
                                     end
 
-                                    NativeUI.CurrentMenu.Controls.Up.Pressed = false
+                                    RageUI.CurrentMenu.Controls.Up.Pressed = false
                                 end)
 
                                 break
@@ -119,24 +119,24 @@ function NativeUI.Controls()
                     end
                 end
 
-                if NativeUI.CurrentMenu.Controls.Down.Enabled then
-                    for Index = 1, #NativeUI.CurrentMenu.Controls.Down.Keys do
-                        if not NativeUI.CurrentMenu.Controls.Down.Pressed then
-                            if IsDisabledControlJustPressed(NativeUI.CurrentMenu.Controls.Down.Keys[Index][1], NativeUI.CurrentMenu.Controls.Down.Keys[Index][2]) then
-                                NativeUI.CurrentMenu.Controls.Down.Pressed = true
+                if RageUI.CurrentMenu.Controls.Down.Enabled then
+                    for Index = 1, #RageUI.CurrentMenu.Controls.Down.Keys do
+                        if not RageUI.CurrentMenu.Controls.Down.Pressed then
+                            if IsDisabledControlJustPressed(RageUI.CurrentMenu.Controls.Down.Keys[Index][1], RageUI.CurrentMenu.Controls.Down.Keys[Index][2]) then
+                                RageUI.CurrentMenu.Controls.Down.Pressed = true
 
                                 Citizen.CreateThread(function()
-                                    NativeUI.GoDown(Options)
+                                    RageUI.GoDown(Options)
 
                                     Citizen.Wait(175)
 
-                                    while NativeUI.CurrentMenu.Controls.Down.Enabled and IsDisabledControlPressed(NativeUI.CurrentMenu.Controls.Down.Keys[Index][1], NativeUI.CurrentMenu.Controls.Down.Keys[Index][2]) do
-                                        NativeUI.GoDown(Options)
+                                    while RageUI.CurrentMenu.Controls.Down.Enabled and IsDisabledControlPressed(RageUI.CurrentMenu.Controls.Down.Keys[Index][1], RageUI.CurrentMenu.Controls.Down.Keys[Index][2]) do
+                                        RageUI.GoDown(Options)
 
                                         Citizen.Wait(125)
                                     end
 
-                                    NativeUI.CurrentMenu.Controls.Down.Pressed = false
+                                    RageUI.CurrentMenu.Controls.Down.Pressed = false
                                 end)
 
                                 break
@@ -145,32 +145,32 @@ function NativeUI.Controls()
                     end
                 end
 
-                if NativeUI.CurrentMenu.Controls.Left.Enabled then
-                    for Index = 1, #NativeUI.CurrentMenu.Controls.Left.Keys do
-                        if not NativeUI.CurrentMenu.Controls.Left.Pressed then
-                            if IsDisabledControlJustPressed(NativeUI.CurrentMenu.Controls.Left.Keys[Index][1], NativeUI.CurrentMenu.Controls.Left.Keys[Index][2]) then
-                                NativeUI.CurrentMenu.Controls.Left.Pressed = true
+                if RageUI.CurrentMenu.Controls.Left.Enabled then
+                    for Index = 1, #RageUI.CurrentMenu.Controls.Left.Keys do
+                        if not RageUI.CurrentMenu.Controls.Left.Pressed then
+                            if IsDisabledControlJustPressed(RageUI.CurrentMenu.Controls.Left.Keys[Index][1], RageUI.CurrentMenu.Controls.Left.Keys[Index][2]) then
+                                RageUI.CurrentMenu.Controls.Left.Pressed = true
 
                                 Citizen.CreateThread(function()
-                                    NativeUI.CurrentMenu.Controls.Left.Active = true
+                                    RageUI.CurrentMenu.Controls.Left.Active = true
 
                                     Citizen.Wait(0.01)
 
-                                    NativeUI.CurrentMenu.Controls.Left.Active = false
+                                    RageUI.CurrentMenu.Controls.Left.Active = false
 
                                     Citizen.Wait(174.99)
 
-                                    while NativeUI.CurrentMenu.Controls.Left.Enabled and IsDisabledControlPressed(NativeUI.CurrentMenu.Controls.Left.Keys[Index][1], NativeUI.CurrentMenu.Controls.Left.Keys[Index][2]) do
-                                        NativeUI.CurrentMenu.Controls.Left.Active = true
+                                    while RageUI.CurrentMenu.Controls.Left.Enabled and IsDisabledControlPressed(RageUI.CurrentMenu.Controls.Left.Keys[Index][1], RageUI.CurrentMenu.Controls.Left.Keys[Index][2]) do
+                                        RageUI.CurrentMenu.Controls.Left.Active = true
 
                                         Citizen.Wait(0.01)
 
-                                        NativeUI.CurrentMenu.Controls.Left.Active = false
+                                        RageUI.CurrentMenu.Controls.Left.Active = false
 
                                         Citizen.Wait(124.99)
                                     end
 
-                                    NativeUI.CurrentMenu.Controls.Left.Pressed = false
+                                    RageUI.CurrentMenu.Controls.Left.Pressed = false
                                 end)
 
                                 break
@@ -179,32 +179,32 @@ function NativeUI.Controls()
                     end
                 end
 
-                if NativeUI.CurrentMenu.Controls.Right.Enabled then
-                    for Index = 1, #NativeUI.CurrentMenu.Controls.Right.Keys do
-                        if not NativeUI.CurrentMenu.Controls.Right.Pressed then
-                            if IsDisabledControlJustPressed(NativeUI.CurrentMenu.Controls.Right.Keys[Index][1], NativeUI.CurrentMenu.Controls.Right.Keys[Index][2]) then
-                                NativeUI.CurrentMenu.Controls.Right.Pressed = true
+                if RageUI.CurrentMenu.Controls.Right.Enabled then
+                    for Index = 1, #RageUI.CurrentMenu.Controls.Right.Keys do
+                        if not RageUI.CurrentMenu.Controls.Right.Pressed then
+                            if IsDisabledControlJustPressed(RageUI.CurrentMenu.Controls.Right.Keys[Index][1], RageUI.CurrentMenu.Controls.Right.Keys[Index][2]) then
+                                RageUI.CurrentMenu.Controls.Right.Pressed = true
 
                                 Citizen.CreateThread(function()
-                                    NativeUI.CurrentMenu.Controls.Right.Active = true
+                                    RageUI.CurrentMenu.Controls.Right.Active = true
 
                                     Citizen.Wait(0.01)
 
-                                    NativeUI.CurrentMenu.Controls.Right.Active = false
+                                    RageUI.CurrentMenu.Controls.Right.Active = false
 
                                     Citizen.Wait(174.99)
 
-                                    while NativeUI.CurrentMenu.Controls.Right.Enabled and IsDisabledControlPressed(NativeUI.CurrentMenu.Controls.Right.Keys[Index][1], NativeUI.CurrentMenu.Controls.Right.Keys[Index][2]) do
-                                        NativeUI.CurrentMenu.Controls.Right.Active = true
+                                    while RageUI.CurrentMenu.Controls.Right.Enabled and IsDisabledControlPressed(RageUI.CurrentMenu.Controls.Right.Keys[Index][1], RageUI.CurrentMenu.Controls.Right.Keys[Index][2]) do
+                                        RageUI.CurrentMenu.Controls.Right.Active = true
 
                                         Citizen.Wait(1)
 
-                                        NativeUI.CurrentMenu.Controls.Right.Active = false
+                                        RageUI.CurrentMenu.Controls.Right.Active = false
 
                                         Citizen.Wait(124.99)
                                     end
 
-                                    NativeUI.CurrentMenu.Controls.Right.Pressed = false
+                                    RageUI.CurrentMenu.Controls.Right.Pressed = false
                                 end)
 
                                 break
@@ -213,32 +213,32 @@ function NativeUI.Controls()
                     end
                 end
 
-                if NativeUI.CurrentMenu.Controls.Select.Enabled then
-                    for Index = 1, #NativeUI.CurrentMenu.Controls.Select.Keys do
-                        if not NativeUI.CurrentMenu.Controls.Select.Pressed then
-                            if IsDisabledControlJustPressed(NativeUI.CurrentMenu.Controls.Select.Keys[Index][1], NativeUI.CurrentMenu.Controls.Select.Keys[Index][2]) then
-                                NativeUI.CurrentMenu.Controls.Select.Pressed = true
+                if RageUI.CurrentMenu.Controls.Select.Enabled then
+                    for Index = 1, #RageUI.CurrentMenu.Controls.Select.Keys do
+                        if not RageUI.CurrentMenu.Controls.Select.Pressed then
+                            if IsDisabledControlJustPressed(RageUI.CurrentMenu.Controls.Select.Keys[Index][1], RageUI.CurrentMenu.Controls.Select.Keys[Index][2]) then
+                                RageUI.CurrentMenu.Controls.Select.Pressed = true
 
                                 Citizen.CreateThread(function()
-                                    NativeUI.CurrentMenu.Controls.Select.Active = true
+                                    RageUI.CurrentMenu.Controls.Select.Active = true
 
                                     Citizen.Wait(0.01)
 
-                                    NativeUI.CurrentMenu.Controls.Select.Active = false
+                                    RageUI.CurrentMenu.Controls.Select.Active = false
 
                                     Citizen.Wait(174.99)
 
-                                    while NativeUI.CurrentMenu.Controls.Select.Enabled and IsDisabledControlPressed(NativeUI.CurrentMenu.Controls.Select.Keys[Index][1], NativeUI.CurrentMenu.Controls.Select.Keys[Index][2]) do
-                                        NativeUI.CurrentMenu.Controls.Select.Active = true
+                                    while RageUI.CurrentMenu.Controls.Select.Enabled and IsDisabledControlPressed(RageUI.CurrentMenu.Controls.Select.Keys[Index][1], RageUI.CurrentMenu.Controls.Select.Keys[Index][2]) do
+                                        RageUI.CurrentMenu.Controls.Select.Active = true
 
                                         Citizen.Wait(0.01)
 
-                                        NativeUI.CurrentMenu.Controls.Select.Active = false
+                                        RageUI.CurrentMenu.Controls.Select.Active = false
 
                                         Citizen.Wait(124.99)
                                     end
 
-                                    NativeUI.CurrentMenu.Controls.Select.Pressed = false
+                                    RageUI.CurrentMenu.Controls.Select.Pressed = false
                                 end)
 
                                 break
@@ -247,32 +247,32 @@ function NativeUI.Controls()
                     end
                 end
 
-                if NativeUI.CurrentMenu.Controls.Click.Enabled then
-                    for Index = 1, #NativeUI.CurrentMenu.Controls.Click.Keys do
-                        if not NativeUI.CurrentMenu.Controls.Click.Pressed then
-                            if IsDisabledControlJustPressed(NativeUI.CurrentMenu.Controls.Click.Keys[Index][1], NativeUI.CurrentMenu.Controls.Click.Keys[Index][2]) then
-                                NativeUI.CurrentMenu.Controls.Click.Pressed = true
+                if RageUI.CurrentMenu.Controls.Click.Enabled then
+                    for Index = 1, #RageUI.CurrentMenu.Controls.Click.Keys do
+                        if not RageUI.CurrentMenu.Controls.Click.Pressed then
+                            if IsDisabledControlJustPressed(RageUI.CurrentMenu.Controls.Click.Keys[Index][1], RageUI.CurrentMenu.Controls.Click.Keys[Index][2]) then
+                                RageUI.CurrentMenu.Controls.Click.Pressed = true
 
                                 Citizen.CreateThread(function()
-                                    NativeUI.CurrentMenu.Controls.Click.Active = true
+                                    RageUI.CurrentMenu.Controls.Click.Active = true
 
                                     Citizen.Wait(0.01)
 
-                                    NativeUI.CurrentMenu.Controls.Click.Active = false
+                                    RageUI.CurrentMenu.Controls.Click.Active = false
 
                                     Citizen.Wait(174.99)
 
-                                    while NativeUI.CurrentMenu.Controls.Click.Enabled and IsDisabledControlPressed(NativeUI.CurrentMenu.Controls.Click.Keys[Index][1], NativeUI.CurrentMenu.Controls.Click.Keys[Index][2]) do
-                                        NativeUI.CurrentMenu.Controls.Click.Active = true
+                                    while RageUI.CurrentMenu.Controls.Click.Enabled and IsDisabledControlPressed(RageUI.CurrentMenu.Controls.Click.Keys[Index][1], RageUI.CurrentMenu.Controls.Click.Keys[Index][2]) do
+                                        RageUI.CurrentMenu.Controls.Click.Active = true
 
                                         Citizen.Wait(0.01)
 
-                                        NativeUI.CurrentMenu.Controls.Click.Active = false
+                                        RageUI.CurrentMenu.Controls.Click.Active = false
 
                                         Citizen.Wait(124.99)
                                     end
 
-                                    NativeUI.CurrentMenu.Controls.Click.Pressed = false
+                                    RageUI.CurrentMenu.Controls.Click.Pressed = false
                                 end)
 
                                 break
@@ -281,11 +281,11 @@ function NativeUI.Controls()
                     end
                 end
 
-                if NativeUI.CurrentMenu.Controls.Back.Enabled then
-                    for Index = 1, #NativeUI.CurrentMenu.Controls.Back.Keys do
-                        if not NativeUI.CurrentMenu.Controls.Back.Pressed then
-                            if IsDisabledControlJustPressed(NativeUI.CurrentMenu.Controls.Back.Keys[Index][1], NativeUI.CurrentMenu.Controls.Back.Keys[Index][2]) then
-                                NativeUI.CurrentMenu.Controls.Back.Pressed = true
+                if RageUI.CurrentMenu.Controls.Back.Enabled then
+                    for Index = 1, #RageUI.CurrentMenu.Controls.Back.Keys do
+                        if not RageUI.CurrentMenu.Controls.Back.Pressed then
+                            if IsDisabledControlJustPressed(RageUI.CurrentMenu.Controls.Back.Keys[Index][1], RageUI.CurrentMenu.Controls.Back.Keys[Index][2]) then
+                                RageUI.CurrentMenu.Controls.Back.Pressed = true
                                 break
                             end
                         end
@@ -300,10 +300,10 @@ end
 ---Navigation
 ---@return nil
 ---@public
-function NativeUI.Navigation()
-    if NativeUI.CurrentMenu ~= nil then
-        if NativeUI.CurrentMenu() then
-            if NativeUI.Options > NativeUI.CurrentMenu.Pagination.Total then
+function RageUI.Navigation()
+    if RageUI.CurrentMenu ~= nil then
+        if RageUI.CurrentMenu() then
+            if RageUI.Options > RageUI.CurrentMenu.Pagination.Total then
 
                 ---@type boolean
                 local UpHovered = false
@@ -311,43 +311,43 @@ function NativeUI.Navigation()
                 ---@type boolean
                 local DownHovered = false
 
-                if not NativeUI.CurrentMenu.SafeZoneSize then
-                    NativeUI.CurrentMenu.SafeZoneSize = { X = 0, Y = 0 }
+                if not RageUI.CurrentMenu.SafeZoneSize then
+                    RageUI.CurrentMenu.SafeZoneSize = { X = 0, Y = 0 }
 
-                    if NativeUI.CurrentMenu.Safezone then
-                        NativeUI.CurrentMenu.SafeZoneSize = NativeUI.GetSafeZoneBounds()
+                    if RageUI.CurrentMenu.Safezone then
+                        RageUI.CurrentMenu.SafeZoneSize = RageUI.GetSafeZoneBounds()
 
                         ScreenDrawPositionBegin(76, 84)
                         ScreenDrawPositionRatio(0, 0, 0, 0)
                     end
                 end
 
-                UpHovered = NativeUI.IsMouseInBounds(NativeUI.CurrentMenu.X + NativeUI.CurrentMenu.SafeZoneSize.X, NativeUI.CurrentMenu.Y + NativeUI.CurrentMenu.SafeZoneSize.Y + NativeUI.CurrentMenu.SubtitleHeight + NativeUI.ItemOffset, NativeUI.Settings.Items.Navigation.Rectangle.Width + NativeUI.CurrentMenu.WidthOffset, NativeUI.Settings.Items.Navigation.Rectangle.Height)
-                DownHovered = NativeUI.IsMouseInBounds(NativeUI.CurrentMenu.X + NativeUI.CurrentMenu.SafeZoneSize.X, NativeUI.CurrentMenu.Y + NativeUI.Settings.Items.Navigation.Rectangle.Height + NativeUI.CurrentMenu.SafeZoneSize.Y + NativeUI.CurrentMenu.SubtitleHeight + NativeUI.ItemOffset, NativeUI.Settings.Items.Navigation.Rectangle.Width + NativeUI.CurrentMenu.WidthOffset, NativeUI.Settings.Items.Navigation.Rectangle.Height)
+                UpHovered = RageUI.IsMouseInBounds(RageUI.CurrentMenu.X + RageUI.CurrentMenu.SafeZoneSize.X, RageUI.CurrentMenu.Y + RageUI.CurrentMenu.SafeZoneSize.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Items.Navigation.Rectangle.Width + RageUI.CurrentMenu.WidthOffset, RageUI.Settings.Items.Navigation.Rectangle.Height)
+                DownHovered = RageUI.IsMouseInBounds(RageUI.CurrentMenu.X + RageUI.CurrentMenu.SafeZoneSize.X, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Navigation.Rectangle.Height + RageUI.CurrentMenu.SafeZoneSize.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Items.Navigation.Rectangle.Width + RageUI.CurrentMenu.WidthOffset, RageUI.Settings.Items.Navigation.Rectangle.Height)
 
-                if NativeUI.CurrentMenu.Controls.Click.Active then
+                if RageUI.CurrentMenu.Controls.Click.Active then
                     if UpHovered then
-                        NativeUI.GoUp(NativeUI.Options)
+                        RageUI.GoUp(RageUI.Options)
                     elseif DownHovered then
-                        NativeUI.GoDown(NativeUI.Options)
+                        RageUI.GoDown(RageUI.Options)
                     end
                 end
 
                 if UpHovered then
-                    NativeUI.RenderRectangle(NativeUI.CurrentMenu.X, NativeUI.CurrentMenu.Y + NativeUI.CurrentMenu.SubtitleHeight + NativeUI.ItemOffset, NativeUI.Settings.Items.Navigation.Rectangle.Width + NativeUI.CurrentMenu.WidthOffset, NativeUI.Settings.Items.Navigation.Rectangle.Height, 30, 30, 30, 255)
+                    RageUI.RenderRectangle(RageUI.CurrentMenu.X, RageUI.CurrentMenu.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Items.Navigation.Rectangle.Width + RageUI.CurrentMenu.WidthOffset, RageUI.Settings.Items.Navigation.Rectangle.Height, 30, 30, 30, 255)
                 else
-                    NativeUI.RenderRectangle(NativeUI.CurrentMenu.X, NativeUI.CurrentMenu.Y + NativeUI.CurrentMenu.SubtitleHeight + NativeUI.ItemOffset, NativeUI.Settings.Items.Navigation.Rectangle.Width + NativeUI.CurrentMenu.WidthOffset, NativeUI.Settings.Items.Navigation.Rectangle.Height, 0, 0, 0, 200)
+                    RageUI.RenderRectangle(RageUI.CurrentMenu.X, RageUI.CurrentMenu.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Items.Navigation.Rectangle.Width + RageUI.CurrentMenu.WidthOffset, RageUI.Settings.Items.Navigation.Rectangle.Height, 0, 0, 0, 200)
                 end
 
                 if DownHovered then
-                    NativeUI.RenderRectangle(NativeUI.CurrentMenu.X, NativeUI.CurrentMenu.Y + NativeUI.Settings.Items.Navigation.Rectangle.Height + NativeUI.CurrentMenu.SubtitleHeight + NativeUI.ItemOffset, NativeUI.Settings.Items.Navigation.Rectangle.Width + NativeUI.CurrentMenu.WidthOffset, NativeUI.Settings.Items.Navigation.Rectangle.Height, 30, 30, 30, 255)
+                    RageUI.RenderRectangle(RageUI.CurrentMenu.X, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Navigation.Rectangle.Height + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Items.Navigation.Rectangle.Width + RageUI.CurrentMenu.WidthOffset, RageUI.Settings.Items.Navigation.Rectangle.Height, 30, 30, 30, 255)
                 else
-                    NativeUI.RenderRectangle(NativeUI.CurrentMenu.X, NativeUI.CurrentMenu.Y + NativeUI.Settings.Items.Navigation.Rectangle.Height + NativeUI.CurrentMenu.SubtitleHeight + NativeUI.ItemOffset, NativeUI.Settings.Items.Navigation.Rectangle.Width + NativeUI.CurrentMenu.WidthOffset, NativeUI.Settings.Items.Navigation.Rectangle.Height, 0, 0, 0, 200)
+                    RageUI.RenderRectangle(RageUI.CurrentMenu.X, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Navigation.Rectangle.Height + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Items.Navigation.Rectangle.Width + RageUI.CurrentMenu.WidthOffset, RageUI.Settings.Items.Navigation.Rectangle.Height, 0, 0, 0, 200)
                 end
 
-                NativeUI.RenderSprite(NativeUI.Settings.Items.Navigation.Arrows.Dictionary, NativeUI.Settings.Items.Navigation.Arrows.Texture, NativeUI.CurrentMenu.X + NativeUI.Settings.Items.Navigation.Arrows.X + (NativeUI.CurrentMenu.WidthOffset / 2), NativeUI.CurrentMenu.Y + NativeUI.Settings.Items.Navigation.Arrows.Y + NativeUI.CurrentMenu.SubtitleHeight + NativeUI.ItemOffset, NativeUI.Settings.Items.Navigation.Arrows.Width, NativeUI.Settings.Items.Navigation.Arrows.Height)
+                RageUI.RenderSprite(RageUI.Settings.Items.Navigation.Arrows.Dictionary, RageUI.Settings.Items.Navigation.Arrows.Texture, RageUI.CurrentMenu.X + RageUI.Settings.Items.Navigation.Arrows.X + (RageUI.CurrentMenu.WidthOffset / 2), RageUI.CurrentMenu.Y + RageUI.Settings.Items.Navigation.Arrows.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Items.Navigation.Arrows.Width, RageUI.Settings.Items.Navigation.Arrows.Height)
 
-                NativeUI.ItemOffset = NativeUI.ItemOffset + (NativeUI.Settings.Items.Navigation.Rectangle.Height * 2)
+                RageUI.ItemOffset = RageUI.ItemOffset + (RageUI.Settings.Items.Navigation.Rectangle.Height * 2)
             end
         end
     end

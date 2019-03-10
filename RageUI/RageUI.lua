@@ -17,34 +17,34 @@ function string.starts(String, Start)
 end
 
 ---@type table
-NativeUI = {}
+RageUI = {}
 
 ---@type table
-NativeUI.Menus = setmetatable({}, NativeUI.Menus)
+RageUI.Menus = setmetatable({}, RageUI.Menus)
 
 ---@type table
 ---@return boolean
-NativeUI.Menus.__call = function()
+RageUI.Menus.__call = function()
     return true
 end
 
 ---@type table
-NativeUI.Menus.__index = NativeUI.Menus
+RageUI.Menus.__index = RageUI.Menus
 
 ---@type table
-NativeUI.CurrentMenu = nil
+RageUI.CurrentMenu = nil
 
 ---@type table
-NativeUI.NextMenu = nil
+RageUI.NextMenu = nil
 
 ---@type number
-NativeUI.Options = 0
+RageUI.Options = 0
 
 ---@type number
-NativeUI.ItemOffset = 0
+RageUI.ItemOffset = 0
 
 ---@type table
-NativeUI.Settings = {
+RageUI.Settings = {
     Controls = {
         Up = {
             Enabled = true,
@@ -272,7 +272,7 @@ NativeUI.Settings = {
 ---@param Height number
 ---@return number
 ---@public
-function NativeUI.IsMouseInBounds(X, Y, Width, Height)
+function RageUI.IsMouseInBounds(X, Y, Width, Height)
     local MX, MY = math.round(GetControlNormal(0, 239) * 1920) / 1920, math.round(GetControlNormal(0, 240) * 1080) / 1080
     X, Y = X / 1920, Y / 1080
     Width, Height = Width / 1920, Height / 1080
@@ -282,7 +282,7 @@ end
 ---GetSafeZoneBounds
 ---@return table
 ---@public
-function NativeUI.GetSafeZoneBounds()
+function RageUI.GetSafeZoneBounds()
     local SafeSize = GetSafeZoneSize()
     SafeSize = math.round(SafeSize, 2)
     SafeSize = (SafeSize * 100) - 90
@@ -299,23 +299,23 @@ end
 ---@param IsLooped boolean
 ---@return nil
 ---@public
-function NativeUI.PlaySound(Library, Sound, IsLooped)
+function RageUI.PlaySound(Library, Sound, IsLooped)
     if not IsLooped then
         PlaySoundFrontend(-1, Sound, Library, true)
     else
-        if not NativeUI.Settings.Audio.Id then
+        if not RageUI.Settings.Audio.Id then
             Citizen.CreateThread(function()
-                NativeUI.Settings.Audio.Id = GetSoundId()
+                RageUI.Settings.Audio.Id = GetSoundId()
 
-                PlaySoundFrontend(NativeUI.Settings.Audio.Id, Sound, Library, true)
+                PlaySoundFrontend(RageUI.Settings.Audio.Id, Sound, Library, true)
 
                 Citizen.Wait(0.01)
 
-                StopSound(NativeUI.Settings.Audio.Id)
+                StopSound(RageUI.Settings.Audio.Id)
 
-                ReleaseSoundId(NativeUI.Settings.Audio.Id)
+                ReleaseSoundId(RageUI.Settings.Audio.Id)
 
-                NativeUI.Settings.Audio.Id = nil
+                RageUI.Settings.Audio.Id = nil
             end)
         end
     end
@@ -330,7 +330,7 @@ end
 ---@param TextureName string
 ---@return table
 ---@public
-function NativeUI.CreateMenu(Title, Subtitle, X, Y, TextureDictionary, TextureName)
+function RageUI.CreateMenu(Title, Subtitle, X, Y, TextureDictionary, TextureName)
 
     ---@type table
     local Menu = {}
@@ -339,13 +339,13 @@ function NativeUI.CreateMenu(Title, Subtitle, X, Y, TextureDictionary, TextureNa
     Menu.Subtitle = Subtitle or ""
     Menu.SubtitleHeight = -37
     Menu.Description = ""
-    Menu.DescriptionHeight = NativeUI.Settings.Items.Description.Background.Height
+    Menu.DescriptionHeight = RageUI.Settings.Items.Description.Background.Height
     Menu.X = X or 0
     Menu.Y = Y or 0
     Menu.Parent = nil
     Menu.WidthOffset = 0
     Menu.Open = false
-    Menu.Controls = NativeUI.Settings.Controls
+    Menu.Controls = RageUI.Settings.Controls
     Menu.Index = 1
     Menu.Sprite = { Dictionary = TextureDictionary or "commonmenu", Texture = TextureName or "interaction_bgd" }
     Menu.Rectangle = nil
@@ -361,7 +361,7 @@ function NativeUI.CreateMenu(Title, Subtitle, X, Y, TextureDictionary, TextureNa
     end
 
     if Menu.Subtitle ~= "" then
-        local SubtitleLineCount = NativeUI.GetLineCount(Menu.Subtitle, Menu.X + NativeUI.Settings.Items.Subtitle.Text.X, Menu.Y + NativeUI.Settings.Items.Subtitle.Text.Y, 0, NativeUI.Settings.Items.Subtitle.Text.Scale, 245, 245, 245, 255, nil, false, false, NativeUI.Settings.Items.Subtitle.Background.Width + Menu.WidthOffset)
+        local SubtitleLineCount = RageUI.GetLineCount(Menu.Subtitle, Menu.X + RageUI.Settings.Items.Subtitle.Text.X, Menu.Y + RageUI.Settings.Items.Subtitle.Text.Y, 0, RageUI.Settings.Items.Subtitle.Text.Scale, 245, 245, 245, 255, nil, false, false, RageUI.Settings.Items.Subtitle.Background.Width + Menu.WidthOffset)
 
         if SubtitleLineCount > 1 then
             Menu.SubtitleHeight = 18 * SubtitleLineCount
@@ -370,7 +370,7 @@ function NativeUI.CreateMenu(Title, Subtitle, X, Y, TextureDictionary, TextureNa
         end
     end
 
-    return setmetatable(Menu, NativeUI.Menus)
+    return setmetatable(Menu, RageUI.Menus)
 end
 
 ---CreateSubMenu
@@ -383,7 +383,7 @@ end
 ---@param TextureName string
 ---@return table
 ---@public
-function NativeUI.CreateSubMenu(ParentMenu, Title, Subtitle, X, Y, TextureDictionary, TextureName)
+function RageUI.CreateSubMenu(ParentMenu, Title, Subtitle, X, Y, TextureDictionary, TextureName)
     if ParentMenu ~= nil then
         if ParentMenu() then
 
@@ -394,13 +394,13 @@ function NativeUI.CreateSubMenu(ParentMenu, Title, Subtitle, X, Y, TextureDictio
             Menu.Subtitle = Subtitle or ParentMenu.Subtitle
             Menu.SubtitleHeight = -37
             Menu.Description = ""
-            Menu.DescriptionHeight = NativeUI.Settings.Items.Description.Background.Height
+            Menu.DescriptionHeight = RageUI.Settings.Items.Description.Background.Height
             Menu.X = X or ParentMenu.X
             Menu.Y = Y or ParentMenu.Y
             Menu.Parent = ParentMenu
             Menu.WidthOffset = ParentMenu.WidthOffset
             Menu.Open = false
-            Menu.Controls = NativeUI.Settings.Controls
+            Menu.Controls = RageUI.Settings.Controls
             Menu.Index = 1
             Menu.Pagination = { Minimum = 1, Maximum = 10, Total = 10 }
             Menu.Safezone = ParentMenu.Safezone
@@ -414,7 +414,7 @@ function NativeUI.CreateSubMenu(ParentMenu, Title, Subtitle, X, Y, TextureDictio
             end
 
             if Menu.Subtitle ~= "" then
-                local SubtitleLineCount = NativeUI.GetLineCount(Menu.Subtitle, Menu.X + NativeUI.Settings.Items.Subtitle.Text.X, Menu.Y + NativeUI.Settings.Items.Subtitle.Text.Y, 0, NativeUI.Settings.Items.Subtitle.Text.Scale, 245, 245, 245, 255, nil, false, false, NativeUI.Settings.Items.Subtitle.Background.Width + Menu.WidthOffset)
+                local SubtitleLineCount = RageUI.GetLineCount(Menu.Subtitle, Menu.X + RageUI.Settings.Items.Subtitle.Text.X, Menu.Y + RageUI.Settings.Items.Subtitle.Text.Y, 0, RageUI.Settings.Items.Subtitle.Text.Scale, 245, 245, 245, 255, nil, false, false, RageUI.Settings.Items.Subtitle.Background.Width + Menu.WidthOffset)
 
                 if SubtitleLineCount > 1 then
                     Menu.SubtitleHeight = 18 * SubtitleLineCount
@@ -429,7 +429,7 @@ function NativeUI.CreateSubMenu(ParentMenu, Title, Subtitle, X, Y, TextureDictio
                 Menu.Rectangle = ParentMenu.Rectangle
             end
 
-            return setmetatable(Menu, NativeUI.Menus)
+            return setmetatable(Menu, RageUI.Menus)
         else
             return nil
         end
@@ -443,20 +443,20 @@ end
 ---@param Value boolean
 ---@return table
 ---@public
-function NativeUI.Visible(Menu, Value)
+function RageUI.Visible(Menu, Value)
     if Menu ~= nil then
         if Menu() then
             if type(Value) == "boolean" then
                 Menu.Open = Value
 
                 if Menu.Open then
-                    NativeUI.CurrentMenu = Menu
-                    NativeUI.Options = 0
-                    NativeUI.ItemOffset = 0
+                    RageUI.CurrentMenu = Menu
+                    RageUI.Options = 0
+                    RageUI.ItemOffset = 0
                 else
-                    NativeUI.CurrentMenu = nil
-                    NativeUI.Options = 0
-                    NativeUI.ItemOffset = 0
+                    RageUI.CurrentMenu = nil
+                    RageUI.Options = 0
+                    RageUI.ItemOffset = 0
                 end
             else
                 return Menu.Open
@@ -468,29 +468,29 @@ end
 ---Title
 ---@return nil
 ---@public
-function NativeUI.Title()
-    if NativeUI.CurrentMenu ~= nil then
-        if NativeUI.CurrentMenu() then
-            if not NativeUI.CurrentMenu.SafeZoneSize then
-                NativeUI.CurrentMenu.SafeZoneSize = { X = 0, Y = 0 }
+function RageUI.Title()
+    if RageUI.CurrentMenu ~= nil then
+        if RageUI.CurrentMenu() then
+            if not RageUI.CurrentMenu.SafeZoneSize then
+                RageUI.CurrentMenu.SafeZoneSize = { X = 0, Y = 0 }
 
-                if NativeUI.CurrentMenu.Safezone then
-                    NativeUI.CurrentMenu.SafeZoneSize = NativeUI.GetSafeZoneBounds()
+                if RageUI.CurrentMenu.Safezone then
+                    RageUI.CurrentMenu.SafeZoneSize = RageUI.GetSafeZoneBounds()
 
                     ScreenDrawPositionBegin(76, 84)
                     ScreenDrawPositionRatio(0, 0, 0, 0)
                 end
             end
 
-            if NativeUI.CurrentMenu.Sprite then
-                NativeUI.RenderSprite(NativeUI.CurrentMenu.Sprite.Dictionary, NativeUI.CurrentMenu.Sprite.Texture, NativeUI.CurrentMenu.X, NativeUI.CurrentMenu.Y, NativeUI.Settings.Items.Title.Background.Width + NativeUI.CurrentMenu.WidthOffset, NativeUI.Settings.Items.Title.Background.Height)
+            if RageUI.CurrentMenu.Sprite then
+                RageUI.RenderSprite(RageUI.CurrentMenu.Sprite.Dictionary, RageUI.CurrentMenu.Sprite.Texture, RageUI.CurrentMenu.X, RageUI.CurrentMenu.Y, RageUI.Settings.Items.Title.Background.Width + RageUI.CurrentMenu.WidthOffset, RageUI.Settings.Items.Title.Background.Height)
             else
-                NativeUI.RenderRectangle(NativeUI.CurrentMenu.X, NativeUI.CurrentMenu.Y, NativeUI.Settings.Items.Title.Background.Width + NativeUI.CurrentMenu.WidthOffset, NativeUI.Settings.Items.Title.Background.Height, NativeUI.CurrentMenu.Rectangle.R, NativeUI.CurrentMenu.Rectangle.G, NativeUI.CurrentMenu.Rectangle.B, NativeUI.CurrentMenu.Rectangle.A)
+                RageUI.RenderRectangle(RageUI.CurrentMenu.X, RageUI.CurrentMenu.Y, RageUI.Settings.Items.Title.Background.Width + RageUI.CurrentMenu.WidthOffset, RageUI.Settings.Items.Title.Background.Height, RageUI.CurrentMenu.Rectangle.R, RageUI.CurrentMenu.Rectangle.G, RageUI.CurrentMenu.Rectangle.B, RageUI.CurrentMenu.Rectangle.A)
             end
 
-            NativeUI.RenderText(NativeUI.CurrentMenu.Title, NativeUI.CurrentMenu.X + NativeUI.Settings.Items.Title.Text.X + (NativeUI.CurrentMenu.WidthOffset / 2), NativeUI.CurrentMenu.Y + NativeUI.Settings.Items.Title.Text.Y, 1, NativeUI.Settings.Items.Title.Text.Scale, 255, 255, 255, 255, 1)
+            RageUI.RenderText(RageUI.CurrentMenu.Title, RageUI.CurrentMenu.X + RageUI.Settings.Items.Title.Text.X + (RageUI.CurrentMenu.WidthOffset / 2), RageUI.CurrentMenu.Y + RageUI.Settings.Items.Title.Text.Y, 1, RageUI.Settings.Items.Title.Text.Scale, 255, 255, 255, 255, 1)
 
-            NativeUI.ItemOffset = NativeUI.ItemOffset + NativeUI.Settings.Items.Title.Background.Height
+            RageUI.ItemOffset = RageUI.ItemOffset + RageUI.Settings.Items.Title.Background.Height
         end
     end
 end
@@ -498,29 +498,29 @@ end
 ---Subtitle
 ---@return nil
 ---@public
-function NativeUI.Subtitle()
-    if NativeUI.CurrentMenu ~= nil then
-        if NativeUI.CurrentMenu() then
-            if not NativeUI.CurrentMenu.SafeZoneSize then
-                NativeUI.CurrentMenu.SafeZoneSize = { X = 0, Y = 0 }
+function RageUI.Subtitle()
+    if RageUI.CurrentMenu ~= nil then
+        if RageUI.CurrentMenu() then
+            if not RageUI.CurrentMenu.SafeZoneSize then
+                RageUI.CurrentMenu.SafeZoneSize = { X = 0, Y = 0 }
 
-                if NativeUI.CurrentMenu.Safezone then
-                    NativeUI.CurrentMenu.SafeZoneSize = NativeUI.GetSafeZoneBounds()
+                if RageUI.CurrentMenu.Safezone then
+                    RageUI.CurrentMenu.SafeZoneSize = RageUI.GetSafeZoneBounds()
 
                     ScreenDrawPositionBegin(76, 84)
                     ScreenDrawPositionRatio(0, 0, 0, 0)
                 end
             end
 
-            if NativeUI.CurrentMenu.Subtitle ~= "" then
-                NativeUI.RenderRectangle(NativeUI.CurrentMenu.X, NativeUI.CurrentMenu.Y + NativeUI.ItemOffset, NativeUI.Settings.Items.Subtitle.Background.Width + NativeUI.CurrentMenu.WidthOffset, NativeUI.Settings.Items.Subtitle.Background.Height + NativeUI.CurrentMenu.SubtitleHeight, 0, 0, 0, 255)
-                NativeUI.RenderText(NativeUI.CurrentMenu.Subtitle, NativeUI.CurrentMenu.X + NativeUI.Settings.Items.Subtitle.Text.X, NativeUI.CurrentMenu.Y + NativeUI.Settings.Items.Subtitle.Text.Y + NativeUI.ItemOffset, 0, NativeUI.Settings.Items.Subtitle.Text.Scale, 245, 245, 245, 255, nil, false, false, NativeUI.Settings.Items.Subtitle.Background.Width + NativeUI.CurrentMenu.WidthOffset)
+            if RageUI.CurrentMenu.Subtitle ~= "" then
+                RageUI.RenderRectangle(RageUI.CurrentMenu.X, RageUI.CurrentMenu.Y + RageUI.ItemOffset, RageUI.Settings.Items.Subtitle.Background.Width + RageUI.CurrentMenu.WidthOffset, RageUI.Settings.Items.Subtitle.Background.Height + RageUI.CurrentMenu.SubtitleHeight, 0, 0, 0, 255)
+                RageUI.RenderText(RageUI.CurrentMenu.Subtitle, RageUI.CurrentMenu.X + RageUI.Settings.Items.Subtitle.Text.X, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Subtitle.Text.Y + RageUI.ItemOffset, 0, RageUI.Settings.Items.Subtitle.Text.Scale, 245, 245, 245, 255, nil, false, false, RageUI.Settings.Items.Subtitle.Background.Width + RageUI.CurrentMenu.WidthOffset)
 
-                if NativeUI.CurrentMenu.Options >= NativeUI.CurrentMenu.Pagination.Total + 1 then
-                    NativeUI.RenderText(NativeUI.CurrentMenu.PageCounterColour .. NativeUI.CurrentMenu.Index .. " / " .. NativeUI.CurrentMenu.Options, NativeUI.CurrentMenu.X + NativeUI.Settings.Items.Subtitle.PreText.X + NativeUI.CurrentMenu.WidthOffset, NativeUI.CurrentMenu.Y + NativeUI.Settings.Items.Subtitle.PreText.Y + NativeUI.ItemOffset, 0, NativeUI.Settings.Items.Subtitle.PreText.Scale, 245, 245, 245, 255, 2)
+                if RageUI.CurrentMenu.Options >= RageUI.CurrentMenu.Pagination.Total + 1 then
+                    RageUI.RenderText(RageUI.CurrentMenu.PageCounterColour .. RageUI.CurrentMenu.Index .. " / " .. RageUI.CurrentMenu.Options, RageUI.CurrentMenu.X + RageUI.Settings.Items.Subtitle.PreText.X + RageUI.CurrentMenu.WidthOffset, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Subtitle.PreText.Y + RageUI.ItemOffset, 0, RageUI.Settings.Items.Subtitle.PreText.Scale, 245, 245, 245, 255, 2)
                 end
 
-                NativeUI.ItemOffset = NativeUI.ItemOffset + NativeUI.Settings.Items.Subtitle.Background.Height
+                RageUI.ItemOffset = RageUI.ItemOffset + RageUI.Settings.Items.Subtitle.Background.Height
             end
         end
     end
@@ -529,14 +529,14 @@ end
 ---Background
 ---@return nil
 ---@public
-function NativeUI.Background()
-    if NativeUI.CurrentMenu ~= nil then
-        if NativeUI.CurrentMenu() then
-            if not NativeUI.CurrentMenu.SafeZoneSize then
-                NativeUI.CurrentMenu.SafeZoneSize = { X = 0, Y = 0 }
+function RageUI.Background()
+    if RageUI.CurrentMenu ~= nil then
+        if RageUI.CurrentMenu() then
+            if not RageUI.CurrentMenu.SafeZoneSize then
+                RageUI.CurrentMenu.SafeZoneSize = { X = 0, Y = 0 }
 
-                if NativeUI.CurrentMenu.Safezone then
-                    NativeUI.CurrentMenu.SafeZoneSize = NativeUI.GetSafeZoneBounds()
+                if RageUI.CurrentMenu.Safezone then
+                    RageUI.CurrentMenu.SafeZoneSize = RageUI.GetSafeZoneBounds()
 
                     ScreenDrawPositionBegin(76, 84)
                     ScreenDrawPositionRatio(0, 0, 0, 0)
@@ -544,7 +544,7 @@ function NativeUI.Background()
             end
 
             SetUiLayer(0)
-            NativeUI.RenderSprite(NativeUI.Settings.Items.Background.Dictionary, NativeUI.Settings.Items.Background.Texture, NativeUI.CurrentMenu.X, NativeUI.CurrentMenu.Y + NativeUI.Settings.Items.Background.Y + NativeUI.CurrentMenu.SubtitleHeight, NativeUI.Settings.Items.Background.Width + NativeUI.CurrentMenu.WidthOffset, NativeUI.ItemOffset, 0, 0, 0, 255)
+            RageUI.RenderSprite(RageUI.Settings.Items.Background.Dictionary, RageUI.Settings.Items.Background.Texture, RageUI.CurrentMenu.X, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Background.Y + RageUI.CurrentMenu.SubtitleHeight, RageUI.Settings.Items.Background.Width + RageUI.CurrentMenu.WidthOffset, RageUI.ItemOffset, 0, 0, 0, 255)
             SetUiLayer(1)
         end
     end
@@ -553,14 +553,14 @@ end
 ---Description
 ---@return nil
 ---@public
-function NativeUI.Description()
-    if NativeUI.CurrentMenu ~= nil then
-        if NativeUI.CurrentMenu() then
-            if not NativeUI.CurrentMenu.SafeZoneSize then
-                NativeUI.CurrentMenu.SafeZoneSize = { X = 0, Y = 0 }
+function RageUI.Description()
+    if RageUI.CurrentMenu ~= nil then
+        if RageUI.CurrentMenu() then
+            if not RageUI.CurrentMenu.SafeZoneSize then
+                RageUI.CurrentMenu.SafeZoneSize = { X = 0, Y = 0 }
 
-                if NativeUI.CurrentMenu.Safezone then
-                    NativeUI.CurrentMenu.SafeZoneSize = NativeUI.GetSafeZoneBounds()
+                if RageUI.CurrentMenu.Safezone then
+                    RageUI.CurrentMenu.SafeZoneSize = RageUI.GetSafeZoneBounds()
 
                     ScreenDrawPositionBegin(76, 84)
                     ScreenDrawPositionRatio(0, 0, 0, 0)
@@ -568,11 +568,11 @@ function NativeUI.Description()
             end
 
 
-            NativeUI.RenderRectangle(NativeUI.CurrentMenu.X, NativeUI.CurrentMenu.Y + NativeUI.Settings.Items.Description.Bar.Y + NativeUI.CurrentMenu.SubtitleHeight + NativeUI.ItemOffset, NativeUI.Settings.Items.Description.Bar.Width + NativeUI.CurrentMenu.WidthOffset, NativeUI.Settings.Items.Description.Bar.Height, 0, 0, 0, 255)
-            NativeUI.RenderSprite(NativeUI.Settings.Items.Description.Background.Dictionary, NativeUI.Settings.Items.Description.Background.Texture, NativeUI.CurrentMenu.X, NativeUI.CurrentMenu.Y + NativeUI.Settings.Items.Description.Background.Y + NativeUI.CurrentMenu.SubtitleHeight + NativeUI.ItemOffset, NativeUI.Settings.Items.Description.Background.Width + NativeUI.CurrentMenu.WidthOffset, NativeUI.CurrentMenu.DescriptionHeight, 0, 0, 0, 255)
-            NativeUI.RenderText(NativeUI.CurrentMenu.Description, NativeUI.CurrentMenu.X + NativeUI.Settings.Items.Description.Text.X, NativeUI.CurrentMenu.Y + NativeUI.Settings.Items.Description.Text.Y + NativeUI.CurrentMenu.SubtitleHeight + NativeUI.ItemOffset, 0, NativeUI.Settings.Items.Description.Text.Scale, 255, 255, 255, 255, nil, false, false, NativeUI.Settings.Items.Description.Background.Width + NativeUI.CurrentMenu.WidthOffset)
+            RageUI.RenderRectangle(RageUI.CurrentMenu.X, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Description.Bar.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Items.Description.Bar.Width + RageUI.CurrentMenu.WidthOffset, RageUI.Settings.Items.Description.Bar.Height, 0, 0, 0, 255)
+            RageUI.RenderSprite(RageUI.Settings.Items.Description.Background.Dictionary, RageUI.Settings.Items.Description.Background.Texture, RageUI.CurrentMenu.X, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Description.Background.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Items.Description.Background.Width + RageUI.CurrentMenu.WidthOffset, RageUI.CurrentMenu.DescriptionHeight, 0, 0, 0, 255)
+            RageUI.RenderText(RageUI.CurrentMenu.Description, RageUI.CurrentMenu.X + RageUI.Settings.Items.Description.Text.X, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Description.Text.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, 0, RageUI.Settings.Items.Description.Text.Scale, 255, 255, 255, 255, nil, false, false, RageUI.Settings.Items.Description.Background.Width + RageUI.CurrentMenu.WidthOffset)
 
-            NativeUI.ItemOffset = NativeUI.ItemOffset + NativeUI.CurrentMenu.DescriptionHeight + NativeUI.Settings.Items.Description.Bar.Y
+            RageUI.ItemOffset = RageUI.ItemOffset + RageUI.CurrentMenu.DescriptionHeight + RageUI.Settings.Items.Description.Bar.Y
         end
     end
 end
@@ -580,45 +580,45 @@ end
 ---Render
 ---@return nil
 ---@public
-function NativeUI.Render()
-    if NativeUI.CurrentMenu ~= nil then
-        if NativeUI.CurrentMenu() then
+function RageUI.Render()
+    if RageUI.CurrentMenu ~= nil then
+        if RageUI.CurrentMenu() then
 
-            if NativeUI.CurrentMenu.Safezone then
+            if RageUI.CurrentMenu.Safezone then
                 ScreenDrawPositionEnd()
             end
 
-            NativeUI.CurrentMenu.Options = NativeUI.Options
-            NativeUI.CurrentMenu.SafeZoneSize = nil
+            RageUI.CurrentMenu.Options = RageUI.Options
+            RageUI.CurrentMenu.SafeZoneSize = nil
 
-            NativeUI.Controls()
+            RageUI.Controls()
 
-            NativeUI.Options = 0
-            NativeUI.ItemOffset = 0
+            RageUI.Options = 0
+            RageUI.ItemOffset = 0
 
-            if NativeUI.CurrentMenu.Controls.Back.Pressed then
-                NativeUI.CurrentMenu.Controls.Back.Pressed = false
+            if RageUI.CurrentMenu.Controls.Back.Pressed then
+                RageUI.CurrentMenu.Controls.Back.Pressed = false
 
-                NativeUI.PlaySound(NativeUI.Settings.Audio.Library, NativeUI.Settings.Audio.Back)
+                RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.Back)
 
-                if NativeUI.CurrentMenu.Parent ~= nil then
-                    if NativeUI.CurrentMenu.Parent() then
-                        NativeUI.NextMenu = NativeUI.CurrentMenu.Parent
+                if RageUI.CurrentMenu.Parent ~= nil then
+                    if RageUI.CurrentMenu.Parent() then
+                        RageUI.NextMenu = RageUI.CurrentMenu.Parent
                     else
-                        NativeUI.NextMenu = nil
-                        NativeUI.Visible(NativeUI.CurrentMenu, false)
+                        RageUI.NextMenu = nil
+                        RageUI.Visible(RageUI.CurrentMenu, false)
                     end
                 else
-                    NativeUI.NextMenu = nil
-                    NativeUI.Visible(NativeUI.CurrentMenu, false)
+                    RageUI.NextMenu = nil
+                    RageUI.Visible(RageUI.CurrentMenu, false)
                 end
             end
 
-            if NativeUI.NextMenu ~= nil then
-                if NativeUI.NextMenu() then
-                    NativeUI.Visible(NativeUI.CurrentMenu, false)
-                    NativeUI.Visible(NativeUI.NextMenu, true)
-                    NativeUI.CurrentMenu.Controls.Select.Active = false
+            if RageUI.NextMenu ~= nil then
+                if RageUI.NextMenu() then
+                    RageUI.Visible(RageUI.CurrentMenu, false)
+                    RageUI.Visible(RageUI.NextMenu, true)
+                    RageUI.CurrentMenu.Controls.Select.Active = false
                 end
             end
         end
@@ -629,7 +629,7 @@ end
 ---@param Title string
 ---@return nil
 ---@public
-function NativeUI.Menus:SetTitle(Title)
+function RageUI.Menus:SetTitle(Title)
     self.Title = Title
 end
 
@@ -637,7 +637,7 @@ end
 ---@param Subtitle string
 ---@return nil
 ---@public
-function NativeUI.Menus:SetSubtitle(Subtitle)
+function RageUI.Menus:SetSubtitle(Subtitle)
 
     self.Subtitle = Subtitle or self.Subtitle
 
@@ -648,7 +648,7 @@ function NativeUI.Menus:SetSubtitle(Subtitle)
     end
 
     if self.Subtitle ~= "" then
-        local SubtitleLineCount = NativeUI.GetLineCount(self.Subtitle, self.X + NativeUI.Settings.Items.Subtitle.Text.X, self.Y + NativeUI.Settings.Items.Subtitle.Text.Y, 0, NativeUI.Settings.Items.Subtitle.Text.Scale, 245, 245, 245, 255, nil, false, false, NativeUI.Settings.Items.Subtitle.Background.Width + self.WidthOffset)
+        local SubtitleLineCount = RageUI.GetLineCount(self.Subtitle, self.X + RageUI.Settings.Items.Subtitle.Text.X, self.Y + RageUI.Settings.Items.Subtitle.Text.Y, 0, RageUI.Settings.Items.Subtitle.Text.Scale, 245, 245, 245, 255, nil, false, false, RageUI.Settings.Items.Subtitle.Background.Width + self.WidthOffset)
 
         if SubtitleLineCount > 1 then
             self.SubtitleHeight = 18 * SubtitleLineCount
@@ -665,7 +665,7 @@ end
 ---@param Y number
 ---@return nil
 ---@public
-function NativeUI.Menus:SetPosition(X, Y)
+function RageUI.Menus:SetPosition(X, Y)
     self.X = tonumber(X) or self.X
     self.Y = tonumber(Y) or self.Y
 end
@@ -674,7 +674,7 @@ end
 ---@param Value number
 ---@return nil
 ---@public
-function NativeUI.Menus:SetTotalItemsPerPage(Value)
+function RageUI.Menus:SetTotalItemsPerPage(Value)
     self.Pagination.Total = tonumber(Value) or self.Pagination.Total
 end
 
@@ -685,7 +685,7 @@ end
 ---@param A number
 ---@return nil
 ---@public
-function NativeUI.Menus:SetRectangleBanner(R, G, B, A)
+function RageUI.Menus:SetRectangleBanner(R, G, B, A)
     self.Rectangle = { R = tonumber(R) or 255, G = tonumber(G) or 255, B = tonumber(B) or 255, A = tonumber(A) or 255 }
     self.Sprite = nil
 end
@@ -695,7 +695,7 @@ end
 ---@param Texture string
 ---@return nil
 ---@public
-function NativeUI.Menus:SetSpriteBanner(TextureDictionary, Texture)
+function RageUI.Menus:SetSpriteBanner(TextureDictionary, Texture)
     self.Sprite = { Dictionary = TextureDictionary or "commonmenu", Texture = Texture or "interaction_bgd" }
     self.Rectangle = nil
 end
