@@ -94,8 +94,13 @@ Citizen.CreateThread(function()
 
             RageUI.Title()
             RageUI.Subtitle()
-
-            RageUI.Button("Hello", "LMAO", "World", RageUI.BadgeStyle.BronzeMedal, nil, false, function(Hovered, Active, Selected)
+                
+                
+      RageUI.Button("Hello form submenu", math.random(99999999, 999999999999999999999999), {
+                LeftBadge = RageUI.BadgeStyle.Ammo,
+                --RightBadge = RageUI.BadgeStyle.Gun,
+                RightLabel = "→→→"
+            }, true, function(Hovered, Active, Selected)
                 if Selected then
                     Citizen.Trace("Ello2")
                 end
