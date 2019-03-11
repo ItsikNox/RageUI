@@ -1,27 +1,27 @@
 resource_manifest_version '05cfa83c-a124-4cfa-a768-c24a5811d8f9'
 
 client_scripts {
-    "RageUI/RageUI.lua",
-    "RageUI/UIMenuProcess.lua",
+    "menu/RageUI.lua",
+    "menu/UIMenuProcess.lua",
 
-    "RageUI/elements/Badge.lua",
-    "RageUI/elements/Rectangle.lua",
-    "RageUI/elements/Sprite.lua",
-    "RageUI/elements/Text.lua",
-    "RageUI/elements/ColourPanel.lua",
-    "RageUI/elements/Visual.lua",
+    "menu/elements/Badge.lua",
+    "menu/elements/Rectangle.lua",
+    "menu/elements/Sprite.lua",
+    "menu/elements/Text.lua",
+    "menu/elements/ColourPanel.lua",
+    "menu/elements/Visual.lua",
 
-    "RageUI/items/UIButton.lua",
-    "RageUI/items/UICheckBox.lua",
-    "RageUI/items/UIList.lua",
-    "RageUI/items/UIProgress.lua",
-    "RageUI/items/UISlider.lua",
+    "menu/items/UIButton.lua",
+    "menu/items/UICheckBox.lua",
+    "menu/items/UIList.lua",
+    "menu/items/UIProgress.lua",
+    "menu/items/UISlider.lua",
 
-    "RageUI/panels/UIColourPanel.lua",
-    "RageUI/panels/UIGridPanel.lua",
-    "RageUI/panels/UIPercentagePanel.lua",
+    "menu/panels/UIColourPanel.lua",
+    "menu/panels/UIGridPanel.lua",
+    "menu/panels/UIPercentagePanel.lua",
 
-    "RageUI/windows/UIHeritage.lua",
+    "menu/windows/UIHeritage.lua",
 
-    ---"example/default.lua",
+    "example/default.lua",
 }
