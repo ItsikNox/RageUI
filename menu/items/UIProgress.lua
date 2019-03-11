@@ -8,9 +8,14 @@
 ---@param Callback function
 ---@return nil
 ---@public
-function RageUI.Progress(Label, Items, Index, Description, Counter, Enabled, Callback)
+function RageUI.Progress(Label, ProgressStart, ProgressMax, Description, Counter, Enabled, Callback)
     if RageUI.CurrentMenu ~= nil then
         if RageUI.CurrentMenu() then
+
+            local Items = {}
+            for i = 1, ProgressMax do 
+                table.insert(Items,i)
+            end
 
             ---@type number
             local Option = RageUI.Options + 1
@@ -39,7 +44,7 @@ function RageUI.Progress(Label, Items, Index, Description, Counter, Enabled, Cal
 
                 Hovered = RageUI.IsMouseInBounds(RageUI.CurrentMenu.X + RageUI.CurrentMenu.SafeZoneSize.X, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Button.Rectangle.Y + RageUI.CurrentMenu.SafeZoneSize.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Items.Button.Rectangle.Width + RageUI.CurrentMenu.WidthOffset, RageUI.Settings.Items.Progress.Height)
 
-                local ProgressText = (Counter and Index .. "/" .. #Items or (type(Items[Index]) == "table") and tostring(Items[Index].Name) or tostring(Items[Index]))
+                local ProgressText = (Counter and ProgressStart .. "/" .. #Items or (type(Items[ProgressStart]) == "table") and tostring(Items[ProgressStart].Name) or tostring(Items[ProgressStart]))
 
                 if Hovered and not Selected then
                     RageUI.RenderRectangle(RageUI.CurrentMenu.X, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Button.Rectangle.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Items.Button.Rectangle.Width + RageUI.CurrentMenu.WidthOffset, RageUI.Settings.Items.Progress.Height, 255, 255, 255, 20)
@@ -62,14 +67,14 @@ function RageUI.Progress(Label, Items, Index, Description, Counter, Enabled, Cal
                         RageUI.RenderText(Label, RageUI.CurrentMenu.X + RageUI.Settings.Items.Button.Text.X, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Button.Text.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, 0, RageUI.Settings.Items.Button.Text.Scale, 0, 0, 0, 255)
 
                         RageUI.RenderRectangle(RageUI.CurrentMenu.X + RageUI.Settings.Items.Progress.Background.X, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Progress.Background.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Items.Progress.Background.Width + RageUI.CurrentMenu.WidthOffset, RageUI.Settings.Items.Progress.Background.Height, 0, 0, 0, 255)
-                        RageUI.RenderRectangle(RageUI.CurrentMenu.X + RageUI.Settings.Items.Progress.Bar.X, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Progress.Bar.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, ((Index / #Items) * (RageUI.Settings.Items.Progress.Bar.Width + RageUI.CurrentMenu.WidthOffset)), RageUI.Settings.Items.Progress.Bar.Height, 240, 240, 240, 255)
+                        RageUI.RenderRectangle(RageUI.CurrentMenu.X + RageUI.Settings.Items.Progress.Bar.X, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Progress.Bar.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, ((ProgressStart / #Items) * (RageUI.Settings.Items.Progress.Bar.Width + RageUI.CurrentMenu.WidthOffset)), RageUI.Settings.Items.Progress.Bar.Height, 240, 240, 240, 255)
                     else
                         RageUI.RenderText(ProgressText, RageUI.CurrentMenu.X + RageUI.Settings.Items.Button.RightText.X + RageUI.CurrentMenu.WidthOffset, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Button.RightText.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, 0, RageUI.Settings.Items.Button.RightText.Scale, 245, 245, 245, 255, 2)
 
                         RageUI.RenderText(Label, RageUI.CurrentMenu.X + RageUI.Settings.Items.Button.Text.X, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Button.Text.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, 0, RageUI.Settings.Items.Button.Text.Scale, 245, 245, 245, 255)
 
                         RageUI.RenderRectangle(RageUI.CurrentMenu.X + RageUI.Settings.Items.Progress.Background.X, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Progress.Background.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Items.Progress.Background.Width + RageUI.CurrentMenu.WidthOffset, RageUI.Settings.Items.Progress.Background.Height, 240, 240, 240, 255)
-                        RageUI.RenderRectangle(RageUI.CurrentMenu.X + RageUI.Settings.Items.Progress.Bar.X, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Progress.Bar.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, ((Index / #Items) * (RageUI.Settings.Items.Progress.Bar.Width + RageUI.CurrentMenu.WidthOffset)), RageUI.Settings.Items.Progress.Bar.Height, 0, 0, 0, 255)
+                        RageUI.RenderRectangle(RageUI.CurrentMenu.X + RageUI.Settings.Items.Progress.Bar.X, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Progress.Bar.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, ((ProgressStart / #Items) * (RageUI.Settings.Items.Progress.Bar.Width + RageUI.CurrentMenu.WidthOffset)), RageUI.Settings.Items.Progress.Bar.Height, 0, 0, 0, 255)
                     end
                 else
                     RageUI.RenderText(ProgressText, RageUI.CurrentMenu.X + RageUI.Settings.Items.Button.RightText.X + RageUI.CurrentMenu.WidthOffset, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Button.RightText.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, 0, RageUI.Settings.Items.Button.RightText.Scale, 163, 159, 148, 255, 2)
@@ -98,18 +103,18 @@ function RageUI.Progress(Label, Items, Index, Description, Counter, Enabled, Cal
                 end
 
                 if Selected and RageUI.CurrentMenu.Controls.Left.Active and not RageUI.CurrentMenu.Controls.Right.Active then
-                    Index = Index - 1
+                    ProgressStart = ProgressStart - 1
 
-                    if Index < 1 then
-                        Index = #Items
+                    if ProgressStart < 0 then
+                        ProgressStart = #Items
                     end
 
                     RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.LeftRight)
                 elseif Selected and RageUI.CurrentMenu.Controls.Right.Active and not RageUI.CurrentMenu.Controls.Left.Active then
-                    Index = Index + 1
+                    ProgressStart = ProgressStart + 1
 
-                    if Index > #Items then
-                        Index = 1
+                    if ProgressStart > #Items then
+                        ProgressStart = 0
                     end
 
                     RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.LeftRight)
@@ -127,17 +132,19 @@ function RageUI.Progress(Label, Items, Index, Description, Counter, Enabled, Cal
                         Progress = 0
                     end
 
-                    Index = math.round(#Items * (Progress / Barsize))
+                    ProgressStart = math.round(#Items * (Progress / Barsize))
 
-                    if Index > #Items or Index < 1 then
-                        Index = 1
+                    if ProgressStart > #Items or ProgressStart < 0 then
+                        ProgressStart = 0
                     end
                 end
 
-                Callback(Hovered, Selected, ((RageUI.CurrentMenu.Controls.Select.Active or ((Hovered and RageUI.CurrentMenu.Controls.Click.Active) and not ProgressHovered)) and Selected), Index)
+                Callback(Hovered, Selected, ((RageUI.CurrentMenu.Controls.Select.Active or ((Hovered and RageUI.CurrentMenu.Controls.Click.Active) and not ProgressHovered)) and Selected), ProgressStart)
             end
 
             RageUI.Options = RageUI.Options + 1
+
+            Items = nil
         end
     end
 end
