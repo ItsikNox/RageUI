@@ -41,17 +41,15 @@ Citizen.CreateThread(function()
                 Indexes[2] = Index
             end)
 
-            RageUI.Button("HelloHello", "LMAO", "WorldWorld", RageUI.BadgeStyle.BronzeMedal, RageUI.BadgeStyle.GoldMedal, true, function(Hovered, Active, Selected)
-                if Selected then
-                    Citizen.Trace("Ello")
-                end
-            end, NewMenu2)
-
-            RageUI.Button("Hello", "LMAO", "World", RageUI.BadgeStyle.BronzeMedal, nil, false, function(Hovered, Active, Selected)
+            RageUI.Button("Hello 2", math.random(99999999, 999999999999999999999999), {
+                LeftBadge = RageUI.BadgeStyle.Ammo,
+                --RightBadge = RageUI.BadgeStyle.Gun,
+                RightLabel = "→→→"
+            }, true, function(Hovered, Active, Selected)
                 if Selected then
                     Citizen.Trace("Ello2")
                 end
-            end)
+            end, NewMenu2)
 
             RageUI.Progress("Progress item", { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }, ProgressTable, "yes", true, true, function(Hovered, Selected, Active, Index)
                 --print(Index)
