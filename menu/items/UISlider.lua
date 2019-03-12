@@ -1,17 +1,21 @@
 ---Slider
 ---@param Label string
----@param Items number
----@param Index number
+---@param Number of choice
+---@param Progress MAX
 ---@param Description string
 ---@param Divider number
 ---@param Enabled boolean
 ---@param Callback function
 ---@return nil
 ---@public
-function RageUI.Slider(Label, Items, Index, Description, Divider, Enabled, Callback)
+function RageUI.Slider(Label, ProgressStart, ProgressMax, Description, Divider, Enabled, Callback) -- A FAIRE : Changer le slider pour qu'il bouge entre 0 et X sinon il dépasse
     if RageUI.CurrentMenu ~= nil then
         if RageUI.CurrentMenu() then
 
+            local Items = {}
+            for i = 1, ProgressMax do 
+                table.insert(Items,i)
+            end
             ---@type number
             local Option = RageUI.Options + 1
 
@@ -73,7 +77,7 @@ function RageUI.Slider(Label, Items, Index, Description, Divider, Enabled, Callb
                 end
 
                 RageUI.RenderRectangle(RageUI.CurrentMenu.X + RageUI.Settings.Items.Slider.Background.X + RageUI.CurrentMenu.WidthOffset, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Slider.Background.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Items.Slider.Background.Width, RageUI.Settings.Items.Slider.Background.Height, 4, 32, 57, 255)
-                RageUI.RenderRectangle(RageUI.CurrentMenu.X + RageUI.Settings.Items.Slider.Slider.X + (((RageUI.Settings.Items.Slider.Background.Width - RageUI.Settings.Items.Slider.Slider.Width) / (#Items - 1)) * (Index - 1)) + RageUI.CurrentMenu.WidthOffset, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Slider.Slider.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Items.Slider.Slider.Width, RageUI.Settings.Items.Slider.Slider.Height, 57, 116, 200, 255)
+                RageUI.RenderRectangle(RageUI.CurrentMenu.X + RageUI.Settings.Items.Slider.Slider.X + (((RageUI.Settings.Items.Slider.Background.Width - RageUI.Settings.Items.Slider.Slider.Width) / (#Items - 1)) * (ProgressStart - 1)) + RageUI.CurrentMenu.WidthOffset, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Slider.Slider.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Items.Slider.Slider.Width, RageUI.Settings.Items.Slider.Slider.Height, 57, 116, 200, 255)
 
                 if Divider then
                     RageUI.RenderRectangle(RageUI.CurrentMenu.X + RageUI.Settings.Items.Slider.Divider.X + RageUI.CurrentMenu.WidthOffset, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Slider.Divider.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Items.Slider.Divider.Width, RageUI.Settings.Items.Slider.Divider.Height, 245, 245, 245, 255)
@@ -94,18 +98,18 @@ function RageUI.Slider(Label, Items, Index, Description, Divider, Enabled, Callb
                 end
 
                 if Selected and (RageUI.CurrentMenu.Controls.Left.Active or (RageUI.CurrentMenu.Controls.Click.Active and LeftArrowHovered)) and not (RageUI.CurrentMenu.Controls.Right.Active or (RageUI.CurrentMenu.Controls.Click.Active and RightArrowHovered)) then
-                    Index = Index - 1
+                    ProgressStart = ProgressStart - 1
 
-                    if Index < 1 then
-                        Index = #Items
+                    if ProgressStart < 1 then
+                        ProgressStart = #Items
                     end
 
                     RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.LeftRight)
                 elseif Selected and (RageUI.CurrentMenu.Controls.Right.Active or (RageUI.CurrentMenu.Controls.Click.Active and RightArrowHovered)) and not (RageUI.CurrentMenu.Controls.Left.Active or (RageUI.CurrentMenu.Controls.Click.Active and LeftArrowHovered)) then
-                    Index = Index + 1
+                    ProgressStart = ProgressStart + 1
 
-                    if Index > #Items then
-                        Index = 1
+                    if ProgressStart > #Items then
+                        ProgressStart = 1
                     end
 
                     RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.LeftRight)
@@ -115,7 +119,7 @@ function RageUI.Slider(Label, Items, Index, Description, Divider, Enabled, Callb
                     RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.Select)
                 end
 
-                Callback(Hovered, Selected, ((RageUI.CurrentMenu.Controls.Select.Active or ((Hovered and RageUI.CurrentMenu.Controls.Click.Active) and (not LeftArrowHovered and not RightArrowHovered))) and Selected), Index)
+                Callback(Hovered, Selected, ((RageUI.CurrentMenu.Controls.Select.Active or ((Hovered and RageUI.CurrentMenu.Controls.Click.Active) and (not LeftArrowHovered and not RightArrowHovered))) and Selected), ProgressStart)
             end
 
             RageUI.Options = RageUI.Options + 1
