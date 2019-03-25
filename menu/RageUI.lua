@@ -699,3 +699,22 @@ function RageUI.Menus:SetSpriteBanner(TextureDictionary, Texture)
     self.Sprite = { Dictionary = TextureDictionary or "commonmenu", Texture = Texture or "interaction_bgd" }
     self.Rectangle = nil
 end
+
+---GoBack
+---@return nil
+---@public
+function RageUI.Menus:GoBack()
+    RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.Back)
+
+    if RageUI.CurrentMenu.Parent ~= nil then
+        if RageUI.CurrentMenu.Parent() then
+            RageUI.NextMenu = RageUI.CurrentMenu.Parent
+        else
+            RageUI.NextMenu = nil
+            RageUI.Visible(RageUI.CurrentMenu, false)
+        end
+    else
+        RageUI.NextMenu = nil
+        RageUI.Visible(RageUI.CurrentMenu, false)
+    end
+end
