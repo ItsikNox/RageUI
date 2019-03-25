@@ -494,6 +494,14 @@ function RageUI.Title()
         end
     end
 end
+---CloseAll
+---@return nil
+---@public
+function RageUI:CloseAll()
+    RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.Back)
+    RageUI.NextMenu = nil
+    RageUI.Visible(RageUI.CurrentMenu, false)
+end
 
 ---Subtitle
 ---@return nil
