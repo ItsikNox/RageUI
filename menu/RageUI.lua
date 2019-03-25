@@ -711,7 +711,7 @@ end
 ---GoBack
 ---@return nil
 ---@public
-function RageUI.Menus:GoBack()
+function RageUI.GoBack()
     RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.Back)
 
     if RageUI.CurrentMenu.Parent ~= nil then
