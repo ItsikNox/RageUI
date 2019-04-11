@@ -337,6 +337,10 @@ end
 ---@param Y number
 ---@param TextureDictionary string
 ---@param TextureName string
+---@param R number
+---@param G number
+---@param B number
+---@param A number
 ---@return table
 ---@public
 function RageUI.CreateMenu(Title, Subtitle, X, Y, TextureDictionary, TextureName,R,G,B,A)
@@ -390,6 +394,10 @@ end
 ---@param Y number
 ---@param TextureDictionary string
 ---@param TextureName string
+---@param R number
+---@param G number
+---@param B number
+---@param A number
 ---@return table
 ---@public
 function RageUI.CreateSubMenu(ParentMenu, Title, Subtitle, X, Y, TextureDictionary, TextureName,R,G,B,A)
@@ -433,7 +441,7 @@ function RageUI.CreateSubMenu(ParentMenu, Title, Subtitle, X, Y, TextureDictiona
             end
 
             if ParentMenu.Sprite then
-                Menu.Sprite = { Dictionary = TextureDictionary or ParentMenu.Sprite.Dictionary, Texture = TextureName or ParentMenu.Sprite.Texture ,Color={R=R or ParentMenu.Color.R ,G=G or ParentMenu.Color.G,B=B or ParentMenu.Color.B,A=A or ParentMenu.Color.A}}
+                Menu.Sprite = { Dictionary = TextureDictionary or ParentMenu.Sprite.Dictionary, Texture = TextureName or ParentMenu.Sprite.Texture ,Color={R=R or ParentMenu.Sprite.Color.R ,G=G or ParentMenu.Sprite.Color.G,B=B or ParentMenu.Sprite.Color.B,A=A or ParentMenu.Sprite.Color.A}}
             else
                 Menu.Rectangle = ParentMenu.Rectangle
             end
