@@ -645,7 +645,7 @@ end
 ---@return nil
 ---@public
 function RageUI.Menus:RefreshIndex()
-    RageUI.CurrentMenu.Index = 1
+    self.Index = 1
 end
 
 ---SetSubtitle
