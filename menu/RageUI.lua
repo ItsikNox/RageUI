@@ -641,6 +641,13 @@ function RageUI.Menus:SetTitle(Title)
     self.Title = Title
 end
 
+---RefreshIndex
+---@return nil
+---@public
+function RageUI.Menus:RefreshIndex()
+    RageUI.CurrentMenu.Index = 1
+end
+
 ---SetSubtitle
 ---@param Subtitle string
 ---@return nil
