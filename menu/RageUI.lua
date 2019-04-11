@@ -330,7 +330,16 @@ end
 ---@param TextureName string
 ---@return table
 ---@public
-function RageUI.CreateMenu(Title, Subtitle, X, Y, TextureDictionary, TextureName)
+---CreateMenu
+---@param Title string
+---@param Subtitle string
+---@param X number
+---@param Y number
+---@param TextureDictionary string
+---@param TextureName string
+---@return table
+---@public
+function RageUI.CreateMenu(Title, Subtitle, X, Y, TextureDictionary, TextureName,R,G,B,A)
 
     ---@type table
     local Menu = {}
@@ -347,7 +356,7 @@ function RageUI.CreateMenu(Title, Subtitle, X, Y, TextureDictionary, TextureName
     Menu.Open = false
     Menu.Controls = RageUI.Settings.Controls
     Menu.Index = 1
-    Menu.Sprite = { Dictionary = TextureDictionary or "commonmenu", Texture = TextureName or "interaction_bgd" }
+    Menu.Sprite = { Dictionary = TextureDictionary or "commonmenu", Texture = TextureName or "interaction_bgd" ,Color={R=R,G=G,B=B,A=A}}
     Menu.Rectangle = nil
     Menu.Pagination = { Minimum = 1, Maximum = 10, Total = 10 }
     Menu.Safezone = false
@@ -383,7 +392,7 @@ end
 ---@param TextureName string
 ---@return table
 ---@public
-function RageUI.CreateSubMenu(ParentMenu, Title, Subtitle, X, Y, TextureDictionary, TextureName)
+function RageUI.CreateSubMenu(ParentMenu, Title, Subtitle, X, Y, TextureDictionary, TextureName,R,G,B,A)
     if ParentMenu ~= nil then
         if ParentMenu() then
 
@@ -424,7 +433,7 @@ function RageUI.CreateSubMenu(ParentMenu, Title, Subtitle, X, Y, TextureDictiona
             end
 
             if ParentMenu.Sprite then
-                Menu.Sprite = { Dictionary = TextureDictionary or ParentMenu.Sprite.Dictionary, Texture = TextureName or ParentMenu.Sprite.Texture }
+                Menu.Sprite = { Dictionary = TextureDictionary or ParentMenu.Sprite.Dictionary, Texture = TextureName or ParentMenu.Sprite.Texture ,Color={R=R,G=G,B=B,A=A}}
             else
                 Menu.Rectangle = ParentMenu.Rectangle
             end
