@@ -1,5 +1,5 @@
 Citizen.CreateThread(function()
-    local NewMenu = RageUI.CreateMenu("RageUILua", "~b~SHOWCASE", 0, 0)
+    local NewMenu = RageUI.CreateMenu("RageUILua", "~b~SHOWCASE", 0, 0,nil,nil,nil,nil,nil,nil,Close)
     --NewMenu:SetSubtitle(math.random(1000,20000))
 
     NewMenu.Safezone = true
@@ -128,6 +128,11 @@ Citizen.CreateThread(function()
         end
     end
 end)
+
+function Close()
+    Citizen.Trace("Menu Closed")
+    
+end
 
 
 
