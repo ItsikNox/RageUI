@@ -341,13 +341,14 @@ end
 ---@param G number
 ---@param B number
 ---@param A number
+---@param CloseFct Function
 ---@return table
 ---@public
-function RageUI.CreateMenu(Title, Subtitle, X, Y, TextureDictionary, TextureName,R,G,B,A)
+function RageUI.CreateMenu(Title, Subtitle, X, Y, TextureDictionary, TextureName,R,G,B,A,CloseFct)
 
     ---@type table
     local Menu = {}
-
+    Menu.CbClosed = CloseFct
     Menu.Title = Title or ""
     Menu.Subtitle = Subtitle or ""
     Menu.SubtitleHeight = -37
@@ -400,13 +401,13 @@ end
 ---@param A number
 ---@return table
 ---@public
-function RageUI.CreateSubMenu(ParentMenu, Title, Subtitle, X, Y, TextureDictionary, TextureName,R,G,B,A)
+function RageUI.CreateSubMenu(ParentMenu, Title, Subtitle, X, Y, TextureDictionary, TextureName,R,G,B,A,CloseFct)
     if ParentMenu ~= nil then
         if ParentMenu() then
 
             ---@type table
             local Menu = {}
-
+            Menu.CbClosed = CloseFct
             Menu.Title = Title or ParentMenu.Title
             Menu.Subtitle = Subtitle or ParentMenu.Subtitle
             Menu.SubtitleHeight = -37
@@ -482,6 +483,15 @@ function RageUI.Visible(Menu, Value)
     end
 end
 
+--ClosedMenu
+--@param fct function
+--@return nil
+--@public
+function RageUI.ClosedMenu(fct)
+    if fct ~= nil then
+        fct()
+    end
+end
 ---Title
 ---@return nil
 ---@public
@@ -628,7 +638,7 @@ function RageUI.Render()
                 RageUI.CurrentMenu.Controls.Back.Pressed = false
 
                 RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.Back)
-
+                RageUI.Closed(RageUI.CurrentMenu.CbClosed)
                 if RageUI.CurrentMenu.Parent ~= nil then
                     if RageUI.CurrentMenu.Parent() then
                         RageUI.NextMenu = RageUI.CurrentMenu.Parent
