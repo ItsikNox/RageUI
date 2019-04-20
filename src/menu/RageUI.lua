@@ -1,3 +1,9 @@
+print("\n")
+print("Github download : https://github.com/iTexZoz/RageUI/releases")
+print("[Feature Suggestions] : https://github.com/iTexZoz/RageUI/issues/1")
+print("[Frequently asked question] : https://github.com/iTexZoz/RageUI/issues/2")
+print("RageUI wiki : https://github.com/iTexZoz/NativeUILua-Reloaded/wiki")
+print("\n")
 ---round
 ---@param num number
 ---@param numDecimalPlaces number
@@ -356,7 +362,7 @@ function RageUI.CreateMenu(Title, Subtitle, X, Y, TextureDictionary, TextureName
     Menu.X = X or 0
     Menu.Y = Y or 0
     Menu.Parent = nil
-    Menu.WidthOffset = 0
+    Menu.WidthOffset = 100
     Menu.Open = false
     Menu.Controls = RageUI.Settings.Controls
     Menu.Index = 1
@@ -461,6 +467,7 @@ end
 ---@return table
 ---@public
 function RageUI.Visible(Menu, Value)
+    -- TODO Implemeted settings display mouse
     if Menu ~= nil then
         if Menu() then
             if type(Value) == "boolean" then
