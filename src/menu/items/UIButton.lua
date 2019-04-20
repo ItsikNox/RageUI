@@ -89,7 +89,7 @@ function RageUI.Button(Label, Description, Style, Enabled, Callback, Submenu)
                 RageUI.ItemOffset = RageUI.ItemOffset + RageUI.Settings.Items.Button.Rectangle.Height
 
                 if Selected and RageUI.CurrentMenu.Description ~= Description then
-                    RageUI.CurrentMenu.Description = Description or ""
+                    RageUI.CurrentMenu.Description = Description or nil
 
                     local DescriptionLineCount = RageUI.GetLineCount(RageUI.CurrentMenu.Description, RageUI.CurrentMenu.X + RageUI.Settings.Items.Description.Text.X, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Description.Text.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, 0, RageUI.Settings.Items.Description.Text.Scale, 255, 255, 255, 255, nil, false, false, RageUI.Settings.Items.Description.Background.Width + RageUI.CurrentMenu.WidthOffset)
 

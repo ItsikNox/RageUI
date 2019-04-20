@@ -357,7 +357,7 @@ function RageUI.CreateMenu(Title, Subtitle, X, Y, TextureDictionary, TextureName
     Menu.Title = Title or ""
     Menu.Subtitle = Subtitle or ""
     Menu.SubtitleHeight = -37
-    Menu.Description = ""
+    Menu.Description = nil
     Menu.DescriptionHeight = RageUI.Settings.Items.Description.Background.Height
     Menu.X = X or 0
     Menu.Y = Y or 0
@@ -416,7 +416,7 @@ function RageUI.CreateSubMenu(ParentMenu, Title, Subtitle, X, Y, TextureDictiona
             Menu.Title = Title or ParentMenu.Title
             Menu.Subtitle = Subtitle or ParentMenu.Subtitle
             Menu.SubtitleHeight = -37
-            Menu.Description = ""
+            Menu.Description = nil
             Menu.DescriptionHeight = RageUI.Settings.Items.Description.Background.Height
             Menu.X = X or ParentMenu.X
             Menu.Y = Y or ParentMenu.Y
