@@ -1,6 +1,6 @@
 Citizen.CreateThread(function()
 
-    local mainMenu = RageUI.CreateMenu("RageUILua", "~b~SHOWCASE", 0, 100)
+    local mainMenu = RageUI.CreateMenu("RageUILua", "~b~SHOWCASE", 0, 0)
     mainMenu:SetSubtitle("~b~SHOWCASE - RAGEUI")
     mainMenu.Safezone = true
 
