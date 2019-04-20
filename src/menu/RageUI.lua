@@ -343,7 +343,7 @@ end
 ---@param A number
 ---@return table
 ---@public
-function RageUI.CreateMenu(Title, Subtitle, X, Y, TextureDictionary, TextureName,R,G,B,A)
+function RageUI.CreateMenu(Title, Subtitle, X, Y, TextureDictionary, TextureName, R, G, B, A)
 
     ---@type table
     local Menu = {}
@@ -360,7 +360,7 @@ function RageUI.CreateMenu(Title, Subtitle, X, Y, TextureDictionary, TextureName
     Menu.Open = false
     Menu.Controls = RageUI.Settings.Controls
     Menu.Index = 1
-    Menu.Sprite = { Dictionary = TextureDictionary or "commonmenu", Texture = TextureName or "interaction_bgd" ,Color={R=R,G=G,B=B,A=A}}
+    Menu.Sprite = { Dictionary = TextureDictionary or "commonmenu", Texture = TextureName or "interaction_bgd", Color = { R = R, G = G, B = B, A = A } }
     Menu.Rectangle = nil
     Menu.Pagination = { Minimum = 1, Maximum = 10, Total = 10 }
     Menu.Safezone = false
@@ -400,7 +400,7 @@ end
 ---@param A number
 ---@return table
 ---@public
-function RageUI.CreateSubMenu(ParentMenu, Title, Subtitle, X, Y, TextureDictionary, TextureName,R,G,B,A)
+function RageUI.CreateSubMenu(ParentMenu, Title, Subtitle, X, Y, TextureDictionary, TextureName, R, G, B, A)
     if ParentMenu ~= nil then
         if ParentMenu() then
 
@@ -441,7 +441,7 @@ function RageUI.CreateSubMenu(ParentMenu, Title, Subtitle, X, Y, TextureDictiona
             end
 
             if ParentMenu.Sprite then
-                Menu.Sprite = { Dictionary = TextureDictionary or ParentMenu.Sprite.Dictionary, Texture = TextureName or ParentMenu.Sprite.Texture ,Color={R=R or ParentMenu.Sprite.Color.R ,G=G or ParentMenu.Sprite.Color.G,B=B or ParentMenu.Sprite.Color.B,A=A or ParentMenu.Sprite.Color.A}}
+                Menu.Sprite = { Dictionary = TextureDictionary or ParentMenu.Sprite.Dictionary, Texture = TextureName or ParentMenu.Sprite.Texture, Color = { R = R or ParentMenu.Sprite.Color.R, G = G or ParentMenu.Sprite.Color.G, B = B or ParentMenu.Sprite.Color.B, A = A or ParentMenu.Sprite.Color.A } }
             else
                 Menu.Rectangle = ParentMenu.Rectangle
             end
@@ -485,30 +485,37 @@ end
 ---Title
 ---@return nil
 ---@public
-function RageUI.Title()
-    if RageUI.CurrentMenu ~= nil then
-        if RageUI.CurrentMenu() then
-            if not RageUI.CurrentMenu.SafeZoneSize then
-                RageUI.CurrentMenu.SafeZoneSize = { X = 0, Y = 0 }
+---@param Enabled boolean
+function RageUI.Banner(Enabled)
+    if type(Enabled) == "boolean" then
+        if Enabled == true then
+            if RageUI.CurrentMenu ~= nil then
+                if RageUI.CurrentMenu() then
+                    if not RageUI.CurrentMenu.SafeZoneSize then
+                        RageUI.CurrentMenu.SafeZoneSize = { X = 0, Y = 0 }
 
-                if RageUI.CurrentMenu.Safezone then
-                    RageUI.CurrentMenu.SafeZoneSize = RageUI.GetSafeZoneBounds()
+                        if RageUI.CurrentMenu.Safezone then
+                            RageUI.CurrentMenu.SafeZoneSize = RageUI.GetSafeZoneBounds()
 
-                    ScreenDrawPositionBegin(76, 84)
-                    ScreenDrawPositionRatio(0, 0, 0, 0)
+                            ScreenDrawPositionBegin(76, 84)
+                            ScreenDrawPositionRatio(0, 0, 0, 0)
+                        end
+                    end
+
+                    if RageUI.CurrentMenu.Sprite then
+                        RageUI.RenderSprite(RageUI.CurrentMenu.Sprite.Dictionary, RageUI.CurrentMenu.Sprite.Texture, RageUI.CurrentMenu.X, RageUI.CurrentMenu.Y, RageUI.Settings.Items.Title.Background.Width + RageUI.CurrentMenu.WidthOffset, RageUI.Settings.Items.Title.Background.Height)
+                    else
+                        RageUI.RenderRectangle(RageUI.CurrentMenu.X, RageUI.CurrentMenu.Y, RageUI.Settings.Items.Title.Background.Width + RageUI.CurrentMenu.WidthOffset, RageUI.Settings.Items.Title.Background.Height, RageUI.CurrentMenu.Rectangle.R, RageUI.CurrentMenu.Rectangle.G, RageUI.CurrentMenu.Rectangle.B, RageUI.CurrentMenu.Rectangle.A)
+                    end
+
+                    RageUI.RenderText(RageUI.CurrentMenu.Title, RageUI.CurrentMenu.X + RageUI.Settings.Items.Title.Text.X + (RageUI.CurrentMenu.WidthOffset / 2), RageUI.CurrentMenu.Y + RageUI.Settings.Items.Title.Text.Y, 1, RageUI.Settings.Items.Title.Text.Scale, 255, 255, 255, 255, 1)
+
+                    RageUI.ItemOffset = RageUI.ItemOffset + RageUI.Settings.Items.Title.Background.Height
                 end
             end
-
-            if RageUI.CurrentMenu.Sprite then
-                RageUI.RenderSprite(RageUI.CurrentMenu.Sprite.Dictionary, RageUI.CurrentMenu.Sprite.Texture, RageUI.CurrentMenu.X, RageUI.CurrentMenu.Y, RageUI.Settings.Items.Title.Background.Width + RageUI.CurrentMenu.WidthOffset, RageUI.Settings.Items.Title.Background.Height)
-            else
-                RageUI.RenderRectangle(RageUI.CurrentMenu.X, RageUI.CurrentMenu.Y, RageUI.Settings.Items.Title.Background.Width + RageUI.CurrentMenu.WidthOffset, RageUI.Settings.Items.Title.Background.Height, RageUI.CurrentMenu.Rectangle.R, RageUI.CurrentMenu.Rectangle.G, RageUI.CurrentMenu.Rectangle.B, RageUI.CurrentMenu.Rectangle.A)
-            end
-
-            RageUI.RenderText(RageUI.CurrentMenu.Title, RageUI.CurrentMenu.X + RageUI.Settings.Items.Title.Text.X + (RageUI.CurrentMenu.WidthOffset / 2), RageUI.CurrentMenu.Y + RageUI.Settings.Items.Title.Text.Y, 1, RageUI.Settings.Items.Title.Text.Scale, 255, 255, 255, 255, 1)
-
-            RageUI.ItemOffset = RageUI.ItemOffset + RageUI.Settings.Items.Title.Background.Height
         end
+    else
+        error("Enabled is not boolean")
     end
 end
 ---CloseAll -- TODO 
@@ -594,7 +601,6 @@ function RageUI.Description()
                     ScreenDrawPositionRatio(0, 0, 0, 0)
                 end
             end
-
 
             RageUI.RenderRectangle(RageUI.CurrentMenu.X, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Description.Bar.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Items.Description.Bar.Width + RageUI.CurrentMenu.WidthOffset, RageUI.Settings.Items.Description.Bar.Height, 0, 0, 0, 255)
             RageUI.RenderSprite(RageUI.Settings.Items.Description.Background.Dictionary, RageUI.Settings.Items.Description.Background.Texture, RageUI.CurrentMenu.X, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Description.Background.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Items.Description.Background.Width + RageUI.CurrentMenu.WidthOffset, RageUI.CurrentMenu.DescriptionHeight, 0, 0, 0, 255)
