@@ -6,7 +6,3 @@
 - ***
 
 ## 
-
-## Current Bugs
-  - When you visible false a menu 80% of chance that you got an error
-  - https://streamable.com/349ry (on the same submenu)
