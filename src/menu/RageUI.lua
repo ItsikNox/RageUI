@@ -369,7 +369,7 @@ function RageUI.CreateMenu(Title, Subtitle, X, Y, TextureDictionary, TextureName
     Menu.Sprite = { Dictionary = TextureDictionary or "commonmenu", Texture = TextureName or "interaction_bgd", Color = { R = R, G = G, B = B, A = A } }
     Menu.Rectangle = nil
     Menu.Pagination = { Minimum = 1, Maximum = 10, Total = 10 }
-    Menu.Safezone = false
+    Menu.Safezone = true
     Menu.SafeZoneSize = nil
     Menu.Options = 0
 
@@ -467,12 +467,10 @@ end
 ---@return table
 ---@public
 function RageUI.Visible(Menu, Value)
-    -- TODO Implemeted settings display mouse
     if Menu ~= nil then
         if Menu() then
             if type(Value) == "boolean" then
                 Menu.Open = Value
-
                 if Menu.Open then
                     RageUI.CurrentMenu = Menu
                     RageUI.Options = 0
@@ -622,6 +620,10 @@ end
 ---@return nil
 ---@public
 function RageUI.Render()
+    --TODO Settings Background, Navigatio, Description, and render
+    RageUI.Background();
+    RageUI.Navigation();
+    RageUI.Description();
     if RageUI.CurrentMenu ~= nil then
         if RageUI.CurrentMenu() then
 

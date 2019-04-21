@@ -110,7 +110,6 @@ function RageUI.Button(Label, Description, Style, Enabled, Callback, Submenu)
                             RageUI.NextMenu = Submenu
                         end
                     end
-
                 end
 
             end
