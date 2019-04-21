@@ -4,17 +4,20 @@ RageUI.CheckboxStyle = {
 }
 
 local function StyleCheckBox(Selected, Checked, Box, BoxSelect)
+
+    local Checkbox = RageUI.Settings.Items.Checkbox;
+
     if Selected then
         if Checked then
-            RageUI.RenderSprite(RageUI.Settings.Items.Checkbox.Dictionary, RageUI.Settings.Items.Checkbox.Textures[Box], RageUI.CurrentMenu.X + RageUI.Settings.Items.Checkbox.X + RageUI.CurrentMenu.WidthOffset, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Checkbox.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Items.Checkbox.Width, RageUI.Settings.Items.Checkbox.Height)
+            RageUI.RenderSprite(Checkbox.Dictionary, Checkbox.Textures[Box], RageUI.CurrentMenu.X + Checkbox.X + RageUI.CurrentMenu.WidthOffset, RageUI.CurrentMenu.Y + Checkbox.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset,Checkbox.Width, Checkbox.Height)
         else
-            RageUI.RenderSprite(RageUI.Settings.Items.Checkbox.Dictionary, RageUI.Settings.Items.Checkbox.Textures[1], RageUI.CurrentMenu.X + RageUI.Settings.Items.Checkbox.X + RageUI.CurrentMenu.WidthOffset, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Checkbox.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Items.Checkbox.Width, RageUI.Settings.Items.Checkbox.Height)
+            RageUI.RenderSprite(Checkbox.Dictionary, Checkbox.Textures[1], RageUI.CurrentMenu.X + Checkbox.X + RageUI.CurrentMenu.WidthOffset, RageUI.CurrentMenu.Y + Checkbox.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, Checkbox.Width, Checkbox.Height)
         end
     else
         if Checked then
-            RageUI.RenderSprite(RageUI.Settings.Items.Checkbox.Dictionary, RageUI.Settings.Items.Checkbox.Textures[BoxSelect], RageUI.CurrentMenu.X + RageUI.Settings.Items.Checkbox.X + RageUI.CurrentMenu.WidthOffset, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Checkbox.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Items.Checkbox.Width, RageUI.Settings.Items.Checkbox.Height)
+            RageUI.RenderSprite(Checkbox.Dictionary, Checkbox.Textures[BoxSelect], RageUI.CurrentMenu.X + Checkbox.X + RageUI.CurrentMenu.WidthOffset, RageUI.CurrentMenu.Y + Checkbox.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, Checkbox.Width, Checkbox.Height)
         else
-            RageUI.RenderSprite(RageUI.Settings.Items.Checkbox.Dictionary, RageUI.Settings.Items.Checkbox.Textures[3], RageUI.CurrentMenu.X + RageUI.Settings.Items.Checkbox.X + RageUI.CurrentMenu.WidthOffset, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Checkbox.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Items.Checkbox.Width, RageUI.Settings.Items.Checkbox.Height)
+            RageUI.RenderSprite(Checkbox.Dictionary,Checkbox.Textures[3], RageUI.CurrentMenu.X + Checkbox.X + RageUI.CurrentMenu.WidthOffset, RageUI.CurrentMenu.Y + Checkbox.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, Checkbox.Width, Checkbox.Height)
         end
     end
 end

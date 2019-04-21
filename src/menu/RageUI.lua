@@ -616,6 +616,11 @@ function RageUI.Description()
     end
 end
 
+function RageUI.Header()
+    ShowCursorThisFrame()
+    RageUI.Banner(true)
+    RageUI.Subtitle()
+end
 ---Render
 ---@return nil
 ---@public
