@@ -4,8 +4,9 @@
 ---@return nil
 ---@public
 function RageUI.HeritageWindow(Mum, Dad)
-    if RageUI.CurrentMenu ~= nil then
-        if RageUI.CurrentMenu() then
+    local CurrentMenu = RageUI.CurrentMenu;
+    if CurrentMenu ~= nil then
+        if CurrentMenu() then
             if Mum < 0 or Mum > 21 then
                 Mum = 0
             end
@@ -22,10 +23,12 @@ function RageUI.HeritageWindow(Mum, Dad)
             else
                 Dad = "male_" .. Dad
             end
-            RageUI.RenderSprite(RageUI.Settings.Windows.Heritage.Background.Dictionary, RageUI.Settings.Windows.Heritage.Background.Texture, RageUI.CurrentMenu.X + (RageUI.CurrentMenu.WidthOffset / 2), RageUI.CurrentMenu.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Windows.Heritage.Background.Width, RageUI.Settings.Windows.Heritage.Background.Height)
-            RageUI.RenderSprite(RageUI.Settings.Windows.Heritage.Dad.Dictionary, Dad, RageUI.CurrentMenu.X + RageUI.Settings.Windows.Heritage.Dad.X + (RageUI.CurrentMenu.WidthOffset / 2), RageUI.CurrentMenu.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Windows.Heritage.Dad.Width, RageUI.Settings.Windows.Heritage.Dad.Height)
-            RageUI.RenderSprite(RageUI.Settings.Windows.Heritage.Mum.Dictionary, Mum, RageUI.CurrentMenu.X + RageUI.Settings.Windows.Heritage.Mum.X + (RageUI.CurrentMenu.WidthOffset / 2), RageUI.CurrentMenu.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Windows.Heritage.Mum.Width, RageUI.Settings.Windows.Heritage.Mum.Height)
-            RageUI.ItemOffset = RageUI.ItemOffset + RageUI.Settings.Windows.Heritage.Background.Height
+            local Heritage = RageUI.Settings.Windows.Heritage;
+
+            RageUI.RenderSprite(Heritage.Background.Dictionary, Heritage.Background.Texture, CurrentMenu.X, CurrentMenu.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, Heritage.Background.Width + (CurrentMenu.WidthOffset / 1), Heritage.Background.Height)
+            RageUI.RenderSprite(Heritage.Dad.Dictionary, Dad, CurrentMenu.X + Heritage.Dad.X + (CurrentMenu.WidthOffset / 2), CurrentMenu.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, Heritage.Dad.Width, Heritage.Dad.Height)
+            RageUI.RenderSprite(Heritage.Mum.Dictionary, Mum, CurrentMenu.X + Heritage.Mum.X + (CurrentMenu.WidthOffset / 2), CurrentMenu.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, Heritage.Mum.Width, Heritage.Mum.Height)
+            RageUI.ItemOffset = RageUI.ItemOffset + Heritage.Background.Height
         end
     end
 end
