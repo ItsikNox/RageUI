@@ -596,7 +596,7 @@ end
 ---@return nil
 ---@public
 function RageUI.Description()
-    if RageUI.CurrentMenu ~= nil then
+    if RageUI.CurrentMenu ~= nil and RageUI.CurrentMenu.Description ~= nil then
         if RageUI.CurrentMenu() then
             if not RageUI.CurrentMenu.SafeZoneSize then
                 RageUI.CurrentMenu.SafeZoneSize = { X = 0, Y = 0 }

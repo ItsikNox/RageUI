@@ -41,23 +41,17 @@ Citizen.CreateThread(function()
 
             RageUI.Background()
             RageUI.Navigation()
-
-            if mainMenu.Description ~= nil then
-                RageUI.Description()
-            end
-
-        RageUI.Render()
+            RageUI.Description()
+            RageUI.Render()
         elseif RageUI.Visible(subMenu) then
-    ShowCursorThisFrame()
-        RageUI.Banner(true)
-        RageUI.Subtitle()
+            ShowCursorThisFrame()
+            RageUI.Banner(true)
+            RageUI.Subtitle()
 
-
-
-    RageUI.Background()
-    RageUI.Navigation()
-    RageUI.Description()
-    RageUI.Render()
+            RageUI.Background()
+            RageUI.Navigation()
+            RageUI.Description()
+            RageUI.Render()
         end
     end
 end)
