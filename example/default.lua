@@ -5,7 +5,6 @@ Citizen.CreateThread(function()
 
     local subMenu = RageUI.CreateSubMenu(mainMenu, "RageUI", "~b~ SHOWCASE RAGEUI - SUBMENU")
 
-    local CheckBox = false
     while true do
         Citizen.Wait(1)
         if IsControlJustPressed(1, 51) then
@@ -26,6 +25,7 @@ Citizen.CreateThread(function()
                     Citizen.Trace("1")
                 end
             end)
+
 
             RageUI.Render()
         elseif RageUI.Visible(subMenu) then

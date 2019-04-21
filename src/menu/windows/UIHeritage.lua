@@ -1,3 +1,10 @@
+---@type table
+local Heritage = {
+    Background = { Dictionary = "pause_menu_pages_char_mom_dad", Texture = "mumdadbg", Width = 431, Height = 228 },
+    Mum = { Dictionary = "char_creator_portraits", X = 25, Width = 228, Height = 228 },
+    Dad = { Dictionary = "char_creator_portraits", X = 195, Width = 228, Height = 228 },
+}
+
 ---HeritageWindow
 ---@param Mum number
 ---@param Dad number
@@ -27,9 +34,6 @@ function RageUI.HeritageWindow(Mum, Dad)
             else
                 Dad = "male_" .. Dad
             end
-
-            ---@type table
-            local Heritage = RageUI.Settings.Windows.Heritage;
 
             RageUI.RenderSprite(Heritage.Background.Dictionary, Heritage.Background.Texture, CurrentMenu.X, CurrentMenu.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, Heritage.Background.Width + (CurrentMenu.WidthOffset / 1), Heritage.Background.Height)
             RageUI.RenderSprite(Heritage.Dad.Dictionary, Dad, CurrentMenu.X + Heritage.Dad.X + (CurrentMenu.WidthOffset / 2), CurrentMenu.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, Heritage.Dad.Width, Heritage.Dad.Height)

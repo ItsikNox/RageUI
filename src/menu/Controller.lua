@@ -1,3 +1,32 @@
+
+---IsMouseInBounds
+---@param X number
+---@param Y number
+---@param Width number
+---@param Height number
+---@return number
+---@public
+function RageUI.IsMouseInBounds(X, Y, Width, Height)
+    local MX, MY = math.round(GetControlNormal(0, 239) * 1920) / 1920, math.round(GetControlNormal(0, 240) * 1080) / 1080
+    X, Y = X / 1920, Y / 1080
+    Width, Height = Width / 1920, Height / 1080
+    return (MX >= X and MX <= X + Width) and (MY > Y and MY < Y + Height)
+end
+
+---GetSafeZoneBounds
+---@return table
+---@public
+function RageUI.GetSafeZoneBounds()
+    local SafeSize = GetSafeZoneSize()
+    SafeSize = math.round(SafeSize, 2)
+    SafeSize = (SafeSize * 100) - 90
+    SafeSize = 10 - SafeSize
+
+    local W, H = 1920, 1080
+
+    return { X = math.round(SafeSize * ((W / H) * 5.4)), Y = math.round(SafeSize * 5.4) }
+end
+
 ---GoUp
 ---@param Options number
 ---@return nil
@@ -67,6 +96,25 @@ function RageUI.GoDown(Options)
 
             RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.UpDown)
         end
+    end
+end
+
+---GoBack
+---@return nil
+---@public
+function RageUI.GoBack()
+    RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.Back)
+
+    if RageUI.CurrentMenu.Parent ~= nil then
+        if RageUI.CurrentMenu.Parent() then
+            RageUI.NextMenu = RageUI.CurrentMenu.Parent
+        else
+            RageUI.NextMenu = nil
+            RageUI.Visible(RageUI.CurrentMenu, false)
+        end
+    else
+        RageUI.NextMenu = nil
+        RageUI.Visible(RageUI.CurrentMenu, false)
     end
 end
 

@@ -1,8 +1,11 @@
 resource_manifest_version '05cfa83c-a124-4cfa-a768-c24a5811d8f9'
 
 client_scripts {
+
     "src/menu/RageUI.lua",
-    "src/menu/UIMenuProcess.lua",
+    "src/menu/Menu.lua",
+    "src/menu/Submenu.lua",
+    "src/menu/Controller.lua",
 
     "src/menu/elements/Badge.lua",
     "src/menu/elements/Rectangle.lua",
