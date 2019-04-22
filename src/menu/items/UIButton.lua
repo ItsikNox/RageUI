@@ -24,12 +24,6 @@ function RageUI.Button(Label, Description, Style, Enabled, Callback, Submenu)
     if CurrentMenu ~= nil then
         if CurrentMenu() then
 
-            ---@type table
-            local Audio = RageUI.Settings.Audio;
-
-            ---@type table
-            local SettingsDescription = RageUI.Settings.Items.Description;
-
             ---@type number
             local Option = RageUI.Options + 1
 
@@ -44,13 +38,12 @@ function RageUI.Button(Label, Description, Style, Enabled, Callback, Submenu)
                 local RightBadgeOffset = ((Style.RightBadge == RageUI.BadgeStyle.None or tonumber(Style.RightBadge) == nil) and 0 or 32)
 
                 ---@type boolean
-                local Hovered = ItemsWrapper.ItemsMouseBounds(CurrentMenu, Selected, Option, SettingsButton, Audio);
+                local Hovered = ItemsWrapper.ItemsMouseBounds(CurrentMenu, Selected, Option, SettingsButton);
 
                 if Selected then
                     RageUI.RenderSprite(SettingsButton.SelectedSprite.Dictionary, SettingsButton.SelectedSprite.Texture, CurrentMenu.X, CurrentMenu.Y + SettingsButton.SelectedSprite.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, SettingsButton.SelectedSprite.Width + CurrentMenu.WidthOffset, SettingsButton.SelectedSprite.Height)
                 end
 
-                --- Render Badge Right & Left
                 if type(Style) == 'table' then
                     if Style.LeftBadge ~= nil then
                         if Style.LeftBadge ~= RageUI.BadgeStyle.None and tonumber(Style.LeftBadge) ~= nil then
@@ -89,7 +82,6 @@ function RageUI.Button(Label, Description, Style, Enabled, Callback, Submenu)
 
                 ItemsWrapper.SelectedSound(CurrentMenu, Hovered, Selected, Submenu)
             end
-
             RageUI.Options = RageUI.Options + 1
         end
     end
