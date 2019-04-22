@@ -7,12 +7,14 @@ client_scripts {
     "src/menu/Submenu.lua",
     "src/menu/Controller.lua",
 
-    "src/menu/elements/Badge.lua",
-    "src/menu/elements/Rectangle.lua",
-    "src/menu/elements/Sprite.lua",
-    "src/menu/elements/Text.lua",
-    "src/menu/elements/ColourPanel.lua",
-    "src/menu/elements/Visual.lua",
+    "src/elements/Badge.lua",
+    "src/elements/Rectangle.lua",
+    "src/elements/Sprite.lua",
+    "src/elements/Text.lua",
+    "src/elements/ColourPanel.lua",
+    "src/elements/Visual.lua",
+
+    "src/menu/wrapper/items-wrapper.lua",
 
     "src/menu/items/UIButton.lua",
     "src/menu/items/UICheckBox.lua",
