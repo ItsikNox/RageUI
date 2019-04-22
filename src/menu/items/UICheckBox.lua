@@ -3,10 +3,13 @@ RageUI.CheckboxStyle = {
     Cross = 2
 }
 
+---StyleCheckBox
+---@param Selected number
+---@param Checked boolean
+---@param Box number
+---@param BoxSelect number
 local function StyleCheckBox(Selected, Checked, Box, BoxSelect)
-
     local Checkbox = RageUI.Settings.Items.Checkbox;
-
     if Selected then
         if Checked then
             RageUI.RenderSprite(Checkbox.Dictionary, Checkbox.Textures[Box], RageUI.CurrentMenu.X + Checkbox.X + RageUI.CurrentMenu.WidthOffset, RageUI.CurrentMenu.Y + Checkbox.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, Checkbox.Width, Checkbox.Height)
@@ -22,6 +25,8 @@ local function StyleCheckBox(Selected, Checked, Box, BoxSelect)
     end
 end
 
+---CheckBoxLockBadgeColor
+---@param Selected boolean
 local function CheckBoxLockBadgeColor(Selected)
     if Selected then
         return 0, 0, 0, 255
