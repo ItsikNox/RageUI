@@ -33,7 +33,7 @@ Citizen.CreateThread(function()
                 RightLabel = "→→→"
             }, true, function(Hovered, Active, Selected)
                 if Selected then
-                    Citizen.Trace("1")
+                    Citizen.Trace("submenu")
                 end
             end, subMenu)
 
