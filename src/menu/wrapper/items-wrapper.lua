@@ -74,6 +74,10 @@ function ItemsWrapper.ItemsMouseBounds(CurrentMenu, Selected, Option, SettingsBu
     return Hovered;
 end
 
+---ItemsSafeZone
+---@param CurrentMenu table
+---@return nil
+---@public
 function ItemsWrapper.ItemsSafeZone(CurrentMenu)
 
     if not CurrentMenu.SafeZoneSize then
