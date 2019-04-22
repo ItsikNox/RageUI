@@ -557,7 +557,7 @@ function RageUI.Menus:SetSubtitle(Subtitle)
 end
 
 ---PageCounter
----@param Pagecounter string
+---@param Subtitle string
 ---@return nil
 ---@public
 function RageUI.Menus:SetPageCounter(Subtitle)
