@@ -27,6 +27,17 @@ Citizen.CreateThread(function()
             end)
 
 
+            RageUI.Button("SubMenu", Description, {
+                LeftBadge = RageUI.BadgeStyle.Ammo,
+                RightBadge = RageUI.BadgeStyle.Gun,
+                RightLabel = "→→→"
+            }, true, function(Hovered, Active, Selected)
+                if Selected then
+                    Citizen.Trace("1")
+                end
+            end, subMenu)
+
+
             RageUI.Render()
         elseif RageUI.Visible(subMenu) then
             RageUI.Header();
