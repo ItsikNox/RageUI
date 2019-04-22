@@ -7,6 +7,13 @@
 ---@type table
 ItemsWrapper = {}
 
+---ItemsDescription
+---@param CurrentMenu table
+---@param SettingsDescription table
+---@param Description string
+---@param Selected boolean
+---@return nil
+---@public
 function ItemsWrapper.ItemsDescription(CurrentMenu, SettingsDescription, Description, Selected)
     if Selected and CurrentMenu.Description ~= Description then
 
@@ -23,6 +30,13 @@ function ItemsWrapper.ItemsDescription(CurrentMenu, SettingsDescription, Descrip
     end
 end
 
+---SelectedSound
+---@param CurrentMenu table
+---@param Hovered boolean
+---@param Selected boolean
+---@param Submenu table
+---@return nil
+---@public
 function ItemsWrapper.SelectedSound(CurrentMenu, Hovered, Selected, Submenu)
     if Selected and (CurrentMenu.Controls.Select.Active or (Hovered and CurrentMenu.Controls.Click.Active)) then
         RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.Select)
@@ -32,4 +46,45 @@ function ItemsWrapper.SelectedSound(CurrentMenu, Hovered, Selected, Submenu)
             end
         end
     end
+end
+
+---MouseBounds
+---@param CurrentMenu table
+---@param Selected boolean
+---@param Option number
+---@param SettingsButton table
+---@param Audio table
+---@return boolean
+---@public
+function ItemsWrapper.ItemsMouseBounds(CurrentMenu, Selected, Option, SettingsButton, Audio)
+
+    ---@type boolean
+    local Hovered = false
+
+    Hovered = RageUI.IsMouseInBounds(CurrentMenu.X + CurrentMenu.SafeZoneSize.X, CurrentMenu.Y + SettingsButton.Rectangle.Y + CurrentMenu.SafeZoneSize.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, SettingsButton.Rectangle.Width + CurrentMenu.WidthOffset, SettingsButton.Rectangle.Height)
+
+    if Hovered and not Selected then
+        RageUI.RenderRectangle(CurrentMenu.X, CurrentMenu.Y + SettingsButton.Rectangle.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, SettingsButton.Rectangle.Width + CurrentMenu.WidthOffset, SettingsButton.Rectangle.Height, 255, 255, 255, 20)
+        if CurrentMenu.Controls.Click.Active then
+            CurrentMenu.Index = Option
+            RageUI.PlaySound(Audio.Library, Audio.Error)
+        end
+    end
+
+    return Hovered;
+end
+
+function ItemsWrapper.ItemsSafeZone(CurrentMenu)
+
+    if not CurrentMenu.SafeZoneSize then
+        CurrentMenu.SafeZoneSize = { X = 0, Y = 0 }
+
+        if CurrentMenu.Safezone then
+            CurrentMenu.SafeZoneSize = RageUI.GetSafeZoneBounds()
+
+            ScreenDrawPositionBegin(76, 84)
+            ScreenDrawPositionRatio(0, 0, 0, 0)
+        end
+    end
+
 end
