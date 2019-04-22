@@ -1,3 +1,13 @@
+---@type table
+local SettingsButton = {
+    Rectangle = { Y = 0, Width = 431, Height = 38 },
+    Text = { X = 8, Y = 3, Scale = 0.33 },
+    LeftBadge = { Y = -2, Width = 40, Height = 40 },
+    RightBadge = { X = 385, Y = -2, Width = 40, Height = 40 },
+    RightText = { X = 420, Y = 4, Scale = 0.35 },
+    SelectedSprite = { Dictionary = "commonmenu", Texture = "gradient_nav", Y = 0, Width = 431, Height = 38 },
+}
+
 ---Button
 ---@param Label string
 ---@param Description string
@@ -13,9 +23,6 @@ function RageUI.Button(Label, Description, Style, Enabled, Callback, Submenu)
 
     if CurrentMenu ~= nil then
         if CurrentMenu() then
-
-            ---@type table
-            local SettingsButton = RageUI.Settings.Items.Button;
 
             ---@type table
             local Audio = RageUI.Settings.Audio;
@@ -100,30 +107,11 @@ function RageUI.Button(Label, Description, Style, Enabled, Callback, Submenu)
 
                 RageUI.ItemOffset = RageUI.ItemOffset + SettingsButton.Rectangle.Height
 
-                if Selected and CurrentMenu.Description ~= Description then
-                    CurrentMenu.Description = Description or nil
-
-                    local DescriptionLineCount = RageUI.GetLineCount(CurrentMenu.Description, CurrentMenu.X + SettingsDescription.Text.X, CurrentMenu.Y + SettingsDescription.Text.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, 0, SettingsDescription.Text.Scale, 255, 255, 255, 255, nil, false, false, SettingsDescription.Background.Width + CurrentMenu.WidthOffset)
-
-                    if DescriptionLineCount > 1 then
-                        CurrentMenu.DescriptionHeight = SettingsDescription.Background.Height * DescriptionLineCount
-                    else
-                        CurrentMenu.DescriptionHeight = SettingsDescription.Background.Height + 7
-                    end
-                end
+                ItemsWrapper.ItemsDescription(CurrentMenu, SettingsDescription, Description, Selected);
 
                 Callback(Hovered, Selected, ((CurrentMenu.Controls.Select.Active or (Hovered and CurrentMenu.Controls.Click.Active)) and Selected))
 
-                if Selected and (CurrentMenu.Controls.Select.Active or (Hovered and CurrentMenu.Controls.Click.Active)) then
-                    RageUI.PlaySound(Audio.Library, Audio.Select)
-
-                    if Submenu ~= nil then
-                        if Submenu() then
-                            RageUI.NextMenu = Submenu
-                        end
-                    end
-
-                end
+                ItemsWrapper.SelectedSound(CurrentMenu, Hovered, Selected, Submenu)
             end
 
             RageUI.Options = RageUI.Options + 1
