@@ -9,12 +9,15 @@ ItemsWrapper = {}
 
 ---ItemsDescription
 ---@param CurrentMenu table
----@param SettingsDescription table
 ---@param Description string
 ---@param Selected boolean
 ---@return nil
 ---@public
-function ItemsWrapper.ItemsDescription(CurrentMenu, SettingsDescription, Description, Selected)
+function ItemsWrapper.ItemsDescription(CurrentMenu, Description, Selected)
+
+    ---@type table
+    local SettingsDescription = RageUI.Settings.Items.Description;
+
     if Selected and CurrentMenu.Description ~= Description then
 
         CurrentMenu.Description = Description or nil
@@ -53,10 +56,9 @@ end
 ---@param Selected boolean
 ---@param Option number
 ---@param SettingsButton table
----@param Audio table
 ---@return boolean
 ---@public
-function ItemsWrapper.ItemsMouseBounds(CurrentMenu, Selected, Option, SettingsButton, Audio)
+function ItemsWrapper.ItemsMouseBounds(CurrentMenu, Selected, Option, SettingsButton)
 
     ---@type boolean
     local Hovered = false
@@ -67,7 +69,7 @@ function ItemsWrapper.ItemsMouseBounds(CurrentMenu, Selected, Option, SettingsBu
         RageUI.RenderRectangle(CurrentMenu.X, CurrentMenu.Y + SettingsButton.Rectangle.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, SettingsButton.Rectangle.Width + CurrentMenu.WidthOffset, SettingsButton.Rectangle.Height, 255, 255, 255, 20)
         if CurrentMenu.Controls.Click.Active then
             CurrentMenu.Index = Option
-            RageUI.PlaySound(Audio.Library, Audio.Error)
+            RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.Error)
         end
     end
 
