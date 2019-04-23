@@ -205,43 +205,6 @@ RageUI.Settings = {
             Background = { Dictionary = "commonmenu", Texture = "gradient_bgd", Y = 4, Width = 431, Height = 30 },
             Text = { X = 8, Y = 10, Scale = 0.35 },
         },
-        -- TODO Remove button table after finish cleanup
-        Button = {
-            Rectangle = { Y = 0, Width = 431, Height = 38 },
-            Text = { X = 8, Y = 3, Scale = 0.33 },
-            LeftBadge = { Y = -2, Width = 40, Height = 40 },
-            RightBadge = { X = 385, Y = -2, Width = 40, Height = 40 },
-            RightText = { X = 420, Y = 4, Scale = 0.35 },
-            SelectedSprite = { Dictionary = "commonmenu", Texture = "gradient_nav", Y = 0, Width = 431, Height = 38 },
-        },
-        -- TODO Remove button table after finish cleanup
-        Checkbox = { Dictionary = "commonmenu", Textures = {
-            "shop_box_blankb", -- 1
-            "shop_box_tickb", -- 2
-            "shop_box_blank", -- 3
-            "shop_box_tick", -- 4
-            "shop_box_crossb", -- 5
-            "shop_box_cross", -- 6
-        }, X = 380, Y = -6, Width = 50, Height = 50 },
-        -- TODO Remove button table after finish cleanup
-        List = {
-            LeftArrow = { Dictionary = "commonmenu", Texture = "arrowleft", X = 378, Y = 3, Width = 30, Height = 30 },
-            RightArrow = { Dictionary = "commonmenu", Texture = "arrowright", X = 400, Y = 3, Width = 30, Height = 30 },
-            Text = { X = 403, Y = 3, Scale = 0.35 },
-        },
-        Slider = {
-            Background = { X = 250, Y = 14.5, Width = 150, Height = 9 },
-            Slider = { X = 250, Y = 14.5, Width = 75, Height = 9 },
-            Divider = { X = 323.5, Y = 9, Width = 2.5, Height = 20 },
-            LeftArrow = { Dictionary = "commonmenutu", Texture = "arrowleft", X = 235, Y = 11.5, Width = 15, Height = 15 },
-            RightArrow = { Dictionary = "commonmenutu", Texture = "arrowright", X = 400, Y = 11.5, Width = 15, Height = 15 },
-        },
-        -- TODO Remove button table after finish cleanup
-        Progress = {
-            Background = { X = 8, Y = 33, Width = 415, Height = 20 },
-            Bar = { X = 11.75, Y = 36.75, Width = 407.5, Height = 12.5 },
-            Height = 60
-        },
     },
     Panels = {
         Grid = {

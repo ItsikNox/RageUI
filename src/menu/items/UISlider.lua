@@ -1,28 +1,49 @@
+---@type table
+local SettingsButton = {
+    Rectangle = { Y = 0, Width = 431, Height = 38 },
+    Text = { X = 8, Y = 3, Scale = 0.33 },
+    LeftBadge = { Y = -2, Width = 40, Height = 40 },
+    RightBadge = { X = 385, Y = -2, Width = 40, Height = 40 },
+    RightText = { X = 420, Y = 4, Scale = 0.35 },
+    SelectedSprite = { Dictionary = "commonmenu", Texture = "gradient_nav", Y = 0, Width = 431, Height = 38 },
+}
+
+---@type table
+local SettingsSlider = {
+    Background = { X = 250, Y = 14.5, Width = 150, Height = 9 },
+    Slider = { X = 250, Y = 14.5, Width = 75, Height = 9 },
+    Divider = { X = 323.5, Y = 9, Width = 2.5, Height = 20 },
+    LeftArrow = { Dictionary = "commonmenutu", Texture = "arrowleft", X = 235, Y = 11.5, Width = 15, Height = 15 },
+    RightArrow = { Dictionary = "commonmenutu", Texture = "arrowright", X = 400, Y = 11.5, Width = 15, Height = 15 },
+}
+
 ---Slider
 ---@param Label string
----@param Number of choice
----@param Progress MAX
+---@param ProgressStart number
+---@param ProgressMax number
 ---@param Description string
----@param Divider number
+---@param Divider boolean
 ---@param Enabled boolean
 ---@param Callback function
----@return nil
----@public
-function RageUI.Slider(Label, ProgressStart, ProgressMax, Description, Divider, Enabled, Callback) -- A FAIRE : Changer le slider pour qu'il bouge entre 0 et X sinon il dépasse
-    if RageUI.CurrentMenu ~= nil then
-        if RageUI.CurrentMenu() then
+function RageUI.Slider(Label, ProgressStart, ProgressMax, Description, Divider, Enabled, Callback)
+
+    ---@type table
+    local CurrentMenu = RageUI.CurrentMenu;
+
+    if CurrentMenu ~= nil then
+        if CurrentMenu() then
 
             local Items = {}
-            for i = 1, ProgressMax do 
-                table.insert(Items,i)
+            for i = 1, ProgressMax do
+                table.insert(Items, i)
             end
             ---@type number
             local Option = RageUI.Options + 1
 
-            if RageUI.CurrentMenu.Pagination.Minimum <= Option and RageUI.CurrentMenu.Pagination.Maximum >= Option then
+            if CurrentMenu.Pagination.Minimum <= Option and CurrentMenu.Pagination.Maximum >= Option then
 
                 ---@type number
-                local Selected = RageUI.CurrentMenu.Index == Option
+                local Selected = CurrentMenu.Index == Option
 
                 ---@type boolean
                 local Hovered = false
@@ -30,73 +51,54 @@ function RageUI.Slider(Label, ProgressStart, ProgressMax, Description, Divider, 
                 ---@type boolean
                 local LeftArrowHovered, RightArrowHovered = false, false
 
-                if not RageUI.CurrentMenu.SafeZoneSize then
-                    RageUI.CurrentMenu.SafeZoneSize = { X = 0, Y = 0 }
+                ItemsWrapper.ItemsSafeZone(CurrentMenu)
 
-                    if RageUI.CurrentMenu.Safezone then
-                        RageUI.CurrentMenu.SafeZoneSize = RageUI.GetSafeZoneBounds()
-
-                        ScreenDrawPositionBegin(76, 84)
-                        ScreenDrawPositionRatio(0, 0, 0, 0)
-                    end
-                end
-
-                Hovered = RageUI.IsMouseInBounds(RageUI.CurrentMenu.X + RageUI.CurrentMenu.SafeZoneSize.X, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Button.Rectangle.Y + RageUI.CurrentMenu.SafeZoneSize.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Items.Button.Rectangle.Width + RageUI.CurrentMenu.WidthOffset, RageUI.Settings.Items.Button.Rectangle.Height)
+                Hovered = RageUI.IsMouseInBounds(CurrentMenu.X + CurrentMenu.SafeZoneSize.X, CurrentMenu.Y + SettingsButton.Rectangle.Y + CurrentMenu.SafeZoneSize.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, SettingsButton.Rectangle.Width + CurrentMenu.WidthOffset, SettingsButton.Rectangle.Height)
 
                 if Hovered and not Selected then
-                    RageUI.RenderRectangle(RageUI.CurrentMenu.X, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Button.Rectangle.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Items.Button.Rectangle.Width + RageUI.CurrentMenu.WidthOffset, RageUI.Settings.Items.Button.Rectangle.Height, 255, 255, 255, 20)
-                    if RageUI.CurrentMenu.Controls.Click.Active then
-                        RageUI.CurrentMenu.Index = Option
+                    RageUI.RenderRectangle(CurrentMenu.X, CurrentMenu.Y + SettingsButton.Rectangle.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, SettingsButton.Rectangle.Width + CurrentMenu.WidthOffset, SettingsButton.Rectangle.Height, 255, 255, 255, 20)
+                    if CurrentMenu.Controls.Click.Active then
+                        CurrentMenu.Index = Option
                         RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.Error)
                     end
                 end
 
                 if Selected then
-                    RageUI.RenderSprite(RageUI.Settings.Items.Button.SelectedSprite.Dictionary, RageUI.Settings.Items.Button.SelectedSprite.Texture, RageUI.CurrentMenu.X, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Button.SelectedSprite.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Items.Button.SelectedSprite.Width + RageUI.CurrentMenu.WidthOffset, RageUI.Settings.Items.Button.SelectedSprite.Height)
-                    LeftArrowHovered = RageUI.IsMouseInBounds(RageUI.CurrentMenu.X + RageUI.Settings.Items.Slider.LeftArrow.X + RageUI.CurrentMenu.SafeZoneSize.X + RageUI.CurrentMenu.WidthOffset, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Slider.LeftArrow.Y + RageUI.CurrentMenu.SafeZoneSize.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Items.Slider.LeftArrow.Width, RageUI.Settings.Items.Slider.LeftArrow.Height)
-                    RightArrowHovered = RageUI.IsMouseInBounds(RageUI.CurrentMenu.X + RageUI.Settings.Items.Slider.RightArrow.X + RageUI.CurrentMenu.SafeZoneSize.X + RageUI.CurrentMenu.WidthOffset, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Slider.RightArrow.Y + RageUI.CurrentMenu.SafeZoneSize.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Items.Slider.RightArrow.Width, RageUI.Settings.Items.Slider.RightArrow.Height)
+                    RageUI.RenderSprite(SettingsButton.SelectedSprite.Dictionary, SettingsButton.SelectedSprite.Texture, CurrentMenu.X, CurrentMenu.Y + SettingsButton.SelectedSprite.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, SettingsButton.SelectedSprite.Width + CurrentMenu.WidthOffset, SettingsButton.SelectedSprite.Height)
+                    LeftArrowHovered = RageUI.IsMouseInBounds(CurrentMenu.X + SettingsSlider.LeftArrow.X + CurrentMenu.SafeZoneSize.X + CurrentMenu.WidthOffset, CurrentMenu.Y + SettingsSlider.LeftArrow.Y + CurrentMenu.SafeZoneSize.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, SettingsSlider.LeftArrow.Width, SettingsSlider.LeftArrow.Height)
+                    RightArrowHovered = RageUI.IsMouseInBounds(CurrentMenu.X + SettingsSlider.RightArrow.X + CurrentMenu.SafeZoneSize.X + CurrentMenu.WidthOffset, CurrentMenu.Y + SettingsSlider.RightArrow.Y + CurrentMenu.SafeZoneSize.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, SettingsSlider.RightArrow.Width, SettingsSlider.RightArrow.Height)
                 end
 
                 if Enabled == true or Enabled == nil then
                     if Selected then
-                        RageUI.RenderText(Label, RageUI.CurrentMenu.X + RageUI.Settings.Items.Button.Text.X, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Button.Text.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, 0, RageUI.Settings.Items.Button.Text.Scale, 0, 0, 0, 255)
+                        RageUI.RenderText(Label, CurrentMenu.X + SettingsButton.Text.X, CurrentMenu.Y + SettingsButton.Text.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, 0, SettingsButton.Text.Scale, 0, 0, 0, 255)
 
-                        RageUI.RenderSprite(RageUI.Settings.Items.Slider.LeftArrow.Dictionary, RageUI.Settings.Items.Slider.LeftArrow.Texture, RageUI.CurrentMenu.X + RageUI.Settings.Items.Slider.LeftArrow.X + RageUI.CurrentMenu.WidthOffset, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Slider.LeftArrow.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Items.Slider.LeftArrow.Width, RageUI.Settings.Items.Slider.LeftArrow.Height, 0, 0, 0, 0, 255)
-                        RageUI.RenderSprite(RageUI.Settings.Items.Slider.RightArrow.Dictionary, RageUI.Settings.Items.Slider.RightArrow.Texture, RageUI.CurrentMenu.X + RageUI.Settings.Items.Slider.RightArrow.X + RageUI.CurrentMenu.WidthOffset, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Slider.RightArrow.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Items.Slider.RightArrow.Width, RageUI.Settings.Items.Slider.RightArrow.Height, 0, 0, 0, 0, 255)
+                        RageUI.RenderSprite(SettingsSlider.LeftArrow.Dictionary, SettingsSlider.LeftArrow.Texture, CurrentMenu.X + SettingsSlider.LeftArrow.X + CurrentMenu.WidthOffset, CurrentMenu.Y + SettingsSlider.LeftArrow.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, SettingsSlider.LeftArrow.Width, SettingsSlider.LeftArrow.Height, 0, 0, 0, 0, 255)
+                        RageUI.RenderSprite(SettingsSlider.RightArrow.Dictionary, SettingsSlider.RightArrow.Texture, CurrentMenu.X + SettingsSlider.RightArrow.X + CurrentMenu.WidthOffset, CurrentMenu.Y + SettingsSlider.RightArrow.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, SettingsSlider.RightArrow.Width, SettingsSlider.RightArrow.Height, 0, 0, 0, 0, 255)
                     else
-                        RageUI.RenderText(Label, RageUI.CurrentMenu.X + RageUI.Settings.Items.Button.Text.X, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Button.Text.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, 0, RageUI.Settings.Items.Button.Text.Scale, 245, 245, 245, 255)
+                        RageUI.RenderText(Label, CurrentMenu.X + SettingsButton.Text.X, CurrentMenu.Y + SettingsButton.Text.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, 0, SettingsButton.Text.Scale, 245, 245, 245, 255)
                     end
                 else
-                    RageUI.RenderText(Label, RageUI.CurrentMenu.X + RageUI.Settings.Items.Button.Text.X, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Button.Text.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, 0, RageUI.Settings.Items.Button.Text.Scale, 163, 159, 148, 255)
+                    RageUI.RenderText(Label, CurrentMenu.X + SettingsButton.Text.X, CurrentMenu.Y + SettingsButton.Text.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, 0, SettingsButton.Text.Scale, 163, 159, 148, 255)
 
                     if Selected then
-                        RageUI.RenderSprite(RageUI.Settings.Items.Slider.LeftArrow.Dictionary, RageUI.Settings.Items.Slider.LeftArrow.Texture, RageUI.CurrentMenu.X + RageUI.Settings.Items.Slider.LeftArrow.X + RageUI.CurrentMenu.WidthOffset, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Slider.LeftArrow.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Items.Slider.LeftArrow.Width, RageUI.Settings.Items.Slider.LeftArrow.Height, 163, 159, 148, 255)
-                        RageUI.RenderSprite(RageUI.Settings.Items.Slider.RightArrow.Dictionary, RageUI.Settings.Items.Slider.RightArrow.Texture, RageUI.CurrentMenu.X + RageUI.Settings.Items.Slider.RightArrow.X + RageUI.CurrentMenu.WidthOffset, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Slider.RightArrow.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Items.Slider.RightArrow.Width, RageUI.Settings.Items.Slider.RightArrow.Height, 163, 159, 148, 255)
+                        RageUI.RenderSprite(SettingsSlider.LeftArrow.Dictionary, SettingsSlider.LeftArrow.Texture, CurrentMenu.X + SettingsSlider.LeftArrow.X + CurrentMenu.WidthOffset, CurrentMenu.Y + SettingsSlider.LeftArrow.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, SettingsSlider.LeftArrow.Width, SettingsSlider.LeftArrow.Height, 163, 159, 148, 255)
+                        RageUI.RenderSprite(SettingsSlider.RightArrow.Dictionary, SettingsSlider.RightArrow.Texture, CurrentMenu.X + SettingsSlider.RightArrow.X + CurrentMenu.WidthOffset, CurrentMenu.Y + SettingsSlider.RightArrow.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, SettingsSlider.RightArrow.Width, SettingsSlider.RightArrow.Height, 163, 159, 148, 255)
                     end
                 end
 
-                RageUI.RenderRectangle(RageUI.CurrentMenu.X + RageUI.Settings.Items.Slider.Background.X + RageUI.CurrentMenu.WidthOffset, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Slider.Background.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Items.Slider.Background.Width, RageUI.Settings.Items.Slider.Background.Height, 4, 32, 57, 255)
-                RageUI.RenderRectangle(RageUI.CurrentMenu.X + RageUI.Settings.Items.Slider.Slider.X + (((RageUI.Settings.Items.Slider.Background.Width - RageUI.Settings.Items.Slider.Slider.Width) / (#Items - 1)) * (ProgressStart - 1)) + RageUI.CurrentMenu.WidthOffset, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Slider.Slider.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Items.Slider.Slider.Width, RageUI.Settings.Items.Slider.Slider.Height, 57, 116, 200, 255)
+                RageUI.RenderRectangle(CurrentMenu.X + SettingsSlider.Background.X + CurrentMenu.WidthOffset, CurrentMenu.Y + SettingsSlider.Background.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, SettingsSlider.Background.Width, SettingsSlider.Background.Height, 4, 32, 57, 255)
+                RageUI.RenderRectangle(CurrentMenu.X + SettingsSlider.Slider.X + (((SettingsSlider.Background.Width - SettingsSlider.Slider.Width) / (#Items - 1)) * (ProgressStart - 1)) + CurrentMenu.WidthOffset, CurrentMenu.Y + SettingsSlider.Slider.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, SettingsSlider.Slider.Width, SettingsSlider.Slider.Height, 57, 116, 200, 255)
 
                 if Divider then
-                    RageUI.RenderRectangle(RageUI.CurrentMenu.X + RageUI.Settings.Items.Slider.Divider.X + RageUI.CurrentMenu.WidthOffset, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Slider.Divider.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Items.Slider.Divider.Width, RageUI.Settings.Items.Slider.Divider.Height, 245, 245, 245, 255)
+                    RageUI.RenderRectangle(CurrentMenu.X + SettingsSlider.Divider.X + CurrentMenu.WidthOffset, CurrentMenu.Y + SettingsSlider.Divider.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, SettingsSlider.Divider.Width, SettingsSlider.Divider.Height, 245, 245, 245, 255)
                 end
 
-                RageUI.ItemOffset = RageUI.ItemOffset + RageUI.Settings.Items.Button.Rectangle.Height
+                RageUI.ItemOffset = RageUI.ItemOffset + SettingsButton.Rectangle.Height
 
-                if Selected and RageUI.CurrentMenu.Description ~= Description then
-                    RageUI.CurrentMenu.Description = Description or nil
+                ItemsWrapper.ItemsDescription(CurrentMenu, Description, Selected);
 
-                    local DescriptionLineCount = RageUI.GetLineCount(RageUI.CurrentMenu.Description, RageUI.CurrentMenu.X + RageUI.Settings.Items.Description.Text.X, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Description.Text.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, 0, RageUI.Settings.Items.Description.Text.Scale, 255, 255, 255, 255, nil, false, false, RageUI.Settings.Items.Description.Background.Width + RageUI.CurrentMenu.WidthOffset)
-
-                    if DescriptionLineCount > 1 then
-                        RageUI.CurrentMenu.DescriptionHeight = RageUI.Settings.Items.Description.Background.Height * DescriptionLineCount
-                    else
-                        RageUI.CurrentMenu.DescriptionHeight = RageUI.Settings.Items.Description.Background.Height + 7
-                    end
-                end
-
-                if Selected and (RageUI.CurrentMenu.Controls.Left.Active or (RageUI.CurrentMenu.Controls.Click.Active and LeftArrowHovered)) and not (RageUI.CurrentMenu.Controls.Right.Active or (RageUI.CurrentMenu.Controls.Click.Active and RightArrowHovered)) then
+                if Selected and (CurrentMenu.Controls.Left.Active or (CurrentMenu.Controls.Click.Active and LeftArrowHovered)) and not (CurrentMenu.Controls.Right.Active or (CurrentMenu.Controls.Click.Active and RightArrowHovered)) then
                     ProgressStart = ProgressStart - 1
 
                     if ProgressStart < 1 then
@@ -104,7 +106,7 @@ function RageUI.Slider(Label, ProgressStart, ProgressMax, Description, Divider, 
                     end
 
                     RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.LeftRight)
-                elseif Selected and (RageUI.CurrentMenu.Controls.Right.Active or (RageUI.CurrentMenu.Controls.Click.Active and RightArrowHovered)) and not (RageUI.CurrentMenu.Controls.Left.Active or (RageUI.CurrentMenu.Controls.Click.Active and LeftArrowHovered)) then
+                elseif Selected and (CurrentMenu.Controls.Right.Active or (CurrentMenu.Controls.Click.Active and RightArrowHovered)) and not (CurrentMenu.Controls.Left.Active or (CurrentMenu.Controls.Click.Active and LeftArrowHovered)) then
                     ProgressStart = ProgressStart + 1
 
                     if ProgressStart > #Items then
@@ -114,11 +116,11 @@ function RageUI.Slider(Label, ProgressStart, ProgressMax, Description, Divider, 
                     RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.LeftRight)
                 end
 
-                if Selected and (RageUI.CurrentMenu.Controls.Select.Active or ((Hovered and RageUI.CurrentMenu.Controls.Click.Active) and (not LeftArrowHovered and not RightArrowHovered))) then
+                if Selected and (CurrentMenu.Controls.Select.Active or ((Hovered and CurrentMenu.Controls.Click.Active) and (not LeftArrowHovered and not RightArrowHovered))) then
                     RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.Select)
                 end
 
-                Callback(Hovered, Selected, ((RageUI.CurrentMenu.Controls.Select.Active or ((Hovered and RageUI.CurrentMenu.Controls.Click.Active) and (not LeftArrowHovered and not RightArrowHovered))) and Selected), ProgressStart)
+                Callback(Hovered, Selected, ((CurrentMenu.Controls.Select.Active or ((Hovered and CurrentMenu.Controls.Click.Active) and (not LeftArrowHovered and not RightArrowHovered))) and Selected), ProgressStart)
             end
 
             RageUI.Options = RageUI.Options + 1

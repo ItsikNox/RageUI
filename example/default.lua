@@ -11,6 +11,8 @@ Citizen.CreateThread(function()
 
     local progress_number = 1
 
+    local slider_number = 1
+
     while true do
         Citizen.Wait(1)
         if IsControlJustPressed(1, 51) then
@@ -41,8 +43,12 @@ Citizen.CreateThread(function()
                 quantity_number = Index
             end)
 
-            RageUI.Progress("Niveaux de seum", progress_number, 50, Description, true, true, function(Hovered, Selected, Active, Index)
+            RageUI.Progress("Niveaux de seum de pichot ", progress_number, 50, Description, true, true, function(Hovered, Selected, Active, Index)
                 progress_number = Index
+            end)
+
+            RageUI.Slider("Quantité", slider_number, 20, Description, false, true, function(Hovered, Selected, Active, Index)
+                slider_number = Index
             end)
 
             RageUI.Render()
