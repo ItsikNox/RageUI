@@ -223,6 +223,7 @@ RageUI.Settings = {
             "shop_box_crossb", -- 5
             "shop_box_cross", -- 6
         }, X = 380, Y = -6, Width = 50, Height = 50 },
+        -- TODO Remove button table after finish cleanup
         List = {
             LeftArrow = { Dictionary = "commonmenu", Texture = "arrowleft", X = 378, Y = 3, Width = 30, Height = 30 },
             RightArrow = { Dictionary = "commonmenu", Texture = "arrowright", X = 400, Y = 3, Width = 30, Height = 30 },
