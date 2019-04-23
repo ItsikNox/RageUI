@@ -7,6 +7,8 @@ Citizen.CreateThread(function()
 
     local checkbox_boolean = false
 
+    local quantity_number = 1
+
     while true do
         Citizen.Wait(1)
         if IsControlJustPressed(1, 51) then
@@ -28,6 +30,14 @@ Citizen.CreateThread(function()
                 checkbox_boolean = Checked
             end)
 
+            local list_table = {
+                {Name = "RageUI", Value = 1},
+                {Name = "iTexZoz", Value = 2},
+                {Name = "Parow", Value = 3},
+            }
+            RageUI.List("Projet & contributeur", list_table, quantity_number, Description, true, function(Hovered, Active, Selected, Index)
+                quantity_number = Index
+            end)
 
 
 

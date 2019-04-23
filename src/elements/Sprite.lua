@@ -20,5 +20,5 @@ function RageUI.RenderSprite(TextureDictionary, TextureName, X, Y, Width, Height
         RequestStreamedTextureDict(TextureDictionary, true)
     end
 
-    DrawSprite(TextureDictionary, TextureName, X + Width * 0.5, Y + Height * 0.5, Width, Height, Heading or 0, tonumber(R) or 255, tonumber(G) or 255, 255, tonumber(A) or 255)
+    DrawSprite(TextureDictionary, TextureName, X + Width * 0.5, Y + Height * 0.5, Width, Height, Heading or 0, tonumber(R) or 255, tonumber(G) or 255, tonumber(B) or 255, tonumber(A) or 255)
 end
