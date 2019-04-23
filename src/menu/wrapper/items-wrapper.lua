@@ -13,7 +13,7 @@ ItemsWrapper = {}
 ---@param Selected boolean
 ---@return nil
 ---@public
-function ItemsWrapper.ItemsDescription(CurrentMenu, Description, Selected)
+function ItemsWrapper.ItemsDescription(CurrentMenu, Description, Selected )
 
     ---@type table
     local SettingsDescription = RageUI.Settings.Items.Description;
