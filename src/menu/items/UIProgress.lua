@@ -16,6 +16,8 @@ local SettingsProgress = {
 
 ---Progress
 ---@param Label string
+---@param ProgressStart number
+---@param ProgressMax number
 ---@param Description string
 ---@param Counter number
 ---@param Enabled boolean

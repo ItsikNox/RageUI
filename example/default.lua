@@ -9,6 +9,8 @@ Citizen.CreateThread(function()
 
     local quantity_number = 1
 
+    local progress_number = 1
+
     while true do
         Citizen.Wait(1)
         if IsControlJustPressed(1, 51) then
@@ -39,7 +41,9 @@ Citizen.CreateThread(function()
                 quantity_number = Index
             end)
 
-
+            RageUI.Progress("Niveaux de seum", progress_number, 50, Description, true, true, function(Hovered, Selected, Active, Index)
+                progress_number = Index
+            end)
 
             RageUI.Render()
         elseif RageUI.Visible(subMenu) then
