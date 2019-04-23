@@ -236,6 +236,7 @@ RageUI.Settings = {
             LeftArrow = { Dictionary = "commonmenutu", Texture = "arrowleft", X = 235, Y = 11.5, Width = 15, Height = 15 },
             RightArrow = { Dictionary = "commonmenutu", Texture = "arrowright", X = 400, Y = 11.5, Width = 15, Height = 15 },
         },
+        -- TODO Remove button table after finish cleanup
         Progress = {
             Background = { X = 8, Y = 33, Width = 415, Height = 20 },
             Bar = { X = 11.75, Y = 36.75, Width = 407.5, Height = 12.5 },
