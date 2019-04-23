@@ -205,6 +205,7 @@ RageUI.Settings = {
             Background = { Dictionary = "commonmenu", Texture = "gradient_bgd", Y = 4, Width = 431, Height = 30 },
             Text = { X = 8, Y = 10, Scale = 0.35 },
         },
+        -- TODO Remove button table after finish cleanup
         Button = {
             Rectangle = { Y = 0, Width = 431, Height = 38 },
             Text = { X = 8, Y = 3, Scale = 0.33 },
@@ -213,6 +214,7 @@ RageUI.Settings = {
             RightText = { X = 420, Y = 4, Scale = 0.35 },
             SelectedSprite = { Dictionary = "commonmenu", Texture = "gradient_nav", Y = 0, Width = 431, Height = 38 },
         },
+        -- TODO Remove button table after finish cleanup
         Checkbox = { Dictionary = "commonmenu", Textures = {
             "shop_box_blankb", -- 1
             "shop_box_tickb", -- 2

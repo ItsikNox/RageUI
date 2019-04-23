@@ -33,24 +33,6 @@ function ItemsWrapper.ItemsDescription(CurrentMenu, Description, Selected )
     end
 end
 
----SelectedSound
----@param CurrentMenu table
----@param Hovered boolean
----@param Selected boolean
----@param Submenu table
----@return nil
----@public
-function ItemsWrapper.SelectedSound(CurrentMenu, Hovered, Selected, Submenu)
-    if Selected and (CurrentMenu.Controls.Select.Active or (Hovered and CurrentMenu.Controls.Click.Active)) then
-        RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.Select)
-        if Submenu ~= nil then
-            if Submenu() then
-                RageUI.NextMenu = Submenu
-            end
-        end
-    end
-end
-
 ---MouseBounds
 ---@param CurrentMenu table
 ---@param Selected boolean

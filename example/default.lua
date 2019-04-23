@@ -5,6 +5,8 @@ Citizen.CreateThread(function()
 
     local subMenu = RageUI.CreateSubMenu(mainMenu, "RageUI", "~b~ SHOWCASE RAGEUI - SUBMENU")
 
+    local checkbox_boolean = false
+
     while true do
         Citizen.Wait(1)
         if IsControlJustPressed(1, 51) then
@@ -16,21 +18,18 @@ Citizen.CreateThread(function()
             local Title = "Confirmé vous votre achat ? "
             local Description = "Sample description that takes more than one line. Moreso, it takes way more than two lines since it's so long. Wow, check out this length!"
 
-            RageUI.Button(Title, Description, {
-                LeftBadge = RageUI.BadgeStyle.Ammo,
-                RightBadge = RageUI.BadgeStyle.Gun,
-                RightLabel = "→→→"
-            }, true, function(Hovered, Active, Selected)
+            RageUI.Button(Title, Description, { LeftBadge = RageUI.BadgeStyle.Ammo, RightBadge = RageUI.BadgeStyle.Gun, RightLabel = "→→→" }, true, function(Hovered, Active, Selected)
                 if Selected then
                     Citizen.Trace("1")
                 end
             end)
 
-            RageUI.Checkbox("Activé ceci : ", Description, true, {
-                Style = RageUI.CheckboxStyle.Tick
-            }, function(Hovered, Selected, Active, Checked)
-
+            RageUI.Checkbox("Activé ceci : ", Description, checkbox_boolean, { Style = RageUI.CheckboxStyle.Tick }, function(Hovered, Selected, Active, Checked)
+                checkbox_boolean = Checked
             end)
+
+
+
 
             RageUI.Render()
         elseif RageUI.Visible(subMenu) then

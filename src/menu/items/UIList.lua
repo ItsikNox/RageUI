@@ -44,7 +44,6 @@ function RageUI.List(Label, Items, Index, Description, Enabled, Callback)
 
                 if Hovered and not Selected then
                     RageUI.RenderRectangle(RageUI.CurrentMenu.X, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Button.Rectangle.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Items.Button.Rectangle.Width + RageUI.CurrentMenu.WidthOffset, RageUI.Settings.Items.Button.Rectangle.Height, 255, 255, 255, 20)
-
                     if RageUI.CurrentMenu.Controls.Click.Active then
                         RageUI.CurrentMenu.Index = Option
                         RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.Error)

@@ -80,7 +80,15 @@ function RageUI.Button(Label, Description, Style, Enabled, Callback, Submenu)
 
                 Callback(Hovered, Selected, ((CurrentMenu.Controls.Select.Active or (Hovered and CurrentMenu.Controls.Click.Active)) and Selected))
 
-                ItemsWrapper.SelectedSound(CurrentMenu, Hovered, Selected, Submenu)
+                if Selected and (CurrentMenu.Controls.Select.Active or (Hovered and CurrentMenu.Controls.Click.Active)) then
+                    RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.Select)
+                    if Submenu ~= nil then
+                        if Submenu() then
+                            RageUI.NextMenu = Submenu
+                        end
+                    end
+                end
+
             end
             RageUI.Options = RageUI.Options + 1
         end
