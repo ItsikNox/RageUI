@@ -218,14 +218,6 @@ RageUI.Settings = {
                 Right = { X = 373.25, Y = 130, Scale = 0.35 },
             },
         },
-        Colour = {
-            Background = { Dictionary = "commonmenu", Texture = "gradient_bgd", Y = 4, Width = 431, Height = 112 },
-            LeftArrow = { Dictionary = "commonmenu", Texture = "arrowleft", X = 7.5, Y = 15, Width = 30, Height = 30 },
-            RightArrow = { Dictionary = "commonmenu", Texture = "arrowright", X = 393.5, Y = 15, Width = 30, Height = 30 },
-            Header = { X = 215.5, Y = 15, Scale = 0.35 },
-            Box = { X = 15, Y = 55, Width = 44.5, Height = 44.5 },
-            SelectedRectangle = { X = 15, Y = 47, Width = 44.5, Height = 8 },
-        },
         Percentage = {
             Background = { Dictionary = "commonmenu", Texture = "gradient_bgd", Y = 4, Width = 431, Height = 76 },
             Bar = { X = 9, Y = 50, Width = 413, Height = 10 },
@@ -433,10 +425,6 @@ end
 ---@return nil
 ---@public
 function RageUI.Render()
-    --TODO Settings Background, Navigatio, Description, and render
-    RageUI.Background();
-    RageUI.Navigation();
-    RageUI.Description();
     if RageUI.CurrentMenu ~= nil then
         if RageUI.CurrentMenu() then
 
