@@ -61,6 +61,7 @@ Citizen.CreateThread (function()
                 slider_number = Index
             end)
 
+            --[[
             RageUI.Button("~b~Ajout +1", "Ajouter 1 item", { RightBadge = RageUI.BadgeStyle.Tick, RightLabel = "+1" }, true, function(Hovered, Active, Selected)
                 if Selected then
                     interger = interger + 1
@@ -82,6 +83,7 @@ Citizen.CreateThread (function()
                     end)
                 end
             end
+            ]]--
 
             RageUI.Background();
             RageUI.Navigation();
@@ -90,7 +92,7 @@ Citizen.CreateThread (function()
         elseif RageUI.Visible(subMenu) then
             RageUI.Header();
 
-            for i = 1, 1000 do
+            for i = 1, 2500 do
                 RageUI.Button("UIButton - " .. i, Description, { }, true, function(Hovered, Active, Selected)
                     if Active then
                     end

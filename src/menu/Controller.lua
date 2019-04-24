@@ -126,39 +126,40 @@ function RageUI.Controls()
         if RageUI.CurrentMenu() then
             if RageUI.CurrentMenu.Open then
 
+                local Controls = RageUI.CurrentMenu.Controls;
                 ---@type number
                 local Options = RageUI.Options
 
                 DisableAllControlActions(2)
 
                 if not IsInputDisabled(2) then
-                    for Index = 1, #RageUI.CurrentMenu.Controls.Enabled.Controller do
-                        EnableControlAction(RageUI.CurrentMenu.Controls.Enabled.Controller[Index][1], RageUI.CurrentMenu.Controls.Enabled.Controller[Index][2], true)
+                    for Index = 1, #Controls.Enabled.Controller do
+                        EnableControlAction(Controls.Enabled.Controller[Index][1], Controls.Enabled.Controller[Index][2], true)
                     end
                 else
-                    for Index = 1, #RageUI.CurrentMenu.Controls.Enabled.Keyboard do
-                        EnableControlAction(RageUI.CurrentMenu.Controls.Enabled.Keyboard[Index][1], RageUI.CurrentMenu.Controls.Enabled.Keyboard[Index][2], true)
+                    for Index = 1, #Controls.Enabled.Keyboard do
+                        EnableControlAction(Controls.Enabled.Keyboard[Index][1], Controls.Enabled.Keyboard[Index][2], true)
                     end
                 end
 
-                if RageUI.CurrentMenu.Controls.Up.Enabled then
-                    for Index = 1, #RageUI.CurrentMenu.Controls.Up.Keys do
-                        if not RageUI.CurrentMenu.Controls.Up.Pressed then
-                            if IsDisabledControlJustPressed(RageUI.CurrentMenu.Controls.Up.Keys[Index][1], RageUI.CurrentMenu.Controls.Up.Keys[Index][2]) then
-                                RageUI.CurrentMenu.Controls.Up.Pressed = true
+                if Controls.Up.Enabled then
+                    for Index = 1, #Controls.Up.Keys do
+                        if not Controls.Up.Pressed then
+                            if IsDisabledControlJustPressed(Controls.Up.Keys[Index][1], Controls.Up.Keys[Index][2]) then
+                                Controls.Up.Pressed = true
 
                                 Citizen.CreateThread(function()
                                     RageUI.GoUp(Options)
 
                                     Citizen.Wait(175)
 
-                                    while RageUI.CurrentMenu.Controls.Up.Enabled and IsDisabledControlPressed(RageUI.CurrentMenu.Controls.Up.Keys[Index][1], RageUI.CurrentMenu.Controls.Up.Keys[Index][2]) do
+                                    while Controls.Up.Enabled and IsDisabledControlPressed(Controls.Up.Keys[Index][1], Controls.Up.Keys[Index][2]) do
                                         RageUI.GoUp(Options)
 
-                                        Citizen.Wait(125)
+                                        Citizen.Wait(100)
                                     end
 
-                                    RageUI.CurrentMenu.Controls.Up.Pressed = false
+                                    Controls.Up.Pressed = false
                                 end)
 
                                 break
@@ -167,24 +168,24 @@ function RageUI.Controls()
                     end
                 end
 
-                if RageUI.CurrentMenu.Controls.Down.Enabled then
-                    for Index = 1, #RageUI.CurrentMenu.Controls.Down.Keys do
-                        if not RageUI.CurrentMenu.Controls.Down.Pressed then
-                            if IsDisabledControlJustPressed(RageUI.CurrentMenu.Controls.Down.Keys[Index][1], RageUI.CurrentMenu.Controls.Down.Keys[Index][2]) then
-                                RageUI.CurrentMenu.Controls.Down.Pressed = true
+                if Controls.Down.Enabled then
+                    for Index = 1, #Controls.Down.Keys do
+                        if not Controls.Down.Pressed then
+                            if IsDisabledControlJustPressed(Controls.Down.Keys[Index][1], Controls.Down.Keys[Index][2]) then
+                                Controls.Down.Pressed = true
 
                                 Citizen.CreateThread(function()
                                     RageUI.GoDown(Options)
 
                                     Citizen.Wait(175)
 
-                                    while RageUI.CurrentMenu.Controls.Down.Enabled and IsDisabledControlPressed(RageUI.CurrentMenu.Controls.Down.Keys[Index][1], RageUI.CurrentMenu.Controls.Down.Keys[Index][2]) do
+                                    while Controls.Down.Enabled and IsDisabledControlPressed(Controls.Down.Keys[Index][1], Controls.Down.Keys[Index][2]) do
                                         RageUI.GoDown(Options)
 
-                                        Citizen.Wait(125)
+                                        Citizen.Wait(100)
                                     end
 
-                                    RageUI.CurrentMenu.Controls.Down.Pressed = false
+                                    Controls.Down.Pressed = false
                                 end)
 
                                 break
@@ -193,32 +194,32 @@ function RageUI.Controls()
                     end
                 end
 
-                if RageUI.CurrentMenu.Controls.Left.Enabled then
-                    for Index = 1, #RageUI.CurrentMenu.Controls.Left.Keys do
-                        if not RageUI.CurrentMenu.Controls.Left.Pressed then
-                            if IsDisabledControlJustPressed(RageUI.CurrentMenu.Controls.Left.Keys[Index][1], RageUI.CurrentMenu.Controls.Left.Keys[Index][2]) then
-                                RageUI.CurrentMenu.Controls.Left.Pressed = true
+                if Controls.Left.Enabled then
+                    for Index = 1, #Controls.Left.Keys do
+                        if not Controls.Left.Pressed then
+                            if IsDisabledControlJustPressed(Controls.Left.Keys[Index][1], Controls.Left.Keys[Index][2]) then
+                                Controls.Left.Pressed = true
 
                                 Citizen.CreateThread(function()
-                                    RageUI.CurrentMenu.Controls.Left.Active = true
+                                    Controls.Left.Active = true
 
                                     Citizen.Wait(0.01)
 
-                                    RageUI.CurrentMenu.Controls.Left.Active = false
+                                    Controls.Left.Active = false
 
                                     Citizen.Wait(174.99)
 
-                                    while RageUI.CurrentMenu.Controls.Left.Enabled and IsDisabledControlPressed(RageUI.CurrentMenu.Controls.Left.Keys[Index][1], RageUI.CurrentMenu.Controls.Left.Keys[Index][2]) do
-                                        RageUI.CurrentMenu.Controls.Left.Active = true
+                                    while Controls.Left.Enabled and IsDisabledControlPressed(Controls.Left.Keys[Index][1], Controls.Left.Keys[Index][2]) do
+                                        Controls.Left.Active = true
 
                                         Citizen.Wait(0.01)
 
-                                        RageUI.CurrentMenu.Controls.Left.Active = false
+                                        Controls.Left.Active = false
 
                                         Citizen.Wait(124.99)
                                     end
 
-                                    RageUI.CurrentMenu.Controls.Left.Pressed = false
+                                    Controls.Left.Pressed = false
                                 end)
 
                                 break
@@ -227,32 +228,32 @@ function RageUI.Controls()
                     end
                 end
 
-                if RageUI.CurrentMenu.Controls.Right.Enabled then
-                    for Index = 1, #RageUI.CurrentMenu.Controls.Right.Keys do
-                        if not RageUI.CurrentMenu.Controls.Right.Pressed then
-                            if IsDisabledControlJustPressed(RageUI.CurrentMenu.Controls.Right.Keys[Index][1], RageUI.CurrentMenu.Controls.Right.Keys[Index][2]) then
-                                RageUI.CurrentMenu.Controls.Right.Pressed = true
+                if Controls.Right.Enabled then
+                    for Index = 1, #Controls.Right.Keys do
+                        if not Controls.Right.Pressed then
+                            if IsDisabledControlJustPressed(Controls.Right.Keys[Index][1], Controls.Right.Keys[Index][2]) then
+                                Controls.Right.Pressed = true
 
                                 Citizen.CreateThread(function()
-                                    RageUI.CurrentMenu.Controls.Right.Active = true
+                                    Controls.Right.Active = true
 
                                     Citizen.Wait(0.01)
 
-                                    RageUI.CurrentMenu.Controls.Right.Active = false
+                                    Controls.Right.Active = false
 
                                     Citizen.Wait(174.99)
 
-                                    while RageUI.CurrentMenu.Controls.Right.Enabled and IsDisabledControlPressed(RageUI.CurrentMenu.Controls.Right.Keys[Index][1], RageUI.CurrentMenu.Controls.Right.Keys[Index][2]) do
-                                        RageUI.CurrentMenu.Controls.Right.Active = true
+                                    while Controls.Right.Enabled and IsDisabledControlPressed(Controls.Right.Keys[Index][1], Controls.Right.Keys[Index][2]) do
+                                        Controls.Right.Active = true
 
                                         Citizen.Wait(1)
 
-                                        RageUI.CurrentMenu.Controls.Right.Active = false
+                                        Controls.Right.Active = false
 
                                         Citizen.Wait(124.99)
                                     end
 
-                                    RageUI.CurrentMenu.Controls.Right.Pressed = false
+                                    Controls.Right.Pressed = false
                                 end)
 
                                 break
@@ -261,32 +262,32 @@ function RageUI.Controls()
                     end
                 end
 
-                if RageUI.CurrentMenu.Controls.Select.Enabled then
-                    for Index = 1, #RageUI.CurrentMenu.Controls.Select.Keys do
-                        if not RageUI.CurrentMenu.Controls.Select.Pressed then
-                            if IsDisabledControlJustPressed(RageUI.CurrentMenu.Controls.Select.Keys[Index][1], RageUI.CurrentMenu.Controls.Select.Keys[Index][2]) then
-                                RageUI.CurrentMenu.Controls.Select.Pressed = true
+                if Controls.Select.Enabled then
+                    for Index = 1, #Controls.Select.Keys do
+                        if not Controls.Select.Pressed then
+                            if IsDisabledControlJustPressed(Controls.Select.Keys[Index][1], Controls.Select.Keys[Index][2]) then
+                                Controls.Select.Pressed = true
 
                                 Citizen.CreateThread(function()
-                                    RageUI.CurrentMenu.Controls.Select.Active = true
+                                    Controls.Select.Active = true
 
                                     Citizen.Wait(0.01)
 
-                                    RageUI.CurrentMenu.Controls.Select.Active = false
+                                    Controls.Select.Active = false
 
                                     Citizen.Wait(174.99)
 
-                                    while RageUI.CurrentMenu.Controls.Select.Enabled and IsDisabledControlPressed(RageUI.CurrentMenu.Controls.Select.Keys[Index][1], RageUI.CurrentMenu.Controls.Select.Keys[Index][2]) do
-                                        RageUI.CurrentMenu.Controls.Select.Active = true
+                                    while Controls.Select.Enabled and IsDisabledControlPressed(Controls.Select.Keys[Index][1], Controls.Select.Keys[Index][2]) do
+                                        Controls.Select.Active = true
 
                                         Citizen.Wait(0.01)
 
-                                        RageUI.CurrentMenu.Controls.Select.Active = false
+                                        Controls.Select.Active = false
 
                                         Citizen.Wait(124.99)
                                     end
 
-                                    RageUI.CurrentMenu.Controls.Select.Pressed = false
+                                    Controls.Select.Pressed = false
                                 end)
 
                                 break
@@ -295,32 +296,32 @@ function RageUI.Controls()
                     end
                 end
 
-                if RageUI.CurrentMenu.Controls.Click.Enabled then
-                    for Index = 1, #RageUI.CurrentMenu.Controls.Click.Keys do
-                        if not RageUI.CurrentMenu.Controls.Click.Pressed then
-                            if IsDisabledControlJustPressed(RageUI.CurrentMenu.Controls.Click.Keys[Index][1], RageUI.CurrentMenu.Controls.Click.Keys[Index][2]) then
-                                RageUI.CurrentMenu.Controls.Click.Pressed = true
+                if Controls.Click.Enabled then
+                    for Index = 1, #Controls.Click.Keys do
+                        if not Controls.Click.Pressed then
+                            if IsDisabledControlJustPressed(Controls.Click.Keys[Index][1], Controls.Click.Keys[Index][2]) then
+                                Controls.Click.Pressed = true
 
                                 Citizen.CreateThread(function()
-                                    RageUI.CurrentMenu.Controls.Click.Active = true
+                                    Controls.Click.Active = true
 
                                     Citizen.Wait(0.01)
 
-                                    RageUI.CurrentMenu.Controls.Click.Active = false
+                                    Controls.Click.Active = false
 
                                     Citizen.Wait(174.99)
 
-                                    while RageUI.CurrentMenu.Controls.Click.Enabled and IsDisabledControlPressed(RageUI.CurrentMenu.Controls.Click.Keys[Index][1], RageUI.CurrentMenu.Controls.Click.Keys[Index][2]) do
-                                        RageUI.CurrentMenu.Controls.Click.Active = true
+                                    while Controls.Click.Enabled and IsDisabledControlPressed(Controls.Click.Keys[Index][1], Controls.Click.Keys[Index][2]) do
+                                        Controls.Click.Active = true
 
                                         Citizen.Wait(0.01)
 
-                                        RageUI.CurrentMenu.Controls.Click.Active = false
+                                        Controls.Click.Active = false
 
                                         Citizen.Wait(124.99)
                                     end
 
-                                    RageUI.CurrentMenu.Controls.Click.Pressed = false
+                                    Controls.Click.Pressed = false
                                 end)
 
                                 break
@@ -329,11 +330,11 @@ function RageUI.Controls()
                     end
                 end
 
-                if RageUI.CurrentMenu.Controls.Back.Enabled then
-                    for Index = 1, #RageUI.CurrentMenu.Controls.Back.Keys do
-                        if not RageUI.CurrentMenu.Controls.Back.Pressed then
-                            if IsDisabledControlJustPressed(RageUI.CurrentMenu.Controls.Back.Keys[Index][1], RageUI.CurrentMenu.Controls.Back.Keys[Index][2]) then
-                                RageUI.CurrentMenu.Controls.Back.Pressed = true
+                if Controls.Back.Enabled then
+                    for Index = 1, #Controls.Back.Keys do
+                        if not Controls.Back.Pressed then
+                            if IsDisabledControlJustPressed(Controls.Back.Keys[Index][1], Controls.Back.Keys[Index][2]) then
+                                Controls.Back.Pressed = true
                                 break
                             end
                         end
