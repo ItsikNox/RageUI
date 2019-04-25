@@ -88,9 +88,12 @@ function RageUI.Checkbox(Label, Description, Checked, Style, Callback)
 
                 ItemsWrapper.ItemsSafeZone(CurrentMenu)
 
-                ---@type boolean
-                local Hovered = ItemsWrapper.ItemsMouseBounds(CurrentMenu, Selected, Option, SettingsButton);
+                local Hovered = false;
 
+                ---@type boolean
+                if CurrentMenu.EnableMouse == true then
+                    Hovered = ItemsWrapper.ItemsMouseBounds(CurrentMenu, Selected, Option, SettingsButton);
+                end
                 if Selected then
                     RageUI.RenderSprite(SettingsButton.SelectedSprite.Dictionary, SettingsButton.SelectedSprite.Texture, CurrentMenu.X, CurrentMenu.Y + SettingsButton.SelectedSprite.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, SettingsButton.SelectedSprite.Width + CurrentMenu.WidthOffset, SettingsButton.SelectedSprite.Height)
                 end

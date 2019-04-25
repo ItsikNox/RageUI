@@ -45,8 +45,12 @@ function RageUI.List(Label, Items, Index, Description, Enabled, Callback)
 
                 ItemsWrapper.ItemsSafeZone(CurrentMenu)
 
+                local Hovered = false;
+
                 ---@type boolean
-                local Hovered = ItemsWrapper.ItemsMouseBounds(CurrentMenu, Selected, Option, SettingsButton);
+                if CurrentMenu.EnableMouse == true then
+                    Hovered = ItemsWrapper.ItemsMouseBounds(CurrentMenu, Selected, Option, SettingsButton);
+                end
 
                 local ListText = (type(Items[Index]) == "table") and tostring(Items[Index].Name) or tostring(Items[Index]) or "NIL"
                 local TextOffset = RageUI.MeasureStringWidth(ListText, 0, 0.35)

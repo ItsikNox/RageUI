@@ -230,7 +230,6 @@ RageUI.Settings = {
     },
 }
 
-
 ---PlaySound
 ---@param Library string
 ---@param Sound string
@@ -258,8 +257,6 @@ function RageUI.PlaySound(Library, Sound, IsLooped)
         end
     end
 end
-
-
 
 ---Visible
 ---@param Menu function
@@ -417,7 +414,6 @@ function RageUI.Description()
 end
 
 function RageUI.Header()
-    ShowCursorThisFrame()
     RageUI.Banner(true)
     RageUI.Subtitle()
 end

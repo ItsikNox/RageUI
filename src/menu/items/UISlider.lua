@@ -46,21 +46,15 @@ function RageUI.Slider(Label, ProgressStart, ProgressMax, Description, Divider, 
                 local Selected = CurrentMenu.Index == Option
 
                 ---@type boolean
-                local Hovered = false
-
-                ---@type boolean
                 local LeftArrowHovered, RightArrowHovered = false, false
 
                 ItemsWrapper.ItemsSafeZone(CurrentMenu)
 
-                Hovered = RageUI.IsMouseInBounds(CurrentMenu.X + CurrentMenu.SafeZoneSize.X, CurrentMenu.Y + SettingsButton.Rectangle.Y + CurrentMenu.SafeZoneSize.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, SettingsButton.Rectangle.Width + CurrentMenu.WidthOffset, SettingsButton.Rectangle.Height)
+                local Hovered = false;
 
-                if Hovered and not Selected then
-                    RageUI.RenderRectangle(CurrentMenu.X, CurrentMenu.Y + SettingsButton.Rectangle.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, SettingsButton.Rectangle.Width + CurrentMenu.WidthOffset, SettingsButton.Rectangle.Height, 255, 255, 255, 20)
-                    if CurrentMenu.Controls.Click.Active then
-                        CurrentMenu.Index = Option
-                        RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.Error)
-                    end
+                ---@type boolean
+                if CurrentMenu.EnableMouse == true then
+                    Hovered = ItemsWrapper.ItemsMouseBounds(CurrentMenu, Selected, Option, SettingsButton);
                 end
 
                 if Selected then

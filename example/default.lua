@@ -2,6 +2,7 @@ Citizen.CreateThread (function()
 
     local mainMenu = RageUI.CreateMenu("RageUI", "~b~SHOWCASE", 0, 0)
     mainMenu:SetSubtitle("~b~SHOWCASE - RAGEUI")
+    mainMenu.EnableMouse = true;
 
     local subMenu = RageUI.CreateSubMenu(mainMenu, "RageUI", "~b~ SHOWCASE RAGEUI - SUBMENU - 1")
 
@@ -32,11 +33,13 @@ Citizen.CreateThread (function()
         if RageUI.Visible(mainMenu) then
             RageUI.Header();
 
-            RageUI.Button("Panels", Description, { LeftBadge = RageUI.BadgeStyle.Gun, RightBadge = RageUI.BadgeStyle.Heart, RightLabel = "→→→" }, true, function(Hovered, Active, Selected)
-                if Selected then
+            for i = 1, 50 do
+                RageUI.Button("Panels", Description, { LeftBadge = RageUI.BadgeStyle.Gun, RightBadge = RageUI.BadgeStyle.Heart, RightLabel = "→→→" }, true, function(Hovered, Active, Selected)
+                    if Selected then
 
-                end
-            end, subMenu)
+                    end
+                end, subMenu)
+            end
 
             RageUI.Checkbox("Activé ceci : ", Description, checkbox_boolean, { Style = RageUI.CheckboxStyle.Tick }, function(Hovered, Selected, Active, Checked)
                 checkbox_boolean = Checked

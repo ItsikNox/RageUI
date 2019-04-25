@@ -41,6 +41,7 @@ function RageUI.CreateSubMenu(ParentMenu, Title, Subtitle, X, Y, TextureDictiona
             Menu.Pagination = { Minimum = 1, Maximum = 10, Total = 10 }
             Menu.Safezone = ParentMenu.Safezone
             Menu.SafeZoneSize = nil
+            Menu.EnableMouse = false
             Menu.Options = 0
 
             if string.starts(Menu.Subtitle, "~") then
