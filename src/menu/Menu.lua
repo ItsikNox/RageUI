@@ -122,6 +122,16 @@ end
 function RageUI.Menus:SetPageCounter(Subtitle)
     self.PageCounter = Subtitle
 end
+
+---EditSpriteColor
+---@param Colors table
+---@return nil
+---@public
+function RageUI.Menus:EditSpriteColor(color)
+    if self.Sprite.Dictionary == "commonmenu" then
+        self.Sprite.Color = color
+    end
+end
 ---SetPosition
 ---@param X number
 ---@param Y number
