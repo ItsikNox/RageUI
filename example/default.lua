@@ -3,7 +3,7 @@ Citizen.CreateThread (function()
     local mainMenu = RageUI.CreateMenu("RageUI", "~b~SHOWCASE", 0, 0)
     mainMenu.Closed = function()
 		Citizen.Trace("main menu closed")
-	end
+    end
     mainMenu:SetSubtitle("~b~SHOWCASE - RAGEUI")
     mainMenu.EnableMouse = true;
 
