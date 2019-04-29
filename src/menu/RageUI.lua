@@ -440,7 +440,9 @@ function RageUI.Render()
                 RageUI.CurrentMenu.Controls.Back.Pressed = false
 
                 RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.Back)
-
+                if RageUI.CurrentMenu.Closed ~= nil then
+                    RageUI.CurrentMenu.Closed()
+                end
                 if RageUI.CurrentMenu.Parent ~= nil then
                     if RageUI.CurrentMenu.Parent() then
                         RageUI.NextMenu = RageUI.CurrentMenu.Parent
