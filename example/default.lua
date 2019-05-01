@@ -1,3 +1,4 @@
+
 Citizen.CreateThread (function()
 
     local mainMenu = RageUI.CreateMenu("RageUI", "~b~SHOWCASE", 0, 0)
@@ -25,6 +26,7 @@ Citizen.CreateThread (function()
 
     local percentage_float = 0.5
 
+    Grid1x5X = 0
     local grid_5x5 = { X = 0.5, Y = 0.5 }
 
     local interger = 0
@@ -73,13 +75,11 @@ Citizen.CreateThread (function()
                     interger = interger + 1
                 end
             end)
-
             RageUI.Button("~r~Suppression", "Delete 1 item", { RightBadge = RageUI.BadgeStyle.Alert, RightLabel = "-1" }, true, function(Hovered, Active, Selected)
                 if Selected then
                     interger = interger - 1
                 end
             end)
-
             if interger ~= 0 then
                 for i = 1, interger do
                     RageUI.Button("Item - N°"..i, "Mise a jour en temps reel du menu.", {}, true, function(Hovered, Active, Selected)
@@ -117,7 +117,11 @@ Citizen.CreateThread (function()
             end)
 
             RageUI.Button("1x5 Grid Panel", Description, { }, true, function(Hovered, Active, Selected)
-                if Selected then
+                if Active then
+                    RageUI.GridPanel1x5(Grid1x5X,"TopText","LeftText","RightText",function(Hovered,Active,X)
+                        Grid1x5X = X
+                        
+                    end)
                 end
             end)
 
@@ -125,6 +129,9 @@ Citizen.CreateThread (function()
                 if Selected then
                 end
             end)
+
+
+
 
             RageUI.Background();
             RageUI.Navigation();
@@ -168,11 +175,4 @@ Citizen.CreateThread (function()
     end
 
 end)
-
-
-
-
-
-
-
 
