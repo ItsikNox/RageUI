@@ -144,9 +144,9 @@ Citizen.CreateThread(function()
                        ]]
 
 
-                    RageUI.GridPanelVertical(GridPanelVertical, "TopText", "ddd", function(Hovered, Active, Y)
-                        GridPanelVertical = Y
-                    end)
+            RageUI.GridPanelVertical(GridPanelVertical, "TopText", "ddd", function(Hovered, Active, Y)
+                GridPanelVertical = Y
+            end)
 
 
             --[[
