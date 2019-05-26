@@ -27,7 +27,7 @@ Citizen.CreateThread(function()
 
     local percentage_float = 0.5
 
-    Grid1x5X = 0
+    Grid1x5X = 0.5
     local grid_5x5 = { X = 0.5, Y = 0.5 }
 
     local interger = 0
