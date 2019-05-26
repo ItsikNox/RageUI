@@ -29,6 +29,9 @@ Citizen.CreateThread(function()
     local percentage_float = 0.5
 
     Grid1x5X = 0.5
+
+    GridPanelVertical = 0.5
+
     local grid_5x5 = { X = 0.5, Y = 0.5 }
 
     local interger = 0
@@ -134,9 +137,16 @@ Citizen.CreateThread(function()
 
             -- Panel
 
-            RageUI.GridPanelHorizontal(Grid1x5X, "TopText", "ddd","LeftText", "RightText", function(Hovered, Active, X)
-                Grid1x5X = X
+
+            RageUI.GridPanelHorizontal(Grid1x5X, "TopText", "ddd","LeftText", "RightText", function(Hovered, Active, Y)
+                Grid1x5X = Y
             end)
+
+            --[[
+                    RageUI.GridPanelVertical(GridPanelVertical, "TopText", "ddd", function(Hovered, Active, Y)
+                        GridPanelVertical = Y
+                    end)
+                    ]]
 
             --[[
             RageUI.ColourPanel("Colour", RageUI.HaircutColorsPanel, colour_table[1], colour_table[2], function(Hovered, Active, MinimumIndex, CurrentIndex)

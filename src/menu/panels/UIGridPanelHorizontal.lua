@@ -3,7 +3,6 @@ local GridPanelHorizontal = {
     Grid = { Dictionary = "NativeUI", Texture = "horizontal_grid", X = 115.5, Y = 47.5, Width = 200, Height = 200 },
     Circle = { Dictionary = "mpinventory", Texture = "in_world_circle", X = 115.5, Y = 47.5, Width = 20, Height = 20 },
     Text = {
-        Top = { X = 215.5, Y = 15, Scale = 0.35 },
         Left = { X = 57.75, Y = 130, Scale = 0.35 },
         Right = { X = 373.25, Y = 130, Scale = 0.35 },
     },
@@ -35,7 +34,6 @@ function RageUI.GridPanelHorizontal(X, TopText, BottomText, LeftText, RightText,
             ---@type number
             local CircleY = CurrentMenu.Y + GridPanelHorizontal.Grid.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset + 20
 
-
             if X < 0.0 or X > 1.0 then
                 X = 0.0
             end
@@ -49,8 +47,6 @@ function RageUI.GridPanelHorizontal(X, TopText, BottomText, LeftText, RightText,
             RageUI.RenderSprite(GridPanelHorizontal.Grid.Dictionary, GridPanelHorizontal.Grid.Texture, CurrentMenu.X + GridPanelHorizontal.Grid.X + (CurrentMenu.WidthOffset / 2), CurrentMenu.Y + GridPanelHorizontal.Grid.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, GridPanelHorizontal.Grid.Width, GridPanelHorizontal.Grid.Height)
             RageUI.RenderSprite(GridPanelHorizontal.Circle.Dictionary, GridPanelHorizontal.Circle.Texture, CircleX, CircleY, GridPanelHorizontal.Circle.Width, GridPanelHorizontal.Circle.Height)
 
-            RageUI.RenderText(TopText or "", CurrentMenu.X + GridPanelHorizontal.Text.Top.X + (CurrentMenu.WidthOffset / 2), CurrentMenu.Y + GridPanelHorizontal.Text.Top.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, 0, GridPanelHorizontal.Text.Top.Scale, 245, 245, 245, 255, 1)
-            RageUI.RenderText(BottomText or "", CurrentMenu.X + RageUI.Settings.Panels.Grid.Text.Bottom.X + (CurrentMenu.WidthOffset / 2), CurrentMenu.Y + RageUI.Settings.Panels.Grid.Text.Bottom.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, 0, RageUI.Settings.Panels.Grid.Text.Bottom.Scale, 245, 245, 245, 255, 1)
             RageUI.RenderText(LeftText or "", CurrentMenu.X + GridPanelHorizontal.Text.Left.X + (CurrentMenu.WidthOffset / 2), CurrentMenu.Y + GridPanelHorizontal.Text.Left.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, 0, GridPanelHorizontal.Text.Left.Scale, 245, 245, 245, 255, 1)
             RageUI.RenderText(RightText or "", CurrentMenu.X + GridPanelHorizontal.Text.Right.X + (CurrentMenu.WidthOffset / 2), CurrentMenu.Y + GridPanelHorizontal.Text.Right.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, 0, GridPanelHorizontal.Text.Right.Scale, 245, 245, 245, 255, 1)
 
