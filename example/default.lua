@@ -1,16 +1,17 @@
-
-Citizen.CreateThread (function()
+Citizen.CreateThread(function()
 
     local mainMenu = RageUI.CreateMenu("RageUI", "~b~SHOWCASE", 0, 0)
     mainMenu.Closed = function()
-	Citizen.Trace("main menu closed")
+        Citizen.Trace("main menu closed")
     end
     mainMenu:SetSubtitle("~b~SHOWCASE - RAGEUI")
     mainMenu.EnableMouse = true;
 
     local subMenu = RageUI.CreateSubMenu(mainMenu, "RageUI", "~b~ SHOWCASE RAGEUI - SUBMENU - 1")
+    subMenu.EnableMouse = true;
 
     local subMenuToSubMenu = RageUI.CreateSubMenu(mainMenu, "RageUI", "~b~ SHOWCASE RAGEUI - SUBMENU - 2")
+    subMenuToSubMenu.EnableMouse = true;
 
     local Description = "Sample description that takes more than one line. Moreso, it takes way more than two lines since it's so long. Wow, check out this length!"
 
@@ -118,10 +119,6 @@ Citizen.CreateThread (function()
 
             RageUI.Button("1x5 Grid Panel", Description, { }, true, function(Hovered, Active, Selected)
                 if Active then
-                    RageUI.GridPanel1x5(Grid1x5X,"TopText","LeftText","RightText",function(Hovered,Active,X)
-                        Grid1x5X = X
-                        
-                    end)
                 end
             end)
 
@@ -130,15 +127,17 @@ Citizen.CreateThread (function()
                 end
             end)
 
-
-
-
             RageUI.Background();
             RageUI.Navigation();
             RageUI.Description();
 
             -- Panel
 
+            RageUI.GridPanelHorizontal(Grid1x5X, "TopText", "ddd","LeftText", "RightText", function(Hovered, Active, X)
+                Grid1x5X = X
+            end)
+
+            --[[
             RageUI.ColourPanel("Colour", RageUI.HaircutColorsPanel, colour_table[1], colour_table[2], function(Hovered, Active, MinimumIndex, CurrentIndex)
                 colour_table[1] = MinimumIndex
                 colour_table[2] = CurrentIndex
@@ -152,7 +151,7 @@ Citizen.CreateThread (function()
                 grid_5x5.X = X
                 grid_5x5.Y = Y
             end)
-
+            ]]
             RageUI.Render()
         elseif RageUI.Visible(subMenuToSubMenu) then
 

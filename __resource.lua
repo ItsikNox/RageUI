@@ -27,7 +27,6 @@ client_scripts {
     "src/menu/panels/UIGridPanelHorizontal.lua",
     "src/menu/panels/UIGridPanelVertical.lua",
     "src/menu/panels/UIPercentagePanel.lua",
-    "src/menu/panels/UIGridPanel1x5.lua",
     "src/menu/windows/UIHeritage.lua",
 
     "example/default.lua",
