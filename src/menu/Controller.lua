@@ -130,7 +130,9 @@ function RageUI.Controls()
                 ---@type number
                 local Options = RageUI.Options
 
-                DisableAllControlActions(2)
+                if RageUI.CurrentMenu.EnableMouse then
+                    DisableAllControlActions(2)
+                end
 
                 if not IsInputDisabled(2) then
                     for Index = 1, #Controls.Enabled.Controller do
