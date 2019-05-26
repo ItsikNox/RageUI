@@ -43,13 +43,23 @@ Citizen.CreateThread(function()
         if RageUI.Visible(mainMenu) then
             RageUI.Header();
 
-            for i = 1, 50 do
+            for i = 1, 1 do
                 RageUI.Button("Panels", Description, { LeftBadge = RageUI.BadgeStyle.Gun, RightBadge = RageUI.BadgeStyle.Heart, RightLabel = "→→→" }, true, function(Hovered, Active, Selected)
                     if Selected then
 
                     end
                 end, subMenu)
             end
+
+            RageUI.Button("Scalefrom", Description, {}, true, function(Hovered, Active, Selected)
+                if Selected then
+                    RageUI.AddInstructionButton({
+                        [1] = GetControlInstructionalButton(2, 177, 0),
+                        [2] = "Dylan Malandain"
+                    })
+                    RageUI.UpdateScaleform(true)
+                end
+            end)
 
             RageUI.Checkbox("Activé ceci : ", Description, checkbox_boolean, { Style = RageUI.CheckboxStyle.Tick }, function(Hovered, Selected, Active, Checked)
                 checkbox_boolean = Checked
@@ -138,16 +148,14 @@ Citizen.CreateThread(function()
             -- Panel
 
             --[[
-                       RageUI.GridPanelHorizontal(Grid1x5X, "TopText", "ddd","LeftText", "RightText", function(Hovered, Active, Y)
-                           Grid1x5X = Y
-                       end)
-                       ]]
-
+            RageUI.GridPanelHorizontal(Grid1x5X, "TopText", "ddd","LeftText", "RightText", function(Hovered, Active, Y)
+                Grid1x5X = Y
+            end)
 
             RageUI.GridPanelVertical(GridPanelVertical, "TopText", "ddd", function(Hovered, Active, Y)
                 GridPanelVertical = Y
             end)
-
+              ]]
 
             --[[
             RageUI.ColourPanel("Colour", RageUI.HaircutColorsPanel, colour_table[1], colour_table[2], function(Hovered, Active, MinimumIndex, CurrentIndex)

@@ -58,6 +58,9 @@ RageUI.ItemOffset = 0
 
 ---@type table
 RageUI.Settings = {
+    InstructionalButtons = true,
+    InstructionalScaleform = RequestScaleformMovie("INSTRUCTIONAL_BUTTONS"),
+    InstructionalButtons = {},
     Controls = {
         Up = {
             Enabled = true,
@@ -231,6 +234,82 @@ RageUI.Settings = {
     },
 }
 
+function RageUI.AddInstructionButton(button)
+    if type(button) == "table" and #button == 2 then
+        table.insert(RageUI.Settings.InstructionalButtons, button)
+    end
+end
+
+function RageUI.RemoveInstructionButton(button)
+    local Settings = RageUI.Settings
+    if type(button) == "table" then
+        for i = 1, #Settings.InstructionalButtons do
+            if button == Settings.InstructionalButtons[i] then
+                table.remove(Settings.InstructionalButtons, i)
+                break
+            end
+        end
+    else
+        if tonumber(button) then
+            if Settings.InstructionalButtons[tonumber(button)] then
+                table.remove(Settings.InstructionalButtons, tonumber(button))
+            end
+        end
+    end
+end
+
+function RageUI.UpdateScaleform(Visible)
+    local Settings = RageUI.Settings
+
+
+    if not Visible or not Settings.InstructionalButtons then
+        return
+    end
+
+    PushScaleformMovieFunction(Settings.InstructionalScaleform, "CLEAR_ALL")
+    PopScaleformMovieFunction()
+
+    PushScaleformMovieFunction(Settings.InstructionalScaleform, "TOGGLE_MOUSE_BUTTONS")
+    PushScaleformMovieFunctionParameterInt(0)
+    PopScaleformMovieFunction()
+
+    PushScaleformMovieFunction(Settings.InstructionalScaleform, "CREATE_CONTAINER")
+    PopScaleformMovieFunction()
+
+    PushScaleformMovieFunction(Settings.InstructionalScaleform, "SET_DATA_SLOT")
+    PushScaleformMovieFunctionParameterInt(0)
+    PushScaleformMovieMethodParameterButtonName(GetControlInstructionalButton(2, 176, 0))
+    PushScaleformMovieFunctionParameterString(GetLabelText("HUD_INPUT2"))
+    PopScaleformMovieFunction()
+
+    if Settings.Controls.Back.Enabled then
+        PushScaleformMovieFunction(Settings.InstructionalScaleform, "SET_DATA_SLOT")
+        PushScaleformMovieFunctionParameterInt(1)
+        PushScaleformMovieMethodParameterButtonName(GetControlInstructionalButton(2, 177, 0))
+        PushScaleformMovieFunctionParameterString(GetLabelText("HUD_INPUT3"))
+        PopScaleformMovieFunction()
+    end
+
+    local count = 2
+
+    for i = 1, #Settings.InstructionalButtons do
+        if Settings.InstructionalButtons[i] then
+            if #Settings.InstructionalButtons[i] == 2 then
+                PushScaleformMovieFunction(Settings.InstructionalScaleform, "SET_DATA_SLOT")
+                PushScaleformMovieFunctionParameterInt(count)
+                PushScaleformMovieMethodParameterButtonName(Settings.InstructionalButtons[i][1])
+                PushScaleformMovieFunctionParameterString(Settings.InstructionalButtons[i][2])
+                PopScaleformMovieFunction()
+                count = count + 1
+            end
+        end
+    end
+
+    PushScaleformMovieFunction(Settings.InstructionalScaleform, "DRAW_INSTRUCTIONAL_BUTTONS")
+    PushScaleformMovieFunctionParameterInt(-1)
+    PopScaleformMovieFunction()
+end
+
 ---PlaySound
 ---@param Library string
 ---@param Sound string
@@ -268,6 +347,7 @@ function RageUI.Visible(Menu, Value)
     if Menu ~= nil then
         if Menu() then
             if type(Value) == "boolean" then
+                RageUI.UpdateScaleform(Value);
                 Menu.Open = Value
                 if Menu.Open then
                     RageUI.CurrentMenu = Menu
@@ -306,7 +386,7 @@ function RageUI.Banner(Enabled)
                     end
 
                     if RageUI.CurrentMenu.Sprite then
-                        RageUI.RenderSprite(RageUI.CurrentMenu.Sprite.Dictionary, RageUI.CurrentMenu.Sprite.Texture, RageUI.CurrentMenu.X, RageUI.CurrentMenu.Y, RageUI.Settings.Items.Title.Background.Width + RageUI.CurrentMenu.WidthOffset, RageUI.Settings.Items.Title.Background.Height,nil,RageUI.CurrentMenu.Sprite.Color.R,RageUI.CurrentMenu.Sprite.Color.G,RageUI.CurrentMenu.Sprite.Color.B,RageUI.CurrentMenu.Sprite.Color.A)
+                        RageUI.RenderSprite(RageUI.CurrentMenu.Sprite.Dictionary, RageUI.CurrentMenu.Sprite.Texture, RageUI.CurrentMenu.X, RageUI.CurrentMenu.Y, RageUI.Settings.Items.Title.Background.Width + RageUI.CurrentMenu.WidthOffset, RageUI.Settings.Items.Title.Background.Height, nil, RageUI.CurrentMenu.Sprite.Color.R, RageUI.CurrentMenu.Sprite.Color.G, RageUI.CurrentMenu.Sprite.Color.B, RageUI.CurrentMenu.Sprite.Color.A)
                     else
                         RageUI.RenderRectangle(RageUI.CurrentMenu.X, RageUI.CurrentMenu.Y, RageUI.Settings.Items.Title.Background.Width + RageUI.CurrentMenu.WidthOffset, RageUI.Settings.Items.Title.Background.Height, RageUI.CurrentMenu.Rectangle.R, RageUI.CurrentMenu.Rectangle.G, RageUI.CurrentMenu.Rectangle.B, RageUI.CurrentMenu.Rectangle.A)
                     end
@@ -421,21 +501,21 @@ end
 ---GoBack
 ---@return nil
 ---@public
-function RageUI.GoBack()	
-    if RageUI.CurrentMenu ~= nil then	
-        RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.Back)	
-         if RageUI.CurrentMenu.Parent ~= nil then	
-            if RageUI.CurrentMenu.Parent() then	
-                RageUI.NextMenu = RageUI.CurrentMenu.Parent	
-            else	
-                RageUI.NextMenu = nil	
-                RageUI.Visible(RageUI.CurrentMenu, false)	
-            end	
-        else	
-            RageUI.NextMenu = nil	
-            RageUI.Visible(RageUI.CurrentMenu, false)	
-        end	
-    end	
+function RageUI.GoBack()
+    if RageUI.CurrentMenu ~= nil then
+        RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.Back)
+        if RageUI.CurrentMenu.Parent ~= nil then
+            if RageUI.CurrentMenu.Parent() then
+                RageUI.NextMenu = RageUI.CurrentMenu.Parent
+            else
+                RageUI.NextMenu = nil
+                RageUI.Visible(RageUI.CurrentMenu, false)
+            end
+        else
+            RageUI.NextMenu = nil
+            RageUI.Visible(RageUI.CurrentMenu, false)
+        end
+    end
 end
 ---Render
 ---@return nil
@@ -443,6 +523,10 @@ end
 function RageUI.Render()
     if RageUI.CurrentMenu ~= nil then
         if RageUI.CurrentMenu() then
+
+            if RageUI.Settings.InstructionalButtons then
+                DrawScaleformMovieFullscreen(RageUI.Settings.InstructionalScaleform, 255, 255, 255, 255, 0)
+            end
 
             if RageUI.CurrentMenu.Safezone then
                 ScreenDrawPositionEnd()
