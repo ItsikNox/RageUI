@@ -1,6 +1,6 @@
 Citizen.CreateThread(function()
 
-    local mainMenu = RageUI.CreateMenu("RageUI", "~b~SHOWCASE", 1920/2 - (431/4) - 100, 0)
+    local mainMenu = RageUI.CreateMenu("RageUI", "~b~SHOWCASE", 1920 / 2 - (431 / 4) - 100, 0)
     mainMenu.Closed = function()
         Citizen.Trace("main menu closed")
     end
@@ -137,16 +137,17 @@ Citizen.CreateThread(function()
 
             -- Panel
 
-
-            RageUI.GridPanelHorizontal(Grid1x5X, "TopText", "ddd","LeftText", "RightText", function(Hovered, Active, Y)
-                Grid1x5X = Y
-            end)
-
             --[[
+                       RageUI.GridPanelHorizontal(Grid1x5X, "TopText", "ddd","LeftText", "RightText", function(Hovered, Active, Y)
+                           Grid1x5X = Y
+                       end)
+                       ]]
+
+
                     RageUI.GridPanelVertical(GridPanelVertical, "TopText", "ddd", function(Hovered, Active, Y)
                         GridPanelVertical = Y
                     end)
-                    ]]
+
 
             --[[
             RageUI.ColourPanel("Colour", RageUI.HaircutColorsPanel, colour_table[1], colour_table[2], function(Hovered, Active, MinimumIndex, CurrentIndex)
