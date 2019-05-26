@@ -417,6 +417,25 @@ function RageUI.Header()
     RageUI.Banner(true)
     RageUI.Subtitle()
 end
+---GoBack
+---@return nil
+---@public
+function RageUI.GoBack()	
+    if RageUI.CurrentMenu ~= nil then	
+        RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.Back)	
+         if RageUI.CurrentMenu.Parent ~= nil then	
+            if RageUI.CurrentMenu.Parent() then	
+                RageUI.NextMenu = RageUI.CurrentMenu.Parent	
+            else	
+                RageUI.NextMenu = nil	
+                RageUI.Visible(RageUI.CurrentMenu, false)	
+            end	
+        else	
+            RageUI.NextMenu = nil	
+            RageUI.Visible(RageUI.CurrentMenu, false)	
+        end	
+    end	
+end
 ---Render
 ---@return nil
 ---@public
