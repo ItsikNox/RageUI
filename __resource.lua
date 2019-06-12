@@ -7,15 +7,15 @@ client_scripts {
     "src/menu/Submenu.lua",
     "src/menu/Controller.lua",
 
-    "src/elements/Badge.lua",
     "src/elements/Rectangle.lua",
     "src/elements/Sprite.lua",
     "src/elements/Text.lua",
-    "src/elements/ColourPanel.lua",
     "src/elements/Visual.lua",
 
     "src/menu/wrapper/items-wrapper.lua",
 
+    "src/menu/elements/Badge.lua",
+    "src/menu/elements/ColourPanel.lua",
     "src/menu/items/UIButton.lua",
     "src/menu/items/UICheckBox.lua",
     "src/menu/items/UIList.lua",
@@ -29,5 +29,6 @@ client_scripts {
     "src/menu/panels/UIPercentagePanel.lua",
     "src/menu/windows/UIHeritage.lua",
 
-    "example/default.lua",
+    "tests/menu/default.lua",
+    "tests/location/default.lua",
 }

@@ -237,6 +237,7 @@ RageUI.Settings = {
 function RageUI.AddInstructionButton(button)
     if type(button) == "table" and #button == 2 then
         table.insert(RageUI.Settings.InstructionalButtons, button)
+        RageUI.UpdateScaleform(true)
     end
 end
 
@@ -246,6 +247,7 @@ function RageUI.RemoveInstructionButton(button)
         for i = 1, #Settings.InstructionalButtons do
             if button == Settings.InstructionalButtons[i] then
                 table.remove(Settings.InstructionalButtons, i)
+                RageUI.UpdateScaleform(true)
                 break
             end
         end
@@ -253,6 +255,7 @@ function RageUI.RemoveInstructionButton(button)
         if tonumber(button) then
             if Settings.InstructionalButtons[tonumber(button)] then
                 table.remove(Settings.InstructionalButtons, tonumber(button))
+                RageUI.UpdateScaleform(true)
             end
         end
     end

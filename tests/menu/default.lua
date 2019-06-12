@@ -57,7 +57,6 @@ Citizen.CreateThread(function()
                         [1] = GetControlInstructionalButton(2, 177, 0),
                         [2] = "Dylan Malandain"
                     })
-                    RageUI.UpdateScaleform(true)
                 end
             end)
 
@@ -195,3 +194,140 @@ Citizen.CreateThread(function()
 
 end)
 
+--[[
+Citizen.CreateThread(function()
+    while true do
+        Citizen.Wait(1)
+
+        local ColorPanelScaleform = RequestScaleformMovie("COLOUR_SWITCHER_02")
+        BeginScaleformMovieMethod(ColorPanelScaleform, "SET_TITLE");
+        PushScaleformMovieMethodParameterString("Opacity");
+        BeginTextCommandScaleformString("FACE_COLOUR");
+        AddTextComponentInteger (1);
+        AddTextComponentInteger(1);
+        EndTextCommandScaleformString();
+        ScaleformMovieMethodAddParamInt(0);
+        ScaleformMovieMethodAddParamBool(true);
+        EndScaleformMovieMethod();
+
+        BeginScaleformMovieMethod(ColorPanelScaleform, "SET_DATA_SLOT_EMPTY");
+        EndScaleformMovieMethod();
+
+        --for (int i = 0; i < 64; i++)
+        --{
+        r = 1;
+        g = 1;
+        b = 1;
+        -- if (listItem.ColorPanelColorType == MenuListItem.ColorPanelType.Hair)
+        --{
+        GetHairRgbColor(i, r, g, b);
+        -- }
+        -- else
+        -- {
+        GetMakeupRgbColor(i, r, g, b);
+        -- }
+
+        BeginScaleformMovieMethod(ColorPanelScaleform, "SET_DATA_SLOT");
+        ScaleformMovieMethodAddParamInt(i);
+        ScaleformMovieMethodAddParamInt(r);
+        ScaleformMovieMethodAddParamInt(g);
+        ScaleformMovieMethodAddParamInt(b);
+        EndScaleformMovieMethod();
+
+        BeginScaleformMovieMethod(ColorPanelScaleform, "DISPLAY_VIEW");
+        EndScaleformMovieMethod();
+
+        BeginScaleformMovieMethod(ColorPanelScaleform, "SET_HIGHLIGHT");
+        ScaleformMovieMethodAddParamInt(1);
+        EndScaleformMovieMethod();
+
+        BeginScaleformMovieMethod(ColorPanelScaleform, "SHOW_OPACITY");
+        ScaleformMovieMethodAddParamBool(false);
+        ScaleformMovieMethodAddParamBool(true);
+        EndScaleformMovieMethod();
+
+        width = 2;
+        height = 2;
+        x = 2;
+        y = 2;
+
+        SetScriptGfxAlign(82, 84);
+        SetScriptGfxAlignParams(0, 0, 0, 0);
+        DrawScaleformMovie(ColorPanelScaleform, x, y, width, height, 255, 255, 255, 255, 0);
+        ResetScriptGfxAlign();
+    end
+end)
+]]
+
+
+
+Citizen.CreateThread(function()
+    function drawscaleform(scaleform)
+        scaleform = RequestScaleformMovie(scaleform)
+
+        while not HasScaleformMovieLoaded(scaleform) do
+            Citizen.Wait(0)
+        end
+
+        PushScaleformMovieFunction(scaleform, "SET_TITLE")
+        BeginScaleformMovieMethod(scaleform, "SET_TITLE");
+        PushScaleformMovieMethodParameterString("Opacity");
+        BeginTextCommandScaleformString("FACE_COLOUR");
+        AddTextComponentInteger (1);
+        AddTextComponentInteger(1);
+        EndTextCommandScaleformString();
+        ScaleformMovieMethodAddParamInt(0);
+        ScaleformMovieMethodAddParamBool(true);
+        EndScaleformMovieMethod();
+
+        BeginScaleformMovieMethod(scaleform, "SET_DATA_SLOT_EMPTY");
+        EndScaleformMovieMethod();
+
+        for i = 1, 64 do
+            local r = 0;
+            local g = 0;
+            local b = 0;
+            --GetHairRgbColor(i, r, g, b);
+            GetMakeupRgbColor(i, r, g, b);
+
+            BeginScaleformMovieMethod(scaleform, "SET_DATA_SLOT");
+            ScaleformMovieMethodAddParamInt(i);
+            ScaleformMovieMethodAddParamInt(r);
+            ScaleformMovieMethodAddParamInt(g);
+            ScaleformMovieMethodAddParamInt(b);
+            EndScaleformMovieMethod();
+        end
+
+
+        BeginScaleformMovieMethod(scaleform, "DISPLAY_VIEW");
+        EndScaleformMovieMethod();
+
+        BeginScaleformMovieMethod(scaleform, "SET_HIGHLIGHT");
+        ScaleformMovieMethodAddParamInt(1);
+        EndScaleformMovieMethod();
+
+        BeginScaleformMovieMethod(scaleform, "SHOW_OPACITY");
+        ScaleformMovieMethodAddParamBool(false);
+        ScaleformMovieMethodAddParamBool(true);
+        EndScaleformMovieMethod();
+
+        --[[
+        width = 2;
+        height = 2;
+        x = 2;
+        y = 2;
+
+        SetScriptGfxAlign(82, 84);
+        SetScriptGfxAlignParams(0, 0, 0, 0);
+        DrawScaleformMovie(ColorPanelScaleform, x, y, width, height, 255, 255, 255, 255, 0);
+        ResetScriptGfxAlign();
+        ]]
+
+        DrawScaleformMovieFullscreen(scaleform, 255, 255, 255, 255, 0)
+    end
+
+    while true do
+        Citizen.Wait(2)
+        drawscaleform("COLOUR_SWITCHER_02")
+    end
+end)

@@ -4,6 +4,7 @@ luac.out
 # Ignore folder
 .idea/
 .vscode/
+.tests/location
 
 # luarocks build files
 *.src.rock
