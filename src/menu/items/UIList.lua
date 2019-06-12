@@ -15,7 +15,6 @@ local SettingsList = {
     Text = { X = 403, Y = 3, Scale = 0.35 },
 }
 
-
 ---List
 ---@param Label string
 ---@param Items table
@@ -54,7 +53,6 @@ function RageUI.List(Label, Items, Index, Description, Enabled, Callback)
 
                 local ListText = (type(Items[Index]) == "table") and tostring(Items[Index].Name) or tostring(Items[Index]) or "NIL"
                 local TextOffset = RageUI.MeasureStringWidth(ListText, 0, 0.35)
-
 
                 if Selected then
                     RageUI.RenderSprite(SettingsButton.SelectedSprite.Dictionary, SettingsButton.SelectedSprite.Texture, CurrentMenu.X, CurrentMenu.Y + SettingsButton.SelectedSprite.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, SettingsButton.SelectedSprite.Width + CurrentMenu.WidthOffset, SettingsButton.SelectedSprite.Height)
@@ -110,7 +108,9 @@ function RageUI.List(Label, Items, Index, Description, Enabled, Callback)
                     RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.Select)
                 end
 
-                Callback(Hovered, Selected, ((CurrentMenu.Controls.Select.Active or ((Hovered and CurrentMenu.Controls.Click.Active) and (not LeftArrowHovered and not RightArrowHovered))) and Selected), Index)
+                if (Enabled) then
+                    Callback(Hovered, Selected, ((CurrentMenu.Controls.Select.Active or ((Hovered and CurrentMenu.Controls.Click.Active) and (not LeftArrowHovered and not RightArrowHovered))) and Selected), Index)
+                end
             end
 
             RageUI.Options = RageUI.Options + 1

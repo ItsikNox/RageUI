@@ -137,7 +137,9 @@ function RageUI.Progress(Label, ProgressStart, ProgressMax, Description, Counter
 
                 end
 
-                Callback(Hovered, Selected, ((CurrentMenu.Controls.Select.Active or ((Hovered and CurrentMenu.Controls.Click.Active) and not ProgressHovered)) and Selected), ProgressStart)
+                if (Enabled) then
+                    Callback(Hovered, Selected, ((CurrentMenu.Controls.Select.Active or ((Hovered and CurrentMenu.Controls.Click.Active) and not ProgressHovered)) and Selected), ProgressStart)
+                end
             end
             RageUI.Options = RageUI.Options + 1
 

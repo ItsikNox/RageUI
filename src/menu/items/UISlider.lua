@@ -114,7 +114,9 @@ function RageUI.Slider(Label, ProgressStart, ProgressMax, Description, Divider, 
                     RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.Select)
                 end
 
-                Callback(Hovered, Selected, ((CurrentMenu.Controls.Select.Active or ((Hovered and CurrentMenu.Controls.Click.Active) and (not LeftArrowHovered and not RightArrowHovered))) and Selected), ProgressStart)
+                if (Enabled) then
+                    Callback(Hovered, Selected, ((CurrentMenu.Controls.Select.Active or ((Hovered and CurrentMenu.Controls.Click.Active) and (not LeftArrowHovered and not RightArrowHovered))) and Selected), ProgressStart)
+                end
             end
 
             RageUI.Options = RageUI.Options + 1
