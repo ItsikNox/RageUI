@@ -259,7 +259,7 @@ Citizen.CreateThread(function()
 end)
 ]]
 
-
+--[[
 
 Citizen.CreateThread(function()
     function drawscaleform(scaleform)
@@ -311,17 +311,16 @@ Citizen.CreateThread(function()
         ScaleformMovieMethodAddParamBool(true);
         EndScaleformMovieMethod();
 
-        --[[
-        width = 2;
-        height = 2;
-        x = 2;
-        y = 2;
 
-        SetScriptGfxAlign(82, 84);
-        SetScriptGfxAlignParams(0, 0, 0, 0);
-        DrawScaleformMovie(ColorPanelScaleform, x, y, width, height, 255, 255, 255, 255, 0);
-        ResetScriptGfxAlign();
-        ]]
+       -- width = 2;
+       -- height = 2;
+       -- x = 2;
+       -- y = 2;
+
+        --SetScriptGfxAlign(82, 84);
+        --SetScriptGfxAlignParams(0, 0, 0, 0);
+        --DrawScaleformMovie(ColorPanelScaleform, x, y, width, height, 255, 255, 255, 255, 0);
+        --ResetScriptGfxAlign();
 
         DrawScaleformMovieFullscreen(scaleform, 255, 255, 255, 255, 0)
     end
@@ -331,3 +330,5 @@ Citizen.CreateThread(function()
         drawscaleform("COLOUR_SWITCHER_02")
     end
 end)
+
+]]
