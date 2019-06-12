@@ -12,15 +12,6 @@
 ---@param Y number
 ---@param TextureDictionary string
 ---@param TextureName string
----@return table
----@public
----CreateMenu
----@param Title string
----@param Subtitle string
----@param X number
----@param Y number
----@param TextureDictionary string
----@param TextureName string
 ---@param R number
 ---@param G number
 ---@param B number
@@ -31,6 +22,8 @@ function RageUI.CreateMenu(Title, Subtitle, X, Y, TextureDictionary, TextureName
 
     ---@type table
     local Menu = {}
+
+    Menu.InstructionalButtons = {}
 
     Menu.Title = Title or ""
     Menu.Subtitle = Subtitle or ""
@@ -51,6 +44,7 @@ function RageUI.CreateMenu(Title, Subtitle, X, Y, TextureDictionary, TextureName
     Menu.SafeZoneSize = nil
     Menu.EnableMouse = false
     Menu.Options = 0
+    Menu.InstructionalScaleform = RequestScaleformMovie("INSTRUCTIONAL_BUTTONS")
 
     if string.starts(Menu.Subtitle, "~") then
         Menu.PageCounterColour = string.sub(Menu.Subtitle, 1, 3)
@@ -68,10 +62,17 @@ function RageUI.CreateMenu(Title, Subtitle, X, Y, TextureDictionary, TextureName
         end
     end
 
+    Citizen.CreateThread(function()
+        if not HasScaleformMovieLoaded(Menu.InstructionalScaleform) then
+            Menu.InstructionalScaleform = RequestScaleformMovie("INSTRUCTIONAL_BUTTONS")
+            while not HasScaleformMovieLoaded(Menu.InstructionalScaleform) do
+                Citizen.Wait(0)
+            end
+        end
+    end)
+
     return setmetatable(Menu, RageUI.Menus)
 end
-
-
 
 ---SetTitle
 ---@param Title string
@@ -172,3 +173,84 @@ function RageUI.Menus:SetSpriteBanner(TextureDictionary, Texture)
     self.Rectangle = nil
 end
 
+
+ --- TODO need using
+function RageUI.Menus:DrawInstructional()
+    DrawScaleformMovieFullscreen(self.InstructionalScaleform, 255, 255, 255, 255, 0)
+end
+
+function RageUI.Menus:AddInstructionButton(button)
+    if type(button) == "table" and #button == 2 then
+        table.insert(self.InstructionalButtons, button)
+        self.UpdateInstructionalButtons(true);
+    end
+end
+
+function RageUI.Menus:RemoveInstructionButton(button)
+    if type(button) == "table" then
+        for i = 1, #self.InstructionalButtons do
+            if button == self.InstructionalButtons[i] then
+                table.remove(self.InstructionalButtons, i)
+                self.UpdateInstructionalButtons(true);
+                break
+            end
+        end
+    else
+        if tonumber(button) then
+            if self.InstructionalButtons[tonumber(button)] then
+                table.remove(self.InstructionalButtons, tonumber(button))
+                self.UpdateInstructionalButtons(true);
+            end
+        end
+    end
+end
+
+function RageUI.Menus:UpdateInstructionalButtons(Visible)
+
+    if not Visible then
+        return
+    end
+
+    PushScaleformMovieFunction(self.InstructionalScaleform, "CLEAR_ALL")
+    PopScaleformMovieFunction()
+
+    PushScaleformMovieFunction(self.InstructionalScaleform, "TOGGLE_MOUSE_BUTTONS")
+    PushScaleformMovieFunctionParameterInt(0)
+    PopScaleformMovieFunction()
+
+    PushScaleformMovieFunction(self.InstructionalScaleform, "CREATE_CONTAINER")
+    PopScaleformMovieFunction()
+
+    PushScaleformMovieFunction(self.InstructionalScaleform, "SET_DATA_SLOT")
+    PushScaleformMovieFunctionParameterInt(0)
+    PushScaleformMovieMethodParameterButtonName(GetControlInstructionalButton(2, 176, 0))
+    PushScaleformMovieFunctionParameterString(GetLabelText("HUD_INPUT2"))
+    PopScaleformMovieFunction()
+
+    PushScaleformMovieFunction(self.InstructionalScaleform, "SET_DATA_SLOT")
+    PushScaleformMovieFunctionParameterInt(1)
+    PushScaleformMovieMethodParameterButtonName(GetControlInstructionalButton(2, 177, 0))
+    PushScaleformMovieFunctionParameterString(GetLabelText("HUD_INPUT3"))
+    PopScaleformMovieFunction()
+
+    local count = 2
+
+    if (self.InstructionalButtons ~= nil) then
+        for i = 1, #self.InstructionalButtons do
+            if self.InstructionalButtons[i] then
+                if #self.InstructionalButtons[i] == 2 then
+                    PushScaleformMovieFunction(self.InstructionalScaleform, "SET_DATA_SLOT")
+                    PushScaleformMovieFunctionParameterInt(count)
+                    PushScaleformMovieMethodParameterButtonName(self.InstructionalButtons[i][1])
+                    PushScaleformMovieFunctionParameterString(self.InstructionalButtons[i][2])
+                    PopScaleformMovieFunction()
+                    count = count + 1
+                end
+            end
+        end
+    end
+
+    PushScaleformMovieFunction(self.InstructionalScaleform, "DRAW_INSTRUCTIONAL_BUTTONS")
+    PushScaleformMovieFunctionParameterInt(-1)
+    PopScaleformMovieFunction()
+end

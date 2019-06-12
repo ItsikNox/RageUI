@@ -1,6 +1,7 @@
 Citizen.CreateThread(function()
 
     local mainMenu = RageUI.CreateMenu("RageUI", "~b~SHOWCASE", 1920 / 2 - (431 / 4) - 100, 0)
+
     mainMenu.Closed = function()
         Citizen.Trace("main menu closed")
     end
@@ -35,6 +36,9 @@ Citizen.CreateThread(function()
     local grid_5x5 = { X = 0.5, Y = 0.5 }
 
     local interger = 0
+
+
+
     while true do
         Citizen.Wait(1)
         if IsControlJustPressed(1, 51) then
@@ -51,12 +55,20 @@ Citizen.CreateThread(function()
                 end, subMenu)
             end
 
-            RageUI.Button("Scalefrom", Description, {}, true, function(Hovered, Active, Selected)
+            RageUI.Button("Scalefrom + ", Description, {}, true, function(Hovered, Active, Selected)
                 if Selected then
-                    RageUI.AddInstructionButton({
+                    mainMenu:SetTitle("WSH ALOR")
+                    mainMenu:AddInstructionButton({
                         [1] = GetControlInstructionalButton(2, 177, 0),
                         [2] = "Dylan Malandain"
-                    })
+                   })
+                    mainMenu:UpdateInstructionalButtons(true)
+                end
+            end)
+
+            RageUI.Button("Scalefrom - ", Description, {}, true, function(Hovered, Active, Selected)
+                if Selected then
+                    RageUI.RemoveInstructionButton(1)
                 end
             end)
 

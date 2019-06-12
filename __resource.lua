@@ -14,6 +14,9 @@ client_scripts {
 
     "src/menu/wrapper/items-wrapper.lua",
 
+    "src/menu/scaleform/InstructionalButtons.lua",
+
+
     "src/menu/elements/Badge.lua",
     "src/menu/elements/ColourPanel.lua",
     "src/menu/items/UIButton.lua",

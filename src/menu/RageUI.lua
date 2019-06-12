@@ -231,91 +231,6 @@ RageUI.Settings = {
     },
 }
 
-InstructionalScaleform = RequestScaleformMovie("INSTRUCTIONAL_BUTTONS")
-InstructionalButtons = {}
-
-Citizen.CreateThread(function()
-    if not HasScaleformMovieLoaded(InstructionalScaleform) then
-        InstructionalScaleform = RequestScaleformMovie("INSTRUCTIONAL_BUTTONS")
-        while not HasScaleformMovieLoaded(InstructionalScaleform) do
-            Citizen.Wait(0)
-        end
-    end
-end)
-
-function RageUI.AddInstructionButton(button)
-    if type(button) == "table" and #button == 2 then
-        table.insert(InstructionalButtons, button)
-    end
-end
-
-function RageUI.RemoveInstructionButton(button)
-    if type(button) == "table" then
-        for i = 1, #InstructionalButtons do
-            if button == InstructionalButtons[i] then
-                table.remove(InstructionalButtons, i)
-                break
-            end
-        end
-    else
-        if tonumber(button) then
-            if InstructionalButtons[tonumber(button)] then
-                table.remove(InstructionalButtons, tonumber(button))
-            end
-        end
-    end
-end
-
-function RageUI.UpdateScaleform(Visible)
-
-    if not Visible then
-        return
-    end
-
-    PushScaleformMovieFunction(InstructionalScaleform, "CLEAR_ALL")
-    PopScaleformMovieFunction()
-
-    PushScaleformMovieFunction(InstructionalScaleform, "TOGGLE_MOUSE_BUTTONS")
-    PushScaleformMovieFunctionParameterInt(0)
-    PopScaleformMovieFunction()
-
-    PushScaleformMovieFunction(InstructionalScaleform, "CREATE_CONTAINER")
-    PopScaleformMovieFunction()
-
-    PushScaleformMovieFunction(InstructionalScaleform, "SET_DATA_SLOT")
-    PushScaleformMovieFunctionParameterInt(0)
-    PushScaleformMovieMethodParameterButtonName(GetControlInstructionalButton(2, 176, 0))
-    PushScaleformMovieFunctionParameterString(GetLabelText("HUD_INPUT2"))
-    PopScaleformMovieFunction()
-
-    if RageUI.Settings.Controls.Back.Enabled then
-        PushScaleformMovieFunction(InstructionalScaleform, "SET_DATA_SLOT")
-        PushScaleformMovieFunctionParameterInt(1)
-        PushScaleformMovieMethodParameterButtonName(GetControlInstructionalButton(2, 177, 0))
-        PushScaleformMovieFunctionParameterString(GetLabelText("HUD_INPUT3"))
-        PopScaleformMovieFunction()
-    end
-
-    local count = 2
-
-    for i = 1, #InstructionalButtons do
-        if InstructionalButtons[i] then
-            if #InstructionalButtons[i] == 2 then
-                PushScaleformMovieFunction(InstructionalScaleform, "SET_DATA_SLOT")
-                PushScaleformMovieFunctionParameterInt(count)
-                PushScaleformMovieMethodParameterButtonName(InstructionalButtons[i][1])
-                PushScaleformMovieFunctionParameterString(InstructionalButtons[i][2])
-                PopScaleformMovieFunction()
-                count = count + 1
-            end
-        end
-    end
-
-    PushScaleformMovieFunction(InstructionalScaleform, "DRAW_INSTRUCTIONAL_BUTTONS")
-    PushScaleformMovieFunctionParameterInt(-1)
-    PopScaleformMovieFunction()
-end
-
 ---PlaySound
 ---@param Library string
 ---@param Sound string
@@ -353,9 +268,9 @@ function RageUI.Visible(Menu, Value)
     if Menu ~= nil then
         if Menu() then
             if type(Value) == "boolean" then
-                RageUI.UpdateScaleform(Value);
                 Menu.Open = Value
                 if Menu.Open then
+                    Menu:UpdateInstructionalButtons(Value);
                     RageUI.CurrentMenu = Menu
                     RageUI.Options = 0
                     RageUI.ItemOffset = 0
@@ -530,18 +445,15 @@ function RageUI.Render()
     if RageUI.CurrentMenu ~= nil then
         if RageUI.CurrentMenu() then
 
-
             if RageUI.CurrentMenu.Safezone then
                 ScreenDrawPositionEnd()
             end
-
-
-            DrawScaleformMovieFullscreen(InstructionalScaleform, 255, 255, 255, 255, 0)
 
             RageUI.CurrentMenu.Options = RageUI.Options
             RageUI.CurrentMenu.SafeZoneSize = nil
 
             RageUI.Controls()
+
 
             RageUI.Options = 0
             RageUI.ItemOffset = 0
