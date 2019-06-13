@@ -26,6 +26,9 @@ function RageUI.CreateSubMenu(ParentMenu, Title, Subtitle, X, Y, TextureDictiona
             ---@type table
             local Menu = {}
 
+
+            Menu.InstructionalButtons = {}
+
             Menu.Title = Title or ParentMenu.Title
             Menu.Subtitle = Subtitle or ParentMenu.Subtitle
             Menu.SubtitleHeight = -37
@@ -43,6 +46,8 @@ function RageUI.CreateSubMenu(ParentMenu, Title, Subtitle, X, Y, TextureDictiona
             Menu.SafeZoneSize = nil
             Menu.EnableMouse = false
             Menu.Options = 0
+
+            Menu.InstructionalScaleform = RequestScaleformMovie("INSTRUCTIONAL_BUTTONS")
 
             if string.starts(Menu.Subtitle, "~") then
                 Menu.PageCounterColour = string.sub(Menu.Subtitle, 1, 3)

@@ -449,6 +449,10 @@ function RageUI.Render()
                 ScreenDrawPositionEnd()
             end
 
+            DrawScaleformMovieFullscreen(RageUI.CurrentMenu.InstructionalScaleform, 255, 255, 255, 255, 0)
+
+
+
             RageUI.CurrentMenu.Options = RageUI.Options
             RageUI.CurrentMenu.SafeZoneSize = nil
 

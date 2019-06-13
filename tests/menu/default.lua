@@ -39,6 +39,10 @@ Citizen.CreateThread(function()
 
 
 
+    subMenu:AddInstructionButton({
+        [1] = GetControlInstructionalButton(2, 177, 0),
+        [2] = "Bonjour",
+    })
     while true do
         Citizen.Wait(1)
         if IsControlJustPressed(1, 51) then
