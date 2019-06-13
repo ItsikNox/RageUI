@@ -446,7 +446,7 @@ function RageUI.Render()
         if RageUI.CurrentMenu() then
 
             if RageUI.CurrentMenu.Safezone then
-                ScreenDrawPositionEnd()
+                ResetScriptGfxAlign()
             end
 
             DrawScaleformMovieFullscreen(RageUI.CurrentMenu.InstructionalScaleform, 255, 255, 255, 255, 0)

@@ -211,27 +211,27 @@ function RageUI.Menus:UpdateInstructionalButtons(Visible)
         return
     end
 
-    PushScaleformMovieFunction(self.InstructionalScaleform, "CLEAR_ALL")
-    PopScaleformMovieFunction()
+    BeginScaleformMovieMethod(self.InstructionalScaleform, "CLEAR_ALL")
+    EndScaleformMovieMethod()
 
-    PushScaleformMovieFunction(self.InstructionalScaleform, "TOGGLE_MOUSE_BUTTONS")
-    PushScaleformMovieFunctionParameterInt(0)
-    PopScaleformMovieFunction()
+    BeginScaleformMovieMethod(self.InstructionalScaleform, "TOGGLE_MOUSE_BUTTONS")
+    ScaleformMovieMethodAddParamInt(0)
+    EndScaleformMovieMethod()
 
-    PushScaleformMovieFunction(self.InstructionalScaleform, "CREATE_CONTAINER")
-    PopScaleformMovieFunction()
+    BeginScaleformMovieMethod(self.InstructionalScaleform, "CREATE_CONTAINER")
+    EndScaleformMovieMethod()
 
-    PushScaleformMovieFunction(self.InstructionalScaleform, "SET_DATA_SLOT")
-    PushScaleformMovieFunctionParameterInt(0)
+    BeginScaleformMovieMethod(self.InstructionalScaleform, "SET_DATA_SLOT")
+    ScaleformMovieMethodAddParamInt(0)
     PushScaleformMovieMethodParameterButtonName(GetControlInstructionalButton(2, 176, 0))
-    PushScaleformMovieFunctionParameterString(GetLabelText("HUD_INPUT2"))
-    PopScaleformMovieFunction()
+    PushScaleformMovieMethodParameterString(GetLabelText("HUD_INPUT2"))
+    EndScaleformMovieMethod()
 
-    PushScaleformMovieFunction(self.InstructionalScaleform, "SET_DATA_SLOT")
-    PushScaleformMovieFunctionParameterInt(1)
+    BeginScaleformMovieMethod(self.InstructionalScaleform, "SET_DATA_SLOT")
+    ScaleformMovieMethodAddParamInt(1)
     PushScaleformMovieMethodParameterButtonName(GetControlInstructionalButton(2, 177, 0))
-    PushScaleformMovieFunctionParameterString(GetLabelText("HUD_INPUT3"))
-    PopScaleformMovieFunction()
+    PushScaleformMovieMethodParameterString(GetLabelText("HUD_INPUT3"))
+    EndScaleformMovieMethod()
 
     local count = 2
 
@@ -239,18 +239,18 @@ function RageUI.Menus:UpdateInstructionalButtons(Visible)
         for i = 1, #self.InstructionalButtons do
             if self.InstructionalButtons[i] then
                 if #self.InstructionalButtons[i] == 2 then
-                    PushScaleformMovieFunction(self.InstructionalScaleform, "SET_DATA_SLOT")
-                    PushScaleformMovieFunctionParameterInt(count)
+                    BeginScaleformMovieMethod(self.InstructionalScaleform, "SET_DATA_SLOT")
+                    ScaleformMovieMethodAddParamInt(count)
                     PushScaleformMovieMethodParameterButtonName(self.InstructionalButtons[i][1])
-                    PushScaleformMovieFunctionParameterString(self.InstructionalButtons[i][2])
-                    PopScaleformMovieFunction()
+                    PushScaleformMovieMethodParameterString(self.InstructionalButtons[i][2])
+                    EndScaleformMovieMethod()
                     count = count + 1
                 end
             end
         end
     end
 
-    PushScaleformMovieFunction(self.InstructionalScaleform, "DRAW_INSTRUCTIONAL_BUTTONS")
-    PushScaleformMovieFunctionParameterInt(-1)
-    PopScaleformMovieFunction()
+    BeginScaleformMovieMethod(self.InstructionalScaleform, "DRAW_INSTRUCTIONAL_BUTTONS")
+    ScaleformMovieMethodAddParamInt(-1)
+    EndScaleformMovieMethod()
 end
