@@ -371,8 +371,8 @@ function RageUI.Navigation()
                     if RageUI.CurrentMenu.Safezone then
                         RageUI.CurrentMenu.SafeZoneSize = RageUI.GetSafeZoneBounds()
 
-                        ScreenDrawPositionBegin(76, 84)
-                        ScreenDrawPositionRatio(0, 0, 0, 0)
+                        SetScriptGfxAlign(76, 84)
+                        SetScriptGfxAlignParams(0, 0, 0, 0)
                     end
                 end
 

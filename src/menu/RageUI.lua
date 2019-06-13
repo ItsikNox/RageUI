@@ -300,9 +300,9 @@ function RageUI.Banner(Enabled)
 
                         if RageUI.CurrentMenu.Safezone then
                             RageUI.CurrentMenu.SafeZoneSize = RageUI.GetSafeZoneBounds()
-
-                            ScreenDrawPositionBegin(76, 84)
-                            ScreenDrawPositionRatio(0, 0, 0, 0)
+                            SetScriptGfxAlign(76, 84)
+                            SetScriptGfxAlignParams(0, 0, 0, 0)
+                            --SetScriptGfxAlignParams
                         end
                     end
 
@@ -343,8 +343,8 @@ function RageUI.Subtitle()
                 if RageUI.CurrentMenu.Safezone then
                     RageUI.CurrentMenu.SafeZoneSize = RageUI.GetSafeZoneBounds()
 
-                    ScreenDrawPositionBegin(76, 84)
-                    ScreenDrawPositionRatio(0, 0, 0, 0)
+                    SetScriptGfxAlign(76, 84)
+                    SetScriptGfxAlignParams(0, 0, 0, 0)
                 end
             end
 
@@ -377,14 +377,14 @@ function RageUI.Background()
                 if RageUI.CurrentMenu.Safezone then
                     RageUI.CurrentMenu.SafeZoneSize = RageUI.GetSafeZoneBounds()
 
-                    ScreenDrawPositionBegin(76, 84)
-                    ScreenDrawPositionRatio(0, 0, 0, 0)
+                    SetScriptGfxAlign(76, 84)
+                    SetScriptGfxAlignParams(0, 0, 0, 0)
                 end
             end
 
-            SetUiLayer(0)
+            SetScriptGfxDrawOrder(0)
             RageUI.RenderSprite(RageUI.Settings.Items.Background.Dictionary, RageUI.Settings.Items.Background.Texture, RageUI.CurrentMenu.X, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Background.Y + RageUI.CurrentMenu.SubtitleHeight, RageUI.Settings.Items.Background.Width + RageUI.CurrentMenu.WidthOffset, RageUI.ItemOffset, 0, 0, 0, 255)
-            SetUiLayer(1)
+            SetScriptGfxDrawOrder(1)
         end
     end
 end
@@ -401,8 +401,8 @@ function RageUI.Description()
                 if RageUI.CurrentMenu.Safezone then
                     RageUI.CurrentMenu.SafeZoneSize = RageUI.GetSafeZoneBounds()
 
-                    ScreenDrawPositionBegin(76, 84)
-                    ScreenDrawPositionRatio(0, 0, 0, 0)
+                    SetScriptGfxAlign(76, 84)
+                    SetScriptGfxAlignParams(0, 0, 0, 0)
                 end
             end
 

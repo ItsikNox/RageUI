@@ -47,7 +47,7 @@ Citizen.CreateThread(function()
         if RageUI.Visible(mainMenu) then
             RageUI.Header();
 
-            for i = 1, 1 do
+            for i = 1, 20 do
                 RageUI.Button("Panels", Description, { LeftBadge = RageUI.BadgeStyle.Gun, RightBadge = RageUI.BadgeStyle.Heart, RightLabel = "→→→" }, true, function(Hovered, Active, Selected)
                     if Selected then
 
@@ -55,22 +55,6 @@ Citizen.CreateThread(function()
                 end, subMenu)
             end
 
-            RageUI.Button("Scalefrom + ", Description, {}, true, function(Hovered, Active, Selected)
-                if Selected then
-                    mainMenu:SetTitle("WSH ALOR")
-                    mainMenu:AddInstructionButton({
-                        [1] = GetControlInstructionalButton(2, 177, 0),
-                        [2] = "Dylan Malandain"
-                   })
-                    mainMenu:UpdateInstructionalButtons(true)
-                end
-            end)
-
-            RageUI.Button("Scalefrom - ", Description, {}, true, function(Hovered, Active, Selected)
-                if Selected then
-                    RageUI.RemoveInstructionButton(1)
-                end
-            end)
 
             RageUI.Checkbox("Activé ceci : ", Description, checkbox_boolean, { Style = RageUI.CheckboxStyle.Tick }, function(Hovered, Selected, Active, Checked)
                 checkbox_boolean = Checked
