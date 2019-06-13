@@ -52,37 +52,37 @@ function RageUI.List(Label, Items, Index, Description, Enabled, Callback)
                 end
 
                 local ListText = (type(Items[Index]) == "table") and tostring(Items[Index].Name) or tostring(Items[Index]) or "NIL"
-                local TextOffset = RageUI.MeasureStringWidth(ListText, 0, 0.35)
+                local TextOffset = MeasureStringWidth(ListText, 0, 0.35)
 
                 if Selected then
-                    RageUI.RenderSprite(SettingsButton.SelectedSprite.Dictionary, SettingsButton.SelectedSprite.Texture, CurrentMenu.X, CurrentMenu.Y + SettingsButton.SelectedSprite.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, SettingsButton.SelectedSprite.Width + CurrentMenu.WidthOffset, SettingsButton.SelectedSprite.Height)
+                    RenderSprite(SettingsButton.SelectedSprite.Dictionary, SettingsButton.SelectedSprite.Texture, CurrentMenu.X, CurrentMenu.Y + SettingsButton.SelectedSprite.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, SettingsButton.SelectedSprite.Width + CurrentMenu.WidthOffset, SettingsButton.SelectedSprite.Height)
                     LeftArrowHovered = RageUI.IsMouseInBounds(CurrentMenu.X + SettingsList.LeftArrow.X - TextOffset + CurrentMenu.SafeZoneSize.X + CurrentMenu.WidthOffset, CurrentMenu.Y + SettingsList.LeftArrow.Y + CurrentMenu.SafeZoneSize.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, SettingsList.LeftArrow.Width, SettingsList.LeftArrow.Height)
                     RightArrowHovered = RageUI.IsMouseInBounds(CurrentMenu.X + SettingsList.RightArrow.X + CurrentMenu.SafeZoneSize.X + CurrentMenu.WidthOffset, CurrentMenu.Y + SettingsList.RightArrow.Y + CurrentMenu.SafeZoneSize.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, SettingsList.RightArrow.Width, SettingsList.RightArrow.Height)
                 end
 
                 if Enabled == true or Enabled == nil then
                     if Selected then
-                        RageUI.RenderText(Label, CurrentMenu.X + SettingsButton.Text.X, CurrentMenu.Y + SettingsButton.Text.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, 0, SettingsButton.Text.Scale, 0, 0, 0, 255)
+                        RenderText(Label, CurrentMenu.X + SettingsButton.Text.X, CurrentMenu.Y + SettingsButton.Text.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, 0, SettingsButton.Text.Scale, 0, 0, 0, 255)
 
-                        RageUI.RenderSprite(SettingsList.LeftArrow.Dictionary, SettingsList.LeftArrow.Texture, CurrentMenu.X + SettingsList.LeftArrow.X - TextOffset + CurrentMenu.WidthOffset, CurrentMenu.Y + SettingsList.LeftArrow.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, SettingsList.LeftArrow.Width, SettingsList.LeftArrow.Height, 0, 0, 0, 0, 255)
-                        RageUI.RenderSprite(SettingsList.RightArrow.Dictionary, SettingsList.RightArrow.Texture, CurrentMenu.X + SettingsList.RightArrow.X + CurrentMenu.WidthOffset, CurrentMenu.Y + SettingsList.RightArrow.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, SettingsList.RightArrow.Width, SettingsList.RightArrow.Height, 0, 0, 0, 0, 255)
+                        RenderSprite(SettingsList.LeftArrow.Dictionary, SettingsList.LeftArrow.Texture, CurrentMenu.X + SettingsList.LeftArrow.X - TextOffset + CurrentMenu.WidthOffset, CurrentMenu.Y + SettingsList.LeftArrow.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, SettingsList.LeftArrow.Width, SettingsList.LeftArrow.Height, 0, 0, 0, 0, 255)
+                        RenderSprite(SettingsList.RightArrow.Dictionary, SettingsList.RightArrow.Texture, CurrentMenu.X + SettingsList.RightArrow.X + CurrentMenu.WidthOffset, CurrentMenu.Y + SettingsList.RightArrow.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, SettingsList.RightArrow.Width, SettingsList.RightArrow.Height, 0, 0, 0, 0, 255)
 
-                        RageUI.RenderText(ListText, CurrentMenu.X + SettingsList.Text.X + CurrentMenu.WidthOffset, CurrentMenu.Y + SettingsList.Text.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, 0, SettingsList.Text.Scale, 0, 0, 0, 255, 2)
+                        RenderText(ListText, CurrentMenu.X + SettingsList.Text.X + CurrentMenu.WidthOffset, CurrentMenu.Y + SettingsList.Text.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, 0, SettingsList.Text.Scale, 0, 0, 0, 255, 2)
                     else
-                        RageUI.RenderText(Label, CurrentMenu.X + SettingsButton.Text.X, CurrentMenu.Y + SettingsButton.Text.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, 0, SettingsButton.Text.Scale, 245, 245, 245, 255)
+                        RenderText(Label, CurrentMenu.X + SettingsButton.Text.X, CurrentMenu.Y + SettingsButton.Text.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, 0, SettingsButton.Text.Scale, 245, 245, 245, 255)
 
-                        RageUI.RenderText(ListText, CurrentMenu.X + SettingsList.Text.X + 15 + CurrentMenu.WidthOffset, CurrentMenu.Y + SettingsList.Text.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, 0, SettingsList.Text.Scale, 245, 245, 245, 255, 2)
+                        RenderText(ListText, CurrentMenu.X + SettingsList.Text.X + 15 + CurrentMenu.WidthOffset, CurrentMenu.Y + SettingsList.Text.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, 0, SettingsList.Text.Scale, 245, 245, 245, 255, 2)
                     end
                 else
-                    RageUI.RenderText(Label, CurrentMenu.X + SettingsButton.Text.X, CurrentMenu.Y + SettingsButton.Text.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, 0, SettingsButton.Text.Scale, 163, 159, 148, 255)
+                    RenderText(Label, CurrentMenu.X + SettingsButton.Text.X, CurrentMenu.Y + SettingsButton.Text.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, 0, SettingsButton.Text.Scale, 163, 159, 148, 255)
 
                     if Selected then
-                        RageUI.RenderSprite(SettingsList.LeftArrow.Dictionary, SettingsList.LeftArrow.Texture, CurrentMenu.X + SettingsList.LeftArrow.X - TextOffset + CurrentMenu.WidthOffset, CurrentMenu.Y + SettingsList.LeftArrow.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, SettingsList.LeftArrow.Width, SettingsList.LeftArrow.Height, 0, 163, 159, 148, 255)
-                        RageUI.RenderSprite(SettingsList.RightArrow.Dictionary, SettingsList.RightArrow.Texture, CurrentMenu.X + SettingsList.RightArrow.X + CurrentMenu.WidthOffset, CurrentMenu.Y + SettingsList.RightArrow.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, SettingsList.RightArrow.Width, SettingsList.RightArrow.Height, 0, 163, 159, 148, 255)
+                        RenderSprite(SettingsList.LeftArrow.Dictionary, SettingsList.LeftArrow.Texture, CurrentMenu.X + SettingsList.LeftArrow.X - TextOffset + CurrentMenu.WidthOffset, CurrentMenu.Y + SettingsList.LeftArrow.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, SettingsList.LeftArrow.Width, SettingsList.LeftArrow.Height, 0, 163, 159, 148, 255)
+                        RenderSprite(SettingsList.RightArrow.Dictionary, SettingsList.RightArrow.Texture, CurrentMenu.X + SettingsList.RightArrow.X + CurrentMenu.WidthOffset, CurrentMenu.Y + SettingsList.RightArrow.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, SettingsList.RightArrow.Width, SettingsList.RightArrow.Height, 0, 163, 159, 148, 255)
 
-                        RageUI.RenderText(ListText, CurrentMenu.X + SettingsList.Text.X + CurrentMenu.WidthOffset, CurrentMenu.Y + SettingsList.Text.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, 0, SettingsList.Text.Scale, 163, 159, 148, 255, 2)
+                        RenderText(ListText, CurrentMenu.X + SettingsList.Text.X + CurrentMenu.WidthOffset, CurrentMenu.Y + SettingsList.Text.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, 0, SettingsList.Text.Scale, 163, 159, 148, 255, 2)
                     else
-                        RageUI.RenderText(ListText, CurrentMenu.X + SettingsList.Text.X + 15 + CurrentMenu.WidthOffset, CurrentMenu.Y + SettingsList.Text.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, 0, SettingsList.Text.Scale, 163, 159, 148, 255, 2)
+                        RenderText(ListText, CurrentMenu.X + SettingsList.Text.X + 15 + CurrentMenu.WidthOffset, CurrentMenu.Y + SettingsList.Text.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, 0, SettingsList.Text.Scale, 163, 159, 148, 255, 2)
                     end
                 end
 
