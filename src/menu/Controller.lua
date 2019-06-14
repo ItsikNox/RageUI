@@ -264,7 +264,7 @@ function RageUI.Controls()
                     end
                 end
 
-                if Controls.Select.Enabled then
+                if Controls.Select.Enabled  and not Controls.Down.Pressed and not Controls.Up.Pressed then
                     for Index = 1, #Controls.Select.Keys do
                         if not Controls.Select.Pressed then
                             if IsDisabledControlJustPressed(Controls.Select.Keys[Index][1], Controls.Select.Keys[Index][2]) then
@@ -298,7 +298,7 @@ function RageUI.Controls()
                     end
                 end
 
-                if Controls.Click.Enabled then
+                if Controls.Click.Enabled  and not Controls.Down.Pressed and not Controls.Up.Pressed then
                     for Index = 1, #Controls.Click.Keys do
                         if not Controls.Click.Pressed then
                             if IsDisabledControlJustPressed(Controls.Click.Keys[Index][1], Controls.Click.Keys[Index][2]) then
@@ -331,8 +331,7 @@ function RageUI.Controls()
                         end
                     end
                 end
-
-                if Controls.Back.Enabled then
+                if Controls.Back.Enabled and not Controls.Down.Pressed and not Controls.Up.Pressed then
                     for Index = 1, #Controls.Back.Keys do
                         if not Controls.Back.Pressed then
                             if IsDisabledControlJustPressed(Controls.Back.Keys[Index][1], Controls.Back.Keys[Index][2]) then
