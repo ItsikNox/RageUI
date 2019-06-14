@@ -48,9 +48,9 @@ Citizen.CreateThread(function()
         end
         if RageUI.Visible(mainMenu) then
 
-            RageUI.DrawContent({ header = true, instructionalButton = true }, function()
+            RageUI.DrawContent({ header = false, instructionalButton = true }, function()
 
-                RageUI.Button("Item colored", Description, { Color={BackgroundColor = {255,0,100},HightLightColor={1,150,20}}}, true, function(Hovered, Active, Selected)
+                RageUI.Button("Item colored", Description, { Color={BackgroundColor = RageUI.Colours.Red,HightLightColor=RageUI.Colours.Green}}, true, function(Hovered, Active, Selected)
                     if Active then
                     end
                 end, subMenuToSubMenu)
@@ -66,10 +66,14 @@ Citizen.CreateThread(function()
                     end, subMenu)
                 end
 
-                RageUI.Checkbox("Activé ceci : ", Description, checkbox_boolean, { Style = RageUI.CheckboxStyle.Tick }, function(Hovered, Selected, Active, Checked)
+                RageUI.Checkbox("Activé ceci : ", Description, checkbox_boolean, { Style = RageUI.CheckboxStyle.Tick, RightLabel="Label" , RightBadge = RageUI.BadgeStyle.Heart, LeftBadge = RageUI.BadgeStyle.Gun,}, function(Hovered, Selected, Active, Checked)
                     checkbox_boolean = Checked
                 end)
 
+
+                RageUI.Checkbox("Activé ceci : ", Description, checkbox_boolean, { Style = RageUI.CheckboxStyle.Tick, RightLabel="Label longer"  }, function(Hovered, Selected, Active, Checked)
+                    checkbox_boolean = Checked
+                end)
                 local list_table = {
                     { Name = "RageUI", Value = 1 },
                     { Name = "iTexZoz", Value = 2 },
@@ -88,7 +92,6 @@ Citizen.CreateThread(function()
                 RageUI.Slider("Quantité", slider_number, 20, Description, false, true, function(Hovered, Selected, Active, Index)
                     slider_number = Index
                 end)
-
             end)
 
         elseif RageUI.Visible(subMenu) then
