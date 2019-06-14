@@ -81,7 +81,7 @@ Citizen.CreateThread(function()
                     { Name = "TDLC", Value = 3 },
                     { Name = "Frazzle", Value = 3 },
                 }
-                RageUI.List("Projet & contributeur", list_table, quantity_number, Description, true, function(Hovered, Active, Selected, Index)
+                RageUI.List("Projet & contributeur", list_table, quantity_number, Description, { LeftBadge = RageUI.BadgeStyle.Gun, RightBadge = RageUI.BadgeStyle.Heart, RightLabel = "XXXXXXXXXX" },true, function(Hovered, Active, Selected, Index)
                     quantity_number = Index
                 end)
 
