@@ -439,9 +439,10 @@ function RageUI.GoBack()
     end
 end
 ---Render
+---@param instructionalButton boolean
 ---@return nil
 ---@public
-function RageUI.Render()
+function RageUI.Render(instructionalButton)
     if RageUI.CurrentMenu ~= nil then
         if RageUI.CurrentMenu() then
 
@@ -449,15 +450,14 @@ function RageUI.Render()
                 ResetScriptGfxAlign()
             end
 
-            DrawScaleformMovieFullscreen(RageUI.CurrentMenu.InstructionalScaleform, 255, 255, 255, 255, 0)
-
-
+            if (instructionalButton) then
+                DrawScaleformMovieFullscreen(RageUI.CurrentMenu.InstructionalScaleform, 255, 255, 255, 255, 0)
+            end
 
             RageUI.CurrentMenu.Options = RageUI.Options
             RageUI.CurrentMenu.SafeZoneSize = nil
 
             RageUI.Controls()
-
 
             RageUI.Options = 0
             RageUI.ItemOffset = 0
@@ -490,5 +490,26 @@ function RageUI.Render()
                 end
             end
         end
+    end
+end
+
+---DrawContent
+---@param items function
+---@param panels function
+function RageUI.DrawContent(settings, items, panels)
+    if (settings.header ~= nil) then
+        RageUI.Header(settings.header);
+    else
+        RageUI.Header(true);
+    end
+    items()
+    RageUI.Background();
+    RageUI.Navigation();
+    RageUI.Description();
+    panels()
+    if (settings.instructionalButton ~= nil) then
+        RageUI.Render(settings.instructionalButton)
+    else
+        RageUI.Render(true)
     end
 end

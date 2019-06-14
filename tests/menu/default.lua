@@ -37,8 +37,6 @@ Citizen.CreateThread(function()
 
     local interger = 0
 
-
-
     subMenu:AddInstructionButton({
         [1] = GetControlInstructionalButton(2, 177, 0),
         [2] = "Bonjour",
@@ -49,6 +47,8 @@ Citizen.CreateThread(function()
             RageUI.Visible(mainMenu, not RageUI.Visible(mainMenu))
         end
         if RageUI.Visible(mainMenu) then
+
+            --[[
             RageUI.Header();
 
             for i = 1, 20 do
@@ -105,12 +105,24 @@ Citizen.CreateThread(function()
             end
             ]]--
 
-            RageUI.Background();
-            RageUI.Navigation();
-            RageUI.Description();
-            RageUI.Render()
+            --RageUI.Background();
+            --RageUI.Navigation();
+            --RageUI.Description();
+            --RageUI.Render()
+
+            RageUI.DrawContent({ header = true, instructionalButton = true }, function()
+                ---Items
+                RageUI.Button("Panels", Description, { LeftBadge = RageUI.BadgeStyle.Gun, RightBadge = RageUI.BadgeStyle.Heart, RightLabel = "→→→" }, true, function(Hovered, Active, Selected)
+                    if Selected then
+
+                    end
+                end, subMenu)
+
+            end, function()
+                ---Panels
+            end)
         elseif RageUI.Visible(subMenu) then
-            RageUI.Header();
+            --RageUI.Header();
 
             for i = 1, 2500 do
                 RageUI.Button("UIButton - " .. i, Description, { }, true, function(Hovered, Active, Selected)
@@ -174,7 +186,7 @@ Citizen.CreateThread(function()
             RageUI.Render()
         elseif RageUI.Visible(subMenuToSubMenu) then
 
-            RageUI.Header();
+            --RageUI.Header();
 
             for i = 1, 50 do
                 RageUI.Button("Encore des UIButton - " .. i, Description, { }, true, function(Hovered, Active, Selected)
@@ -193,6 +205,7 @@ Citizen.CreateThread(function()
     end
 
 end)
+
 
 --[[
 Citizen.CreateThread(function()
