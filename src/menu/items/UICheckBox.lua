@@ -1,292 +1,194 @@
-Citizen.CreateThread(function()
+---@type table
+local SettingsButton = {
+    Rectangle = { Y = 0, Width = 431, Height = 38 },
+    Text = { X = 8, Y = 3, Scale = 0.33 },
+    LeftBadge = { Y = -2, Width = 40, Height = 40 },
+    RightBadge = { X = 385, Y = -2, Width = 40, Height = 40 },
+    RightText = { X = 420, Y = 4, Scale = 0.35 },
+    SelectedSprite = { Dictionary = "commonmenu", Texture = "gradient_nav", Y = 0, Width = 431, Height = 38 },
+}
 
-    local mainMenu = RageUI.CreateMenu("RageUI", "~b~SHOWCASE", 1920 / 2 - (431 / 4) - 100, 0)
+---@type table
+local SettingsCheckbox = {
+    Dictionary = "commonmenu", Textures = {
+        "shop_box_blankb", -- 1
+        "shop_box_tickb", -- 2
+        "shop_box_blank", -- 3
+        "shop_box_tick", -- 4
+        "shop_box_crossb", -- 5
+        "shop_box_cross", -- 6
+    },
+    X = 380, Y = -6, Width = 50, Height = 50
+}
 
-    mainMenu.Closed = function()
-        Citizen.Trace("main menu closed")
+RageUI.CheckboxStyle = {
+    Tick = 1,
+    Cross = 2
+}
+
+---StyleCheckBox
+---@param Selected number
+---@param Checked boolean
+---@param Box number
+---@param BoxSelect number
+---@return nil
+local function StyleCheckBox(Selected, Checked, Box, BoxSelect,OffSet)
+
+    ---@type table
+    local CurrentMenu = RageUI.CurrentMenu;
+    if OffSet == nil then
+        OffSet = 0
     end
-
-    mainMenu:SetSubtitle("~b~SHOWCASE - RAGEUI")
-    mainMenu.EnableMouse = true;
-
-    local subMenu = RageUI.CreateSubMenu(mainMenu, "RageUI", "~b~ SHOWCASE RAGEUI - SUBMENU - 1")
-    subMenu.EnableMouse = true;
-
-    local subMenuToSubMenu = RageUI.CreateSubMenu(mainMenu, "RageUI", "~b~ SHOWCASE RAGEUI - SUBMENU - 2")
-    subMenuToSubMenu.EnableMouse = true;
-
-    local Description = "Sample description that takes more than one line. Moreso, it takes way more than two lines since it's so long. Wow, check out this length!"
-
-    local checkbox_boolean = false
-
-    local quantity_number = 1
-
-    local progress_number = 1
-
-    local slider_number = 1
-
-    local colour_table = { 1, 1 }
-
-    local percentage_float = 0.5
-
-    Grid1x5X = 0.5
-
-    GridPanelVertical = 0.5
-
-    local grid_5x5 = { X = 0.5, Y = 0.5 }
-
-    local interger = 0
-
-    subMenu:AddInstructionButton({
-        [1] = GetControlInstructionalButton(2, 177, 0),
-        [2] = "Bonjour",
-    })
-    while true do
-        Citizen.Wait(1)
-        if IsControlJustPressed(1, 51) then
-            RageUI.Visible(mainMenu, not RageUI.Visible(mainMenu))
+    if Selected then
+        if Checked then
+            RenderSprite(SettingsCheckbox.Dictionary, SettingsCheckbox.Textures[Box], CurrentMenu.X + SettingsCheckbox.X + CurrentMenu.WidthOffset-OffSet, CurrentMenu.Y + SettingsCheckbox.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, SettingsCheckbox.Width, SettingsCheckbox.Height)
+        else
+            RenderSprite(SettingsCheckbox.Dictionary, SettingsCheckbox.Textures[1], CurrentMenu.X + SettingsCheckbox.X + CurrentMenu.WidthOffset-OffSet, CurrentMenu.Y + SettingsCheckbox.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, SettingsCheckbox.Width, SettingsCheckbox.Height)
         end
-        if RageUI.Visible(mainMenu) then
+    else
+        if Checked then
+            RenderSprite(SettingsCheckbox.Dictionary, SettingsCheckbox.Textures[BoxSelect], CurrentMenu.X + SettingsCheckbox.X + CurrentMenu.WidthOffset-OffSet, CurrentMenu.Y + SettingsCheckbox.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, SettingsCheckbox.Width, SettingsCheckbox.Height)
+        else
+            RenderSprite(SettingsCheckbox.Dictionary, SettingsCheckbox.Textures[3], CurrentMenu.X + SettingsCheckbox.X + CurrentMenu.WidthOffset-OffSet, CurrentMenu.Y + SettingsCheckbox.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, SettingsCheckbox.Width, SettingsCheckbox.Height)
+        end
+    end
+end
 
-            RageUI.DrawContent({ header = false, instructionalButton = true }, function()
+---CheckBoxLockBadgeColor
+---@param Selected boolean
+---@return table
+local function CheckBoxLockBadgeColor(Selected)
+    if Selected then
+        return 0, 0, 0, 255
+    else
+        return 163, 159, 148, 255
+    end
+end
 
-                RageUI.Button("Item colored", Description, { Color={BackgroundColor = RageUI.Colours.Red,HightLightColor=RageUI.Colours.Green}}, true, function(Hovered, Active, Selected)
-                    if Active then
-                    end
-                end, subMenuToSubMenu)
-                RageUI.Button("Item colored", Description, { Color={BackgroundColor = RageUI.Colours.Red,HightLightColor=RageUI.Colours.Green}}, true, function(Hovered, Active, Selected)
-                    if Active then
-                    end
-                end, subMenuToSubMenu)
-                for i = 1, 1 do
-                    RageUI.Button("Panels", Description, { LeftBadge = RageUI.BadgeStyle.Gun, RightBadge = RageUI.BadgeStyle.Heart, RightLabel = "→→→" }, true, function(Hovered, Active, Selected)
+---Checkbox
+---@param Label string
+---@param Description string
+---@param Checked boolean
+---@param Callback function
+---@return nil
+---@public
+function RageUI.Checkbox(Label, Description, Checked, Style, Callback)
+
+    ---@type table
+    local CurrentMenu = RageUI.CurrentMenu;
+
+    if CurrentMenu ~= nil then
+        if CurrentMenu() then
+
+            ---@type number
+            local Option = RageUI.Options + 1
+
+            if CurrentMenu.Pagination.Minimum <= Option and CurrentMenu.Pagination.Maximum >= Option then
+
+                ---@type number
+                local Selected = CurrentMenu.Index == Option
+                local LeftBadgeOffset = ((Style.LeftBadge == RageUI.BadgeStyle.None or tonumber(Style.LeftBadge) == nil) and 0 or 27)
+                local RightBadgeOffset = ((Style.RightBadge == RageUI.BadgeStyle.None or tonumber(Style.RightBadge) == nil) and 0 or 32)
+                local BoxOffset = 0
+                ItemsWrapper.ItemsSafeZone(CurrentMenu)
+
+                local Hovered = false;
+
+                ---@type boolean
+                if CurrentMenu.EnableMouse == true then
+                    Hovered = ItemsWrapper.ItemsMouseBounds(CurrentMenu, Selected, Option, SettingsButton);
+                end
+                if Selected then
+                    RenderSprite(SettingsButton.SelectedSprite.Dictionary, SettingsButton.SelectedSprite.Texture, CurrentMenu.X, CurrentMenu.Y + SettingsButton.SelectedSprite.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, SettingsButton.SelectedSprite.Width + CurrentMenu.WidthOffset, SettingsButton.SelectedSprite.Height)
+                end
+
+                if type(Style) == "table" then
+                    if Style.Enabled == true or Style.Enabled == nil then
                         if Selected then
-
+                            RenderText(Label, CurrentMenu.X + SettingsButton.Text.X+LeftBadgeOffset, CurrentMenu.Y + SettingsButton.Text.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, 0, SettingsButton.Text.Scale, 0, 0, 0, 255)
+                        else
+                            RenderText(Label, CurrentMenu.X + SettingsButton.Text.X+LeftBadgeOffset, CurrentMenu.Y + SettingsButton.Text.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, 0, SettingsButton.Text.Scale, 245, 245, 245, 255)
                         end
-                    end, subMenu)
+
+                        if type(Style) == 'table' then
+                            if Style.LeftBadge ~= nil then
+                                if Style.LeftBadge ~= RageUI.BadgeStyle.None and tonumber(Style.LeftBadge) ~= nil then
+                                    RenderSprite(RageUI.GetBadgeDictionary(Style.LeftBadge, Selected), RageUI.GetBadgeTexture(Style.LeftBadge, Selected), CurrentMenu.X, CurrentMenu.Y + SettingsButton.LeftBadge.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, SettingsButton.LeftBadge.Width, SettingsButton.LeftBadge.Height, RageUI.GetBadgeColour(Style.LeftBadge, Selected))
+                                end
+                            end
+                            if Style.RightBadge ~= nil then
+                                if Style.RightBadge ~= RageUI.BadgeStyle.None and tonumber(Style.RightBadge) ~= nil then
+                                    RenderSprite(RageUI.GetBadgeDictionary(Style.RightBadge, Selected), RageUI.GetBadgeTexture(Style.RightBadge, Selected), CurrentMenu.X + SettingsButton.RightBadge.X + CurrentMenu.WidthOffset, CurrentMenu.Y + SettingsButton.RightBadge.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, SettingsButton.RightBadge.Width, SettingsButton.RightBadge.Height, 0, RageUI.GetBadgeColour(Style.RightBadge, Selected))
+                                end
+                            end
+                        end
+                    else
+                        ---@type table
+                        local LeftBadge = RageUI.BadgeStyle.Lock
+
+                        ---@type number
+                        local LeftBadgeOffset = ((LeftBadge == RageUI.BadgeStyle.None or tonumber(LeftBadge) == nil) and 0 or 27)
+
+                        if Selected then
+                            RenderText(Label, CurrentMenu.X + SettingsButton.Text.X + LeftBadgeOffset, CurrentMenu.Y + SettingsButton.Text.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, 0, SettingsButton.Text.Scale, 0, 0, 0, 255)
+                        else
+                            RenderText(Label, CurrentMenu.X + SettingsButton.Text.X + LeftBadgeOffset, CurrentMenu.Y + SettingsButton.Text.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, 0, SettingsButton.Text.Scale, 163, 159, 148, 255)
+                        end
+                        if LeftBadge ~= RageUI.BadgeStyle.None and tonumber(LeftBadge) ~= nil then
+                            RenderSprite(RageUI.GetBadgeDictionary(LeftBadge, Selected), RageUI.GetBadgeTexture(LeftBadge, Selected), CurrentMenu.X, CurrentMenu.Y + SettingsButton.LeftBadge.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, SettingsButton.LeftBadge.Width, SettingsButton.LeftBadge.Height, nil, CheckBoxLockBadgeColor(Selected))
+                        end
+                    end
+                    if Enabled == true or Enabled == nil then
+                        if Selected then
+                            if Style.RightLabel ~= nil and Style.RightLabel ~= "" then
+
+                                RenderText(Style.RightLabel, CurrentMenu.X + SettingsButton.RightText.X - RightBadgeOffset + CurrentMenu.WidthOffset, CurrentMenu.Y + SettingsButton.RightText.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, 0, SettingsButton.RightText.Scale, 0, 0, 0, 255, 2)
+                                BoxOffset = MeasureStringWidth(Style.RightLabel,0,0.35)
+                            end
+                        else
+                            if Style.RightLabel ~= nil and Style.RightLabel ~= "" then
+                                RenderText(Style.RightLabel, CurrentMenu.X + SettingsButton.RightText.X - RightBadgeOffset + CurrentMenu.WidthOffset, CurrentMenu.Y + SettingsButton.RightText.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, 0, SettingsButton.RightText.Scale, 245, 245, 245, 255, 2)
+                                BoxOffset =MeasureStringWidth(Style.RightLabel,0,0.35)
+                            end
+                        end
+
+                    end
+
+    
+                    BoxOffset = RightBadgeOffset + BoxOffset 
+                    if Style.Style ~= nil then
+                        if Style.Style == RageUI.CheckboxStyle.Tick then
+                            StyleCheckBox(Selected, Checked, 2, 4,BoxOffset)
+                        elseif Style.Style == RageUI.CheckboxStyle.Cross then
+                            StyleCheckBox(Selected, Checked, 5, 6,BoxOffset)
+                        else
+                            StyleCheckBox(Selected, Checked, 2, 4,BoxOffset)
+                        end
+                    else
+                        StyleCheckBox(Selected, Checked, 2, 4,BoxOffset)
+                    end
+
+                    if Selected and (CurrentMenu.Controls.Select.Active or (Hovered and CurrentMenu.Controls.Click.Active)) and (Style.Enabled == true or Style.Enabled == nil) then
+                        RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.Select)
+                        Checked = not Checked
+                    end
+
+                    if Selected and (CurrentMenu.Controls.Select.Active or (Hovered and CurrentMenu.Controls.Click.Active)) and (Style.Enabled == false) then
+                        RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.Error)
+                        Checked = false
+                    end
+
+                else
+                    error("UICheckBox Style is not a `table`")
                 end
 
-                RageUI.Checkbox("Activé ceci : ", Description, checkbox_boolean, { Style = RageUI.CheckboxStyle.Tick, RightLabel="Label" , RightBadge = RageUI.BadgeStyle.Heart, LeftBadge = RageUI.BadgeStyle.Gun,}, function(Hovered, Selected, Active, Checked)
-                    checkbox_boolean = Checked
-                end)
+                RageUI.ItemOffset = RageUI.ItemOffset + SettingsButton.Rectangle.Height
 
+                ItemsWrapper.ItemsDescription(CurrentMenu, Description, Selected)
 
-                RageUI.Checkbox("Activé ceci : ", Description, checkbox_boolean, { Style = RageUI.CheckboxStyle.Tick, RightLabel="Label longer"  }, function(Hovered, Selected, Active, Checked)
-                    checkbox_boolean = Checked
-                end)
-                local list_table = {
-                    { Name = "RageUI", Value = 1 },
-                    { Name = "iTexZoz", Value = 2 },
-                    { Name = "Parow", Value = 3 },
-                    { Name = "TDLC", Value = 3 },
-                    { Name = "Frazzle", Value = 3 },
-                }
-                RageUI.List("Projet & contributeur", list_table, quantity_number, Description, true, function(Hovered, Active, Selected, Index)
-                    quantity_number = Index
-                end)
-
-                RageUI.Progress("Progress ", progress_number, 50, Description, true, true, function(Hovered, Selected, Active, Index)
-                    progress_number = Index
-                end)
-
-                RageUI.Slider("Quantité", slider_number, 20, Description, false, true, function(Hovered, Selected, Active, Index)
-                    slider_number = Index
-                end)
-            end)
-
-        elseif RageUI.Visible(subMenu) then
-
-            RageUI.DrawContent({ header = true, instructionalButton = true }, function()
-             
-
-                for i = 1, 2500 do
-                    RageUI.Button("UIButton - " .. i, Description, { }, true, function(Hovered, Active, Selected)
-                        if Active then
-                        end
-                    end, subMenuToSubMenu)
-
-                end
-            end)
-
-        elseif RageUI.Visible(subMenuToSubMenu) then
-
-            RageUI.DrawContent({ header = true, instructionalButton = true }, function()
-
-                for i = 1, 50 do
-                    RageUI.Button("Encore des UIButton - " .. i, Description, {}, true, function(Hovered, Active, Selected)
-                        if Active then
-                        end
-                    end)
-                end
-
-            end, function()
-                RageUI.GridPanelHorizontal(Grid1x5X, "TopText", "ddd", "LeftText", "RightText", function(Hovered, Active, Y)
-                    Grid1x5X = Y
-                end)
-
-                RageUI.GridPanelVertical(GridPanelVertical, "TopText", "ddd", function(Hovered, Active, Y)
-                    GridPanelVertical = Y
-                end)
-
-                RageUI.ColourPanel("Colour", RageUI.HaircutColorsPanel, colour_table[1], colour_table[2], function(Hovered, Active, MinimumIndex, CurrentIndex)
-                    colour_table[1] = MinimumIndex
-                    colour_table[2] = CurrentIndex
-                end)
-
-                RageUI.PercentagePanel(percentage_float, nil, nil, nil, function(Hovered, Active, Percent)
-                    percentage_float = Percent
-                end)
-
-                RageUI.GridPanel(grid_5x5.X, grid_5x5.Y, "TopText", "BottomText", "LeftText", "RightText", function(Hovered, Active, X, Y)
-                    grid_5x5.X = X
-                    grid_5x5.Y = Y
-                end)
-
-
-            end)
-
+                Callback(Hovered, Selected, ((CurrentMenu.Controls.Select.Active or (Hovered and CurrentMenu.Controls.Click.Active)) and Selected), Checked)
+            end
+            RageUI.Options = RageUI.Options + 1
         end
-        DisplayRadar(false)
     end
-
-end)
-
-
---[[
-Citizen.CreateThread(function()
-    while true do
-        Citizen.Wait(1)
-
-        local ColorPanelScaleform = RequestScaleformMovie("COLOUR_SWITCHER_02")
-        BeginScaleformMovieMethod(ColorPanelScaleform, "SET_TITLE");
-        PushScaleformMovieMethodParameterString("Opacity");
-        BeginTextCommandScaleformString("FACE_COLOUR");
-        AddTextComponentInteger (1);
-        AddTextComponentInteger(1);
-        EndTextCommandScaleformString();
-        ScaleformMovieMethodAddParamInt(0);
-        ScaleformMovieMethodAddParamBool(true);
-        EndScaleformMovieMethod();
-
-        BeginScaleformMovieMethod(ColorPanelScaleform, "SET_DATA_SLOT_EMPTY");
-        EndScaleformMovieMethod();
-
-        --for (int i = 0; i < 64; i++)
-        --{
-        r = 1;
-        g = 1;
-        b = 1;
-        -- if (listItem.ColorPanelColorType == MenuListItem.ColorPanelType.Hair)
-        --{
-        GetHairRgbColor(i, r, g, b);
-        -- }
-        -- else
-        -- {
-        GetMakeupRgbColor(i, r, g, b);
-        -- }
-
-        BeginScaleformMovieMethod(ColorPanelScaleform, "SET_DATA_SLOT");
-        ScaleformMovieMethodAddParamInt(i);
-        ScaleformMovieMethodAddParamInt(r);
-        ScaleformMovieMethodAddParamInt(g);
-        ScaleformMovieMethodAddParamInt(b);
-        EndScaleformMovieMethod();
-
-        BeginScaleformMovieMethod(ColorPanelScaleform, "DISPLAY_VIEW");
-        EndScaleformMovieMethod();
-
-        BeginScaleformMovieMethod(ColorPanelScaleform, "SET_HIGHLIGHT");
-        ScaleformMovieMethodAddParamInt(1);
-        EndScaleformMovieMethod();
-
-        BeginScaleformMovieMethod(ColorPanelScaleform, "SHOW_OPACITY");
-        ScaleformMovieMethodAddParamBool(false);
-        ScaleformMovieMethodAddParamBool(true);
-        EndScaleformMovieMethod();
-
-        width = 2;
-        height = 2;
-        x = 2;
-        y = 2;
-
-        SetScriptGfxAlign(82, 84);
-        SetScriptGfxAlignParams(0, 0, 0, 0);
-        DrawScaleformMovie(ColorPanelScaleform, x, y, width, height, 255, 255, 255, 255, 0);
-        ResetScriptGfxAlign();
-    end
-end)
-]]
-
---[[
-
-Citizen.CreateThread(function()
-    function drawscaleform(scaleform)
-        scaleform = RequestScaleformMovie(scaleform)
-
-        while not HasScaleformMovieLoaded(scaleform) do
-            Citizen.Wait(0)
-        end
-
-        PushScaleformMovieFunction(scaleform, "SET_TITLE")
-        BeginScaleformMovieMethod(scaleform, "SET_TITLE");
-        PushScaleformMovieMethodParameterString("Opacity");
-        BeginTextCommandScaleformString("FACE_COLOUR");
-        AddTextComponentInteger (1);
-        AddTextComponentInteger(1);
-        EndTextCommandScaleformString();
-        ScaleformMovieMethodAddParamInt(0);
-        ScaleformMovieMethodAddParamBool(true);
-        EndScaleformMovieMethod();
-
-        BeginScaleformMovieMethod(scaleform, "SET_DATA_SLOT_EMPTY");
-        EndScaleformMovieMethod();
-
-        for i = 1, 64 do
-            local r = 0;
-            local g = 0;
-            local b = 0;
-            --GetHairRgbColor(i, r, g, b);
-            GetMakeupRgbColor(i, r, g, b);
-
-            BeginScaleformMovieMethod(scaleform, "SET_DATA_SLOT");
-            ScaleformMovieMethodAddParamInt(i);
-            ScaleformMovieMethodAddParamInt(r);
-            ScaleformMovieMethodAddParamInt(g);
-            ScaleformMovieMethodAddParamInt(b);
-            EndScaleformMovieMethod();
-        end
-
-
-        BeginScaleformMovieMethod(scaleform, "DISPLAY_VIEW");
-        EndScaleformMovieMethod();
-
-        BeginScaleformMovieMethod(scaleform, "SET_HIGHLIGHT");
-        ScaleformMovieMethodAddParamInt(1);
-        EndScaleformMovieMethod();
-
-        BeginScaleformMovieMethod(scaleform, "SHOW_OPACITY");
-        ScaleformMovieMethodAddParamBool(false);
-        ScaleformMovieMethodAddParamBool(true);
-        EndScaleformMovieMethod();
-
-
-       -- width = 2;
-       -- height = 2;
-       -- x = 2;
-       -- y = 2;
-
-        --SetScriptGfxAlign(82, 84);
-        --SetScriptGfxAlignParams(0, 0, 0, 0);
-        --DrawScaleformMovie(ColorPanelScaleform, x, y, width, height, 255, 255, 255, 255, 0);
-        --ResetScriptGfxAlign();
-
-        DrawScaleformMovieFullscreen(scaleform, 255, 255, 255, 255, 0)
-    end
-
-    while true do
-        Citizen.Wait(2)
-        drawscaleform("COLOUR_SWITCHER_02")
-    end
-end)
-
-]]
+end

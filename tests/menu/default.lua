@@ -89,7 +89,7 @@ Citizen.CreateThread(function()
                     progress_number = Index
                 end)
 
-                RageUI.Slider("Quantité", slider_number, 20, Description, false, true, function(Hovered, Selected, Active, Index)
+                RageUI.Slider("Quantité", slider_number, 20, Description, false,{ LeftBadge = RageUI.BadgeStyle.Gun, RightBadge = RageUI.BadgeStyle.Heart, RightLabel = "XXXXXXXXXX" } ,true, function(Hovered, Selected, Active, Index)
                     slider_number = Index
                 end)
             end)
