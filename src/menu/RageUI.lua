@@ -502,11 +502,15 @@ function RageUI.DrawContent(settings, items, panels)
     else
         RageUI.Header(true);
     end
-    items()
+    if (items ~= nil) then
+        items()
+    end
     RageUI.Background();
     RageUI.Navigation();
     RageUI.Description();
-    panels()
+    if (panels ~= nil) then
+        panels()
+    end
     if (settings.instructionalButton ~= nil) then
         RageUI.Render(settings.instructionalButton)
     else
