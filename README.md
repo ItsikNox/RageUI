@@ -1,5 +1,6 @@
-# RageUI **
+# RageUI
 
+**
 <hr>
 
 ![RageUI](https://i.gyazo.com/35642f8eb1688486d11e48ac59f84d95.png)
