@@ -1,6 +1,6 @@
 <p align="center">
 <img width="80%" src="https://i.gyazo.com/35642f8eb1688486d11e48ac59f84d95.png">
-</p
+</p>
 <br>
 
 Hello to all of you. 
@@ -35,5 +35,22 @@ Thank you very much to all the contributors who allowed me to move forward on th
 
 - there is no need to ask questions about the fivem forum workstation, I will not answer any questions or problems on the forum, in order to centralize the messages and questions asked by users of this library. 
 
+<br>
 
+# The documentation of this library. 
 
+<p align="center">
+<img width="80%" src="https://i.gyazo.com/9007f2f30c5cb52b4e2a1f799ac5c1c1.png">
+</p>
+
+The documentation of this library is provided and updated by the community, if you have a question on how to use an item in this library you will find your answer at the following address (if you have a problem with it we invite you to keep us informed as soon as possible)
+
+<br>
+
+# Troubleshooting
+
+<p align="center">
+<img width="80%" src="https://i.gyazo.com/7e0c639920061a37fcd6b4604b71e662.png">
+</p>
+
+- CPU calculation problem present when a number of items is large. (3k item 3.0ms) this is an error only present on the menus, it is important to understand that the calculation performed only if the menu is visible. (unlike NativeUILua-Reloaded)
