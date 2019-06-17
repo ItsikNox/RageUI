@@ -23,3 +23,17 @@ Thank you very much to all the contributors who allowed me to move forward on th
 - [Parow](https://github.com/Parow)
 - [TDLC](https://github.com/TDLCTV)
 
+# Read this message before using it.
+
+- It is useless to ask the question if this library is VRP or ESX compatible, if you ask yourself this question I invite you to turn on your brain to try to understand at least a little what the utility of this library is.
+
+- First of all, it is important to take into account that no support will be provided if you don't know you to use this library with the documentation provided. [See the tab]. 
+
+- You can find the frequently asked questions from this dedicated page to answer these questions[See the tab]. 
+
+- it is possible that other people are open an exit answering the question you are asking yourself or talking about a problem you can surely encounter, before opening exit it is important to look for if a duplicate does not exist. 
+
+- there is no need to ask questions about the fivem forum workstation, I will not answer any questions or problems on the forum, in order to centralize the messages and questions asked by users of this library. 
+
+
+
