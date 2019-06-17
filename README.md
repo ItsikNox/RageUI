@@ -43,7 +43,9 @@ This project would never have been possible without the trust [Frazzle] placed i
 # The documentation of this library. :book:
 
 <p align="center">
+  <a href="https://github.com/iTexZoz/RageUI/wiki">
 <img width="80%" src="https://i.gyazo.com/9007f2f30c5cb52b4e2a1f799ac5c1c1.png">
+  </a>
 </p>
 
 The documentation of this library is provided and updated by the community, if you have a question on how to use an item in this library you will find your answer at the following address (if you have a problem with it we invite you to keep us informed as soon as possible)
@@ -53,7 +55,9 @@ The documentation of this library is provided and updated by the community, if y
 # Troubleshooting :bug:
 
 <p align="center">
+    <a href="https://github.com/iTexZoz/RageUI/wiki/Troubleshooting">
 <img width="80%" src="https://i.gyazo.com/7e0c639920061a37fcd6b4604b71e662.png">
+  </a>
 </p>
 
 - CPU calculation problem present when a number of items is large. (3k item 3.0ms) this is an error only present on the menus, it is important to understand that the calculation performed only if the menu is visible. (unlike NativeUILua-Reloaded)
