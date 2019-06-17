@@ -99,25 +99,6 @@ function RageUI.GoDown(Options)
     end
 end
 
----GoBack
----@return nil
----@public
-function RageUI.GoBack()
-    RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.Back)
-
-    if RageUI.CurrentMenu.Parent ~= nil then
-        if RageUI.CurrentMenu.Parent() then
-            RageUI.NextMenu = RageUI.CurrentMenu.Parent
-        else
-            RageUI.NextMenu = nil
-            RageUI.Visible(RageUI.CurrentMenu, false)
-        end
-    else
-        RageUI.NextMenu = nil
-        RageUI.Visible(RageUI.CurrentMenu, false)
-    end
-end
-
 ---Controls
 ---@return nil
 ---@public
