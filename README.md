@@ -1,4 +1,7 @@
-<center>![RageUI](https://i.gyazo.com/35642f8eb1688486d11e48ac59f84d95.png)</center>
+<p align="center">
+<img width="80%" src="https://i.gyazo.com/35642f8eb1688486d11e48ac59f84d95.png">
+</p
+<br>
 
 Hello to all of you. 
 
