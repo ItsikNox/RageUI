@@ -17,7 +17,7 @@ local GridPanelHorizontal = {
 ---@param Callback table
 ---@return table
 ---@public
-function RageUI.GridPanelHorizontal(X, TopText, BottomText, LeftText, RightText, Callback)
+function RageUI.GridPanelHorizontal(X, LeftText, RightText, Callback)
     local CurrentMenu = RageUI.CurrentMenu
     if CurrentMenu ~= nil then
         if CurrentMenu() then

@@ -32,6 +32,5 @@ client_scripts {
     "src/menu/panels/UIPercentagePanel.lua",
     "src/menu/windows/UIHeritage.lua",
 
-    "tests/menu/default.lua",
-    "tests/location/default.lua",
+    "MenuExample/MenuExample.lua",
 }
