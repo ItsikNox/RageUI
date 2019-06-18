@@ -22,10 +22,11 @@ This project would never have been possible without the trust [Frazzle] placed i
 
 ### Thank you very much to all the contributors who allowed me to move forward on this project. :snail:
 
-- [Frazzle](https://github.com/FrazzIe) 
-- [Dylan Malandain (iTexZoz)](https://github.com/iTexZoz)
-- [Parow](https://github.com/Parow)
-- [TDLC](https://github.com/TDLCTV)
+- [Development] [Frazzle](https://github.com/FrazzIe) 
+- [Development] [Dylan Malandain (iTexZoz)](https://github.com/iTexZoz)
+- [Development] [Parow](https://github.com/Parow)
+- [Development] [TDLC](https://github.com/TDLCTV)
+- [Media Previews] [eR0ot](https://github.com/eR0oT)
 
 # Read this message before using it. ⚠️
 
