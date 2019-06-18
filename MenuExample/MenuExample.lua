@@ -1,3 +1,7 @@
+local updateShowcaseData = {
+    count = 1;
+}
+
 Citizen.CreateThread(function()
 
     local mainMenu = RageUI.CreateMenu("RageUI", "~b~SHOWCASE")
@@ -12,18 +16,22 @@ Citizen.CreateThread(function()
     mainMenu:SetSubtitle("~b~RAGEUI SHOWCASE - RAGEUI")
     mainMenu.EnableMouse = true;
 
-    local subMenu = RageUI.CreateSubMenu(mainMenu, "", "~b~RAGEUI SHOWCASE", nil, nil, "shopui_title_gunclub", "shopui_title_gunclub")
-    subMenu.EnableMouse = true;
+    local updateShowcase = RageUI.CreateSubMenu(mainMenu, "", "~b~RAGEUI SHOWCASE", nil, nil, "shopui_title_gunclub", "shopui_title_gunclub")
+    updateShowcase.EnableMouse = false;
+    updateShowcase:AddInstructionButton({
+        [1] = GetControlInstructionalButton(2, 56, 0),
+        [2] = "Add item",
+    })
+
+    updateShowcase:AddInstructionButton({
+        [1] = GetControlInstructionalButton(2, 57, 0),
+        [2] = "Remove item",
+    })
 
     local panelShowcase = RageUI.CreateSubMenu(mainMenu, "RageUI", "~b~RAGEUI SHOWCASE - PANELS")
     panelShowcase.EnableMouse = true;
 
     local description = "Sample description that takes more than one line. Moreso, it takes way more than two lines since it's so long. Wow, check out this length!"
-
-    subMenu:AddInstructionButton({
-        [1] = GetControlInstructionalButton(2, 55, 0),
-        [2] = "This is a Spacebar",
-    })
 
     local mainMenuData = {
         checkbox = {
@@ -55,7 +63,8 @@ Citizen.CreateThread(function()
     local panelShowcaseData = {
         colors = {
             enable = false,
-            index = 1
+            index_one = 1,
+            index_two = 1
         },
         percentage = {
             enable = false,
@@ -77,9 +86,20 @@ Citizen.CreateThread(function()
     }
     while true do
         Citizen.Wait(1)
+
         if IsControlJustPressed(1, 51) then
             RageUI.Visible(mainMenu, not RageUI.Visible(mainMenu))
         end
+
+        if IsControlJustPressed(1, 56) then
+            updateShowcaseData.count = updateShowcaseData.count + 1
+        end
+        if IsControlJustPressed(1, 57) then
+            if (updateShowcaseData.count > 1) then
+                updateShowcaseData.count = updateShowcaseData.count - 1
+            end
+        end
+
         if RageUI.Visible(mainMenu) then
 
             RageUI.DrawContent({ header = true, instructionalButton = true }, function()
@@ -110,16 +130,16 @@ Citizen.CreateThread(function()
                 end
 
                 RageUI.Button("Another Menu", description, { RightLabel = "→→→" }, true, function(Hovered, Active, Selected)
-                end, subMenu)
+                end, updateShowcase)
 
             end, function()
                 ---Panels
             end)
 
-        elseif RageUI.Visible(subMenu) then
+        elseif RageUI.Visible(updateShowcase) then
             RageUI.DrawContent({ header = true, instructionalButton = true }, function()
 
-                for i = 1, 50 do
+                for i = 1, updateShowcaseData.count do
                     RageUI.Button("Another Sub-Menu " .. i, description, { RightLabel = "→→→" }, true, function(Hovered, Active, Selected)
                         if Active then
                         end
@@ -156,23 +176,40 @@ Citizen.CreateThread(function()
                 ---Panels
 
                 if (panelShowcaseData.colors.enable) then
+                    RageUI.ColourPanel("Colours", RageUI.HaircutColorsPanel, panelShowcaseData.colors.index_one, panelShowcaseData.colors.index_two, function(Hovered, Active, MinimumIndex, CurrentIndex)
+                        panelShowcaseData.colors.index_one = MinimumIndex
+                        panelShowcaseData.colors.index_two = CurrentIndex
 
+                        RageUI.Text({
+                            message = "Colours Panel | MinimumIndex : " .. MinimumIndex .. " CurrentIndex : " .. CurrentIndex
+                        })
+                    end)
                 end
 
                 if (panelShowcaseData.percentage.enable) then
-
+                    RageUI.PercentagePanel(panelShowcaseData.percentage.index, "HeaderText", "MinText", "MaxText", function(Hovered, Active, Percent)
+                        panelShowcaseData.percentage.index = Percent
+                        RageUI.Text({
+                            message = "Percentage | Current : " .. Percent
+                        })
+                    end)
                 end
 
                 if (panelShowcaseData.horizontal.enable) then
-                    RageUI.GridPanelHorizontal(panelShowcaseData.horizontal.x, "LeftText", "RightText", function(Hovered, Active, Y)
-                        panelShowcaseData.horizontal.x = Y
+                    RageUI.GridPanelHorizontal(panelShowcaseData.horizontal.x, "LeftText", "RightText", function(Hovered, Active, X)
+                        panelShowcaseData.horizontal.x = X
+                        RageUI.Text({
+                            message = "Grid Panel Horizontal | X : " .. X
+                        })
                     end)
-
                 end
 
                 if (panelShowcaseData.vertical.enable) then
                     RageUI.GridPanelVertical(panelShowcaseData.vertical.y, "TopText", "BottomText", function(Hovered, Active, Y)
                         panelShowcaseData.vertical.y = Y
+                        RageUI.Text({
+                            message = "Grid Panel Vertical | Y : " .. Y
+                        })
                     end)
                 end
 
@@ -180,6 +217,9 @@ Citizen.CreateThread(function()
                     RageUI.GridPanel(panelShowcaseData.square.x, panelShowcaseData.square.y, "TopText", "BottomText", "LeftText", "RightText", function(Hovered, Active, X, Y)
                         panelShowcaseData.square.x = X
                         panelShowcaseData.square.y = Y
+                        RageUI.Text({
+                            message = "Grid Panel | X :" .. X .. " Y : " .. Y
+                        })
                     end)
                 end
 
