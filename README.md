@@ -5,7 +5,8 @@
 
 ![OpenIssue](https://img.shields.io/github/issues/iTexZoz/RageUI.svg?style=flat)
 ![LastReleases](https://img.shields.io/github/release/iTexZoz/RageUI.svg?label=Last%20releases&style=flat)
-
+<br>
+## ⚠️Warning, downloading and publishing this resource on Github without using the github Fork option is not allowed and may result in a suspension of the repository. I invite you to respect my work and that of my collaborators. :snail:
 ## Hello to all of you. 
 
 ### First of all, I wanted to present the RageUI project. 
