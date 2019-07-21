@@ -4,12 +4,6 @@
 --- DateTime: 21/04/2019 21:20
 ---
 
-print("\n")
-print("Github download : https://github.com/iTexZoz/RageUI/releases")
-print("[Feature Suggestions] : https://github.com/iTexZoz/RageUI/issues/1")
-print("[Frequently asked question] : https://github.com/iTexZoz/RageUI/issues/2")
-print("RageUI wiki : https://github.com/iTexZoz/NativeUILua-Reloaded/wiki")
-print("\n")
 
 ---round
 ---@param num number
@@ -437,7 +431,6 @@ RageUI.Settings = {
                 Right = { X = 373.25, Y = 130, Scale = 0.35 },
             },
         },
-
         Percentage = {
             Background = { Dictionary = "commonmenu", Texture = "gradient_bgd", Y = 4, Width = 431, Height = 76 },
             Bar = { X = 9, Y = 50, Width = 413, Height = 10 },
@@ -680,23 +673,27 @@ function RageUI.Render(instructionalButton)
             RageUI.Options = 0
             RageUI.ItemOffset = 0
 
-            if RageUI.CurrentMenu.Controls.Back.Pressed then
-                RageUI.CurrentMenu.Controls.Back.Pressed = false
+            print(RageUI.CurrentMenu.Closable)
 
-                RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.Back)
-                if RageUI.CurrentMenu.Closed ~= nil then
-                    RageUI.CurrentMenu.Closed()
-                end
-                if RageUI.CurrentMenu.Parent ~= nil then
-                    if RageUI.CurrentMenu.Parent() then
-                        RageUI.NextMenu = RageUI.CurrentMenu.Parent
+            if RageUI.CurrentMenu.Controls.Back.Enabled and RageUI.CurrentMenu.Closable then
+                if RageUI.CurrentMenu.Controls.Back.Pressed then
+                    RageUI.CurrentMenu.Controls.Back.Pressed = false
+
+                    RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.Back)
+                    if RageUI.CurrentMenu.Closed ~= nil then
+                        RageUI.CurrentMenu.Closed()
+                    end
+                    if RageUI.CurrentMenu.Parent ~= nil then
+                        if RageUI.CurrentMenu.Parent() then
+                            RageUI.NextMenu = RageUI.CurrentMenu.Parent
+                        else
+                            RageUI.NextMenu = nil
+                            RageUI.Visible(RageUI.CurrentMenu, false)
+                        end
                     else
                         RageUI.NextMenu = nil
                         RageUI.Visible(RageUI.CurrentMenu, false)
                     end
-                else
-                    RageUI.NextMenu = nil
-                    RageUI.Visible(RageUI.CurrentMenu, false)
                 end
             end
 

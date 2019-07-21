@@ -27,39 +27,37 @@ function RageUI.GetSafeZoneBounds()
     return { X = math.round(SafeSize * ((W / H) * 5.4)), Y = math.round(SafeSize * 5.4) }
 end
 
+---GoUp
+---@param Options number
+---@return nil
+---@public
 function RageUI.GoUp(Options)
     if RageUI.CurrentMenu ~= nil then
         if RageUI.CurrentMenu() then
-            Options = RageUI.CurrentMenu.Options
-            if RageUI.CurrentMenu.Index > Options then
-                RageUI.CurrentMenu.Pagination.Minimum = Options - (RageUI.CurrentMenu.Pagination.Total - 1)
-                RageUI.CurrentMenu.Pagination.Maximum = Options
-                RageUI.CurrentMenu.Index = Options
-            else
-                if Options > RageUI.CurrentMenu.Pagination.Total then
-                    if RageUI.CurrentMenu.Index <= RageUI.CurrentMenu.Pagination.Minimum then
-                        if RageUI.CurrentMenu.Index == 1 then
-                            RageUI.CurrentMenu.Pagination.Minimum = Options - (RageUI.CurrentMenu.Pagination.Total - 1)
-                            RageUI.CurrentMenu.Pagination.Maximum = Options
-                            RageUI.CurrentMenu.Index = Options
-                        else
-                            RageUI.CurrentMenu.Pagination.Minimum = RageUI.CurrentMenu.Pagination.Minimum - 1
-                            RageUI.CurrentMenu.Pagination.Maximum = RageUI.CurrentMenu.Pagination.Maximum - 1
-                            RageUI.CurrentMenu.Index = RageUI.CurrentMenu.Index - 1
-                        end
-                    else
-                        RageUI.CurrentMenu.Index = RageUI.CurrentMenu.Index - 1
-                    end
-                else
+            if Options > RageUI.CurrentMenu.Pagination.Total then
+                if RageUI.CurrentMenu.Index <= RageUI.CurrentMenu.Pagination.Minimum then
                     if RageUI.CurrentMenu.Index == 1 then
                         RageUI.CurrentMenu.Pagination.Minimum = Options - (RageUI.CurrentMenu.Pagination.Total - 1)
                         RageUI.CurrentMenu.Pagination.Maximum = Options
                         RageUI.CurrentMenu.Index = Options
                     else
+                        RageUI.CurrentMenu.Pagination.Minimum = RageUI.CurrentMenu.Pagination.Minimum - 1
+                        RageUI.CurrentMenu.Pagination.Maximum = RageUI.CurrentMenu.Pagination.Maximum - 1
                         RageUI.CurrentMenu.Index = RageUI.CurrentMenu.Index - 1
                     end
+                else
+                    RageUI.CurrentMenu.Index = RageUI.CurrentMenu.Index - 1
+                end
+            else
+                if RageUI.CurrentMenu.Index == 1 then
+                    RageUI.CurrentMenu.Pagination.Minimum = Options - (RageUI.CurrentMenu.Pagination.Total - 1)
+                    RageUI.CurrentMenu.Pagination.Maximum = Options
+                    RageUI.CurrentMenu.Index = Options
+                else
+                    RageUI.CurrentMenu.Index = RageUI.CurrentMenu.Index - 1
                 end
             end
+
             RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.UpDown)
         end
     end
@@ -72,36 +70,30 @@ end
 function RageUI.GoDown(Options)
     if RageUI.CurrentMenu ~= nil then
         if RageUI.CurrentMenu() then
-            Options = RageUI.CurrentMenu.Options
-            if RageUI.CurrentMenu.Index > Options then
-                RageUI.CurrentMenu.Pagination.Minimum = 1
-                RageUI.CurrentMenu.Pagination.Maximum = RageUI.CurrentMenu.Pagination.Total
-                RageUI.CurrentMenu.Index = 1
-            else
-                if Options > RageUI.CurrentMenu.Pagination.Total then
-                    if RageUI.CurrentMenu.Index >= RageUI.CurrentMenu.Pagination.Maximum then
-                        if RageUI.CurrentMenu.Index == Options then
-                            RageUI.CurrentMenu.Pagination.Minimum = 1
-                            RageUI.CurrentMenu.Pagination.Maximum = RageUI.CurrentMenu.Pagination.Total
-                            RageUI.CurrentMenu.Index = 1
-                        else
-                            RageUI.CurrentMenu.Pagination.Maximum = RageUI.CurrentMenu.Pagination.Maximum + 1
-                            RageUI.CurrentMenu.Pagination.Minimum = RageUI.CurrentMenu.Pagination.Maximum - (RageUI.CurrentMenu.Pagination.Total - 1)
-                            RageUI.CurrentMenu.Index = RageUI.CurrentMenu.Index + 1
-                        end
-                    else
-                        RageUI.CurrentMenu.Index = RageUI.CurrentMenu.Index + 1
-                    end
-                else
+            if Options > RageUI.CurrentMenu.Pagination.Total then
+                if RageUI.CurrentMenu.Index >= RageUI.CurrentMenu.Pagination.Maximum then
                     if RageUI.CurrentMenu.Index == Options then
                         RageUI.CurrentMenu.Pagination.Minimum = 1
                         RageUI.CurrentMenu.Pagination.Maximum = RageUI.CurrentMenu.Pagination.Total
                         RageUI.CurrentMenu.Index = 1
                     else
+                        RageUI.CurrentMenu.Pagination.Maximum = RageUI.CurrentMenu.Pagination.Maximum + 1
+                        RageUI.CurrentMenu.Pagination.Minimum = RageUI.CurrentMenu.Pagination.Maximum - (RageUI.CurrentMenu.Pagination.Total - 1)
                         RageUI.CurrentMenu.Index = RageUI.CurrentMenu.Index + 1
                     end
+                else
+                    RageUI.CurrentMenu.Index = RageUI.CurrentMenu.Index + 1
+                end
+            else
+                if RageUI.CurrentMenu.Index == Options then
+                    RageUI.CurrentMenu.Pagination.Minimum = 1
+                    RageUI.CurrentMenu.Pagination.Maximum = RageUI.CurrentMenu.Pagination.Total
+                    RageUI.CurrentMenu.Index = 1
+                else
+                    RageUI.CurrentMenu.Index = RageUI.CurrentMenu.Index + 1
                 end
             end
+
             RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.UpDown)
         end
     end
@@ -117,9 +109,7 @@ function RageUI.Controls()
 
                 local Controls = RageUI.CurrentMenu.Controls;
                 ---@type number
-                local Options = RageUI.CurrentMenu.Options
-                
-
+                local Options = RageUI.Options
 
                 if RageUI.CurrentMenu.EnableMouse then
                     DisableAllControlActions(2)
@@ -255,7 +245,7 @@ function RageUI.Controls()
                     end
                 end
 
-                if Controls.Select.Enabled  then
+                if Controls.Select.Enabled  and not Controls.Down.Pressed and not Controls.Up.Pressed then
                     for Index = 1, #Controls.Select.Keys do
                         if not Controls.Select.Pressed then
                             if IsDisabledControlJustPressed(Controls.Select.Keys[Index][1], Controls.Select.Keys[Index][2]) then
@@ -289,7 +279,7 @@ function RageUI.Controls()
                     end
                 end
 
-                if Controls.Click.Enabled then
+                if Controls.Click.Enabled  and not Controls.Down.Pressed and not Controls.Up.Pressed then
                     for Index = 1, #Controls.Click.Keys do
                         if not Controls.Click.Pressed then
                             if IsDisabledControlJustPressed(Controls.Click.Keys[Index][1], Controls.Click.Keys[Index][2]) then
@@ -322,7 +312,7 @@ function RageUI.Controls()
                         end
                     end
                 end
-                if Controls.Back.Enabled  then
+                if Controls.Back.Enabled and not Controls.Down.Pressed and not Controls.Up.Pressed then
                     for Index = 1, #Controls.Back.Keys do
                         if not Controls.Back.Pressed then
                             if IsDisabledControlJustPressed(Controls.Back.Keys[Index][1], Controls.Back.Keys[Index][2]) then

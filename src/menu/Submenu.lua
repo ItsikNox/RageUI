@@ -46,6 +46,7 @@ function RageUI.CreateSubMenu(ParentMenu, Title, Subtitle, X, Y, TextureDictiona
             Menu.SafeZoneSize = nil
             Menu.EnableMouse = false
             Menu.Options = 0
+            Menu.Closable = true
 
             Menu.InstructionalScaleform = RequestScaleformMovie("INSTRUCTIONAL_BUTTONS")
 
