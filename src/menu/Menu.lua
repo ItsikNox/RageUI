@@ -44,6 +44,8 @@ function RageUI.CreateMenu(Title, Subtitle, X, Y, TextureDictionary, TextureName
     Menu.SafeZoneSize = nil
     Menu.EnableMouse = false
     Menu.Options = 0
+    Menu.Closable = true
+
     Menu.InstructionalScaleform = RequestScaleformMovie("INSTRUCTIONAL_BUTTONS")
 
     if string.starts(Menu.Subtitle, "~") then
@@ -111,6 +113,7 @@ function RageUI.Menus:SetSubtitle(Subtitle)
         else
             self.SubtitleHeight = 0
         end
+
     else
         self.SubtitleHeight = -37
     end
@@ -173,10 +176,12 @@ function RageUI.Menus:SetSpriteBanner(TextureDictionary, Texture)
     self.Rectangle = nil
 end
 
-
- --- TODO need using
-function RageUI.Menus:DrawInstructional()
-    DrawScaleformMovieFullscreen(self.InstructionalScaleform, 255, 255, 255, 255, 0)
+function RageUI.Menus:Closable(boolean)
+    if type(boolean) == "boolean" then
+        self.Closable = boolean
+    else
+        error("Type is not boolean")
+    end
 end
 
 function RageUI.Menus:AddInstructionButton(button)
@@ -227,11 +232,13 @@ function RageUI.Menus:UpdateInstructionalButtons(Visible)
     PushScaleformMovieMethodParameterString(GetLabelText("HUD_INPUT2"))
     EndScaleformMovieMethod()
 
-    BeginScaleformMovieMethod(self.InstructionalScaleform, "SET_DATA_SLOT")
-    ScaleformMovieMethodAddParamInt(1)
-    PushScaleformMovieMethodParameterButtonName(GetControlInstructionalButton(2, 177, 0))
-    PushScaleformMovieMethodParameterString(GetLabelText("HUD_INPUT3"))
-    EndScaleformMovieMethod()
+    if self.Closable then
+        BeginScaleformMovieMethod(self.InstructionalScaleform, "SET_DATA_SLOT")
+        ScaleformMovieMethodAddParamInt(1)
+        PushScaleformMovieMethodParameterButtonName(GetControlInstructionalButton(2, 177, 0))
+        PushScaleformMovieMethodParameterString(GetLabelText("HUD_INPUT3"))
+        EndScaleformMovieMethod()
+    end
 
     local count = 2
 
