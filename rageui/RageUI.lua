@@ -295,9 +295,14 @@ function RageUI.Banner(Enabled)
                             end
                         end
                     end)
+
                     local Glarewidth = RageUI.Settings.Items.Title.Background.Width + RageUI.CurrentMenu.WidthOffset
                     local Glareheight  = RageUI.Settings.Items.Title.Background.Height
-                    DrawScaleformMovie(ScaleformMovie, 0.5450, 0.482, Glarewidth / 430, Glareheight / 100, 255, 51, 204, 255, 0)
+
+                    --- TODO need auto scaling
+                    local GlareX = 0.5450
+                    local GalreY = 0.482
+                    DrawScaleformMovie(ScaleformMovie, GlareX, GalreY, Glarewidth / 430, Glareheight / 100, 255, 51, 204, 255, 0)
 
 
 
