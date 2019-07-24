@@ -673,8 +673,6 @@ function RageUI.Render(instructionalButton)
             RageUI.Options = 0
             RageUI.ItemOffset = 0
 
-            print(RageUI.CurrentMenu.Closable)
-
             if RageUI.CurrentMenu.Controls.Back.Enabled and RageUI.CurrentMenu.Closable then
                 if RageUI.CurrentMenu.Controls.Back.Pressed then
                     RageUI.CurrentMenu.Controls.Back.Pressed = false
