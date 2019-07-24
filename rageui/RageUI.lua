@@ -169,14 +169,35 @@ RageUI.Settings = {
         },
     },
     Audio = {
-        Library = "HUD_FRONTEND_DEFAULT_SOUNDSET",
-        UpDown = "NAV_UP_DOWN",
-        LeftRight = "NAV_LEFT_RIGHT",
-        Select = "SELECT",
-        Back = "BACK",
-        Error = "ERROR",
-        Slider = "CONTINUOUS_SLIDER",
-        Id = nil,
+        Use = "Default",
+
+        Default = {
+            UpDown = {
+                audioName = "HUD_FRONTEND_DEFAULT_SOUNDSET",
+                audioRef = "NAV_UP_DOWN",
+            },
+            LeftRight = {
+                audioName = "HUD_FRONTEND_DEFAULT_SOUNDSET",
+                audioRef = "NAV_LEFT_RIGHT",
+            },
+            Select = {
+                audioName = "HUD_FRONTEND_DEFAULT_SOUNDSET",
+                audioRef = "SELECT",
+            },
+            Back = {
+                audioName = "HUD_FRONTEND_DEFAULT_SOUNDSET",
+                audioRef = "BACK",
+            },
+            Error = {
+                audioName = "HUD_FRONTEND_DEFAULT_SOUNDSET",
+                audioRef = "ERROR",
+            },
+            Slider = {
+                audioName = "HUD_FRONTEND_DEFAULT_SOUNDSET",
+                audioRef = "CONTINUOUS_SLIDER",
+                Id = nil
+            },
+        }
     },
     Items = {
         Title = {
@@ -201,34 +222,6 @@ RageUI.Settings = {
         },
     },
 }
-
----PlaySound
----@param Library string
----@param Sound string
----@param IsLooped boolean
----@return nil
----@public
-function RageUI.PlaySound(Library, Sound, IsLooped)
-    if not IsLooped then
-        PlaySoundFrontend(-1, Sound, Library, true)
-    else
-        if not RageUI.Settings.Audio.Id then
-            Citizen.CreateThread(function()
-                RageUI.Settings.Audio.Id = GetSoundId()
-
-                PlaySoundFrontend(RageUI.Settings.Audio.Id, Sound, Library, true)
-
-                Citizen.Wait(0.01)
-
-                StopSound(RageUI.Settings.Audio.Id)
-
-                ReleaseSoundId(RageUI.Settings.Audio.Id)
-
-                RageUI.Settings.Audio.Id = nil
-            end)
-        end
-    end
-end
 
 ---Visible
 ---@param Menu function
@@ -257,7 +250,7 @@ function RageUI.Visible(Menu, Value)
     end
 end
 
----Title
+---Banner
 ---@return nil
 ---@public
 ---@param Enabled boolean
@@ -278,7 +271,6 @@ function RageUI.Banner(Enabled)
                         RenderRectangle(RageUI.CurrentMenu.X, RageUI.CurrentMenu.Y, RageUI.Settings.Items.Title.Background.Width + RageUI.CurrentMenu.WidthOffset, RageUI.Settings.Items.Title.Background.Height, RageUI.CurrentMenu.Rectangle.R, RageUI.CurrentMenu.Rectangle.G, RageUI.CurrentMenu.Rectangle.B, RageUI.CurrentMenu.Rectangle.A)
                     end
 
-
                     local ScaleformMovie = RequestScaleformMovie("MP_MENU_GLARE")
                     Citizen.CreateThread(function()
                         if not HasScaleformMovieLoaded(ScaleformMovie) then
@@ -290,14 +282,12 @@ function RageUI.Banner(Enabled)
                     end)
 
                     local Glarewidth = RageUI.Settings.Items.Title.Background.Width + RageUI.CurrentMenu.WidthOffset
-                    local Glareheight  = RageUI.Settings.Items.Title.Background.Height
+                    local Glareheight = RageUI.Settings.Items.Title.Background.Height
 
-                    --- TODO Automatic scaling
+                    --TODO Automatic scaling
                     local GlareX = 0.5450
                     local GalreY = 0.482
                     DrawScaleformMovie(ScaleformMovie, GlareX, GalreY, Glarewidth / 430, Glareheight / 100, 255, 51, 204, 255, 0)
-
-
 
                     RenderText(RageUI.CurrentMenu.Title, RageUI.CurrentMenu.X + RageUI.Settings.Items.Title.Text.X + (RageUI.CurrentMenu.WidthOffset / 2), RageUI.CurrentMenu.Y + RageUI.Settings.Items.Title.Text.Y, 1, RageUI.Settings.Items.Title.Text.Scale, 255, 255, 255, 255, 1)
 
@@ -390,7 +380,8 @@ end
 ---@public
 function RageUI.GoBack()
     if RageUI.CurrentMenu ~= nil then
-        PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.Back)
+        local Audio = RageUI.Settings.Audio
+        PlaySound(Audio[Audio.Use].Back.audioName, Audio[Audio.Use].Back.audioRef)
         if RageUI.CurrentMenu.Parent ~= nil then
             if RageUI.CurrentMenu.Parent() then
                 RageUI.NextMenu = RageUI.CurrentMenu.Parent
@@ -416,7 +407,7 @@ function RageUI.Render(instructionalButton)
                 ResetScriptGfxAlign()
             end
 
-            if (instructionalButton) then
+            if instructionalButton then
                 DrawScaleformMovieFullscreen(RageUI.CurrentMenu.InstructionalScaleform, 255, 255, 255, 255, 0)
             end
 
@@ -432,7 +423,8 @@ function RageUI.Render(instructionalButton)
                 if RageUI.CurrentMenu.Controls.Back.Pressed then
                     RageUI.CurrentMenu.Controls.Back.Pressed = false
 
-                    PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.Back)
+                    local Audio = RageUI.Settings.Audio
+                    PlaySound(Audio[Audio.Use].Back.audioName, Audio[Audio.Use].Back.audioRef)
                     if RageUI.CurrentMenu.Closed ~= nil then
                         RageUI.CurrentMenu.Closed()
                     end
@@ -530,7 +522,8 @@ function RageUI.ItemsMouseBounds(CurrentMenu, Selected, Option, SettingsButton)
         RenderRectangle(CurrentMenu.X, CurrentMenu.Y + SettingsButton.Rectangle.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, SettingsButton.Rectangle.Width + CurrentMenu.WidthOffset, SettingsButton.Rectangle.Height, 255, 255, 255, 20)
         if CurrentMenu.Controls.Click.Active then
             CurrentMenu.Index = Option
-            PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.Error)
+            local Audio = RageUI.Settings.Audio
+            PlaySound(Audio[Audio.Use].Error.audioName, Audio[Audio.Use].Error.audioRef)
         end
     end
 

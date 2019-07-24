@@ -102,19 +102,21 @@ function RageUI.Progress(Label, ProgressStart, ProgressMax, Description, Counter
                         ProgressStart = #Items
                     end
 
-                    PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.LeftRight)
+                    local Audio = RageUI.Settings.Audio
+                    PlaySound(Audio[Audio.Use].LeftRight.audioName, Audio[Audio.Use].LeftRight.audioRef)
                 elseif Selected and CurrentMenu.Controls.Right.Active and not CurrentMenu.Controls.Left.Active then
                     ProgressStart = ProgressStart + 1
 
                     if ProgressStart > #Items then
                         ProgressStart = 0
                     end
-
-                    PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.LeftRight)
+                    local Audio = RageUI.Settings.Audio
+                    PlaySound(Audio[Audio.Use].LeftRight.audioName, Audio[Audio.Use].LeftRight.audioRef)
                 end
 
                 if Selected and (CurrentMenu.Controls.Select.Active or ((Hovered and CurrentMenu.Controls.Click.Active) and not ProgressHovered)) then
-                    PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.Select)
+                    local Audio = RageUI.Settings.Audio
+                    PlaySound(Audio[Audio.Use].Select.audioName, Audio[Audio.Use].Select.audioRef)
                 elseif Selected and (Hovered and CurrentMenu.Controls.Click.Active and ProgressHovered) then
 
                     ---@type number

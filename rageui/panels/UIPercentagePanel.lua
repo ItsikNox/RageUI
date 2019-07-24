@@ -66,7 +66,8 @@ function RageUI.PercentagePanel(Percent, HeaderText, MinText, MaxText, Callback)
             RageUI.ItemOffset = RageUI.ItemOffset + Percentage.Background.Height + Percentage.Background.Y
 
             if Hovered and Selected then
-                PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.Slider, true)
+                local Audio = RageUI.Settings.Audio
+                PlaySound(Audio[Audio.Use].Slider.audioName, Audio[Audio.Use].Slider.audioRef)
             end
 
             Callback(Hovered, Selected, Percent)

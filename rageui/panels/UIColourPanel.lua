@@ -86,7 +86,8 @@ function RageUI.ColourPanel(Title, Colours, MinimumIndex, CurrentIndex, Callback
             RageUI.ItemOffset = RageUI.ItemOffset + Colour.Background.Height + Colour.Background.Y
 
             if (Hovered or LeftArrowHovered or RightArrowHovered) and RageUI.Settings.Controls.Click.Active then
-                PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.Select)
+                local Audio = RageUI.Settings.Audio
+                PlaySound(Audio[Audio.Use].Select.audioName, Audio[Audio.Use].Select.audioRef)
             end
 
             Callback((Hovered or LeftArrowHovered or RightArrowHovered), Selected, MinimumIndex, CurrentIndex)
