@@ -200,28 +200,6 @@ RageUI.Settings = {
             Text = { X = 8, Y = 10, Scale = 0.35 },
         },
     },
-    Panels = {
-        Grid = {
-            Background = { Dictionary = "commonmenu", Texture = "gradient_bgd", Y = 4, Width = 431, Height = 275 },
-            Grid = { Dictionary = "pause_menu_pages_char_mom_dad", Texture = "nose_grid", X = 115.5, Y = 47.5, Width = 200, Height = 200 },
-            Circle = { Dictionary = "mpinventory", Texture = "in_world_circle", X = 115.5, Y = 47.5, Width = 20, Height = 20 },
-            Text = {
-                Top = { X = 215.5, Y = 15, Scale = 0.35 },
-                Bottom = { X = 215.5, Y = 250, Scale = 0.35 },
-                Left = { X = 57.75, Y = 130, Scale = 0.35 },
-                Right = { X = 373.25, Y = 130, Scale = 0.35 },
-            },
-        },
-        Percentage = {
-            Background = { Dictionary = "commonmenu", Texture = "gradient_bgd", Y = 4, Width = 431, Height = 76 },
-            Bar = { X = 9, Y = 50, Width = 413, Height = 10 },
-            Text = {
-                Left = { X = 25, Y = 15, Scale = 0.35 },
-                Middle = { X = 215.5, Y = 15, Scale = 0.35 },
-                Right = { X = 398, Y = 15, Scale = 0.35 },
-            },
-        },
-    },
 }
 
 ---PlaySound
