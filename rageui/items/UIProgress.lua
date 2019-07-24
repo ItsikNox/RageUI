@@ -48,13 +48,13 @@ function RageUI.Progress(Label, ProgressStart, ProgressMax, Description, Counter
                 ---@type boolean
                 local ProgressHovered = false
 
-                ItemsWrapper.ItemsSafeZone(CurrentMenu)
+                RageUI.ItemsSafeZone(CurrentMenu)
 
                 local Hovered = false;
 
                 ---@type boolean
                 if CurrentMenu.EnableMouse == true then
-                    Hovered = ItemsWrapper.ItemsMouseBounds(CurrentMenu, Selected, Option, SettingsButton);
+                    Hovered = RageUI.ItemsMouseBounds(CurrentMenu, Selected, Option, SettingsButton);
                 end
 
                 local ProgressText = (Counter and ProgressStart .. "/" .. #Items or (type(Items[ProgressStart]) == "table") and tostring(Items[ProgressStart].Name) or tostring(Items[ProgressStart]))
@@ -93,7 +93,7 @@ function RageUI.Progress(Label, ProgressStart, ProgressMax, Description, Counter
 
                 RageUI.ItemOffset = RageUI.ItemOffset + SettingsProgress.Height
 
-                ItemsWrapper.ItemsDescription(CurrentMenu, Description, Selected);
+                RageUI.ItemsDescription(CurrentMenu, Description, Selected);
 
                 if Selected and CurrentMenu.Controls.Left.Active and not CurrentMenu.Controls.Right.Active then
                     ProgressStart = ProgressStart - 1

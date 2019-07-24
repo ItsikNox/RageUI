@@ -90,13 +90,13 @@ function RageUI.Checkbox(Label, Description, Checked, Style, Callback)
                 local LeftBadgeOffset = ((Style.LeftBadge == RageUI.BadgeStyle.None or tonumber(Style.LeftBadge) == nil) and 0 or 27)
                 local RightBadgeOffset = ((Style.RightBadge == RageUI.BadgeStyle.None or tonumber(Style.RightBadge) == nil) and 0 or 32)
                 local BoxOffset = 0
-                ItemsWrapper.ItemsSafeZone(CurrentMenu)
+                RageUI.ItemsSafeZone(CurrentMenu)
 
                 local Hovered = false;
 
                 ---@type boolean
                 if CurrentMenu.EnableMouse == true then
-                    Hovered = ItemsWrapper.ItemsMouseBounds(CurrentMenu, Selected, Option, SettingsButton);
+                    Hovered = RageUI.ItemsMouseBounds(CurrentMenu, Selected, Option, SettingsButton);
                 end
                 if Selected then
                     RenderSprite(SettingsButton.SelectedSprite.Dictionary, SettingsButton.SelectedSprite.Texture, CurrentMenu.X, CurrentMenu.Y + SettingsButton.SelectedSprite.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, SettingsButton.SelectedSprite.Width + CurrentMenu.WidthOffset, SettingsButton.SelectedSprite.Height)
@@ -184,7 +184,7 @@ function RageUI.Checkbox(Label, Description, Checked, Style, Callback)
 
                 RageUI.ItemOffset = RageUI.ItemOffset + SettingsButton.Rectangle.Height
 
-                ItemsWrapper.ItemsDescription(CurrentMenu, Description, Selected)
+                RageUI.ItemsDescription(CurrentMenu, Description, Selected)
 
                 Callback(Hovered, Selected, ((CurrentMenu.Controls.Select.Active or (Hovered and CurrentMenu.Controls.Click.Active)) and Selected), Checked)
             end

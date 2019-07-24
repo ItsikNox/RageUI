@@ -42,7 +42,7 @@ function RageUI.List(Label, Items, Index, Description,Style, Enabled, Callback)
                 ---@type boolean
                 local LeftArrowHovered, RightArrowHovered = false, false
 
-                ItemsWrapper.ItemsSafeZone(CurrentMenu)
+                RageUI.ItemsSafeZone(CurrentMenu)
 
                 local Hovered = false;
                 local LeftBadgeOffset = ((Style.LeftBadge == RageUI.BadgeStyle.None or tonumber(Style.LeftBadge) == nil) and 0 or 27)
@@ -50,7 +50,7 @@ function RageUI.List(Label, Items, Index, Description,Style, Enabled, Callback)
                 local RightOffset = 0
                 ---@type boolean
                 if CurrentMenu.EnableMouse == true then
-                    Hovered = ItemsWrapper.ItemsMouseBounds(CurrentMenu, Selected, Option, SettingsButton);
+                    Hovered = RageUI.ItemsMouseBounds(CurrentMenu, Selected, Option, SettingsButton);
                 end
 
                 local ListText = (type(Items[Index]) == "table") and tostring(Items[Index].Name) or tostring(Items[Index]) or "NIL"
@@ -132,7 +132,7 @@ function RageUI.List(Label, Items, Index, Description,Style, Enabled, Callback)
 
                 RageUI.ItemOffset = RageUI.ItemOffset + SettingsButton.Rectangle.Height
 
-                ItemsWrapper.ItemsDescription(CurrentMenu, Description, Selected);
+                RageUI.ItemsDescription(CurrentMenu, Description, Selected);
 
                 if Selected and (CurrentMenu.Controls.Left.Active or (CurrentMenu.Controls.Click.Active and LeftArrowHovered)) and not (CurrentMenu.Controls.Right.Active or (CurrentMenu.Controls.Click.Active and RightArrowHovered)) then
                     Index = Index - 1

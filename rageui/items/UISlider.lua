@@ -50,7 +50,7 @@ function RageUI.Slider(Label, ProgressStart, ProgressMax, Description, Divider, 
 
 
 
-                ItemsWrapper.ItemsSafeZone(CurrentMenu)
+                RageUI.ItemsSafeZone(CurrentMenu)
 
                 local Hovered = false;
                 local LeftBadgeOffset = ((Style.LeftBadge == RageUI.BadgeStyle.None or tonumber(Style.LeftBadge) == nil) and 0 or 27)
@@ -58,7 +58,7 @@ function RageUI.Slider(Label, ProgressStart, ProgressMax, Description, Divider, 
                 local RightOffset = 0
                 ---@type boolean
                 if CurrentMenu.EnableMouse == true then
-                    Hovered = ItemsWrapper.ItemsMouseBounds(CurrentMenu, Selected, Option, SettingsButton);
+                    Hovered = RageUI.ItemsMouseBounds(CurrentMenu, Selected, Option, SettingsButton);
                 end
 
                 if Selected then
@@ -134,7 +134,7 @@ function RageUI.Slider(Label, ProgressStart, ProgressMax, Description, Divider, 
 
                 RageUI.ItemOffset = RageUI.ItemOffset + SettingsButton.Rectangle.Height
 
-                ItemsWrapper.ItemsDescription(CurrentMenu, Description, Selected);
+                RageUI.ItemsDescription(CurrentMenu, Description, Selected);
 
                 if Selected and (CurrentMenu.Controls.Left.Active or (CurrentMenu.Controls.Click.Active and LeftArrowHovered)) and not (CurrentMenu.Controls.Right.Active or (CurrentMenu.Controls.Click.Active and RightArrowHovered)) then
                     ProgressStart = ProgressStart - 1

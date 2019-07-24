@@ -9,8 +9,6 @@ client_scripts {
     "components/Scaleform.lua",
     "components/Screen.lua",
 
-    "menu/wrapper/items-wrapper.lua",
-
     "menu/elements/ItemsBadge.lua",
     "menu/elements/ItemsColour.lua",
     "menu/elements/PanelColour.lua",
