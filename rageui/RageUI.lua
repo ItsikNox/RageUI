@@ -264,6 +264,8 @@ end
 function RageUI.Banner(Enabled)
     if type(Enabled) == "boolean" then
         if Enabled == true then
+
+
             if RageUI.CurrentMenu ~= nil then
                 if RageUI.CurrentMenu() then
                     if not RageUI.CurrentMenu.SafeZoneSize then
@@ -281,6 +283,21 @@ function RageUI.Banner(Enabled)
                     else
                         RenderRectangle(RageUI.CurrentMenu.X, RageUI.CurrentMenu.Y, RageUI.Settings.Items.Title.Background.Width + RageUI.CurrentMenu.WidthOffset, RageUI.Settings.Items.Title.Background.Height, RageUI.CurrentMenu.Rectangle.R, RageUI.CurrentMenu.Rectangle.G, RageUI.CurrentMenu.Rectangle.B, RageUI.CurrentMenu.Rectangle.A)
                     end
+
+
+
+                    local ScaleformMovie = RequestScaleformMovie("MP_MENU_GLARE")
+                    Citizen.CreateThread(function()
+                        if not HasScaleformMovieLoaded(ScaleformMovie) then
+                            ScaleformMovie = RequestScaleformMovie("MP_MENU_GLARE")
+                            while not HasScaleformMovieLoaded(ScaleformMovie) do
+                                Citizen.Wait(0)
+                            end
+                        end
+                    end)
+                    DrawScaleformMovie(ScaleformMovie, 0.5450, 0.482, Glarewidth / 430, Glareheight / 100, 255, 255, 10, 255, 0)
+
+
 
                     RenderText(RageUI.CurrentMenu.Title, RageUI.CurrentMenu.X + RageUI.Settings.Items.Title.Text.X + (RageUI.CurrentMenu.WidthOffset / 2), RageUI.CurrentMenu.Y + RageUI.Settings.Items.Title.Text.Y, 1, RageUI.Settings.Items.Title.Text.Scale, 255, 255, 255, 255, 1)
 
