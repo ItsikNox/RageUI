@@ -169,9 +169,35 @@ RageUI.Settings = {
         },
     },
     Audio = {
-        Use = "Default",
-
-        Default = {
+        Use = "RageUI",
+        RageUI = {
+            UpDown = {
+                audioName = "HUD_FREEMODE_SOUNDSET",
+                audioRef = "NAV_UP_DOWN",
+            },
+            LeftRight = {
+                audioName = "HUD_FRONTEND_DEFAULT_SOUNDSET",
+                audioRef = "NAV_LEFT_RIGHT",
+            },
+            Select = {
+                audioName = "HUD_FRONTEND_DEFAULT_SOUNDSET",
+                audioRef = "SELECT",
+            },
+            Back = {
+                audioName = "HUD_FRONTEND_DEFAULT_SOUNDSET",
+                audioRef = "BACK",
+            },
+            Error = {
+                audioName = "HUD_FREEMODE_SOUNDSET",
+                audioRef = "ERROR",
+            },
+            Slider = {
+                audioName = "HUD_FRONTEND_DEFAULT_SOUNDSET",
+                audioRef = "CONTINUOUS_SLIDER",
+                Id = nil
+            },
+        },
+        NativeUI = {
             UpDown = {
                 audioName = "HUD_FRONTEND_DEFAULT_SOUNDSET",
                 audioRef = "NAV_UP_DOWN",
