@@ -541,7 +541,7 @@ function RageUI.ItemsMouseBounds(CurrentMenu, Selected, Option, SettingsButton)
         end
     end
 
-    return Hovered
+    return Hovered;
 end
 
 ---ItemsSafeZone
