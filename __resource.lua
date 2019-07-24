@@ -1,7 +1,6 @@
 resource_manifest_version '05cfa83c-a124-4cfa-a768-c24a5811d8f9'
 
 client_scripts {
-
     "src/menu/RageUI.lua",
     "src/menu/Menu.lua",
     "src/menu/Submenu.lua",
@@ -13,9 +12,6 @@ client_scripts {
     "src/elements/Visual.lua",
 
     "src/menu/wrapper/items-wrapper.lua",
-
-    "src/menu/scaleform/InstructionalButtons.lua",
-
 
     "src/menu/elements/Badge.lua",
     "src/menu/elements/ColourPanel.lua",
@@ -34,3 +30,6 @@ client_scripts {
 
     "MenuExample/MenuExample.lua",
 }
+
+
+
