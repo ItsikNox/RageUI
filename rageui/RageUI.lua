@@ -292,6 +292,7 @@ function RageUI.Banner(Enabled)
         error("Enabled is not boolean")
     end
 end
+
 ---CloseAll -- TODO 
 ---@return nil
 ---@public
@@ -385,6 +386,8 @@ function RageUI.Description()
     end
 end
 
+--- TODO
+
 function RageUI.Header(EnabledBanner)
     RageUI.Banner(EnabledBanner)
     RageUI.Subtitle()
@@ -431,8 +434,6 @@ function RageUI.Render(instructionalButton)
 
             RageUI.Options = 0
             RageUI.ItemOffset = 0
-
-            print(RageUI.CurrentMenu.Closable)
 
             if RageUI.CurrentMenu.Controls.Back.Enabled and RageUI.CurrentMenu.Closable then
                 if RageUI.CurrentMenu.Controls.Back.Pressed then

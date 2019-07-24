@@ -1,4 +1,7 @@
 ---MeasureStringWidth
+---
+--- Reference : Frazzle <3
+---
 ---@param str string
 ---@param font number
 ---@param scale number
@@ -13,6 +16,9 @@ function MeasureStringWidth(str, font, scale)
 end
 
 ---GetCharacterCount
+---
+--- Reference : Frazzle <3
+---
 ---@param Str string
 ---@return number
 ---@public
@@ -28,6 +34,9 @@ function GetCharacterCount(Str)
 end
 
 ---AddText
+---
+--- Reference : Frazzle <3
+---
 ---@param Text string
 ---@return nil
 ---@public
@@ -49,6 +58,9 @@ function AddText(Text)
 end
 
 ---GetLineCount
+---
+--- Reference : Frazzle <3
+---
 ---@param Text string
 ---@param X number
 ---@param Y number
@@ -110,6 +122,9 @@ end
 
 
 ---RenderText
+---
+--- Reference : https://github.com/iTexZoz/NativeUILua_Reloaded/blob/master/UIElements/UIResText.lua#L189
+---
 ---@param Text string
 ---@param X number
 ---@param Y number
