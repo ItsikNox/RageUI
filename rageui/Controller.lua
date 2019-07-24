@@ -58,7 +58,7 @@ function RageUI.GoUp(Options)
                 end
             end
 
-            RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.UpDown)
+            PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.UpDown)
         end
     end
 end
@@ -94,7 +94,7 @@ function RageUI.GoDown(Options)
                 end
             end
 
-            RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.UpDown)
+            PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.UpDown)
         end
     end
 end

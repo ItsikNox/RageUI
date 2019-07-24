@@ -102,7 +102,7 @@ function RageUI.Progress(Label, ProgressStart, ProgressMax, Description, Counter
                         ProgressStart = #Items
                     end
 
-                    RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.LeftRight)
+                    PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.LeftRight)
                 elseif Selected and CurrentMenu.Controls.Right.Active and not CurrentMenu.Controls.Left.Active then
                     ProgressStart = ProgressStart + 1
 
@@ -110,11 +110,11 @@ function RageUI.Progress(Label, ProgressStart, ProgressMax, Description, Counter
                         ProgressStart = 0
                     end
 
-                    RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.LeftRight)
+                    PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.LeftRight)
                 end
 
                 if Selected and (CurrentMenu.Controls.Select.Active or ((Hovered and CurrentMenu.Controls.Click.Active) and not ProgressHovered)) then
-                    RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.Select)
+                    PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.Select)
                 elseif Selected and (Hovered and CurrentMenu.Controls.Click.Active and ProgressHovered) then
 
                     ---@type number

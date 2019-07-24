@@ -139,17 +139,17 @@ function RageUI.List(Label, Items, Index, Description,Style, Enabled, Callback)
                     if Index < 1 then
                         Index = #Items
                     end
-                    RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.LeftRight)
+                    PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.LeftRight)
                 elseif Selected and (CurrentMenu.Controls.Right.Active or (CurrentMenu.Controls.Click.Active and RightArrowHovered)) and not (CurrentMenu.Controls.Left.Active or (CurrentMenu.Controls.Click.Active and LeftArrowHovered)) then
                     Index = Index + 1
                     if Index > #Items then
                         Index = 1
                     end
-                    RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.LeftRight)
+                    PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.LeftRight)
                 end
 
                 if Selected and (CurrentMenu.Controls.Select.Active or ((Hovered and CurrentMenu.Controls.Click.Active) and (not LeftArrowHovered and not RightArrowHovered))) then
-                    RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.Select)
+                    PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.Select)
                 end
 
                 if (Enabled) then

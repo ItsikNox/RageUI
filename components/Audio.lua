@@ -4,6 +4,7 @@
 --- DateTime: 24/07/2019 03:38
 ---
 
+
 ---PlaySound
 ---
 --- Reference : N/A
@@ -15,6 +16,7 @@
 ---@public
 function PlaySound(Library, Sound, IsLooped)
 
+    ---@type table
     local Audio = {
         Id = nil,
     }

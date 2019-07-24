@@ -169,12 +169,12 @@ function RageUI.Checkbox(Label, Description, Checked, Style, Callback)
                     end
 
                     if Selected and (CurrentMenu.Controls.Select.Active or (Hovered and CurrentMenu.Controls.Click.Active)) and (Style.Enabled == true or Style.Enabled == nil) then
-                        RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.Select)
+                        PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.Select)
                         Checked = not Checked
                     end
 
                     if Selected and (CurrentMenu.Controls.Select.Active or (Hovered and CurrentMenu.Controls.Click.Active)) and (Style.Enabled == false) then
-                        RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.Error)
+                        PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.Error)
                         Checked = false
                     end
 

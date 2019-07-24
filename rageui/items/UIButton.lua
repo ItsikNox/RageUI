@@ -99,7 +99,7 @@ function RageUI.Button(Label, Description, Style, Enabled, Callback, Submenu)
                 end
 
                 if Selected and (CurrentMenu.Controls.Select.Active or (Hovered and CurrentMenu.Controls.Click.Active)) then
-                    RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.Select)
+                    PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.Select)
                     if Submenu ~= nil then
                         if Submenu() then
                             RageUI.NextMenu = Submenu

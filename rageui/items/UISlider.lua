@@ -145,7 +145,7 @@ function RageUI.Slider(Label, ProgressStart, ProgressMax, Description, Divider, 
                         ProgressStart = #Items
                     end
 
-                    RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.LeftRight)
+                    PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.LeftRight)
                 elseif Selected and (CurrentMenu.Controls.Right.Active or (CurrentMenu.Controls.Click.Active and RightArrowHovered)) and not (CurrentMenu.Controls.Left.Active or (CurrentMenu.Controls.Click.Active and LeftArrowHovered)) then
                     ProgressStart = ProgressStart + 1
 
@@ -153,11 +153,11 @@ function RageUI.Slider(Label, ProgressStart, ProgressMax, Description, Divider, 
                         ProgressStart = 1
                     end
 
-                    RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.LeftRight)
+                    PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.LeftRight)
                 end
 
                 if Selected and (CurrentMenu.Controls.Select.Active or ((Hovered and CurrentMenu.Controls.Click.Active) and (not LeftArrowHovered and not RightArrowHovered))) then
-                    RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.Select)
+                    PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.Select)
                 end
 
                 if (Enabled) then

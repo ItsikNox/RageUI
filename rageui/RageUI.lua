@@ -314,7 +314,7 @@ end
 ---@return nil
 ---@public
 -- function RageUI:CloseAll()
---     RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.Back)
+--     PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.Back)
 --     RageUI.NextMenu = nil
 --     RageUI.Visible(RageUI.CurrentMenu, false)
 -- end
@@ -390,7 +390,7 @@ end
 ---@public
 function RageUI.GoBack()
     if RageUI.CurrentMenu ~= nil then
-        RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.Back)
+        PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.Back)
         if RageUI.CurrentMenu.Parent ~= nil then
             if RageUI.CurrentMenu.Parent() then
                 RageUI.NextMenu = RageUI.CurrentMenu.Parent
@@ -432,7 +432,7 @@ function RageUI.Render(instructionalButton)
                 if RageUI.CurrentMenu.Controls.Back.Pressed then
                     RageUI.CurrentMenu.Controls.Back.Pressed = false
 
-                    RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.Back)
+                    PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.Back)
                     if RageUI.CurrentMenu.Closed ~= nil then
                         RageUI.CurrentMenu.Closed()
                     end
@@ -530,7 +530,7 @@ function RageUI.ItemsMouseBounds(CurrentMenu, Selected, Option, SettingsButton)
         RenderRectangle(CurrentMenu.X, CurrentMenu.Y + SettingsButton.Rectangle.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, SettingsButton.Rectangle.Width + CurrentMenu.WidthOffset, SettingsButton.Rectangle.Height, 255, 255, 255, 20)
         if CurrentMenu.Controls.Click.Active then
             CurrentMenu.Index = Option
-            RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.Error)
+            PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.Error)
         end
     end
 
@@ -542,7 +542,6 @@ end
 ---@return nil
 ---@public
 function RageUI.ItemsSafeZone(CurrentMenu)
-
     if not CurrentMenu.SafeZoneSize then
         CurrentMenu.SafeZoneSize = { X = 0, Y = 0 }
         if CurrentMenu.Safezone then
@@ -551,5 +550,4 @@ function RageUI.ItemsSafeZone(CurrentMenu)
             SetScriptGfxAlignParams(0, 0, 0, 0)
         end
     end
-
 end
