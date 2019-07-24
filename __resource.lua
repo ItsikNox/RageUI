@@ -4,7 +4,10 @@ client_scripts {
     "components/Rectangle.lua",
     "components/Sprite.lua",
     "components/Text.lua",
-    "components/Visual.lua",
+    "components/Visual.lua", --- Need rework
+    "components/Audio.lua",
+    "components/Scaleform.lua",
+    "components/Screen.lua",
 
     "menu/wrapper/items-wrapper.lua",
 
