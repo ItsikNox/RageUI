@@ -280,7 +280,7 @@ end
 ---@return nil
 ---@public
 ---@param Enabled boolean
-function RageUI.Banner(Enabled)
+function RageUI.Banner(Enabled, Glare)
     if type(Enabled) == "boolean" then
         if Enabled == true then
 
@@ -297,26 +297,28 @@ function RageUI.Banner(Enabled)
                         RenderRectangle(RageUI.CurrentMenu.X, RageUI.CurrentMenu.Y, RageUI.Settings.Items.Title.Background.Width + RageUI.CurrentMenu.WidthOffset, RageUI.Settings.Items.Title.Background.Height, RageUI.CurrentMenu.Rectangle.R, RageUI.CurrentMenu.Rectangle.G, RageUI.CurrentMenu.Rectangle.B, RageUI.CurrentMenu.Rectangle.A)
                     end
 
-                    local ScaleformMovie = RequestScaleformMovie("MP_MENU_GLARE")
-                    Citizen.CreateThread(function()
-                        if not HasScaleformMovieLoaded(ScaleformMovie) then
-                            ScaleformMovie = RequestScaleformMovie("MP_MENU_GLARE")
-                            while not HasScaleformMovieLoaded(ScaleformMovie) do
-                                Citizen.Wait(0)
+                    if Glare then
+                        local ScaleformMovie = RequestScaleformMovie("MP_MENU_GLARE")
+                        Citizen.CreateThread(function()
+                            if not HasScaleformMovieLoaded(ScaleformMovie) then
+                                ScaleformMovie = RequestScaleformMovie("MP_MENU_GLARE")
+                                while not HasScaleformMovieLoaded(ScaleformMovie) do
+                                    Citizen.Wait(0)
+                                end
                             end
-                        end
-                    end)
+                        end)
 
-                    local Glarewidth = RageUI.Settings.Items.Title.Background.Width + RageUI.CurrentMenu.WidthOffset
-                    local Glareheight = RageUI.Settings.Items.Title.Background.Height
+                        ---@type number
+                        local Glarewidth = RageUI.Settings.Items.Title.Background.Width + RageUI.CurrentMenu.WidthOffset
+                        ---@type number
+                        local Glareheight = RageUI.Settings.Items.Title.Background.Height
+                        ---@type number
+                        local GlareX = RageUI.CurrentMenu.X / 1860 + RageUI.CurrentMenu.SafeZoneSize.X / 53.211
+                        ---@type number
+                        local GalreY = RageUI.CurrentMenu.Y / 1080 + RageUI.CurrentMenu.SafeZoneSize.Y / 33.195020746888
 
-                    --TODO Automatic scaling
-                    local GlareX = RageUI.CurrentMenu.X / 1860 + RageUI.CurrentMenu.SafeZoneSize.X / 53.211
-                    local GalreY = RageUI.CurrentMenu.Y / 1080 + RageUI.CurrentMenu.SafeZoneSize.Y / 33.195020746888
-
-                    --print(RageUI.CurrentMenu.X / 1080)
-
-                    DrawScaleformMovie(ScaleformMovie, GlareX, GalreY, Glarewidth / 430, Glareheight / 100, 255, 51, 204, 255, 0)
+                        DrawScaleformMovie(ScaleformMovie, GlareX, GalreY, Glarewidth / 430, Glareheight / 100, 255, 255, 255, 255, 0)
+                    end
 
                     RenderText(RageUI.CurrentMenu.Title, RageUI.CurrentMenu.X + RageUI.Settings.Items.Title.Text.X + (RageUI.CurrentMenu.WidthOffset / 2), RageUI.CurrentMenu.Y + RageUI.Settings.Items.Title.Text.Y, 1, RageUI.Settings.Items.Title.Text.Scale, 255, 255, 255, 255, 1)
 
@@ -344,9 +346,7 @@ end
 function RageUI.Subtitle()
     if RageUI.CurrentMenu ~= nil then
         if RageUI.CurrentMenu() then
-
             RageUI.ItemsSafeZone(RageUI.CurrentMenu)
-
             if RageUI.CurrentMenu.Subtitle ~= "" then
                 RenderRectangle(RageUI.CurrentMenu.X, RageUI.CurrentMenu.Y + RageUI.ItemOffset, RageUI.Settings.Items.Subtitle.Background.Width + RageUI.CurrentMenu.WidthOffset, RageUI.Settings.Items.Subtitle.Background.Height + RageUI.CurrentMenu.SubtitleHeight, 0, 0, 0, 255)
                 RenderText(RageUI.CurrentMenu.Subtitle, RageUI.CurrentMenu.X + RageUI.Settings.Items.Subtitle.Text.X, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Subtitle.Text.Y + RageUI.ItemOffset, 0, RageUI.Settings.Items.Subtitle.Text.Scale, 245, 245, 245, 255, nil, false, false, RageUI.Settings.Items.Subtitle.Background.Width + RageUI.CurrentMenu.WidthOffset)
@@ -357,7 +357,6 @@ function RageUI.Subtitle()
                 else
                     RenderText(RageUI.CurrentMenu.PageCounter, RageUI.CurrentMenu.X + RageUI.Settings.Items.Subtitle.PreText.X + RageUI.CurrentMenu.WidthOffset, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Subtitle.PreText.Y + RageUI.ItemOffset, 0, RageUI.Settings.Items.Subtitle.PreText.Scale, 245, 245, 245, 255, 2)
                 end
-
                 RageUI.ItemOffset = RageUI.ItemOffset + RageUI.Settings.Items.Subtitle.Background.Height
             end
         end
@@ -370,9 +369,7 @@ end
 function RageUI.Background()
     if RageUI.CurrentMenu ~= nil then
         if RageUI.CurrentMenu() then
-
             RageUI.ItemsSafeZone(RageUI.CurrentMenu)
-
             SetScriptGfxDrawOrder(0)
             RenderSprite(RageUI.Settings.Items.Background.Dictionary, RageUI.Settings.Items.Background.Texture, RageUI.CurrentMenu.X, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Background.Y + RageUI.CurrentMenu.SubtitleHeight, RageUI.Settings.Items.Background.Width + RageUI.CurrentMenu.WidthOffset, RageUI.ItemOffset, 0, 0, 0, 255)
             SetScriptGfxDrawOrder(1)
@@ -400,30 +397,11 @@ end
 
 --- TODO
 
-function RageUI.Header(EnabledBanner)
-    RageUI.Banner(EnabledBanner)
+function RageUI.Header(EnableBanner, EnableGlare)
+    RageUI.Banner(EnableBanner, EnableGlare)
     RageUI.Subtitle()
 end
----GoBack
----@return nil
----@public
-function RageUI.GoBack()
-    if RageUI.CurrentMenu ~= nil then
-        local Audio = RageUI.Settings.Audio
-        PlaySound(Audio[Audio.Use].Back.audioName, Audio[Audio.Use].Back.audioRef)
-        if RageUI.CurrentMenu.Parent ~= nil then
-            if RageUI.CurrentMenu.Parent() then
-                RageUI.NextMenu = RageUI.CurrentMenu.Parent
-            else
-                RageUI.NextMenu = nil
-                RageUI.Visible(RageUI.CurrentMenu, false)
-            end
-        else
-            RageUI.NextMenu = nil
-            RageUI.Visible(RageUI.CurrentMenu, false)
-        end
-    end
-end
+
 ---Render
 ---@param instructionalButton boolean
 ---@return nil
@@ -486,10 +464,10 @@ end
 ---@param items function
 ---@param panels function
 function RageUI.DrawContent(settings, items, panels)
-    if (settings.header ~= nil) then
-        RageUI.Header(settings.header);
+    if (settings.header ~= nil and settings.glare ~= nil) then
+        RageUI.Header(settings.header, settings.glare);
     else
-        RageUI.Header(true);
+        RageUI.Header(true, true);
     end
     if (items ~= nil) then
         items()

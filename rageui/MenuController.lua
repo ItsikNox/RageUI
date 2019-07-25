@@ -1,4 +1,3 @@
-
 ---IsMouseInBounds
 ---@param X number
 ---@param Y number
@@ -101,6 +100,77 @@ function RageUI.GoDown(Options)
     end
 end
 
+function RageUI.GoLeft(Controls)
+    if Controls.Left.Enabled then
+        for Index = 1, #Controls.Left.Keys do
+            if not Controls.Left.Pressed then
+                if IsDisabledControlJustPressed(Controls.Left.Keys[Index][1], Controls.Left.Keys[Index][2]) then
+                    Controls.Left.Pressed = true
+
+                    Citizen.CreateThread(function()
+                        Controls.Left.Active = true
+
+                        Citizen.Wait(0.01)
+
+                        Controls.Left.Active = false
+
+                        Citizen.Wait(174.99)
+
+                        while Controls.Left.Enabled and IsDisabledControlPressed(Controls.Left.Keys[Index][1], Controls.Left.Keys[Index][2]) do
+                            Controls.Left.Active = true
+
+                            Citizen.Wait(0.01)
+
+                            Controls.Left.Active = false
+
+                            Citizen.Wait(124.99)
+                        end
+
+                        Controls.Left.Pressed = false
+                    end)
+
+                    break
+                end
+            end
+        end
+    end
+end
+
+function RageUI.GoRight(Controls)
+    if Controls.Right.Enabled then
+        for Index = 1, #Controls.Right.Keys do
+            if not Controls.Right.Pressed then
+                if IsDisabledControlJustPressed(Controls.Right.Keys[Index][1], Controls.Right.Keys[Index][2]) then
+                    Controls.Right.Pressed = true
+
+                    Citizen.CreateThread(function()
+                        Controls.Right.Active = true
+
+                        Citizen.Wait(0.01)
+
+                        Controls.Right.Active = false
+
+                        Citizen.Wait(174.99)
+
+                        while Controls.Right.Enabled and IsDisabledControlPressed(Controls.Right.Keys[Index][1], Controls.Right.Keys[Index][2]) do
+                            Controls.Right.Active = true
+
+                            Citizen.Wait(1)
+
+                            Controls.Right.Active = false
+
+                            Citizen.Wait(124.99)
+                        end
+
+                        Controls.Right.Pressed = false
+                    end)
+
+                    break
+                end
+            end
+        end
+    end
+end
 ---Controls
 ---@return nil
 ---@public
@@ -179,75 +249,10 @@ function RageUI.Controls()
                     end
                 end
 
-                if Controls.Left.Enabled then
-                    for Index = 1, #Controls.Left.Keys do
-                        if not Controls.Left.Pressed then
-                            if IsDisabledControlJustPressed(Controls.Left.Keys[Index][1], Controls.Left.Keys[Index][2]) then
-                                Controls.Left.Pressed = true
+                RageUI.GoLeft(Controls) --- Default Left navigation
+                RageUI.GoRight(Controls) --- Default Right navigation
 
-                                Citizen.CreateThread(function()
-                                    Controls.Left.Active = true
-
-                                    Citizen.Wait(0.01)
-
-                                    Controls.Left.Active = false
-
-                                    Citizen.Wait(174.99)
-
-                                    while Controls.Left.Enabled and IsDisabledControlPressed(Controls.Left.Keys[Index][1], Controls.Left.Keys[Index][2]) do
-                                        Controls.Left.Active = true
-
-                                        Citizen.Wait(0.01)
-
-                                        Controls.Left.Active = false
-
-                                        Citizen.Wait(124.99)
-                                    end
-
-                                    Controls.Left.Pressed = false
-                                end)
-
-                                break
-                            end
-                        end
-                    end
-                end
-
-                if Controls.Right.Enabled then
-                    for Index = 1, #Controls.Right.Keys do
-                        if not Controls.Right.Pressed then
-                            if IsDisabledControlJustPressed(Controls.Right.Keys[Index][1], Controls.Right.Keys[Index][2]) then
-                                Controls.Right.Pressed = true
-
-                                Citizen.CreateThread(function()
-                                    Controls.Right.Active = true
-
-                                    Citizen.Wait(0.01)
-
-                                    Controls.Right.Active = false
-
-                                    Citizen.Wait(174.99)
-
-                                    while Controls.Right.Enabled and IsDisabledControlPressed(Controls.Right.Keys[Index][1], Controls.Right.Keys[Index][2]) do
-                                        Controls.Right.Active = true
-
-                                        Citizen.Wait(1)
-
-                                        Controls.Right.Active = false
-
-                                        Citizen.Wait(124.99)
-                                    end
-
-                                    Controls.Right.Pressed = false
-                                end)
-
-                                break
-                            end
-                        end
-                    end
-                end
-
-                if Controls.Select.Enabled  and not Controls.Down.Pressed and not Controls.Up.Pressed then
+                if Controls.Select.Enabled and not Controls.Down.Pressed and not Controls.Up.Pressed then
                     for Index = 1, #Controls.Select.Keys do
                         if not Controls.Select.Pressed then
                             if IsDisabledControlJustPressed(Controls.Select.Keys[Index][1], Controls.Select.Keys[Index][2]) then
@@ -281,7 +286,7 @@ function RageUI.Controls()
                     end
                 end
 
-                if Controls.Click.Enabled  and not Controls.Down.Pressed and not Controls.Up.Pressed then
+                if Controls.Click.Enabled and not Controls.Down.Pressed and not Controls.Up.Pressed then
                     for Index = 1, #Controls.Click.Keys do
                         if not Controls.Click.Pressed then
                             if IsDisabledControlJustPressed(Controls.Click.Keys[Index][1], Controls.Click.Keys[Index][2]) then
@@ -361,10 +366,9 @@ function RageUI.Navigation()
                 UpHovered = RageUI.IsMouseInBounds(RageUI.CurrentMenu.X + RageUI.CurrentMenu.SafeZoneSize.X, RageUI.CurrentMenu.Y + RageUI.CurrentMenu.SafeZoneSize.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Items.Navigation.Rectangle.Width + RageUI.CurrentMenu.WidthOffset, RageUI.Settings.Items.Navigation.Rectangle.Height)
                 DownHovered = RageUI.IsMouseInBounds(RageUI.CurrentMenu.X + RageUI.CurrentMenu.SafeZoneSize.X, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Navigation.Rectangle.Height + RageUI.CurrentMenu.SafeZoneSize.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Items.Navigation.Rectangle.Width + RageUI.CurrentMenu.WidthOffset, RageUI.Settings.Items.Navigation.Rectangle.Height)
 
-                
                 if RageUI.CurrentMenu.EnableMouse then
 
-                
+
                     if RageUI.CurrentMenu.Controls.Click.Active then
                         if UpHovered then
                             RageUI.GoUp(RageUI.Options)
@@ -391,8 +395,29 @@ function RageUI.Navigation()
                 RenderSprite(RageUI.Settings.Items.Navigation.Arrows.Dictionary, RageUI.Settings.Items.Navigation.Arrows.Texture, RageUI.CurrentMenu.X + RageUI.Settings.Items.Navigation.Arrows.X + (RageUI.CurrentMenu.WidthOffset / 2), RageUI.CurrentMenu.Y + RageUI.Settings.Items.Navigation.Arrows.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Items.Navigation.Arrows.Width, RageUI.Settings.Items.Navigation.Arrows.Height)
 
                 RageUI.ItemOffset = RageUI.ItemOffset + (RageUI.Settings.Items.Navigation.Rectangle.Height * 2)
-                
+
             end
+        end
+    end
+end
+
+---GoBack
+---@return nil
+---@public
+function RageUI.GoBack()
+    if RageUI.CurrentMenu ~= nil then
+        local Audio = RageUI.Settings.Audio
+        PlaySound(Audio[Audio.Use].Back.audioName, Audio[Audio.Use].Back.audioRef)
+        if RageUI.CurrentMenu.Parent ~= nil then
+            if RageUI.CurrentMenu.Parent() then
+                RageUI.NextMenu = RageUI.CurrentMenu.Parent
+            else
+                RageUI.NextMenu = nil
+                RageUI.Visible(RageUI.CurrentMenu, false)
+            end
+        else
+            RageUI.NextMenu = nil
+            RageUI.Visible(RageUI.CurrentMenu, false)
         end
     end
 end
