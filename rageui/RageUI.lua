@@ -311,8 +311,11 @@ function RageUI.Banner(Enabled)
                     local Glareheight = RageUI.Settings.Items.Title.Background.Height
 
                     --TODO Automatic scaling
-                    local GlareX = 0.5450
-                    local GalreY = 0.482
+                    local GlareX = RageUI.CurrentMenu.X / 1860 + RageUI.CurrentMenu.SafeZoneSize.X / 53.211
+                    local GalreY = RageUI.CurrentMenu.Y / 1080 + RageUI.CurrentMenu.SafeZoneSize.Y / 33.195020746888
+
+                    --print(RageUI.CurrentMenu.X / 1080)
+
                     DrawScaleformMovie(ScaleformMovie, GlareX, GalreY, Glarewidth / 430, Glareheight / 100, 255, 51, 204, 255, 0)
 
                     RenderText(RageUI.CurrentMenu.Title, RageUI.CurrentMenu.X + RageUI.Settings.Items.Title.Text.X + (RageUI.CurrentMenu.WidthOffset / 2), RageUI.CurrentMenu.Y + RageUI.Settings.Items.Title.Text.Y, 1, RageUI.Settings.Items.Title.Text.Scale, 255, 255, 255, 255, 1)

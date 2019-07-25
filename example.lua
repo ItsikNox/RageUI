@@ -6,6 +6,7 @@ Citizen.CreateThread(function()
 
     local mainMenu = RageUI.CreateMenu("RageUI", "~b~SHOWCASE")
 
+    --mainMenu:SetPosition(700,300)
     mainMenu.Closed = function()
         RageUI.Popup({
             message = "RageUI showcase menu closed",
