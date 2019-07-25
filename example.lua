@@ -51,7 +51,7 @@ Citizen.CreateThreadNow(function()
             index = 1,
         },
         slider = {
-            max = 20,
+            max = 10,
             index = 1
         },
         progress = {
@@ -120,8 +120,12 @@ Citizen.CreateThreadNow(function()
 
                 end)
 
-                RageUI.Slider("Quantité", mainMenuData.slider.index, mainMenuData.slider.max, description, false, { }, true, function(Hovered, Selected, Active, Index)
+                RageUI.Slider("Quantité", mainMenuData.slider.index, mainMenuData.slider.max, description, true, { }, true, function(Hovered, Selected, Active, Index)
                     mainMenuData.slider.index = Index
+
+                    RageUI.Text({
+                        message = Index
+                    })
                 end)
 
                 if (mainMenuData.progress.show) then

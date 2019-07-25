@@ -99,6 +99,29 @@ RageUI.Settings = {
                 { 2, 175 },
             },
         },
+
+        SliderLeft = {
+            Enabled = true,
+            Active = false,
+            Pressed = false,
+            Keys = {
+                { 0, 174 },
+                { 1, 174 },
+                { 2, 174 },
+            },
+        },
+        SliderRight = {
+            Enabled = true,
+            Pressed = false,
+            Active = false,
+            Keys = {
+                { 0, 175 },
+                { 1, 175 },
+                { 2, 175 },
+            },
+        },
+
+
         Select = {
             Enabled = true,
             Pressed = false,
