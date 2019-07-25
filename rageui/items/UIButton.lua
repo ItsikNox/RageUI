@@ -32,7 +32,7 @@ function RageUI.Button(Label, Description, Style, Enabled, Callback, Submenu)
                 ---@type boolean
                 local Selected = CurrentMenu.Index == Option
 
-                ItemsWrapper.ItemsSafeZone(CurrentMenu)
+                RageUI.ItemsSafeZone(CurrentMenu)
 
                 local LeftBadgeOffset = ((Style.LeftBadge == RageUI.BadgeStyle.None or tonumber(Style.LeftBadge) == nil) and 0 or 27)
                 local RightBadgeOffset = ((Style.RightBadge == RageUI.BadgeStyle.None or tonumber(Style.RightBadge) == nil) and 0 or 32)
@@ -45,7 +45,7 @@ function RageUI.Button(Label, Description, Style, Enabled, Callback, Submenu)
                 end
                 ---@type boolean
                 if CurrentMenu.EnableMouse == true then
-                    Hovered = ItemsWrapper.ItemsMouseBounds(CurrentMenu, Selected, Option, SettingsButton);
+                    Hovered = RageUI.ItemsMouseBounds(CurrentMenu, Selected, Option, SettingsButton);
                 end
 
                 if Selected then
@@ -92,13 +92,15 @@ function RageUI.Button(Label, Description, Style, Enabled, Callback, Submenu)
 
                 RageUI.ItemOffset = RageUI.ItemOffset + SettingsButton.Rectangle.Height
 
-                ItemsWrapper.ItemsDescription(CurrentMenu, Description, Selected);
+                RageUI.ItemsDescription(CurrentMenu, Description, Selected);
 
                 if (Enabled) then
                     Callback(Hovered, Selected, ((CurrentMenu.Controls.Select.Active or (Hovered and CurrentMenu.Controls.Click.Active)) and Selected))
                 end
+
                 if Selected and (CurrentMenu.Controls.Select.Active or (Hovered and CurrentMenu.Controls.Click.Active)) then
-                    RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.Select)
+                    local Audio = RageUI.Settings.Audio
+                    PlaySound(Audio[Audio.Use].Select.audioName, Audio[Audio.Use].Select.audioRef)
                     if Submenu ~= nil then
                         if Submenu() then
                             RageUI.NextMenu = Submenu

@@ -48,13 +48,13 @@ function RageUI.Progress(Label, ProgressStart, ProgressMax, Description, Counter
                 ---@type boolean
                 local ProgressHovered = false
 
-                ItemsWrapper.ItemsSafeZone(CurrentMenu)
+                RageUI.ItemsSafeZone(CurrentMenu)
 
                 local Hovered = false;
 
                 ---@type boolean
                 if CurrentMenu.EnableMouse == true then
-                    Hovered = ItemsWrapper.ItemsMouseBounds(CurrentMenu, Selected, Option, SettingsButton);
+                    Hovered = RageUI.ItemsMouseBounds(CurrentMenu, Selected, Option, SettingsButton);
                 end
 
                 local ProgressText = (Counter and ProgressStart .. "/" .. #Items or (type(Items[ProgressStart]) == "table") and tostring(Items[ProgressStart].Name) or tostring(Items[ProgressStart]))
@@ -93,7 +93,7 @@ function RageUI.Progress(Label, ProgressStart, ProgressMax, Description, Counter
 
                 RageUI.ItemOffset = RageUI.ItemOffset + SettingsProgress.Height
 
-                ItemsWrapper.ItemsDescription(CurrentMenu, Description, Selected);
+                RageUI.ItemsDescription(CurrentMenu, Description, Selected);
 
                 if Selected and CurrentMenu.Controls.Left.Active and not CurrentMenu.Controls.Right.Active then
                     ProgressStart = ProgressStart - 1
@@ -102,19 +102,21 @@ function RageUI.Progress(Label, ProgressStart, ProgressMax, Description, Counter
                         ProgressStart = #Items
                     end
 
-                    RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.LeftRight)
+                    local Audio = RageUI.Settings.Audio
+                    PlaySound(Audio[Audio.Use].LeftRight.audioName, Audio[Audio.Use].LeftRight.audioRef)
                 elseif Selected and CurrentMenu.Controls.Right.Active and not CurrentMenu.Controls.Left.Active then
                     ProgressStart = ProgressStart + 1
 
                     if ProgressStart > #Items then
                         ProgressStart = 0
                     end
-
-                    RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.LeftRight)
+                    local Audio = RageUI.Settings.Audio
+                    PlaySound(Audio[Audio.Use].LeftRight.audioName, Audio[Audio.Use].LeftRight.audioRef)
                 end
 
                 if Selected and (CurrentMenu.Controls.Select.Active or ((Hovered and CurrentMenu.Controls.Click.Active) and not ProgressHovered)) then
-                    RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.Select)
+                    local Audio = RageUI.Settings.Audio
+                    PlaySound(Audio[Audio.Use].Select.audioName, Audio[Audio.Use].Select.audioRef)
                 elseif Selected and (Hovered and CurrentMenu.Controls.Click.Active and ProgressHovered) then
 
                     ---@type number

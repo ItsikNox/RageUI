@@ -2,10 +2,11 @@ local updateShowcaseData = {
     count = 1;
 }
 
-Citizen.CreateThread(function()
+Citizen.CreateThreadNow(function()
 
     local mainMenu = RageUI.CreateMenu("RageUI", "~b~SHOWCASE")
 
+    --mainMenu:SetPosition(700,300)
     mainMenu.Closed = function()
         RageUI.Popup({
             message = "RageUI showcase menu closed",
@@ -50,7 +51,7 @@ Citizen.CreateThread(function()
             index = 1,
         },
         slider = {
-            max = 20,
+            max = 10,
             index = 1
         },
         progress = {
@@ -85,7 +86,7 @@ Citizen.CreateThread(function()
         }
     }
     while true do
-        Citizen.Wait(1)
+        Citizen.Wait(0)
 
         if IsControlJustPressed(1, 51) then
             RageUI.Visible(mainMenu, not RageUI.Visible(mainMenu))
@@ -102,7 +103,7 @@ Citizen.CreateThread(function()
 
         if RageUI.Visible(mainMenu) then
 
-            RageUI.DrawContent({ header = true, instructionalButton = true }, function()
+            RageUI.DrawContent({ header = true, glare = true, instructionalButton = true }, function()
                 ---Items
 
                 RageUI.Checkbox("Checkbox - Style 1 (click me!)", description, mainMenuData.checkbox.tick, { Style = RageUI.CheckboxStyle.Tick }, function(Hovered, Selected, Active, Checked)
@@ -119,8 +120,12 @@ Citizen.CreateThread(function()
 
                 end)
 
-                RageUI.Slider("Quantité", mainMenuData.slider.index, mainMenuData.slider.max, description, false, { }, true, function(Hovered, Selected, Active, Index)
+                RageUI.Slider("Quantité", mainMenuData.slider.index, mainMenuData.slider.max, description, true, { }, true, function(Hovered, Selected, Active, Index)
                     mainMenuData.slider.index = Index
+
+                    RageUI.Text({
+                        message = Index
+                    })
                 end)
 
                 if (mainMenuData.progress.show) then
@@ -137,7 +142,7 @@ Citizen.CreateThread(function()
             end)
 
         elseif RageUI.Visible(updateShowcase) then
-            RageUI.DrawContent({ header = true, instructionalButton = true }, function()
+            RageUI.DrawContent({ header = true, glare = false, nstructionalButton = true }, function()
 
                 for i = 1, updateShowcaseData.count do
                     RageUI.Button("Another Sub-Menu " .. i, description, { RightLabel = "→→→" }, true, function(Hovered, Active, Selected)
@@ -150,7 +155,7 @@ Citizen.CreateThread(function()
                 ---Panels
             end)
         elseif RageUI.Visible(panelShowcase) then
-            RageUI.DrawContent({ header = false, instructionalButton = true }, function()
+            RageUI.DrawContent({ header = false, glare = true, instructionalButton = true }, function()
                 ---Items
                 RageUI.Checkbox("Colors Panel", description, panelShowcaseData.colors.enable, { Style = RageUI.CheckboxStyle.Tick }, function(Hovered, Selected, Active, Checked)
                     panelShowcaseData.colors.enable = Checked
