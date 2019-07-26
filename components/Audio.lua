@@ -14,12 +14,7 @@
 ---@param IsLooped boolean
 ---@return nil
 ---@public
-function PlaySound(Library, Sound, IsLooped)
-
-    ---@type table
-    local Audio = {
-        Id = nil,
-    }
+function PlaySound(Library, Sound, IsLooped,  Audio)
 
     if not IsLooped then
         PlaySoundFrontend(-1, Sound, Library, true)
@@ -41,4 +36,5 @@ function PlaySound(Library, Sound, IsLooped)
         end
     end
 end
+
 

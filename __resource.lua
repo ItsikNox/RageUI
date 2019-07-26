@@ -1,7 +1,7 @@
 resource_manifest_version '05cfa83c-a124-4cfa-a768-c24a5811d8f9'
 
 client_scripts {
-    "rageui/Base.lua",
+    "rageui/RageUI.lua",
     "rageui/Menu.lua",
     "rageui/MenuController.lua",
 
@@ -21,6 +21,7 @@ client_scripts {
     "rageui/items/UIList.lua",
     "rageui/items/UIProgress.lua",
     "rageui/items/UISlider.lua",
+    "rageui/items/UISliderHeritage.lua",
 
     "rageui/panels/UIColourPanel.lua",
     "rageui/panels/UIGridPanel.lua",

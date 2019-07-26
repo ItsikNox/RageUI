@@ -85,6 +85,8 @@ Citizen.CreateThreadNow(function()
             y = 0.5
         }
     }
+
+    local heritageSlider = 0.5
     while true do
         Citizen.Wait(0)
 
@@ -120,13 +122,23 @@ Citizen.CreateThreadNow(function()
 
                 end)
 
+                --[[
                 RageUI.Slider("Quantité", mainMenuData.slider.index, mainMenuData.slider.max, description, true, { }, true, function(Hovered, Selected, Active, Index)
                     mainMenuData.slider.index = Index
 
                     RageUI.Text({
                         message = Index
                     })
+                end)]]
+
+                RageUI.UISliderHeritage("Ressemblance", heritageSlider, description, true,function(Hovered, Selected, Active, Index)
+                    heritageSlider = Index * 10
+
+                    RageUI.Text({
+                        message = Index
+                    })
                 end)
+
 
                 if (mainMenuData.progress.show) then
                     RageUI.Progress("Progress ", mainMenuData.progress.index, mainMenuData.progress.max, description, true, true, function(Hovered, Selected, Active, Index)
