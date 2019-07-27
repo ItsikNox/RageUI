@@ -180,11 +180,11 @@ function RageUI.GoSliderLeft(Controls)
                     Controls.SliderLeft.Pressed = true
                     Citizen.CreateThread(function()
                         Controls.SliderLeft.Active = true
-                        Citizen.Wait(0.01)
+                        Citizen.Wait(1)
                         Controls.SliderLeft.Active = false
                         while Controls.SliderLeft.Enabled and IsDisabledControlPressed(Controls.SliderLeft.Keys[Index][1], Controls.SliderLeft.Keys[Index][2]) do
                             Controls.SliderLeft.Active = true
-                            Citizen.Wait(0.01)
+                            Citizen.Wait(1)
                             Controls.SliderLeft.Active = false
                         end
                         Controls.SliderLeft.Pressed = false
@@ -204,11 +204,11 @@ function RageUI.GoSliderRight(Controls)
                     Controls.SliderRight.Pressed = true
                     Citizen.CreateThread(function()
                         Controls.SliderRight.Active = true
-                        Citizen.Wait(0.01)
+                        Citizen.Wait(1)
                         Controls.SliderRight.Active = false
                         while Controls.SliderRight.Enabled and IsDisabledControlPressed(Controls.SliderRight.Keys[Index][1], Controls.SliderRight.Keys[Index][2]) do
                             Controls.SliderRight.Active = true
-                            Citizen.Wait(0.01)
+                            Citizen.Wait(1)
                             Controls.SliderRight.Active = false
                         end
                         Controls.SliderRight.Pressed = false

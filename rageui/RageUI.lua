@@ -211,7 +211,7 @@ RageUI.Settings = {
                 audioRef = "BACK",
             },
             Error = {
-                audioName = "HUD_FREEMODE_SOUNDSET",
+                audioName = "HUD_FRONTEND_DEFAULT_SOUNDSET",
                 audioRef = "ERROR",
             },
             Slider = {
