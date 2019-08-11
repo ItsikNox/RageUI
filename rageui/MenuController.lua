@@ -72,7 +72,6 @@ function RageUI.GoDown(Options)
     if RageUI.CurrentMenu ~= nil then
         Options = RageUI.CurrentMenu.Options
         if RageUI.CurrentMenu() then
-            print(Options)
             if Options > RageUI.CurrentMenu.Pagination.Total then
                 if RageUI.CurrentMenu.Index >= RageUI.CurrentMenu.Pagination.Maximum then
                     if RageUI.CurrentMenu.Index == Options then

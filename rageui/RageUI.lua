@@ -52,6 +52,7 @@ RageUI.ItemOffset = 0
 
 ---@type table
 RageUI.Settings = {
+    Debug = true,
     Controls = {
         Up = {
             Enabled = true,
@@ -462,6 +463,39 @@ function RageUI.Render(instructionalButton)
     if RageUI.CurrentMenu ~= nil then
         if RageUI.CurrentMenu() then
 
+            if RageUI.Settings.Debug then
+                up = nil
+                if RageUI.CurrentMenu.Controls.Up.Pressed then
+                    up = "~g~True~s~"
+                else
+                    up = "~r~False~s~"
+                end
+                down = nil
+                if RageUI.CurrentMenu.Controls.Down.Pressed then
+                    down = "~g~True~s~"
+                else
+                    down = "~r~False~s~"
+                end
+                left = nil
+                if RageUI.CurrentMenu.Controls.Left.Pressed then
+                    left = "~g~True~s~"
+                else
+                    left = "~r~False~s~"
+                end
+                right = nil
+                if RageUI.CurrentMenu.Controls.Right.Pressed then
+                    right = "~g~True~s~"
+                else
+                    right = "~r~False~s~"
+                end
+                text = "~r~Debug\n~s~Options max : "..RageUI.Options.."\n".."Current index : "..RageUI.CurrentMenu.Index.."\nTitle : " .. RageUI.CurrentMenu.Title .. "\n~s~Subtitle : " ..  RageUI.CurrentMenu.Subtitle .. "\n~s~Up pressed : " .. up .. "\nDown pressed : " .. down .. "\nRight pressed : " .. right .. "\nLeft pressed : " .. left
+
+                local SubtitleLineCount = GetLineCount(text, RageUI.CurrentMenu.X + RageUI.Settings.Items.Subtitle.Text.X, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Subtitle.Text.Y, 0, RageUI.Settings.Items.Subtitle.Text.Scale, 245, 245, 245, 255, nil, false, false, RageUI.Settings.Items.Subtitle.Background.Width + RageUI.CurrentMenu.WidthOffset)
+
+                RenderSprite(RageUI.Settings.Items.Description.Background.Dictionary, RageUI.Settings.Items.Description.Background.Texture, RageUI.CurrentMenu.X, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Description.Background.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Items.Description.Background.Width + RageUI.CurrentMenu.WidthOffset, 250, 0, 0, 0, 255)
+                RenderText(text, RageUI.CurrentMenu.X + RageUI.Settings.Items.Description.Text.X, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Description.Text.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, 0, RageUI.Settings.Items.Description.Text.Scale, 255, 255, 255, 255, nil, false, false, RageUI.Settings.Items.Description.Background.Width + RageUI.CurrentMenu.WidthOffset)
+
+            end
             if RageUI.CurrentMenu.Safezone then
                 ResetScriptGfxAlign()
             end
@@ -474,7 +508,6 @@ function RageUI.Render(instructionalButton)
             RageUI.CurrentMenu.SafeZoneSize = nil
 
             RageUI.Controls()
-
             RageUI.Options = 0
             RageUI.ItemOffset = 0
 
