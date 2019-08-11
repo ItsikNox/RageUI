@@ -58,7 +58,7 @@ function RageUI.GoUp(Options)
             end
 
             local Audio = RageUI.Settings.Audio
-            PlaySound(Audio[Audio.Use].UpDown.audioName, Audio[Audio.Use].UpDown.audioRef)
+            RageUI.PlaySound(Audio[Audio.Use].UpDown.audioName, Audio[Audio.Use].UpDown.audioRef)
         end
     end
 end
@@ -95,7 +95,7 @@ function RageUI.GoDown(Options)
             end
 
             local Audio = RageUI.Settings.Audio
-            PlaySound(Audio[Audio.Use].UpDown.audioName, Audio[Audio.Use].UpDown.audioRef)
+            RageUI.PlaySound(Audio[Audio.Use].UpDown.audioName, Audio[Audio.Use].UpDown.audioRef)
         end
     end
 end
@@ -459,7 +459,7 @@ end
 function RageUI.GoBack()
     if RageUI.CurrentMenu ~= nil then
         local Audio = RageUI.Settings.Audio
-        PlaySound(Audio[Audio.Use].Back.audioName, Audio[Audio.Use].Back.audioRef)
+        RageUI.PlaySound(Audio[Audio.Use].Back.audioName, Audio[Audio.Use].Back.audioRef)
         if RageUI.CurrentMenu.Parent ~= nil then
             if RageUI.CurrentMenu.Parent() then
                 RageUI.NextMenu = RageUI.CurrentMenu.Parent

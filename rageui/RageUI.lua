@@ -192,6 +192,7 @@ RageUI.Settings = {
         },
     },
     Audio = {
+        Id = nil,
         Use = "RageUI",
         RageUI = {
             UpDown = {
@@ -299,6 +300,34 @@ function RageUI.Visible(Menu, Value)
     end
 end
 
+---PlaySound
+---@param Library string
+---@param Sound string
+---@param IsLooped boolean
+---@return nil
+---@public
+function RageUI.PlaySound(Library, Sound, IsLooped)
+    if not IsLooped then
+        PlaySoundFrontend(-1, Sound, Library, true)
+    else
+        if not RageUI.Settings.Audio.Id then
+            Citizen.CreateThread(function()
+                RageUI.Settings.Audio.Id = GetSoundId()
+
+                PlaySoundFrontend(RageUI.Settings.Audio.Id, Sound, Library, true)
+
+                Citizen.Wait(0.01)
+
+                StopSound(RageUI.Settings.Audio.Id)
+
+                ReleaseSoundId(RageUI.Settings.Audio.Id)
+
+                RageUI.Settings.Audio.Id = nil
+            end)
+        end
+    end
+end
+
 ---Banner
 ---@return nil
 ---@public
@@ -358,7 +387,7 @@ end
 ---@return nil
 ---@public
 -- function RageUI:CloseAll()
---     PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.Back)
+--     RageUI.PlaySound(RageUI.Settings.Audio.Library, RageUI.Settings.Audio.Back)
 --     RageUI.NextMenu = nil
 --     RageUI.Visible(RageUI.CurrentMenu, false)
 -- end
@@ -454,7 +483,7 @@ function RageUI.Render(instructionalButton)
                     RageUI.CurrentMenu.Controls.Back.Pressed = false
 
                     local Audio = RageUI.Settings.Audio
-                    PlaySound(Audio[Audio.Use].Back.audioName, Audio[Audio.Use].Back.audioRef)
+                    RageUI.PlaySound(Audio[Audio.Use].Back.audioName, Audio[Audio.Use].Back.audioRef)
                     if RageUI.CurrentMenu.Closed ~= nil then
                         RageUI.CurrentMenu.Closed()
                     end
@@ -553,7 +582,7 @@ function RageUI.ItemsMouseBounds(CurrentMenu, Selected, Option, SettingsButton)
         if CurrentMenu.Controls.Click.Active then
             CurrentMenu.Index = Option
             local Audio = RageUI.Settings.Audio
-            PlaySound(Audio[Audio.Use].Error.audioName, Audio[Audio.Use].Error.audioRef)
+            RageUI.PlaySound(Audio[Audio.Use].Error.audioName, Audio[Audio.Use].Error.audioRef)
         end
     end
 

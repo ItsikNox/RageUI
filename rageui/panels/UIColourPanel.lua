@@ -87,7 +87,7 @@ function RageUI.ColourPanel(Title, Colours, MinimumIndex, CurrentIndex, Callback
 
             if (Hovered or LeftArrowHovered or RightArrowHovered) and RageUI.Settings.Controls.Click.Active then
                 local Audio = RageUI.Settings.Audio
-                PlaySound(Audio[Audio.Use].Select.audioName, Audio[Audio.Use].Select.audioRef)
+                RageUI.PlaySound(Audio[Audio.Use].Select.audioName, Audio[Audio.Use].Select.audioRef)
             end
 
             Callback((Hovered or LeftArrowHovered or RightArrowHovered), Selected, MinimumIndex, CurrentIndex)
