@@ -32,6 +32,7 @@ end
 ---@public
 function RageUI.GoUp(Options)
     if RageUI.CurrentMenu ~= nil then
+        Options = RageUI.CurrentMenu.Options
         if RageUI.CurrentMenu() then
             if Options > RageUI.CurrentMenu.Pagination.Total then
                 if RageUI.CurrentMenu.Index <= RageUI.CurrentMenu.Pagination.Minimum then
@@ -69,7 +70,9 @@ end
 ---@public
 function RageUI.GoDown(Options)
     if RageUI.CurrentMenu ~= nil then
+        Options = RageUI.CurrentMenu.Options
         if RageUI.CurrentMenu() then
+            print(Options)
             if Options > RageUI.CurrentMenu.Pagination.Total then
                 if RageUI.CurrentMenu.Index >= RageUI.CurrentMenu.Pagination.Maximum then
                     if RageUI.CurrentMenu.Index == Options then
@@ -230,8 +233,8 @@ function RageUI.Controls()
 
                 local Controls = RageUI.CurrentMenu.Controls;
                 ---@type number
-                local Options = RageUI.Options
-
+                local Options = RageUI.CurrentMenu.Options
+                RageUI.Options = RageUI.CurrentMenu.Options
                 if RageUI.CurrentMenu.EnableMouse then
                     DisableAllControlActions(2)
                 end
@@ -304,7 +307,7 @@ function RageUI.Controls()
                 RageUI.GoSliderLeft(Controls)
                 RageUI.GoSliderRight(Controls)
 
-                if Controls.Select.Enabled and not Controls.Down.Pressed and not Controls.Up.Pressed then
+                if Controls.Select.Enabled then
                     for Index = 1, #Controls.Select.Keys do
                         if not Controls.Select.Pressed then
                             if IsDisabledControlJustPressed(Controls.Select.Keys[Index][1], Controls.Select.Keys[Index][2]) then
@@ -330,6 +333,7 @@ function RageUI.Controls()
                                     end
 
                                     Controls.Select.Pressed = false
+    
                                 end)
 
                                 break
@@ -338,7 +342,7 @@ function RageUI.Controls()
                     end
                 end
 
-                if Controls.Click.Enabled and not Controls.Down.Pressed and not Controls.Up.Pressed then
+                if Controls.Click.Enabled then
                     for Index = 1, #Controls.Click.Keys do
                         if not Controls.Click.Pressed then
                             if IsDisabledControlJustPressed(Controls.Click.Keys[Index][1], Controls.Click.Keys[Index][2]) then
@@ -371,7 +375,7 @@ function RageUI.Controls()
                         end
                     end
                 end
-                if Controls.Back.Enabled and not Controls.Down.Pressed and not Controls.Up.Pressed then
+                if Controls.Back.Enabled  then
                     for Index = 1, #Controls.Back.Keys do
                         if not Controls.Back.Pressed then
                             if IsDisabledControlJustPressed(Controls.Back.Keys[Index][1], Controls.Back.Keys[Index][2]) then
