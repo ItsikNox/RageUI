@@ -147,9 +147,10 @@ Citizen.CreateThreadNow(function()
 
                 RageUI.Button("Another Menu", description, { RightLabel = "→→→" }, true, function(Hovered, Active, Selected)
                 end, updateShowcase)
-
+                
             end, function()
                 ---Panels
+
             end)
 
         elseif RageUI.Visible(updateShowcase) then
