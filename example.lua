@@ -278,6 +278,7 @@ Citizen.CreateThreadNow(function()
 
             end, function()
                 ---Panels
+
             end)
         elseif RageUI.Visible(menuWeaponPanel) then
             RageUI.DrawContent({ header = true, glare = false, nstructionalButton = true }, function()
