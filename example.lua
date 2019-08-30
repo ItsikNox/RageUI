@@ -18,6 +18,120 @@ Citizen.CreateThreadNow(function()
     mainMenu.EnableMouse = true;
 
     local updateShowcase = RageUI.CreateSubMenu(mainMenu, "", "~b~RAGEUI SHOWCASE", nil, nil, "shopui_title_gunclub", "shopui_title_gunclub")
+
+    local menuWeaponPanel = RageUI.CreateSubMenu(mainMenu, "", "~b~RAGEUI SHOWCASE", nil, nil, "shopui_title_gunclub", "shopui_title_gunclub")
+
+
+     menuWeaponPanel.list = {
+         index = 1
+     }
+
+
+     menuWeaponPanel.list.WeaponName = {
+        ['weapon_golfclub'] = {
+                            ['base'] = {'mpweaponsunusedfornow','w_me_gclub_silhouette'},
+                            },
+        ['weapon_knife'] = {
+                            ['base'] = {'mpweaponsunusedfornow','w_me_knife_silhouette'},
+                            },
+        ['weapon_crowbar'] = {
+                            ['base'] = {'mpweaponsunusedfornow','w_me_crowbar_silhouette'},
+                            },
+        ['weapon_bat'] = {
+                            ['base'] = {'mpweaponsunusedfornow','w_me_bat_silhouette'},
+                            },
+        ['weapon_hammer'] = {
+                            ['base'] = {'mpweaponsunusedfornow','w_me_hammer_silhouette'},
+                            },
+        ['weapon_pistol'] = {
+                            ['base'] = {'mpweaponsgang1','w_pi_pistol_silhouette_overlay'},
+                            ['acc'] = {['component_pistol_clip_01'] = 'w_pi_pistol_mag1_silhouette',
+                                       ['component_pistol_clip_02'] = 'w_pi_pistol_mag2_silhouette',
+                                       ['component_at_pi_supp_02'] = 'w_pi_pistol_supp_silhouette',
+                                       ['component_at_pi_flsh'] = 'w_pi_pistol_flash_silhouette'
+                                    }
+                            },
+        ['weapon_smokegrenade'] = {
+                            ['base'] = {'mpweaponscommon','w_ex_grenadesmoke_silhouette'},
+                            },
+        ['weapon_pumpshotgun'] = {
+                            ['base'] = {'mpweaponscommon','w_sg_pumpshotgun_silhouette _overlay'},
+                            ['acc'] = {['component_at_ar_flsh'] ='w_sg_pumpshotgun_flash_silhouette',
+                                       ['component_at_sr_supp'] ='w_sg_pumpshotgun_supp_silhouette',
+                                       }
+                            },
+        ['weapon_microsmg'] = {
+                            ['base'] = {'mpweaponscommon','w_sb_microsmg_silhouette_overlay'},
+                            ['acc'] = {['component_at_pi_flsh'] = 'w_sb_microsmg_flash_silhouette',
+                                       ['component_microsmg_clip_01'] = 'w_sb_microsmg_mag1_silhouette',
+                                       ['component_microsmg_clip_02'] = 'w_sb_microsmg_mag2_silhouette',
+                                       ['component_at_scope_macro'] = 'w_sb_microsmg_scope_silhouette',
+                                       ['component_at_ar_supp_02'] = 'w_sb_microsmg_supp_silhouette',
+                                      }
+                            },
+        ['weapon_smg'] = {
+                            ['base'] = {'mpweaponsgang0','w_sb_smg_silhouette_overlay'},
+                            ['acc'] = {['component_at_ar_flsh'] = 'w_sb_smg_flash_silhouette',
+                                       ['component_smg_clip_01'] = 'w_sb_smg_mag1_silhouette',
+                                       ['component_smg_clip_02'] = 'w_sb_smg_mag2_silhouette',
+                                       ['component_smg_clip_03'] = '',
+                                       ['component_at_scope_macro_02'] = 'w_sb_smg_scope_silhouette',
+                                       ['component_at_pi_supp'] = 'w_sb_smg_supp_silhouette',
+                                       ['component_smg_clip_03'] = '',
+                                       }
+                            },
+        ['weapon_assaultrifle'] = {
+                            ['base'] = {'mpweaponsgang1','w_ar_assaultrifle_silhouette_overlay'},
+                            ['acc'] = {['component_assaultrifle_clip_01'] = 'w_ar_assaultrifle_mag1_silhouette',
+                                       ['component_assaultrifle_clip_02'] = 'w_ar_assaultrifle_mag2_silhouette',
+                                       ['component_assaultrifle_clip_03'] = '',
+                                       ['component_at_ar_supp_02'] = 'w_ar_assaultrifle_supp_silhouette',
+                                       ['component_at_ar_flsh'] = 'w_ar_assaultrifle_flash_silhouette',
+                                       ['component_at_ar_afgrip'] = 'w_ar_assaultrifle_grip_silhouette',
+                                       ['component_at_scope_macro'] = 'w_ar_assaultrifle_scope_silhouette',
+                                       }
+                            },
+        ['weapon_carbinerifle'] = {
+                            ['base'] = {'mpweaponsgang0','w_ar_carbinerifle_silhouette_overlay'},
+                            ['acc'] = {['component_carbinerifle_clip_01'] = 'w_ar_carbinerifle_mag1_silhouette',
+                                       ['component_carbinerifle_clip_02'] = 'w_ar_carbinerifle_mag2_silhouette',
+                                       ['component_carbinerifle_clip_03'] = '',
+                                       ['component_at_ar_supp'] = 'w_ar_carbinerifle_supp_silhouette',
+                                       ['component_at_ar_flsh'] = 'w_ar_carbinerifle_flash_silhouette',
+                                       ['component_at_ar_afgrip'] = 'w_ar_carbinerifle_grip_silhouette',
+                                       ['component_at_scope_medium'] = 'w_ar_carbinerifle_scope_silhouette',
+                                      }
+                            },
+        ['weapon_sniperrifle'] = {
+                            ['base'] = {'mpweaponsgang0','w_sr_sniperrifle_silhouette_overlay'},
+                            ['acc'] = {['component_at_scope_large'] = 'w_sr_sniperrifle_scope_large_silhouette',
+                                       ['component_at_scope_max'] = 'w_sr_sniperrifle_scope_silhouette',
+                                       ['component_at_ar_supp_02'] = 'w_sr_sniperrifle_supp_silhouette',
+                                      }
+                            },
+        ['weapon_stungun'] = {
+                            ['base'] = {'mpweaponsgang0','w_pi_stungun_silhouette'},
+                            },
+        ['weapon_nightstick'] = {
+                            ['base'] = {'mpweaponsunusedfornow','w_me_nightstick_silhouette'},
+                            },
+    }
+
+    menuWeaponPanel.list.Indexes = {}
+    for k,v in pairs(menuWeaponPanel.list.WeaponName) do
+        file = v.base[1]
+        if not HasStreamedTextureDictLoaded(file) then
+            RequestStreamedTextureDict(file, true)
+            while not HasStreamedTextureDictLoaded(file) do
+             Wait(1)
+            end
+        end
+    
+        table.insert( menuWeaponPanel.list.Indexes, k )
+    end
+
+
+
     updateShowcase.EnableMouse = false;
     updateShowcase:AddInstructionButton({
         [1] = GetControlInstructionalButton(2, 56, 0),
@@ -87,6 +201,16 @@ Citizen.CreateThreadNow(function()
     }
 
     local HeritageIndex = 5
+    function RefreshWeaponsAccess(weapon_name)
+        menuWeaponPanel.list.access = {}
+        EnabledAcces = {}
+        if menuWeaponPanel.list.WeaponName[weapon_name]["acc"] ~= nil then
+            for k, v in pairs(menuWeaponPanel.list.WeaponName[weapon_name]["acc"]) do
+                menuWeaponPanel.list.access[k] = v 
+                EnabledAcces[k] = {}
+            end
+        end
+    end
     while true do
         Citizen.Wait(0)
 
@@ -148,10 +272,39 @@ Citizen.CreateThreadNow(function()
                 RageUI.Button("Another Menu", description, { RightLabel = "→→→" }, true, function(Hovered, Active, Selected)
                 end, updateShowcase)
 
+
+                RageUI.Button("Weapon Panel Menu", description, { RightLabel = "→→→" }, true, function(Hovered, Active, Selected)
+                end, menuWeaponPanel)
+
             end, function()
                 ---Panels
             end)
-
+        elseif RageUI.Visible(menuWeaponPanel) then
+            RageUI.DrawContent({ header = true, glare = false, nstructionalButton = true }, function()
+                RageUI.List("Weapon", menuWeaponPanel.list.Indexes,  menuWeaponPanel.list.index, nil, {}, true,  function(Hovered, Active, Selected, Index)
+                    if Index ~= menuWeaponPanel.list.index then
+                        menuWeaponPanel.list.index = Index
+                        RefreshWeaponsAccess(menuWeaponPanel.list.Indexes[menuWeaponPanel.list.index])
+                    end
+                end)
+                if menuWeaponPanel.list.access ~= nil then
+                    for k,v in pairs(menuWeaponPanel.list.access) do
+                        RageUI.Checkbox(k, nil, EnabledAcces[k].enabled, { Style = RageUI.CheckboxStyle.Tick }, function(Hovered, Selected, Active, Checked)
+                            EnabledAcces[k].enabled = Checked
+                        end)
+                    end
+                end
+            end, function()
+                local accessoires = {}
+                if menuWeaponPanel.list.access ~= nil then
+                    for k,v in pairs(menuWeaponPanel.list.access) do
+                        if EnabledAcces[k].enabled then
+                            table.insert( accessoires, k )
+                        end
+                    end
+                end
+                RageUI.WeaponPanel(menuWeaponPanel.list.Indexes[menuWeaponPanel.list.index],accessoires,"Accessoires",function()end)
+            end)
         elseif RageUI.Visible(updateShowcase) then
             RageUI.DrawContent({ header = true, glare = false, nstructionalButton = true }, function()
 

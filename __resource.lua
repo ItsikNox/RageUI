@@ -28,6 +28,7 @@ client_scripts {
     "rageui/panels/UIGridPanelHorizontal.lua",
     "rageui/panels/UIGridPanelVertical.lua",
     "rageui/panels/UIPercentagePanel.lua",
+    "rageui/panels/UIWeaponPanel.lua",
     "rageui/windows/UIHeritage.lua",
 
 
