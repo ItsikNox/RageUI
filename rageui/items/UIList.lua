@@ -54,7 +54,9 @@ function RageUI.List(Label, Items, Index, Description,Style, Enabled, Callback)
                 end
 
                 local ListText = (type(Items[Index]) == "table") and tostring(Items[Index].Name) or tostring(Items[Index]) or "NIL"
-                local TextOffset = MeasureStringWidth(ListText, 0, 0.35)
+                local name = ListText
+                local name = name:gsub("é", "e")
+                local TextOffset = MeasureStringWidth(name, 0, 0.35)
 
                 if Selected then
                     RenderSprite(SettingsButton.SelectedSprite.Dictionary, SettingsButton.SelectedSprite.Texture, CurrentMenu.X, CurrentMenu.Y + SettingsButton.SelectedSprite.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, SettingsButton.SelectedSprite.Width + CurrentMenu.WidthOffset, SettingsButton.SelectedSprite.Height)

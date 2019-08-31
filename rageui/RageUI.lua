@@ -52,7 +52,7 @@ RageUI.ItemOffset = 0
 
 ---@type table
 RageUI.Settings = {
-    Debug = true,
+    Debug = false,
     Controls = {
         Up = {
             Enabled = true,
@@ -283,13 +283,23 @@ function RageUI.Visible(Menu, Value)
     if Menu ~= nil then
         if Menu() then
             if type(Value) == "boolean" then
-                Menu.Open = Value
-                if Menu.Open then
-                    Menu:UpdateInstructionalButtons(Value);
-                    RageUI.CurrentMenu = Menu
-                    RageUI.Options = 0
-                    RageUI.ItemOffset = 0
-                else
+      
+                if not menuOpen then
+                    Menu.Open = Value
+                    if Menu.Open and RageUI.CurrentMenu == nil then
+                        Menu:UpdateInstructionalButtons(Value);
+                        RageUI.CurrentMenu = Menu
+                        RageUI.Options = 0
+                        RageUI.ItemOffset = 0
+                    elseif not Menu.Open then
+                        RageUI.CurrentMenu = nil
+                        RageUI.Options = 0
+                        RageUI.ItemOffset = 0
+                    end
+                    menuOpen = true
+                elseif not Value then
+                    Menu.Open = Value
+                    menuOpen = false
                     RageUI.CurrentMenu = nil
                     RageUI.Options = 0
                     RageUI.ItemOffset = 0
@@ -301,6 +311,13 @@ function RageUI.Visible(Menu, Value)
     end
 end
 
+
+function RageUI.CloseAll()
+    menuOpen = false
+    RageUI.CurrentMenu = nil
+    RageUI.Options = 0
+    RageUI.ItemOffset = 0
+end
 ---PlaySound
 ---@param Library string
 ---@param Sound string

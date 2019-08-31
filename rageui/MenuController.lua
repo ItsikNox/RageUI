@@ -379,6 +379,7 @@ function RageUI.Controls()
                         if not Controls.Back.Pressed then
                             if IsDisabledControlJustPressed(Controls.Back.Keys[Index][1], Controls.Back.Keys[Index][2]) then
                                 Controls.Back.Pressed = true
+                                Wait(10)
                                 break
                             end
                         end
