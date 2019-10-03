@@ -1,36 +1,40 @@
 resource_manifest_version '05cfa83c-a124-4cfa-a768-c24a5811d8f9'
 
 client_scripts {
+    "rageui/RageUI.lua",
+    "rageui/Menu.lua",
+    "rageui/MenuController.lua",
 
-    "src/menu/RageUI.lua",
-    "src/menu/Menu.lua",
-    "src/menu/Submenu.lua",
-    "src/menu/Controller.lua",
+    "components/Rectangle.lua",
+    "components/Sprite.lua",
+    "components/Text.lua",
+    "components/Visual.lua", --- Need rework
+    "components/Audio.lua",
+    "components/Scaleform.lua",
+    "components/Screen.lua",
 
-    "src/elements/Rectangle.lua",
-    "src/elements/Sprite.lua",
-    "src/elements/Text.lua",
-    "src/elements/Visual.lua",
+    "rageui/elements/ItemsBadge.lua",
+    "rageui/elements/ItemsColour.lua",
+    "rageui/elements/PanelColour.lua",
+    "rageui/items/UIButton.lua",
+    "rageui/items/UICheckBox.lua",
+    "rageui/items/UIList.lua",
+    "rageui/items/UIProgress.lua",
+    "rageui/items/UISlider.lua",
+    "rageui/items/UISliderHeritage.lua",
 
-    "src/menu/wrapper/items-wrapper.lua",
+    "rageui/panels/UIColourPanel.lua",
+    "rageui/panels/UIGridPanel.lua",
+    "rageui/panels/UIGridPanelHorizontal.lua",
+    "rageui/panels/UIGridPanelVertical.lua",
+    "rageui/panels/UIPercentagePanel.lua",
+    "rageui/panels/UIWeaponPanel.lua",
+    "rageui/windows/UIHeritage.lua",
 
-    "src/menu/scaleform/InstructionalButtons.lua",
 
 
-    "src/menu/elements/Badge.lua",
-    "src/menu/elements/ColourPanel.lua",
-    "src/menu/items/UIButton.lua",
-    "src/menu/items/UICheckBox.lua",
-    "src/menu/items/UIList.lua",
-    "src/menu/items/UIProgress.lua",
-    "src/menu/items/UISlider.lua",
-
-    "src/menu/panels/UIColourPanel.lua",
-    "src/menu/panels/UIGridPanel.lua",
-    "src/menu/panels/UIGridPanelHorizontal.lua",
-    "src/menu/panels/UIGridPanelVertical.lua",
-    "src/menu/panels/UIPercentagePanel.lua",
-    "src/menu/windows/UIHeritage.lua",
-
-    "MenuExample/MenuExample.lua",
+    "example.lua",
 }
+
+
+
