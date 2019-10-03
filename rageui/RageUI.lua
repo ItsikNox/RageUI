@@ -272,6 +272,29 @@ RageUI.Settings = {
             Text = { X = 8, Y = 10, Scale = 0.35 },
         },
     },
+    Panels = {
+        Grid = {
+            Background = { Dictionary = "commonmenu", Texture = "gradient_bgd", Y = 4, Width = 431, Height = 275 },
+            Grid = { Dictionary = "pause_menu_pages_char_mom_dad", Texture = "nose_grid", X = 115.5, Y = 47.5, Width = 200, Height = 200 },
+            Circle = { Dictionary = "mpinventory", Texture = "in_world_circle", X = 115.5, Y = 47.5, Width = 20, Height = 20 },
+            Text = {
+                Top = { X = 215.5, Y = 15, Scale = 0.35 },
+                Bottom = { X = 215.5, Y = 250, Scale = 0.35 },
+                Left = { X = 57.75, Y = 130, Scale = 0.35 },
+                Right = { X = 373.25, Y = 130, Scale = 0.35 },
+            },
+        },
+
+        Percentage = {
+            Background = { Dictionary = "commonmenu", Texture = "gradient_bgd", Y = 4, Width = 431, Height = 76 },
+            Bar = { X = 9, Y = 50, Width = 413, Height = 10 },
+            Text = {
+                Left = { X = 25, Y = 15, Scale = 0.35 },
+                Middle = { X = 215.5, Y = 15, Scale = 0.35 },
+                Right = { X = 398, Y = 15, Scale = 0.35 },
+            },
+        },
+    },
 }
 
 ---Visible
@@ -283,21 +306,17 @@ function RageUI.Visible(Menu, Value)
     if Menu ~= nil then
         if Menu() then
             if type(Value) == "boolean" then
-      
-                if not menuOpen then
-                    Menu.Open = Value
-                    if Menu.Open and RageUI.CurrentMenu == nil then
-                        Menu:UpdateInstructionalButtons(Value);
-                        RageUI.CurrentMenu = Menu
-                        RageUI.Options = 0
-                        RageUI.ItemOffset = 0
-                    elseif not Menu.Open then
-                        RageUI.CurrentMenu = nil
-                        RageUI.Options = 0
-                        RageUI.ItemOffset = 0
+                if Value then
+                    if RageUI.CurrentMenu ~= nil then
+                        RageUI.CurrentMenu.Open = not Value
                     end
+                    Menu:UpdateInstructionalButtons(Value);
+                    RageUI.CurrentMenu = Menu
+                    RageUI.Options = 0
+                    RageUI.ItemOffset = 0
+                    Menu.Open = Value
                     menuOpen = true
-                elseif not Value then
+                else
                     Menu.Open = Value
                     menuOpen = false
                     RageUI.CurrentMenu = nil
@@ -325,22 +344,18 @@ end
 ---@return nil
 ---@public
 function RageUI.PlaySound(Library, Sound, IsLooped)
+    local audioId
     if not IsLooped then
         PlaySoundFrontend(-1, Sound, Library, true)
     else
-        if not RageUI.Settings.Audio.Id then
+        if not audioId then
             Citizen.CreateThread(function()
-                RageUI.Settings.Audio.Id = GetSoundId()
-
-                PlaySoundFrontend(RageUI.Settings.Audio.Id, Sound, Library, true)
-
-                Citizen.Wait(0.01)
-
-                StopSound(RageUI.Settings.Audio.Id)
-
-                ReleaseSoundId(RageUI.Settings.Audio.Id)
-
-                RageUI.Settings.Audio.Id = nil
+                audioId = GetSoundId()
+                PlaySoundFrontend(audioId, Sound, Library, true)
+                Citizen.Wait(0)
+                StopSound(audioId)
+                ReleaseSoundId(audioId)
+                audioId = nil
             end)
         end
     end
@@ -421,9 +436,7 @@ function RageUI.Subtitle()
                 RenderRectangle(RageUI.CurrentMenu.X, RageUI.CurrentMenu.Y + RageUI.ItemOffset, RageUI.Settings.Items.Subtitle.Background.Width + RageUI.CurrentMenu.WidthOffset, RageUI.Settings.Items.Subtitle.Background.Height + RageUI.CurrentMenu.SubtitleHeight, 0, 0, 0, 255)
                 RenderText(RageUI.CurrentMenu.Subtitle, RageUI.CurrentMenu.X + RageUI.Settings.Items.Subtitle.Text.X, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Subtitle.Text.Y + RageUI.ItemOffset, 0, RageUI.Settings.Items.Subtitle.Text.Scale, 245, 245, 245, 255, nil, false, false, RageUI.Settings.Items.Subtitle.Background.Width + RageUI.CurrentMenu.WidthOffset)
                 if RageUI.CurrentMenu.PageCounter == nil then
-                    if RageUI.CurrentMenu.Options >= RageUI.CurrentMenu.Pagination.Total + 1 then
-                        RenderText(RageUI.CurrentMenu.PageCounterColour .. RageUI.CurrentMenu.Index .. " / " .. RageUI.CurrentMenu.Options, RageUI.CurrentMenu.X + RageUI.Settings.Items.Subtitle.PreText.X + RageUI.CurrentMenu.WidthOffset, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Subtitle.PreText.Y + RageUI.ItemOffset, 0, RageUI.Settings.Items.Subtitle.PreText.Scale, 245, 245, 245, 255, 2)
-                    end
+                    RenderText(RageUI.CurrentMenu.PageCounterColour .. RageUI.CurrentMenu.Index .. " / " .. RageUI.CurrentMenu.Options, RageUI.CurrentMenu.X + RageUI.Settings.Items.Subtitle.PreText.X + RageUI.CurrentMenu.WidthOffset, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Subtitle.PreText.Y + RageUI.ItemOffset, 0, RageUI.Settings.Items.Subtitle.PreText.Scale, 245, 245, 245, 255, 2)
                 else
                     RenderText(RageUI.CurrentMenu.PageCounter, RageUI.CurrentMenu.X + RageUI.Settings.Items.Subtitle.PreText.X + RageUI.CurrentMenu.WidthOffset, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Subtitle.PreText.Y + RageUI.ItemOffset, 0, RageUI.Settings.Items.Subtitle.PreText.Scale, 245, 245, 245, 255, 2)
                 end
@@ -586,8 +599,6 @@ function RageUI.DrawContent(settings, items, panels)
         RageUI.Render(true)
     end
 end
-<<<<<<< HEAD:src/menu/RageUI.lua
-=======
 
 ---ItemsDescription
 ---@param CurrentMenu table
@@ -655,4 +666,3 @@ function RageUI.ItemsSafeZone(CurrentMenu)
         end
     end
 end
->>>>>>> experimental:rageui/RageUI.lua

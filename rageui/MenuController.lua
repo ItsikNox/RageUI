@@ -129,6 +129,7 @@ function RageUI.GoLeft(Controls)
                         end
 
                         Controls.Left.Pressed = false
+                        Wait(10)
                     end)
 
                     break
@@ -165,6 +166,7 @@ function RageUI.GoRight(Controls)
                         end
 
                         Controls.Right.Pressed = false
+                        Wait(10)
                     end)
 
                     break

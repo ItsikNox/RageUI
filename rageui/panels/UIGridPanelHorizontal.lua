@@ -71,7 +71,7 @@ function RageUI.GridPanelHorizontal(X, LeftText, RightText, Callback)
             RageUI.ItemOffset = RageUI.ItemOffset + GridPanelHorizontal.Background.Height + GridPanelHorizontal.Background.Y
             if Hovered and Selected then
                 local Audio = RageUI.Settings.Audio
-                RageUI.PlaySound(Audio[Audio.Use].Slider.audioName, Audio[Audio.Use].Slider.audioRef)
+                RageUI.PlaySound(Audio[Audio.Use].Slider.audioName, Audio[Audio.Use].Slider.audioRef, true)
             end
             Callback(Hovered, Selected, X)
         end

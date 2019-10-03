@@ -56,6 +56,14 @@ function RageUI.List(Label, Items, Index, Description,Style, Enabled, Callback)
                 local ListText = (type(Items[Index]) == "table") and tostring(Items[Index].Name) or tostring(Items[Index]) or "NIL"
                 local name = ListText
                 local name = name:gsub("é", "e")
+                local name = name:gsub("â", "a")
+                local name = name:gsub("à", "a")
+                local name = name:gsub("è", "e")
+                local name = name:gsub("ê", "e")
+                local name = name:gsub("î", "i")
+                local name = name:gsub("ç", "c")
+                local name = name:gsub("ô", "o")
+                local name = name:gsub("É", "E")
                 local TextOffset = MeasureStringWidth(name, 0, 0.35)
 
                 if Selected then
