@@ -1,9 +1,9 @@
 resource_manifest_version '05cfa83c-a124-4cfa-a768-c24a5811d8f9'
 
 client_scripts {
-    "rageui/RageUI.lua",
-    "rageui/Menu.lua",
-    "rageui/MenuController.lua",
+    "rage-ui/menu/RageUI.lua",
+    "rage-ui/menu/Menu.lua",
+    "rage-ui/menu/MenuController.lua",
 
     "components/Rectangle.lua",
     "components/Sprite.lua",
@@ -13,23 +13,26 @@ client_scripts {
     "components/Scaleform.lua",
     "components/Screen.lua",
 
-    "rageui/elements/ItemsBadge.lua",
-    "rageui/elements/ItemsColour.lua",
-    "rageui/elements/PanelColour.lua",
-    "rageui/items/UIButton.lua",
-    "rageui/items/UICheckBox.lua",
-    "rageui/items/UIList.lua",
-    "rageui/items/UIProgress.lua",
-    "rageui/items/UISlider.lua",
-    "rageui/items/UISliderHeritage.lua",
+    "rage-ui/menu/elements/ItemsBadge.lua",
+    "rage-ui/menu/elements/ItemsColour.lua",
+    "rage-ui/menu/elements/PanelColour.lua",
+    "rage-ui/menu/items/UIButton.lua",
+    "rage-ui/menu/items/UICheckBox.lua",
+    "rage-ui/menu/items/UIList.lua",
+    "rage-ui/menu/items/UIProgress.lua",
+    "rage-ui/menu/items/UISlider.lua",
+    "rage-ui/menu/items/UISliderHeritage.lua",
 
-    "rageui/panels/UIColourPanel.lua",
-    "rageui/panels/UIGridPanel.lua",
-    "rageui/panels/UIGridPanelHorizontal.lua",
-    "rageui/panels/UIGridPanelVertical.lua",
-    "rageui/panels/UIPercentagePanel.lua",
-    "rageui/panels/UIWeaponPanel.lua",
-    "rageui/windows/UIHeritage.lua",
+    "rage-ui/menu/panels/UIColourPanel.lua",
+    "rage-ui/menu/panels/UIGridPanel.lua",
+    "rage-ui/menu/panels/UIGridPanelHorizontal.lua",
+    "rage-ui/menu/panels/UIGridPanelVertical.lua",
+    "rage-ui/menu/panels/UIPercentagePanel.lua",
+    "rage-ui/menu/panels/UIWeaponPanel.lua",
+    "rage-ui/menu/windows/UIHeritage.lua",
+
+    "rage-ui/timerbar/TimerBar.lua",
+    "rage-ui/timerbar/items/UIBasic.lua",
 
 
 
