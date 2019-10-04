@@ -12,3 +12,14 @@ TimerBar.Settings = {
 
 }
 
+function TimerBar.Visible()
+
+end
+
+function TimerBar.Background()
+
+end
+
+function TimerBar.Render()
+
+end

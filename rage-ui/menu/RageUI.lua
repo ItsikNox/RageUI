@@ -100,7 +100,6 @@ RageUI.Settings = {
                 { 2, 175 },
             },
         },
-
         SliderLeft = {
             Enabled = true,
             Active = false,
@@ -121,8 +120,6 @@ RageUI.Settings = {
                 { 2, 175 },
             },
         },
-
-
         Select = {
             Enabled = true,
             Pressed = false,
@@ -284,7 +281,6 @@ RageUI.Settings = {
                 Right = { X = 373.25, Y = 130, Scale = 0.35 },
             },
         },
-
         Percentage = {
             Background = { Dictionary = "commonmenu", Texture = "gradient_bgd", Y = 4, Width = 431, Height = 76 },
             Bar = { X = 9, Y = 50, Width = 413, Height = 10 },
