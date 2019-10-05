@@ -1,3 +1,18 @@
+local _timerBarPool = UITimerBarPool.New()
+
+local Basic = UITimerBarItem.New("THIS IS A BAR", "WITH RAGE-UI")
+_timerBarPool:Add(Basic)
+
+local BarWithIcon =
+
+Citizen.CreateThread(function()
+    while true do
+        Citizen.Wait(1)
+        _timerBarPool:Draw()
+    end
+end)
+
+--[[
 local updateShowcaseData = {
     count = 1;
 }
@@ -242,14 +257,14 @@ Citizen.CreateThreadNow(function()
 
                 end)
 
-                --[[
+
                 RageUI.Slider("Quantité", mainMenuData.slider.index, mainMenuData.slider.max, description, true, { }, true, function(Hovered, Selected, Active, Index)
                     mainMenuData.slider.index = Index
 
                     RageUI.Text({
                         message = Index
                     })
-                end)]]
+                end)
 
                 RageUI.UISliderHeritage("Ressemblance", HeritageIndex, description, function(Hovered, Selected, Active, Heritage, Index)
                     HeritageIndex = Index
@@ -394,3 +409,4 @@ Citizen.CreateThreadNow(function()
     end
 
 end)
+]]--
