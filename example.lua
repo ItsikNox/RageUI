@@ -1,9 +1,23 @@
 local _timerBarPool = UITimerBarPool.New()
 
-local Basic = UITimerBarItem.New("THIS IS A BAR", "WITH RAGE-UI")
+--[[
+local Basic = UITimerBarItem.New("HEAD SHOT", "0/5")
 _timerBarPool:Add(Basic)
+]]
 
-local BarWithIcon =
+local Heroin = UIBarIcon.New("commonmenu", "mp_specitem_heroin", math.random(0,100), { R = 101, G = 80, B = 195 })
+_timerBarPool:Add(Heroin)
+
+local Cook = UIBarIcon.New("commonmenu", "mp_specitem_coke", math.random(0,100), { R = 255, G = 255, B = 255 })
+_timerBarPool:Add(Cook)
+
+local Meth = UIBarIcon.New("commonmenu", "mp_specitem_meth", math.random(0,100), { R = 3, G = 82, B = 253 })
+_timerBarPool:Add(Meth)
+
+
+local Weed = UIBarIcon.New("commonmenu", "mp_specitem_weed", math.random(0,100), { R = 3, G = 188, B = 0 })
+_timerBarPool:Add(Weed)
+
 
 Citizen.CreateThread(function()
     while true do

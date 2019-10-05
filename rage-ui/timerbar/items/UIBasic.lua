@@ -4,7 +4,52 @@
 --- DateTime: 03/10/2019 19:20
 ---
 
-function TimerBar.Default()
+---@type table
+UITimerBarItem = setmetatable({}, UITimerBarItem)
 
+---@type table
+UITimerBarItem.__index = UITimerBarItem
 
+---@type table
+UITimerBarItem.__call = function()
+    return "UITimerBarItem"
+end
+
+function UITimerBarItem.New(Text, SecondText, TextureDictionary, TextureName, Heading, R, G, B, A)
+    Heading = tonumber(Heading) or 0
+    R = tonumber(R) or 255
+    G = tonumber(G) or 255
+    B = tonumber(B) or 255
+    A = tonumber(A) or 200
+    local _UITimerBarItem = {
+        Background = { Dictionary = TextureDictionary or "timerbars", Texture = TextureName or "all_black_bg", Color = { R = R, G = G, B = B, A = A } },
+        Text = Text or "",
+        SecondText = SecondText or "";
+        IsVisible = true;
+        Position = { X = 1540, Y = 1060 },
+    }
+    return setmetatable(_UITimerBarItem, UITimerBarItem)
+end
+
+function UITimerBarItem:Visible(Value)
+    if type(Value) == "boolean" then
+        if (Value) then
+
+        else
+
+        end
+    else
+        return self.IsVisible;
+    end
+    return self.IsVisible;
+end
+
+function UITimerBarItem:SetSecondText(Text)
+    self.SecondText = tostring(Text)
+end
+
+function UITimerBarItem:Draw(Interval)
+    RenderSprite(self.Background.Dictionary, self.Background.Texture, self.Position.X, self.Position.Y - Interval, 350, 35, 0, 0, 0, 0, 255)
+    RenderText(self.Text, self.Position.X + 170.0, self.Position.Y - Interval + 7.0, 0, 0.35, 255, 255, 255, 255, "Right")
+    RenderText(self.SecondText, self.Position.X + 340.0, self.Position.Y - Interval, 0, 0.45, 255, 255, 255, 255, "Right")
 end

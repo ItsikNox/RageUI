@@ -33,6 +33,7 @@ client_scripts {
 
     "rage-ui/timerbar/TimerBar.lua",
     "rage-ui/timerbar/items/UIBasic.lua",
+    "rage-ui/timerbar/items/UIBarIcon.lua",
 
 
 

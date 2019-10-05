@@ -4,22 +4,37 @@
 --- DateTime: 03/10/2019 18:37
 ---
 
-TimerBar = {}
+UITimerBarPool = setmetatable({}, UITimerBarPool)
+UITimerBarPool.__index = UITimerBarPool
 
-RageUI.ItemOffset = 0
+function UITimerBarPool.New()
+    local _UITimerBarPool = {
+        TimerBars = {},
 
-TimerBar.Settings = {
-
-}
-
-function TimerBar.Visible()
-
+    }
+    return setmetatable(_UITimerBarPool, UITimerBarPool)
 end
 
-function TimerBar.Background()
-
+function UITimerBarPool:Add(TimerBar)
+    if TimerBar() ==  "UITimerBarItem" or "UIBarIcon" then
+        table.insert(self.TimerBars, TimerBar)
+        return #self.TimerBars
+    end
 end
 
-function TimerBar.Render()
-
+function UITimerBarPool:Remove(id)
+    table.remove(self.TimerBars, id)
+    return self.TimerBars
 end
+
+function UITimerBarPool:Draw()
+    for _, TimerBar in pairs(self.TimerBars) do
+        TimerBar:Draw(38 * _)
+    end
+    if (#self.TimerBars > 0) then
+        for i = 6, 9, 1 do
+            HideHudComponentThisFrame(i)
+        end
+    end
+end
+
