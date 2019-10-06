@@ -5,18 +5,14 @@ local Basic = UITimerBarItem.New("HEAD SHOT", "0/5")
 _timerBarPool:Add(Basic)
 ]]
 
-local Water = UIBarIcon.New("commonmenu", "mp_specitem_heroin", math.random(0, 100), { R = 51, G = 204, B = 255 })
-_timerBarPool:Add(Water)
-
-local Heroin = UIBarIcon.New("commonmenu", "mp_specitem_heroin", math.random(0, 100), { R = 101, G = 80, B = 195 })
-_timerBarPool:Add(Heroin)
-
-local Food = UIBarIcon.New("commonmenu", "mp_specitem_heroin", math.random(0, 100), { R = 134, G = 89, B = 45 })
+local Food = UIBarIcon.New("commonmenu", "mp_specitem_heroin", math.random(0, 100), { R = 255, G = 163, B = 26 })
 _timerBarPool:Add(Food)
-
-Water:Visible(_timerBarPool, true)
-Heroin:Visible(_timerBarPool, true)
 Food:Visible(_timerBarPool, true)
+
+local Water = UIBarIcon.New("commonmenu", "mp_specitem_heroin", math.random(0, 100), { R = 0, G = 102, B = 255 })
+_timerBarPool:Add(Water)
+Water:Visible(_timerBarPool, true)
+
 
 --[[
 local Cook = UIBarIcon.New("commonmenu", "mp_specitem_coke", math.random(0,100), { R = 255, G = 255, B = 255 })
@@ -39,11 +35,11 @@ Citizen.CreateThread(function()
 end)
 
 RegisterCommand("delete", function()
-    Heroin:Visible(_timerBarPool, false)
+    --Heroin:Visible(_timerBarPool, false)
 end, true)
 
 RegisterCommand("show", function()
-    Heroin:Visible(_timerBarPool, true)
+    --Heroin:Visible(_timerBarPool, true)
 end, true)
 
 

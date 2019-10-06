@@ -33,5 +33,10 @@ function UITimerBarPool:Draw()
     for i = 1, #self.BarVisible, 1 do
         self.BarVisible[i]:Draw(38 * i)
     end
+    if (#self.BarVisible > 0) then
+        for i = 6, 9, 1 do
+            HideHudComponentThisFrame(i)
+        end
+    end
 end
 
