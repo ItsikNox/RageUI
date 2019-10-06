@@ -30,7 +30,7 @@ function UITimerBarItem.New(Text, SecondText, TextureDictionary, TextureName, He
     return setmetatable(_UITimerBarItem, UITimerBarItem)
 end
 
-function UIBarIcon:Visible(Pool, Value)
+function UITimerBarItem:Visible(Pool, Value)
     if Value then
         table.insert(Pool.BarVisible, self)
     else
