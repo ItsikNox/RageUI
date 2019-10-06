@@ -5,18 +5,30 @@ local Basic = UITimerBarItem.New("HEAD SHOT", "0/5")
 _timerBarPool:Add(Basic)
 ]]
 
-local Heroin = UIBarIcon.New("commonmenu", "mp_specitem_heroin", math.random(0,100), { R = 101, G = 80, B = 195 })
+local Water = UIBarIcon.New("commonmenu", "mp_specitem_heroin", math.random(0, 100), { R = 51, G = 204, B = 255 })
+_timerBarPool:Add(Water)
+
+local Heroin = UIBarIcon.New("commonmenu", "mp_specitem_heroin", math.random(0, 100), { R = 101, G = 80, B = 195 })
 _timerBarPool:Add(Heroin)
 
+local Food = UIBarIcon.New("commonmenu", "mp_specitem_heroin", math.random(0, 100), { R = 134, G = 89, B = 45 })
+_timerBarPool:Add(Food)
+
+Water:Visible(_timerBarPool, true)
+Heroin:Visible(_timerBarPool, true)
+Food:Visible(_timerBarPool, true)
+
+--[[
 local Cook = UIBarIcon.New("commonmenu", "mp_specitem_coke", math.random(0,100), { R = 255, G = 255, B = 255 })
 _timerBarPool:Add(Cook)
 
 local Meth = UIBarIcon.New("commonmenu", "mp_specitem_meth", math.random(0,100), { R = 3, G = 82, B = 253 })
 _timerBarPool:Add(Meth)
 
-
 local Weed = UIBarIcon.New("commonmenu", "mp_specitem_weed", math.random(0,100), { R = 3, G = 188, B = 0 })
 _timerBarPool:Add(Weed)
+]]
+
 
 
 Citizen.CreateThread(function()
@@ -25,6 +37,15 @@ Citizen.CreateThread(function()
         _timerBarPool:Draw()
     end
 end)
+
+RegisterCommand("delete", function()
+    Heroin:Visible(_timerBarPool, false)
+end, true)
+
+RegisterCommand("show", function()
+    Heroin:Visible(_timerBarPool, true)
+end, true)
+
 
 --[[
 local updateShowcaseData = {

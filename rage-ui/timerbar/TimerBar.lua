@@ -7,16 +7,18 @@
 UITimerBarPool = setmetatable({}, UITimerBarPool)
 UITimerBarPool.__index = UITimerBarPool
 
+BarVisible = {}
+
 function UITimerBarPool.New()
     local _UITimerBarPool = {
         TimerBars = {},
-
+        BarVisible = {},
     }
     return setmetatable(_UITimerBarPool, UITimerBarPool)
 end
 
 function UITimerBarPool:Add(TimerBar)
-    if TimerBar() ==  "UITimerBarItem" or "UIBarIcon" then
+    if TimerBar() == "UITimerBarItem" or "UIBarIcon" then
         table.insert(self.TimerBars, TimerBar)
         return #self.TimerBars
     end
@@ -28,13 +30,8 @@ function UITimerBarPool:Remove(id)
 end
 
 function UITimerBarPool:Draw()
-    for _, TimerBar in pairs(self.TimerBars) do
-        TimerBar:Draw(38 * _)
-    end
-    if (#self.TimerBars > 0) then
-        for i = 6, 9, 1 do
-            HideHudComponentThisFrame(i)
-        end
+    for i = 1, #self.BarVisible, 1 do
+        self.BarVisible[i]:Draw(38 * i)
     end
 end
 

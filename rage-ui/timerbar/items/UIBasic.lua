@@ -24,24 +24,23 @@ function UITimerBarItem.New(Text, SecondText, TextureDictionary, TextureName, He
     local _UITimerBarItem = {
         Background = { Dictionary = TextureDictionary or "timerbars", Texture = TextureName or "all_black_bg", Color = { R = R, G = G, B = B, A = A } },
         Text = Text or "",
-        SecondText = SecondText or "";
-        IsVisible = true;
+        SecondText = SecondText or "",
         Position = { X = 1540, Y = 1060 },
     }
     return setmetatable(_UITimerBarItem, UITimerBarItem)
 end
 
-function UITimerBarItem:Visible(Value)
-    if type(Value) == "boolean" then
-        if (Value) then
-
-        else
-
-        end
+function UIBarIcon:Visible(Pool, Value)
+    if Value then
+        table.insert(Pool.BarVisible, self)
     else
-        return self.IsVisible;
+        for i = 1, #Pool.BarVisible, 1 do
+            if Pool.BarVisible[i] == self then
+                table.remove(Pool.BarVisible, i)
+                break
+            end
+        end
     end
-    return self.IsVisible;
 end
 
 function UITimerBarItem:SetSecondText(Text)

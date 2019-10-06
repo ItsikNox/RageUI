@@ -30,8 +30,22 @@ function UIBarIcon.New(IconDictionary, IconTexture, ProgressValue, ProgressRGB, 
     return setmetatable(_UIBarIcon, UIBarIcon)
 end
 
+
+function UIBarIcon:Visible(Pool, Value)
+    if Value then
+        table.insert(Pool.BarVisible, self)
+    else
+        for i = 1, #Pool.BarVisible, 1 do
+            if Pool.BarVisible[i] == self then
+                table.remove(Pool.BarVisible, i)
+                break
+            end
+        end
+    end
+end
+
 function UIBarIcon:SetPercentage(Value)
-    if  (Value <= 100) then
+    if (Value <= 100) then
         self.Progress.Value = Value
     else
         self.Progress.Value = 100
@@ -40,9 +54,7 @@ end
 
 function UIBarIcon:Draw(Interval)
     RenderSprite(self.Background.Dictionary, self.Background.Texture, self.Position.X, self.Position.Y - Interval, 350, 35, 0, 0, 0, 0, 255)
-    RenderRectangle(self.Position.X + 142.0, self.Position.Y - Interval + 10.0, 200, 17,  self.Progress.R, self.Progress.G, self.Progress.B, 100)
+    RenderRectangle(self.Position.X + 142.0, self.Position.Y - Interval + 10.0, 200, 17, self.Progress.R, self.Progress.G, self.Progress.B, 100)
     RenderRectangle(self.Position.X + 142.0, self.Position.Y - Interval + 10.0, self.Progress.Value * 2, 17, self.Progress.R, self.Progress.G, self.Progress.B, self.Progress.A)
-    RenderSprite(self.Icon.Dictionary, self.Icon.Texture, self.Position.X + 90, self.Position.Y - Interval,37,37)
-    --RenderText(self.Text, self.Position.X + 170.0, self.Position.Y - Interval + 7.0, 0, 0.35, 255, 255, 255, 255, "Right")
-    --RenderText(self.SecondText, self.Position.X + 340.0, self.Position.Y - Interval, 0, 0.45, 255, 255, 255, 255, "Right")
+    RenderSprite(self.Icon.Dictionary, self.Icon.Texture, self.Position.X + 90, self.Position.Y - Interval, 37, 37)
 end
