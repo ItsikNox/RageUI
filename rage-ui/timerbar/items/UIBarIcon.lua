@@ -53,8 +53,8 @@ function UIBarIcon:SetPercentage(Value)
 end
 
 function UIBarIcon:Draw(Interval)
-    RenderSprite(self.Background.Dictionary, self.Background.Texture, self.Position.X, self.Position.Y - Interval, 350, 35, 0, 0, 0, 0, 255)
-    RenderRectangle(self.Position.X + 142.0, self.Position.Y - Interval + 10.0, 200, 17, self.Progress.R, self.Progress.G, self.Progress.B, 100)
-    RenderRectangle(self.Position.X + 142.0, self.Position.Y - Interval + 10.0, self.Progress.Value * 2, 17, self.Progress.R, self.Progress.G, self.Progress.B, self.Progress.A)
+    RenderSprite(self.Background.Dictionary, self.Background.Texture, self.Position.X, self.Position.Y - Interval, 350, 35, 0, 0, 0, 0, 200)
+    RenderRectangle(self.Position.X + 142.0, self.Position.Y - Interval + 10.0, 200, 15, self.Progress.R, self.Progress.G, self.Progress.B, 100)
+    RenderRectangle(self.Position.X + 142.0, self.Position.Y - Interval + 10.0, self.Progress.Value * 2, 15, self.Progress.R, self.Progress.G, self.Progress.B, self.Progress.A)
     RenderSprite(self.Icon.Dictionary, self.Icon.Texture, self.Position.X + 90, self.Position.Y - Interval, 37, 37)
 end

@@ -1,46 +1,13 @@
-local _timerBarPool = UITimerBarPool.New()
 
---[[
-local Basic = UITimerBarItem.New("HEAD SHOT", "0/5")
-_timerBarPool:Add(Basic)
-]]
+local _timerBarPool = UITimerBarPool.New()
 
 local Food = UIBarIcon.New("commonmenu", "mp_specitem_heroin", math.random(0, 100), { R = 255, G = 163, B = 26 })
 _timerBarPool:Add(Food)
 Food:Visible(_timerBarPool, true)
 
-local Meth = UIBarIcon.New("commonmenu", "mp_specitem_meth", math.random(0, 100), { R = 255, G = 0, B = 0 })
-_timerBarPool:Add(Meth)
-Meth:Visible(_timerBarPool, true)
-
 local Water = UIBarIcon.New("commonmenu", "mp_specitem_heroin", math.random(0, 100), { R = 0, G = 102, B = 255 })
 _timerBarPool:Add(Water)
 Water:Visible(_timerBarPool, true)
-
-
---[[
-local Cook = UIBarIcon.New("commonmenu", "mp_specitem_coke", math.random(0,100), { R = 255, G = 255, B = 255 })
-_timerBarPool:Add(Cook)
-
-local Meth = UIBarIcon.New("commonmenu", "mp_specitem_meth", math.random(0,100), { R = 3, G = 82, B = 253 })
-_timerBarPool:Add(Meth)
-
-local Weed = UIBarIcon.New("commonmenu", "mp_specitem_weed", math.random(0,100), { R = 3, G = 188, B = 0 })
-_timerBarPool:Add(Weed)
-]]
-
-
-local i = 0
-Citizen.CreateThread(function()
-    while true do
-        Citizen.Wait(1)
-        Meth:SetPercentage(i)
-        i = i + 1
-        if (i == 100) then
-            i = 0;
-        end
-    end
-end)
 
 Citizen.CreateThread(function()
     while true do
@@ -48,14 +15,6 @@ Citizen.CreateThread(function()
         _timerBarPool:Draw()
     end
 end)
-
-RegisterCommand("delete", function()
-    Meth:Visible(_timerBarPool, false)
-end, true)
-
-RegisterCommand("show", function()
-    Meth:Visible(_timerBarPool, true)
-end, true)
 
 
 --[[

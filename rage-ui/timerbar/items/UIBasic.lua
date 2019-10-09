@@ -48,7 +48,7 @@ function UITimerBarItem:SetSecondText(Text)
 end
 
 function UITimerBarItem:Draw(Interval)
-    RenderSprite(self.Background.Dictionary, self.Background.Texture, self.Position.X, self.Position.Y - Interval, 350, 35, 0, 0, 0, 0, 255)
+    RenderSprite(self.Background.Dictionary, self.Background.Texture, self.Position.X, self.Position.Y - Interval, 350, 35, 0, 0, 0, 0, 200)
     RenderText(self.Text, self.Position.X + 170.0, self.Position.Y - Interval + 7.0, 0, 0.35, 255, 255, 255, 255, "Right")
     RenderText(self.SecondText, self.Position.X + 340.0, self.Position.Y - Interval, 0, 0.45, 255, 255, 255, 255, "Right")
 end
