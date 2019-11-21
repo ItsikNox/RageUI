@@ -199,6 +199,15 @@ function RageUI.GetBadgeTexture(Badge, Selected)
     end
 end
 
+
+function RageUI.CurrentIsEqualTo(Current, To, Style)
+    if (Current == To) then
+        return Style;
+    else
+        return {};
+    end
+end
+
 ---GetBadgeDictionary
 ---@param Badge string
 ---@param Selected boolean

@@ -1,4 +1,4 @@
-
+--[[
 local _timerBarPool = UITimerBarPool.New()
 
 local Food = UIBarIcon.New("commonmenu", "mp_specitem_heroin", math.random(0, 100), { R = 255, G = 163, B = 26 })
@@ -15,7 +15,7 @@ Citizen.CreateThread(function()
         _timerBarPool:Draw()
     end
 end)
-
+]]--
 
 --[[
 local updateShowcaseData = {

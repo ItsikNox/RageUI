@@ -30,7 +30,6 @@ function UIBarIcon.New(IconDictionary, IconTexture, ProgressValue, ProgressRGB, 
     return setmetatable(_UIBarIcon, UIBarIcon)
 end
 
-
 function UIBarIcon:Visible(Pool, Value)
     if Value then
         table.insert(Pool.BarVisible, self)
