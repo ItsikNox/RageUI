@@ -1,23 +1,3 @@
---[[
-local _timerBarPool = UITimerBarPool.New()
-
-local Food = UIBarIcon.New("commonmenu", "mp_specitem_heroin", math.random(0, 100), { R = 255, G = 163, B = 26 })
-_timerBarPool:Add(Food)
-Food:Visible(_timerBarPool, true)
-
-local Water = UIBarIcon.New("commonmenu", "mp_specitem_heroin", math.random(0, 100), { R = 0, G = 102, B = 255 })
-_timerBarPool:Add(Water)
-Water:Visible(_timerBarPool, true)
-
-Citizen.CreateThread(function()
-    while true do
-        Citizen.Wait(1)
-        _timerBarPool:Draw()
-    end
-end)
-]]--
-
---[[
 local updateShowcaseData = {
     count = 1;
 }
@@ -184,6 +164,10 @@ Citizen.CreateThreadNow(function()
             max = 10,
             index = 1
         },
+        sliderprogress = {
+            max = 10,
+            index = 1
+        },
         progress = {
             show = false,
             max = 25,
@@ -231,6 +215,7 @@ Citizen.CreateThreadNow(function()
         Citizen.Wait(0)
 
         if IsControlJustPressed(1, 51) then
+            print('called')
             RageUI.Visible(mainMenu, not RageUI.Visible(mainMenu))
         end
 
@@ -262,6 +247,10 @@ Citizen.CreateThreadNow(function()
 
                 end)
 
+                RageUI.SliderProgress("Food", mainMenuData.sliderprogress.index, mainMenuData.sliderprogress.max, nil, {}, true, function(Hovered, Selected, Active, Index)
+                    mainMenuData.sliderprogress.index = Index
+                    print(Index)
+                end)
 
                 RageUI.Slider("Quantité", mainMenuData.slider.index, mainMenuData.slider.max, description, true, { }, true, function(Hovered, Selected, Active, Index)
                     mainMenuData.slider.index = Index
@@ -414,4 +403,3 @@ Citizen.CreateThreadNow(function()
     end
 
 end)
-]]--

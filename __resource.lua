@@ -21,6 +21,7 @@ client_scripts {
     "rage-ui/menu/items/UIList.lua",
     "rage-ui/menu/items/UIProgress.lua",
     "rage-ui/menu/items/UISlider.lua",
+    "rage-ui/menu/items/UISliderProgress.lua",
     "rage-ui/menu/items/UISliderHeritage.lua",
 
     "rage-ui/menu/panels/UIColourPanel.lua",

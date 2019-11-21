@@ -17,25 +17,6 @@ local SettingsSlider = {
     RightArrow = { Dictionary = "commonmenutu", Texture = "arrowright", X = 400, Y = 11.5, Width = 15, Height = 15 },
 }
 
-function RageUI.SliderControls(CurrentMenu, Audio, Items, Selected, ProgressStart, RightArrowHovered, LeftArrowHovered)
-    if Selected and (CurrentMenu.Controls.SliderLeft.Active or (CurrentMenu.Controls.Click.Active and LeftArrowHovered)) and not (CurrentMenu.Controls.SliderRight.Active or (CurrentMenu.Controls.Click.Active and RightArrowHovered)) then
-        ProgressStart = ProgressStart - 0.1
-
-        if ProgressStart < 0.1 then
-            ProgressStart = #Items
-        end
-
-        RageUI.PlaySound(Audio[Audio.Use].LeftRight.audioName, Audio[Audio.Use].LeftRight.audioRef)
-    elseif Selected and (CurrentMenu.Controls.SliderRight.Active or (CurrentMenu.Controls.Click.Active and RightArrowHovered)) and not (CurrentMenu.Controls.SliderLeft.Active or (CurrentMenu.Controls.Click.Active and LeftArrowHovered)) then
-        ProgressStart = ProgressStart + 0.1
-
-        if ProgressStart > #Items then
-            ProgressStart = 0.1
-        end
-
-        RageUI.PlaySound(Audio[Audio.Use].LeftRight.audioName, Audio[Audio.Use].LeftRight.audioRef)
-    end
-end
 
 ---Slider
 ---@param Label string
@@ -164,7 +145,7 @@ function RageUI.Slider(Label, ProgressStart, ProgressMax, Description, Divider, 
 
                     RageUI.PlaySound(Audio[Audio.Use].LeftRight.audioName, Audio[Audio.Use].LeftRight.audioRef)
                 elseif Selected and (CurrentMenu.Controls.Right.Active or (CurrentMenu.Controls.Click.Active and RightArrowHovered)) and not (CurrentMenu.Controls.Left.Active or (CurrentMenu.Controls.Click.Active and LeftArrowHovered)) then
-                    ProgressStart = ProgressStart + 14
+                    ProgressStart = ProgressStart + 1
                     if ProgressStart > #Items then
                         ProgressStart = 1
                     end
