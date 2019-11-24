@@ -1,3 +1,5 @@
+
+
 local updateShowcaseData = {
     count = 1;
 }
@@ -214,6 +216,7 @@ Citizen.CreateThreadNow(function()
     while true do
         Citizen.Wait(0)
 
+        --[[
         if IsControlJustPressed(1, 51) then
             print('called')
             RageUI.Visible(mainMenu, not RageUI.Visible(mainMenu))
@@ -228,6 +231,7 @@ Citizen.CreateThreadNow(function()
             end
         end
 
+]]
         if RageUI.Visible(mainMenu) then
 
             RageUI.DrawContent({ header = true, glare = true, instructionalButton = true }, function()
