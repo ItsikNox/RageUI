@@ -1,5 +1,3 @@
-
-
 local updateShowcaseData = {
     count = 1;
 }
@@ -167,7 +165,7 @@ Citizen.CreateThreadNow(function()
             index = 1
         },
         sliderprogress = {
-            max = 10,
+            max = 100,
             index = 1
         },
         progress = {
@@ -216,7 +214,6 @@ Citizen.CreateThreadNow(function()
     while true do
         Citizen.Wait(0)
 
-        --[[
         if IsControlJustPressed(1, 51) then
             print('called')
             RageUI.Visible(mainMenu, not RageUI.Visible(mainMenu))
@@ -231,7 +228,6 @@ Citizen.CreateThreadNow(function()
             end
         end
 
-]]
         if RageUI.Visible(mainMenu) then
 
             RageUI.DrawContent({ header = true, glare = true, instructionalButton = true }, function()
@@ -251,9 +247,11 @@ Citizen.CreateThreadNow(function()
 
                 end)
 
-                RageUI.SliderProgress("Food", mainMenuData.sliderprogress.index, mainMenuData.sliderprogress.max, nil, {}, true, function(Hovered, Selected, Active, Index)
+                RageUI.SliderProgress("Food", mainMenuData.sliderprogress.index, mainMenuData.sliderprogress.max, nil, {
+                    ProgressColor = { R = 225, G = 0, B = 0, A = 255 },
+                    ProgressBackgroundColor = { R = 225, G = 0, B = 0, A = 100 }
+                }, true, function(Hovered, Selected, Active, Index)
                     mainMenuData.sliderprogress.index = Index
-                    print(Index)
                 end)
 
                 RageUI.Slider("Quantité", mainMenuData.slider.index, mainMenuData.slider.max, description, true, { }, true, function(Hovered, Selected, Active, Index)
