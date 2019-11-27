@@ -200,11 +200,11 @@ function RageUI.GetBadgeTexture(Badge, Selected)
 end
 
 
-function RageUI.CurrentIsEqualTo(Current, To, Style)
+function RageUI.CurrentIsEqualTo(Current, To, Style, DefaultStyle)
     if (Current == To) then
         return Style;
     else
-        return {};
+        return DefaultStyle or {};
     end
 end
 

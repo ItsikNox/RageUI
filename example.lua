@@ -214,6 +214,7 @@ Citizen.CreateThreadNow(function()
     while true do
         Citizen.Wait(0)
 
+        --[[
         if IsControlJustPressed(1, 51) then
             print('called')
             RageUI.Visible(mainMenu, not RageUI.Visible(mainMenu))
@@ -227,6 +228,7 @@ Citizen.CreateThreadNow(function()
                 updateShowcaseData.count = updateShowcaseData.count - 1
             end
         end
+        ]]--
 
         if RageUI.Visible(mainMenu) then
 
