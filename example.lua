@@ -214,21 +214,21 @@ Citizen.CreateThreadNow(function()
     while true do
         Citizen.Wait(0)
 
-        --[[
-        if IsControlJustPressed(1, 51) then
-            print('called')
-            RageUI.Visible(mainMenu, not RageUI.Visible(mainMenu))
-        end
+        
+        -- if IsControlJustPressed(1, 51) then
+        --     print('called')
+        --     RageUI.Visible(mainMenu, not RageUI.Visible(mainMenu))
+        -- end
 
-        if IsControlJustPressed(1, 56) then
-            updateShowcaseData.count = updateShowcaseData.count + 1
-        end
-        if IsControlJustPressed(1, 57) then
-            if (updateShowcaseData.count > 1) then
-                updateShowcaseData.count = updateShowcaseData.count - 1
-            end
-        end
-        ]]--
+        -- if IsControlJustPressed(1, 56) then
+        --     updateShowcaseData.count = updateShowcaseData.count + 1
+        -- end
+        -- if IsControlJustPressed(1, 57) then
+        --     if (updateShowcaseData.count > 1) then
+        --         updateShowcaseData.count = updateShowcaseData.count - 1
+        --     end
+        -- end
+        
 
         if RageUI.Visible(mainMenu) then
 
@@ -286,7 +286,8 @@ Citizen.CreateThreadNow(function()
 
             end, function()
                 ---Panels
-
+                RageUI.StatisticPanel(math.random(),"Damage")
+                RageUI.StatisticPanel(math.random(),"Parow")
             end)
         elseif RageUI.Visible(menuWeaponPanel) then
             RageUI.DrawContent({ header = true, glare = false, nstructionalButton = true }, function()

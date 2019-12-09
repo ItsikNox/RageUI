@@ -29,6 +29,8 @@ client_scripts {
     "rage-ui/menu/panels/UIGridPanelHorizontal.lua",
     "rage-ui/menu/panels/UIGridPanelVertical.lua",
     "rage-ui/menu/panels/UIPercentagePanel.lua",
+    "rage-ui/menu/panels/UIStatisticsPanel.lua",
+    
     "rage-ui/menu/panels/UIWeaponPanel.lua",
     "rage-ui/menu/windows/UIHeritage.lua",
 

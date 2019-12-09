@@ -50,6 +50,9 @@ RageUI.Options = 0
 ---@type number
 RageUI.ItemOffset = 0
 
+---@type number
+RageUI.StatisticPanelCount = 0
+
 ---@type table
 RageUI.Settings = {
     Debug = false,
@@ -523,6 +526,7 @@ function RageUI.Render(instructionalButton)
             RageUI.CurrentMenu.SafeZoneSize = nil
             RageUI.Controls()
             RageUI.Options = 0
+            RageUI.StatisticPanelCount = 0
             RageUI.ItemOffset = 0
             if RageUI.CurrentMenu.Controls.Back.Enabled and RageUI.CurrentMenu.Closable then
                 if RageUI.CurrentMenu.Controls.Back.Pressed then
