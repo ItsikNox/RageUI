@@ -281,40 +281,10 @@ Citizen.CreateThreadNow(function()
                 RageUI.Button("Another Menu", description, { RightLabel = "→→→" }, true, function(Hovered, Active, Selected)
                 end, updateShowcase)
 
-                RageUI.Button("Weapon Panel Menu", description, { RightLabel = "→→→" }, true, function(Hovered, Active, Selected)
-                end, menuWeaponPanel)
-
             end, function()
                 ---Panels
                 RageUI.StatisticPanel(math.random(),"Damage")
                 RageUI.StatisticPanel(math.random(),"Parow")
-            end)
-        elseif RageUI.Visible(menuWeaponPanel) then
-            RageUI.DrawContent({ header = true, glare = false, nstructionalButton = true }, function()
-                RageUI.List("Weapon", menuWeaponPanel.list.Indexes, menuWeaponPanel.list.index, nil, {}, true, function(Hovered, Active, Selected, Index)
-                    if Index ~= menuWeaponPanel.list.index then
-                        menuWeaponPanel.list.index = Index
-                        RefreshWeaponsAccess(menuWeaponPanel.list.Indexes[menuWeaponPanel.list.index])
-                    end
-                end)
-                if menuWeaponPanel.list.access ~= nil then
-                    for k, v in pairs(menuWeaponPanel.list.access) do
-                        RageUI.Checkbox(k, nil, EnabledAcces[k].enabled, { Style = RageUI.CheckboxStyle.Tick }, function(Hovered, Selected, Active, Checked)
-                            EnabledAcces[k].enabled = Checked
-                        end)
-                    end
-                end
-            end, function()
-                local accessoires = {}
-                if menuWeaponPanel.list.access ~= nil then
-                    for k, v in pairs(menuWeaponPanel.list.access) do
-                        if EnabledAcces[k].enabled then
-                            table.insert(accessoires, k)
-                        end
-                    end
-                end
-                RageUI.WeaponPanel(menuWeaponPanel.list.Indexes[menuWeaponPanel.list.index], accessoires, "Accessoires", function()
-                end)
             end)
         elseif RageUI.Visible(updateShowcase) then
             RageUI.DrawContent({ header = true, glare = false, nstructionalButton = true }, function()
