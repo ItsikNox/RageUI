@@ -642,3 +642,24 @@ function RageUI.ItemsSafeZone(CurrentMenu)
         end
     end
 end
+
+---CreateWhile
+---@param wait number
+---@param closure function
+---@param type number
+---@return void
+---@public
+function RageUI.CreateWhile(wait, closure, type)
+    type = 1;
+    Citizen.CreateThread(function()
+        while true do
+            if (type == 1) then
+                Citizen.Wait(wait or 0.1)
+            end
+            closure()
+            if (type == 2) then
+                Citizen.Wait(wait or 0.1)
+            end
+        end
+    end)
+end
