@@ -214,21 +214,20 @@ Citizen.CreateThreadNow(function()
     while true do
         Citizen.Wait(0)
 
-        
+
         if IsControlJustPressed(1, 51) then
-             print('called')
             RageUI.Visible(mainMenu, not RageUI.Visible(mainMenu))
          end
 
-        -- if IsControlJustPressed(1, 56) then
-        --     updateShowcaseData.count = updateShowcaseData.count + 1
-        -- end
-        -- if IsControlJustPressed(1, 57) then
-        --     if (updateShowcaseData.count > 1) then
-        --         updateShowcaseData.count = updateShowcaseData.count - 1
-        --     end
-        -- end
-        
+         if IsControlJustPressed(1, 56) then
+             updateShowcaseData.count = updateShowcaseData.count + 1
+         end
+         if IsControlJustPressed(1, 57) then
+             if (updateShowcaseData.count > 0) then
+                updateShowcaseData.count = updateShowcaseData.count - 1
+             end
+         end
+
 
         if RageUI.Visible(mainMenu) then
 
@@ -291,8 +290,8 @@ Citizen.CreateThreadNow(function()
 
                 for i = 1, updateShowcaseData.count do
                     RageUI.Button("Another Sub-Menu " .. i, description, { RightLabel = "→→→" }, true, function(Hovered, Active, Selected)
-                        if Active then
-                        end
+                       if Active then
+                       end
                     end, panelShowcase)
                 end
 
