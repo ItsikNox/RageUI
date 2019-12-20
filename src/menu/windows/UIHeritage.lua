@@ -43,3 +43,4 @@ function RageUI.HeritageWindow(Mum, Dad)
         end
     end
 end
+

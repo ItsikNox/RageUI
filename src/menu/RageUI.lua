@@ -675,3 +675,4 @@ function RageUI.CreateWhile(wait, closure, type)
         end
     end)
 end
+

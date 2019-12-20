@@ -77,3 +77,4 @@ function RageUI.GridPanelHorizontal(X, LeftText, RightText, Callback)
         end
     end
 end
+

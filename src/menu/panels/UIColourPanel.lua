@@ -94,3 +94,5 @@ function RageUI.ColourPanel(Title, Colours, MinimumIndex, CurrentIndex, Callback
         end
     end
 end
+
+
