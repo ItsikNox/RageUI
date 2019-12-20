@@ -27,8 +27,16 @@ client_scripts {
     "src/menu/panels/*.lua",
     "src/menu/windows/*.lua",
 
-    "example.lua",
+}
+
+--[[
+client_scripts {
+    'tests/default/basic.lua',
 }
 
 
+client_scripts {
+    'tests/rmenu/basic.lua',
+}
+]]
 
