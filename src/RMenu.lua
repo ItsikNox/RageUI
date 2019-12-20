@@ -7,6 +7,7 @@
 ---@type table
 RMenu = setmetatable({}, RMenu)
 
+---@type table
 local TotalMenus = {}
 
 ---Add
@@ -33,7 +34,7 @@ end
 ---@param Type string
 ---@param Name string
 ---@return table
----@protected
+---@public
 function RMenu:Get(Type, Name)
     if self[Type] ~= nil and self[Type][Name] ~= nil then
         return self[Type][Name].Menu
@@ -46,20 +47,17 @@ end
 ---@param Settings string
 ---@param Value any
 ---@return void
----@protected
+---@public
 function RMenu:Settings(Type, Name, Settings, Value)
     self[Type][Name][Settings] = Value
 end
 
-function RMenu:Generate(Type, Name, Content)
-
-end
 
 ---Delete
 ---@param Type string
 ---@param Name string
 ---@return void
----@protected
+---@public
 function RMenu:Delete(Type, Name)
     self[Type][Name] = nil
 end
@@ -67,7 +65,7 @@ end
 ---DeleteType
 ---@param Type string
 ---@return void
----@protected
+---@public
 function RMenu:DeleteType(Type)
     self[Type] = nil
 end
