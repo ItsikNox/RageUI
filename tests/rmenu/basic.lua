@@ -11,7 +11,7 @@ RMenu:Get('showcase', 'main').Closed = function()
     -- TODO Perform action
 end;
 
-RMenu.Add('showcase', 'submenu', RageUI.CreateSubMenu(RMenu:Get('showcase', 'main'), "RageUI", "~b~RAGEUI SHOWCASE", nil, nil, "rageui", "shopui_title_gunclub"))
+RMenu.Add('showcase', 'submenu', RageUI.CreateSubMenu(RMenu:Get('showcase', 'main'), "RageUI", "~b~RAGEUI SHOWCASE", nil, nil, "casinoui_roulette_high", "casinoui_roulette_high"))
 
 RageUI.CreateWhile(1.0, function()
 

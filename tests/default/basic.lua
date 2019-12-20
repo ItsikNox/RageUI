@@ -11,7 +11,7 @@ mainMenu.Closed = function()
     -- TODO Perform action
 end;
 
-local submenu = RageUI.CreateSubMenu(mainMenu, "RageUI", "~b~RAGEUI SHOWCASE", nil, nil, "rageui", "shopui_title_gunclub")
+local submenu = RageUI.CreateSubMenu(mainMenu, "RageUI", "~b~RAGEUI SHOWCASE", nil, nil, "casinoui_roulette_high", "casinoui_roulette_high")
 
 RageUI.CreateWhile(1.0, function()
 
