@@ -12,18 +12,20 @@ contributor {
 };
 
 client_scripts {
-    "rage-ui/menu/*.lua",
+    "src/menu/RageUI.lua",
+    "src/menu/Menu.lua",
+    "src/menu/MenuController.lua",
 
-    "components/*.lua",
+    "src/components/*.lua",
 
-    "rage-ui/menu/elements/*.lua",
+    "src/menu/elements/*.lua",
 
-    "rage-ui/menu/items/*.lua",
+    "src/menu/items/*.lua",
 
-    "rage-ui/menu/panels/*.lua",
+    "src/menu/panels/*.lua",
 
-    "rage-ui/menu/panels/*.lua",
-    "rage-ui/menu/windows/*.lua",
+    "src/menu/panels/*.lua",
+    "src/menu/windows/*.lua",
 
     "example.lua",
 }
