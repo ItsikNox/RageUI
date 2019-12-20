@@ -5,6 +5,9 @@
 ---
 
 ---@type table
+RageUI = {}
+
+---@type table
 RMenu = setmetatable({}, RMenu)
 
 ---@type table

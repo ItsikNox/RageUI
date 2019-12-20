@@ -35,8 +35,6 @@ function string.starts(String, Start)
     return string.sub(String, 1, string.len(Start)) == Start
 end
 
----@type table
-RageUI = {}
 
 ---@type table
 RageUI.Menus = setmetatable({}, RageUI.Menus)
