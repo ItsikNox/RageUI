@@ -2,6 +2,10 @@ local updateShowcaseData = {
     count = 1;
 }
 
+RageUI.CreateWhile(1.0, function()
+
+end, 1)
+
 Citizen.CreateThreadNow(function()
 
     local mainMenu = RageUI.CreateMenu("RageUI", "~b~SHOWCASE")
