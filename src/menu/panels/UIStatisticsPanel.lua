@@ -14,13 +14,11 @@ local Statistics = {
     }
 }
 
----StatisticsPanel
+
+---StatisticPanel
 ---@param Percent number
----@param HeaderText string
----@param MinText string
----@param MaxText string
----@param Callback function
----@return nil
+---@param Text string
+---@return void
 ---@public
 function RageUI.StatisticPanel(Percent, Text)
     local CurrentMenu = RageUI.CurrentMenu
