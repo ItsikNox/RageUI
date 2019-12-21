@@ -12,6 +12,7 @@ contributor {
 };
 
 client_scripts {
+    "src/RMenu.lua",
     "src/menu/RageUI.lua",
     "src/menu/Menu.lua",
     "src/menu/MenuController.lua",
@@ -40,3 +41,6 @@ client_scripts {
 }
 ]]
 
+client_scripts {
+    'tests/rmenu/basic.lua',
+}
